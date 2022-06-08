@@ -6,7 +6,7 @@ export default function StartColumn(params) {
     <div className="relative">
       <div className="flex">
         <div className="mt-2">
-          <StartValue startValue="5" endValue="0" isTrue="true" />
+          <StartValue startValue="5" endValue="4" isTrue="true" />
           <StartValue startValue="4" endValue="0" />
           <StartValue startValue="3" endValue="0" />
           <StartValue startValue="2" endValue="0" />

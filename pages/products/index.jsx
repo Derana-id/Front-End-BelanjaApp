@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import products from '../../assets/img/products.jpg';
 import shoesOne from '../../assets/img/shoes (1).jpg';
 import shoesTwo from '../../assets/img/shoes (2).jpg';
 import shoesThree from '../../assets/img/shoes (3).jpg';
@@ -13,6 +12,7 @@ import FormValueNumber from '../../components/form/form-addvalue';
 import BtnActionProducts from '../../components/button/button-products';
 import ButtonBuyyer from '../../components/button/button-buyer';
 import FormInformation from '../../components/form/form-information';
+import CardProducts from '../../components/card/card-products';
 
 export default function Products() {
   return (
@@ -96,6 +96,29 @@ export default function Products() {
           </div>
         </div>
         <FormInformation />
+        <hr className="text-gray mt-7" />
+        <h1 className="mt-8 text-black text-3xl font-extrabold">You can also like this</h1>
+        <p className="text-gray">You’ve never seen it before!</p>
+        <div
+          class="w-content bg-secondary grid-cols-2 
+                     grid-flow-row gap-4 auto-rows-auto"
+        >
+          <div
+            class="grid grid-cols-5 
+                     grid-flow-row gap-4 auto-rows-auto"
+          >
+            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+          </div>
+        </div>
       </div>
     </div>
   );
