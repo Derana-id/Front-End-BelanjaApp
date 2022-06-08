@@ -4,7 +4,7 @@ import star from '../../assets/img/star.png';
 
 export default function StartValue(params) {
   return (
-    <div className="flex">
+    <div className="flex h-5">
       <div>
         <Image src={star} width={17} height={15} />
       </div>
