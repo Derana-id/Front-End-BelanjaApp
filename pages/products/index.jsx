@@ -56,13 +56,13 @@ export default function Products() {
               <p className="text-md text-gray">price</p>
               <h3 className="text-dark text-xl font-extrabold">$ 20.0</h3>
             </div>
-            <div>
+            <div className="mt-8">
               <p>Color</p>
               <div className="flex w-44 p-1 justify-between">
-                <Color />
-                <Color />
-                <Color />
-                <Color />
+                <Color color="bg-primary" />
+                <Color color="bg-black" />
+                <Color color="bg-special-warning" />
+                <Color color="bg-special-success" />
               </div>
             </div>
             <div className="flex justify-between w-72 mt-9">
