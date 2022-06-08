@@ -6,11 +6,14 @@ module.exports = {
       sans: []
     },
     colors: {
-      primary: '#FFFFFF',
-      secondary: '#F01F0E',
-      tertiray: '#2AA952',
-      dark: '#000000',
-      gray: '#9B9B9B'
+      primary: '#DB3022',
+      black: '#000000',
+      white: '#FFFFFF',
+      gray: '#9B9B9B',
+      special: {
+        warning: '#F01F0E',
+        success: '#2AA952'
+      }
     }
   },
   plugins: []
