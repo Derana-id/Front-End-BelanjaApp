@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import star from '../../assets/img/star.png';
 
-export default function Start() {
+export default function Start(params) {
   return (
     <div className="relative">
       <div className="flex">
@@ -14,7 +14,7 @@ export default function Start() {
           <Image src={star} width={20} height={18} />
         </div>
         <div className="relative mt-2">
-          <p className="text-gray text-sm ml-2">(10)</p>
+          <p className="text-gray text-sm ml-2">{params.valueReview}</p>
         </div>
       </div>
     </div>

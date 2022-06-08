@@ -6,12 +6,13 @@ import shoesTwo from '../../assets/img/shoes (2).jpg';
 import shoesThree from '../../assets/img/shoes (3).jpg';
 import shoesFourth from '../../assets/img/shoes (4).jpg';
 import Img from '../../components/img/Img';
-import Start from '../../components/img/start';
+import Start from '../../components/star/start';
 import Color from '../../components/molecules/color';
 import SpinnerAction from '../../components/molecules/spinner';
 import FormValueNumber from '../../components/form/form-addvalue';
 import BtnActionProducts from '../../components/button/button-products';
 import ButtonBuyyer from '../../components/button/button-buyer';
+import FormInformation from '../../components/form/form-information';
 
 export default function Products() {
   return (
@@ -50,7 +51,7 @@ export default function Products() {
             <div>
               <h3 className="text-2xl font-bold">Nike CruzrOne (Bright Crimson)</h3>
               <p className="text-gray">Nike</p>
-              <Start />
+              <Start valueReview="(10)" />
             </div>
             <div className="mt-8">
               <p className="text-md text-gray">price</p>
@@ -94,6 +95,7 @@ export default function Products() {
             </div>
           </div>
         </div>
+        <FormInformation />
       </div>
     </div>
   );
