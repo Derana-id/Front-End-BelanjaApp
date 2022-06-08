@@ -27,18 +27,18 @@ export default function Products() {
           <ul className="flex text-gray tex-sm w-56 justify-between">
             <li>Home</li>
             <li>{'>'} </li>
-            <li>Category</li>
+            <li>category</li>
             <li>{'>'} </li>
             <li>Shoes</li>
           </ul>
         </div>
-        <div class="flex mt-12">
+        <div className="flex mt-12">
           <div
-            class="w-2/5 bg-secondary grid-cols-2 
+            className="w-2/5 bg-secondary grid-cols-2 
                      grid-flow-row gap-4 auto-rows-auto"
           >
             <div
-              class="grid grid-cols-2 
+              className="grid grid-cols-2 
                      grid-flow-row gap-4 auto-rows-auto"
             >
               <Img src={shoesOne} />
@@ -47,7 +47,7 @@ export default function Products() {
               <Img src={shoesFourth} />
             </div>
           </div>
-          <div class="flex-auto w-3/5 bg-tertiary pl-9 pr-7">
+          <div className="flex-auto w-3/5 bg-tertiary pl-9 pr-7">
             <div>
               <h3 className="text-2xl font-bold">Nike CruzrOne (Bright Crimson)</h3>
               <p className="text-gray">Nike</p>
@@ -86,8 +86,8 @@ export default function Products() {
             </div>
             <div className="mt-10 w-80">
               <div className="flex justify-between mt-10">
-                <BtnActionProducts onClick="" action="Chat" />
-                <BtnActionProducts onClick="" action="Add bag" />
+                <BtnActionProducts onClick={() => alert('hai')} action="Chat" />
+                <BtnActionProducts onClick={() => alert('hai')} action="Add bag" />
               </div>
               <div className="mt-5">
                 <ButtonBuyyer action="Buy Now" />
@@ -100,11 +100,11 @@ export default function Products() {
         <h1 className="mt-8 text-black text-3xl font-extrabold">You can also like this</h1>
         <p className="text-gray">You’ve never seen it before!</p>
         <div
-          class="w-content bg-secondary grid-cols-2 
+          className="w-content bg-secondary grid-cols-2 
                      grid-flow-row gap-4 auto-rows-auto"
         >
           <div
-            class="grid grid-cols-5 
+            className="grid grid-cols-5 
                      grid-flow-row gap-4 auto-rows-auto"
           >
             <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
