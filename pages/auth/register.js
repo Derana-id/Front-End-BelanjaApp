@@ -15,6 +15,11 @@ export default function index() {
     };
     return (
         <div className='flex min-h-screen'>
+            <Head>
+                <title>Belanja | Register</title>
+                <meta name="" content="" />
+                <link rel="icon" href="/logo.svg" />
+            </Head>
             <div className='sm:w-full md:w-2/6 border-slate-200 rounded-xl mx-auto p-5 flex flex-col items-center relative' >
                 <Image src='/logoAuth.svg' width={150} height={100} layout='fixed' />
                 <label className='font-bold' >Please login with your account</label>
