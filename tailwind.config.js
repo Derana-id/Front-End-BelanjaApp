@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['./pages/**/*.{js,jsx,ts,tsx}'],
+  content: ['./pages/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {},
     fontFamily: {
@@ -8,7 +8,7 @@ module.exports = {
     colors: {
       primary: '#FFFFFF',
       secondary: '#F01F0E',
-      tertiray: '#2AA952',
+      tertiary: '#2AA952',
       dark: '#000000',
       gray: '#9B9B9B'
     }
