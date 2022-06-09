@@ -3,7 +3,7 @@ import Head from 'next/head';
 import CardProducts from '../../components/card/card-products';
 import MainNavbar from '../../components/navbar/navbar-main';
 
-export default function Category() {
+const Category = () => {
   return (
     <div>
       <Head>
@@ -11,7 +11,6 @@ export default function Category() {
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
-      <MainNavbar />
       <div className="p-28 bg-white">
         <div>
           <ul className="flex text-gray tex-sm w-56 justify-between">
@@ -47,4 +46,7 @@ export default function Category() {
       </div>
     </div>
   );
-}
+};
+
+Category.layouts = 'MainLayout';
+export default Category;

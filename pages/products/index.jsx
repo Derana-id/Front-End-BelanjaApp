@@ -13,7 +13,6 @@ import BtnActionProducts from '../../components/button/button-products';
 import ButtonBuyyer from '../../components/button/button-buyer';
 import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
-import SecondNavbar from '../../components/navbar/navbar-second';
 
 const Products = () => {
   return (
@@ -125,5 +124,5 @@ const Products = () => {
   );
 };
 
-Products.layouts = 'MainLayout';
+Products.layouts = 'ThridLayout';
 export default Products;
