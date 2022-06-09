@@ -2,8 +2,8 @@ import React from 'react';
 import Head from 'next/head';
 import FormAddProduct from '../../components/form/form-addProduct';
 import RadioInput from '../../components/Input/radio';
-import BtnActionProducts from '../../components/button/button-products';
-import ButtonBuyyer from '../../components/button/button-buyer';
+import ButtonSuccess from '../../components/button/button-success';
+import ButtonWarning from '../../components/button/button-warning';
 
 const SellingProduct = () => {
   return (
@@ -48,7 +48,7 @@ const SellingProduct = () => {
                 </div>
                 <hr className="text-gray w-full" />
                 <div className="flex justify-center mt-5">
-                  <BtnActionProducts action="Upload Foto" />
+                  <ButtonSuccess action="Upload Foto" />
                 </div>
               </div>
             </div>
@@ -57,12 +57,12 @@ const SellingProduct = () => {
               <h5 className="text-black relative ml-10 text-lg font-bold">Description</h5>
               <hr className="text-gray mt-3" />
               <div className="border-2 border-solid border-gray opacity-60 m-6 flex flex-col justify-center rounded">
-                <textarea className="border-solid border-gray border-t-2 border-t-gray  focus:outline-none p-5 mt-10" />
+                <textarea className="border-solid border-gray border-t-2 border-t-gray max-h-xl min-h-max focus:outline-none p-5 mt-10" />
               </div>
             </div>
             <div className="flex justify-end mt-5">
               <div className="w-28">
-                <ButtonBuyyer action="Jual" />
+                <ButtonWarning action="Jual" />
               </div>
             </div>
           </div>

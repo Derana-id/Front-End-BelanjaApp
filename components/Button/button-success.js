@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function BtnActionProducts(params) {
+export default function ButtonSuccess(params) {
   return (
     <div>
       <button

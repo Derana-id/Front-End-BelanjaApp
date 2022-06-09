@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonBuyyer from '../button/button-buyer';
+import ButtonWarning from '../button/button-warning';
 
 export default function CardTotalPrice(params) {
   return (
@@ -19,7 +19,7 @@ export default function CardTotalPrice(params) {
         <p className="font-bold text-primary text-lg">{params.totalPrice}</p>
       </div>
       <div className="mt-6 mb-2">
-        <ButtonBuyyer action="Select Payment" />
+        <ButtonWarning action="Select Payment" />
       </div>
     </div>
   );

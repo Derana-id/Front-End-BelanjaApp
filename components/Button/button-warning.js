@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ButtonBuyyer(params) {
+export default function ButtonWarning(params) {
   return (
     <div>
       <button

@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import jas from '../../assets/img/jas.jpg';
 import CardCart from '../../components/card/card-cart';
-import ButtonBuyyer from '../../components/button/button-buyer';
+import ButtonWarning from '../../components/button/button-warning';
 import Checklist from '../../components/Input/checklist';
 
 const MyBag = () => {
@@ -57,7 +57,7 @@ const MyBag = () => {
                 <p className="font-bold text-black text-lg">$ 40.0</p>
               </div>
               <div className="mt-8">
-                <ButtonBuyyer action="Buy" onClick={() => alert('Hallo')} />
+                <ButtonWarning action="Buy" onClick={() => alert('Hallo')} />
               </div>
             </div>
           </div>
