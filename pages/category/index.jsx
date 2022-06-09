@@ -1,18 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import shoesOne from '../../assets/img/shoes (1).jpg';
-import shoesTwo from '../../assets/img/shoes (2).jpg';
-import shoesThree from '../../assets/img/shoes (3).jpg';
-import shoesFourth from '../../assets/img/shoes (4).jpg';
-import Img from '../../components/img/Img';
-import Start from '../../components/star/start';
-import Color from '../../components/molecules/color';
-import SpinnerAction from '../../components/molecules/spinner';
-import FormValueNumber from '../../components/form/form-addvalue';
-import BtnActionProducts from '../../components/button/button-products';
-import ButtonBuyyer from '../../components/button/button-buyer';
-import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
+import MainNavbar from '../../components/navbar/navbar-main';
 
 export default function Category() {
   return (
@@ -22,6 +11,7 @@ export default function Category() {
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
+      <MainNavbar />
       <div className="p-28 bg-white">
         <div>
           <ul className="flex text-gray tex-sm w-56 justify-between">
