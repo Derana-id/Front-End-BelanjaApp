@@ -15,7 +15,7 @@ import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
 import SecondNavbar from '../../components/navbar/navbar-second';
 
-export default function Products() {
+const Products = () => {
   return (
     <div>
       <Head>
@@ -23,7 +23,6 @@ export default function Products() {
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
-      <SecondNavbar />
       <div className="p-28 bg-white">
         <div>
           <ul className="flex text-gray tex-sm w-56 justify-between">
@@ -124,4 +123,7 @@ export default function Products() {
       </div>
     </div>
   );
-}
+};
+
+Products.layouts = 'MainLayout';
+export default Products;
