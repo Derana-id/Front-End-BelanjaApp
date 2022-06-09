@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import Checklist from '../checklist/checklist';
+import Checklist from '../Input/checklist';
 import SpinnerAction from '../molecules/spinner';
 import FormValueNumber from '../form/form-addvalue';
 

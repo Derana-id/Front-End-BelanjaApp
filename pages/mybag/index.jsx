@@ -1,12 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
-import BtnAction from '../../components/button/button-choose';
-import CardCheckout from '../../components/card/card-checkout';
 import jas from '../../assets/img/jas.jpg';
-import CardTotalPrice from '../../components/card/card-total-price';
-import Checklist from '../../components/checklist/checklist';
 import CardCart from '../../components/card/card-cart';
 import ButtonBuyyer from '../../components/button/button-buyer';
+import Checklist from '../../components/Input/checklist';
 
 const MyBag = () => {
   return (
