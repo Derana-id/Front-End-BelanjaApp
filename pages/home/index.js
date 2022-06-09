@@ -1,0 +1,26 @@
+import React from 'react'
+import Head from 'next/head'
+import Slider from '../../components/Slider'
+import SliderContainer from '../../components/SliderCategory'
+import NewBrand from '../../components/NewBrand'
+import PopularBrand from '../../components/PopularBrand'
+
+export default function Home() {
+  return (
+    <div>
+      <Head>
+        <title>Belanja | Home</title>
+        <meta name="" content="" />
+        <link rel="icon" href="/logo.svg" />
+      </Head>
+      <div className="container break-normal text-start bg-slate-200">
+        <div className="p-5" style={{ backgroundColor: '#E5E5E5' }}>
+          <Slider />
+        </div>
+        <SliderContainer />
+        <NewBrand />
+        <PopularBrand />
+      </div>
+    </div>
+  )
+}
