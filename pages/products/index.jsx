@@ -14,7 +14,7 @@ import ButtonBuyyer from '../../components/button/button-buyer';
 import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
 
-export default function Products() {
+const Products = () => {
   return (
     <div>
       <Head>
@@ -53,11 +53,11 @@ export default function Products() {
               <p className="text-gray">Nike</p>
               <Start valueReview="(10)" />
             </div>
-            <div className="mt-8">
+            <div className="mt-5">
               <p className="text-md text-gray">price</p>
               <h3 className="text-dark text-xl font-extrabold">$ 20.0</h3>
             </div>
-            <div className="mt-8">
+            <div className="mt-5">
               <p>Color</p>
               <div className="flex w-44 p-1 justify-between">
                 <Color color="bg-primary" />
@@ -66,7 +66,7 @@ export default function Products() {
                 <Color color="bg-special-success" />
               </div>
             </div>
-            <div className="flex justify-between w-72 mt-9">
+            <div className="flex justify-between w-72 mt-5">
               <div className="ralative">
                 <p className="font-bold text-base">Size</p>
                 <div className=" flex w-28 items-center justify-between">
@@ -84,8 +84,8 @@ export default function Products() {
                 </div>
               </div>
             </div>
-            <div className="mt-10 w-80">
-              <div className="flex justify-between mt-10">
+            <div className="mt-5 w-80">
+              <div className="flex justify-between mt-5">
                 <BtnActionProducts onClick={() => alert('hai')} action="Chat" />
                 <BtnActionProducts onClick={() => alert('hai')} action="Add bag" />
               </div>
@@ -122,4 +122,7 @@ export default function Products() {
       </div>
     </div>
   );
-}
+};
+
+Products.layouts = 'ThridLayout';
+export default Products;
