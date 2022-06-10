@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import CardProducts from '../../components/card/card-products';
-import MainNavbar from '../../components/navbar/navbar-main';
 
 const Category = () => {
   return (
