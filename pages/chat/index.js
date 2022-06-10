@@ -4,6 +4,8 @@ import Image from 'next/image';
 import user from '../../assets/img/user.jpg';
 import CardContact from '../../components/card/card-contact';
 import { TbSend } from 'react-icons/tb';
+import BubblessReciver from '../../components/bubbless/bubbless-reciver';
+import BubblessSender from '../../components/bubbless/bubbless-sender';
 
 const Chat = () => {
   return (
@@ -44,14 +46,17 @@ const Chat = () => {
                 </div>
               </div>
             </div>
-            <div className="pl-5 pt-3 h-[340px] overflow-auto">
-              <CardContact img={user} username="Reza Akbar" message="Lorem ipsum dolor" />
-              <CardContact img={user} username="Reza Akbar" message="Lorem ipsum dolor" />
-              <CardContact img={user} username="Reza Akbar" message="Lorem ipsum dolor" />
-              <CardContact img={user} username="Reza Akbar" message="Lorem ipsum dolor" />
-              <CardContact img={user} username="Reza Akbar" message="Lorem ipsum dolor" />
-              <CardContact img={user} username="Reza Akbar" message="Lorem ipsum dolor" />
-              <CardContact img={user} username="Reza Akbar" message="Lorem ipsum dolor" />
+            <div className="pl-5 pt-3 h-[340px] overflow-auto px-5">
+              <BubblessReciver message="hallo" />
+              <BubblessReciver message="hallo" />
+              <BubblessSender message="Juga" />
+              <BubblessReciver message="hallo" />
+              <BubblessReciver message="hallo" />
+              <BubblessSender message="Juga" />
+              <BubblessReciver message="hallo" />
+              <BubblessReciver message="hallo" />
+              <BubblessSender message="Juga" />
+              <BubblessReciver message="hallo" />
             </div>
             <div className="p-5 flex">
               <input
