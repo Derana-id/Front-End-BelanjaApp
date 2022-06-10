@@ -6,6 +6,8 @@ import user from '../../assets/img/user.jpg'
 import RadioButton from '../../components/Input/radio-button'
 import Datepicker from '../../components/Input/datepicker'
 import Sidebar from '../../components/sidebar/sidebar-customer'
+// import {FiHome} from 'react-icons/fi'
+import Modal from '../../components/modals/add-address'
 
 const Customer = () => {
     return (
@@ -20,7 +22,8 @@ const Customer = () => {
                     <Sidebar name='Johanes Mikael' />
                 </div>
                 <div className='w-3/4 bg-[#F5F5F5] min-h-screen'>
-                    <div className='flex flex-col bg-white rounded w-3/4 h-auto mt-[120px] mx-12'>
+                    {/* card */}
+                    {/* <div className='flex flex-col bg-white rounded w-3/4 h-auto mt-[120px] mx-12'>
                         <div className='flex flex-col m-5 border-b-2 border-[#9B9B9B] pb-5'>
                             <label className='font-semibold mb-2 text-lg'>My Profile</label>
                             <label className='text-[#9B9B9B]'>Manage your profile information</label>
@@ -45,7 +48,42 @@ const Customer = () => {
                             </form>
                         </div>
                         <button className='w-32 h-10 ml-44 mt-5 mb-10 bg-primary text-white active:bg-white active:text-primary border rounded-2xl' >Save</button>
+                    </div> */}
+
+                    {/* card order */}
+                    <div className='flex flex-col bg-white rounded w-3/4 h-auto mt-[120px] mx-12'>
+                        <div className='flex flex-col m-5 border-b-2 border-[#9B9B9B] pb-5'>
+                            <label className='font-semibold mb-2 text-lg'>My Profile</label>
+                            <label className='text-[#9B9B9B]'>Manage your profile information</label>
+                        </div>
+                        <div className='flex w-full'>
+                            <button className='w-full mx-10 h-20 border-2 border-dashed rounded text-[#9B9B9B]'>Add new address</button>
+                        </div>
+                        <div className='ml-10 mr-10 my-5 border-2 rounded border-primary h-auto relative flex items-start flex-col'>
+                            <label className='font-semibold m-2' htmlFor="">Andreas Jane</label>
+                            <p className='text-[#222222] m-2'>Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah, 53181 [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181</p>
+
+                            <button className='text-primary m-2 font-bold'>Change address</button>
+                       </div>
                     </div>
+
+                    <Modal/>
+                    {/* card my order */}
+                     {/* <div className='flex flex-col bg-white rounded w-3/4 h-auto mt-[120px] mx-12'>
+                        <div className='flex flex-col m-5 border-b-2 border-[#9B9B9B] pb-5'>
+                            <label className='font-semibold mb-2 text-lg'>My Profile</label>
+                            <label className='text-[#9B9B9B]'>Manage your profile information</label>
+                        </div>
+                        <div className='flex w-full'>
+                            <button className='w-full mx-10 h-20 border-2 border-dashed rounded text-[#9B9B9B]'>Add new address</button>
+                        </div>
+                        <div className='ml-10 mr-10 my-5 border-2 rounded border-primary h-auto relative flex items-start flex-col'>
+                            <label className='font-semibold m-2' htmlFor="">Andreas Jane</label>
+                            <p className='text-[#222222] m-2'>Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah, 53181 [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181</p>
+
+                            <button className='text-primary m-2 font-bold'>Change address</button>
+                       </div>
+                    </div> */}
                 </div>
             </div>
         </div>

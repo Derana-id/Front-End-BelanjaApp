@@ -45,11 +45,11 @@ export default function sidebarSeller(params) {
                     <div className='h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center'>
                         <Image className='absolute border-none p-7 rounded-full' width={20} height={20} src={store} />
                     </div>
-                    <label onClick={onSetNav} className='ml-3 text-base cursor-pointer '>Store</label>
+                    <button onClick={onSetNav} className='ml-3 text-base cursor-pointer '>Store</button>
                 </div>
                 {showNav === 0 ? (
                     <div>
-                        <label className='text-base ml-[50px] focus:text-gray cursor-pointer '>Store profile</label>
+                        <button className='text-base ml-14 focus:text-gray cursor-pointer '>Store profile</button>
                     </div>
                 ) : null
                 }
@@ -57,12 +57,12 @@ export default function sidebarSeller(params) {
                     <div className='h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center'>
                         <Image className='absolute border-none p-7 rounded-full' width={20} height={20} src={product} />
                     </div>
-                    <label onClick={onSetNav2} className='ml-3 text-base cursor-pointer'>Product</label>
+                    <button onClick={onSetNav2} className='ml-3 text-base cursor-pointer'>Product</button>
                 </div>
                 {showNav1 === 0 ? (
-                    <div className='flex flex-col'>
-                        <label className='ml-[50px] text-base mb-3 cursor-pointer '>My products</label>
-                        <label className='ml-[50px] text-base cursor-pointer '>Selling products</label>
+                    <div className='flex flex-col justify-start items-start'>
+                        <button className='ml-14 text-base mb-3 cursor-pointer '>My products</button>
+                        <button className='ml-14 text-base cursor-pointer '>Selling products</button>
                     </div>
                 ) : null
                 }
@@ -70,12 +70,12 @@ export default function sidebarSeller(params) {
                     <div className='h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center'>
                         <Image className='absolute border-none p-7 rounded-full' width={20} height={20} src={chart} />
                     </div>
-                    <label onClick={onSetNav3} className='ml-3 text-base  cursor-pointer'>Order</label>
+                    <button onClick={onSetNav3} className='ml-3 text-base  cursor-pointer'>Order</button>
                 </div>
                 {showNav2 === 0 ? (
-                    <div className='flex flex-col'>
-                        <label className='ml-[50px] text-base mb-3 cursor-pointer '>My order</label>
-                        <label className='ml-[50px] text-base cursor-pointer '>Order cancel</label>
+                    <div className='flex flex-col justify-start items-start'>
+                        <button className='ml-14 text-base mb-3 cursor-pointer '>My order</button>
+                        <button className='ml-14 text-base cursor-pointer '>Order cancel</button>
                     </div>
                 ) : null
                 }
