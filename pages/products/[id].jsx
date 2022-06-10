@@ -9,8 +9,8 @@ import Start from '../../components/star/start';
 import Color from '../../components/molecules/color';
 import SpinnerAction from '../../components/molecules/spinner';
 import FormValueNumber from '../../components/form/form-addvalue';
-import BtnActionProducts from '../../components/button/button-products';
-import ButtonBuyyer from '../../components/button/button-buyer';
+import ButtonSuccess from '../../components/button/button-success';
+import ButtonWarning from '../../components/button/button-warning';
 import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
 
@@ -86,11 +86,11 @@ const Products = () => {
             </div>
             <div className="mt-5 w-80">
               <div className="flex justify-between mt-5">
-                <BtnActionProducts onClick={() => alert('hai')} action="Chat" />
-                <BtnActionProducts onClick={() => alert('hai')} action="Add bag" />
+                <ButtonSuccess onClick={() => alert('hai')} action="Chat" />
+                <ButtonSuccess onClick={() => alert('hai')} action="Add bag" />
               </div>
               <div className="mt-5">
-                <ButtonBuyyer action="Buy Now" />
+                <ButtonWarning action="Buy Now" />
               </div>
             </div>
           </div>
