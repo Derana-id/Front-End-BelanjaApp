@@ -4,8 +4,8 @@ import styles from '../styles/ProductCard.module.css'
 
 export default function ProductCard(props) {
   return (
-    <div className="mt-5 bg-white rounded-lg shadow-md">
-      <Image src='/images/gez-xavier-mansfield-b34E1vh1tYU-unsplash1.jpg' width={436} height={236} className="rounded-t-lg" alt="product" />
+    <div className="mt-5 bg-white rounded-lg shadow-md w-3/4">
+      <Image src='/images/gez-xavier-mansfield-b34E1vh1tYU-unsplash1.jpg' width={236} height={136} className="rounded-t-lg" alt="product" />
       <div className="p-2 pt-1 pl-3 pr-3">
         <h2 className={styles.cardTitle}><b>{props.productName}</b></h2>
           <div style={{ fontSize: '20px' }}>

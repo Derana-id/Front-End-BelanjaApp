@@ -47,13 +47,11 @@ export default function SliderCategory({ deviceType }) {
       <div className="grid grid-cols-12" style={{
         margin: '0 60px'
       }}>
-        <div>
+        <div className='col-span-2'>
           <h1><b>Category</b></h1>
           <p style={{ color: 'gray' }}>What are you currently looking for?</p>
         </div>
-        <div className="justify-between col-span-7 p-5" style={{
-          margin: '0 50px'
-        }}>
+        <div className="justify-between col-span-10 p-5">
           <Carousel
             partialVisible={true}
             deviceType={deviceType}
@@ -64,8 +62,8 @@ export default function SliderCategory({ deviceType }) {
           >
             {images.map((each, index) => {
               return (
-                <div key={index} className='flex justify-center w-full h-full'>
-                  <Image src={each} className='object-cover w-3/4 rounded-lg shadow-xl' width={206} height={220} />
+                <div key={index} className='w-full h-full bg-primary'>
+                  <Image src={each} className='rounded-lg shadow-xl' width={206} height={220} />
                 </div>
               );
             })}

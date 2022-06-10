@@ -14,12 +14,16 @@ export default function Home() {
         <link rel="icon" href="/logo.svg" />
       </Head>
       <div className="container break-normal text-start bg-slate-200">
-        <div className="p-5" style={{ backgroundColor: '#E5E5E5' }}>
+        <div className="px-28 bg-white">
           <Slider />
         </div>
-        <SliderContainer />
-        <NewBrand />
-        <PopularBrand />
+        <div className="px-28" style={{ backgroundColor: '#F0F1F9' }}>
+          <SliderContainer />
+        </div>
+        <div className="px-28 bg-white">
+          <NewBrand />
+          <PopularBrand />
+        </div>
       </div>
     </div>
   )

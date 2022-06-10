@@ -24,10 +24,7 @@ export default function Slider({ deviceType }) {
   const images = ['/images/CardPromotion.jpg', '/images/CardPromotion2.jpg']
   
   return (
-    <div className="font-sans leading-normal tracking-normal" style={{
-      backgroundColor: '#E5E5E5',
-      margin: '40px 0'
-    }}>
+    <div className="font-sans leading-normal tracking-normal bg-primary">
       <Carousel
         partialVisbile
         deviceType={deviceType}
@@ -35,11 +32,12 @@ export default function Slider({ deviceType }) {
         responsive={responsive}
         removeArrowOnDeviceType={["tablet", "mobile"]}
         showDots={true}
+        className='bg-white'
       >
         {images.map((each, index) => {
           return (
-            <div key={index} className='flex w-full h-full'>
-              <Image src={each} className='object-cover w-3/4 rounded-lg shadow-xl' width={456} height={180} />
+            <div key={index} className='flex'>
+              <Image src={each} className='object-cover rounded-lg shadow-xl' width={456} height={180} />
             </div>
           );
         })}
