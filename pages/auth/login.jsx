@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import Head from 'next/head'
-import Image from 'next/image'
-import Input from '../../components/Input'
-import Link from 'next/link'
-import Button from '../../components/Button'
+import React, { useState } from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
+import Input from '../../components/Input';
+import Link from 'next/link';
+import Button from '../../components/Button';
 
 export default function index() {
-    const [formShow, setFormShow] = useState(0)
+  const [formShow, setFormShow] = useState(0);
 
     const setCurrentShow = index => {
         setFormShow(index);
