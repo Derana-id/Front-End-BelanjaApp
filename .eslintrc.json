@@ -1,36 +1,27 @@
 {
   "settings": {
-      "react": {
-          "version": "detect"
-      }
+    "react": {
+      "version": "detect"
+    }
   },
   "env": {
-      "browser": true,
-      "es2021": true
+    "browser": true,
+    "es2021": true
   },
-  "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended",
-      "airbnb",
-  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "airbnb"],
   "parserOptions": {
-      "ecmaFeatures": {
-          "jsx": true
-      },
-      "ecmaVersion": 12,
-      "sourceType": "module"
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
   },
-  "plugins": [
-      "react"
-  ],
+  "plugins": ["react"],
   "rules": {
     "react/react-in-jsx-scope": ["off"],
     "import/no-unresolved": ["off"],
     "react/jsx-props-no-spreading": ["off"],
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/jsx-one-expression-per-line": ["off"],
     "import/prefer-default-export": ["off"],
     "object-curly-newline": ["off"],
@@ -48,4 +39,3 @@
     ]
   }
 }
-
