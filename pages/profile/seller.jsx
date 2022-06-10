@@ -40,6 +40,7 @@ const Seller = () => {
                             </form>
                         </div>
                         <button className='w-32 h-10 ml-40 mt-5 mb-10 bg-primary text-white active:bg-white active:text-primary border rounded-2xl' >Save</button>
+                    
                     </div>
                 </div>
             </div>

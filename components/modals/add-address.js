@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import Close from '../../assets/icons/close.svg'
 import Image from 'next/image';
 
-export default function addAddress(params) {
-    const [showModal, setShowModal] = useState(params.condition);
+export default function addAddress() {
+    const [showModal, setShowModal] = useState();
     return (
         <div className='mt-40'>
             {/* <button

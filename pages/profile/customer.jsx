@@ -10,12 +10,12 @@ import Sidebar from '../../components/sidebar/sidebar-customer'
 import Modal from '../../components/modals/add-address'
 
 const Customer = () => {
-    const [show, setShow] = useState(false)
+    // const [show, setShow] = useState(false)
 
-    const setShowModal = (index) => {
-        setShow(index)
-    }
-    console.log(show)
+    // const setShowModal = (index) => {
+    //     setShow(index)
+    // }
+    // console.log(show)
     return (
         <div>
             <Head>
@@ -69,11 +69,11 @@ const Customer = () => {
                             <label className='font-semibold m-2' htmlFor="">Andreas Jane</label>
                             <p className='text-[#222222] m-2'>Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah, 53181 [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181</p>
 
-                            <button onClick={() => setShowModal(true)} className='text-primary m-2 font-bold'>Change address</button>
+                            <button className='text-primary m-2 font-bold'>Change address</button>
                        </div>
                     </div>
 
-                    <Modal condition={show} />
+                    <Modal />
                     {/* card my order */}
                      {/* <div className='flex flex-col bg-white rounded w-3/4 h-auto mt-[120px] mx-12'>
                         <div className='flex flex-col m-5 border-b-2 border-[#9B9B9B] pb-5'>
