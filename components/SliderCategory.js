@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import React from 'react'
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import React from 'react';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 export default function SliderCategory({ deviceType }) {
   const responsive = {
@@ -20,9 +20,9 @@ export default function SliderCategory({ deviceType }) {
       items: 1,
       paritialVisibilityGutter: 40
     }
-  }
+  };
   const images = [
-    '/images/Group1229.jpg', 
+    '/images/Group1229.jpg',
     '/images/Group1230.jpg',
     '/images/Group1231.jpg',
     '/images/Group1232.jpg',
@@ -37,19 +37,15 @@ export default function SliderCategory({ deviceType }) {
     '/images/Group1242.jpg',
     '/images/Group1243.jpg',
     '/images/Group1244.jpg',
-    '/images/Group1245.jpg',
-  ]
-  
+    '/images/Group1245.jpg'
+  ];
+
   return (
-    <div className="font-sans leading-normal tracking-normal" style={{
-      backgroundColor: '#F0F1F9'
-    }}>
-      <div className="grid grid-cols-12" style={{
-        margin: '0 60px'
-      }}>
-        <div className='col-span-2'>
-          <h1><b>Category</b></h1>
-          <p style={{ color: 'gray' }}>What are you currently looking for?</p>
+    <div className="font-sans leading-normal tracking-normal text-gray-100">
+      <div className="grid grid-cols-12 py-7">
+        <div className="col-span-2">
+          <h1 className="text-black font-bold text-3xl">Category</h1>
+          <p className="text-gray text-base">What are you currently looking for?</p>
         </div>
         <div className="justify-between col-span-10 p-5">
           <Carousel
@@ -57,13 +53,13 @@ export default function SliderCategory({ deviceType }) {
             deviceType={deviceType}
             itemClass="image-item"
             responsive={responsive}
-            removeArrowOnDeviceType={["tablet", "mobile"]}
+            removeArrowOnDeviceType={['tablet', 'mobile']}
             showDots={true}
           >
             {images.map((each, index) => {
               return (
-                <div key={index} className='w-full h-full bg-primary'>
-                  <Image src={each} className='rounded-lg shadow-xl' width={206} height={220} />
+                <div key={index} className="w-full h-full p-2">
+                  <Image src={each} className="rounded-lg shadow-xl" width={206} height={220} />
                 </div>
               );
             })}
@@ -71,5 +67,5 @@ export default function SliderCategory({ deviceType }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
