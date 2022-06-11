@@ -1,3 +1,5 @@
+import NextNProgress from 'nextjs-progressbar';
+import { ToastContainer } from 'react-toastify';
 import MainLayouts from '../layouts/main-layouts';
 import SecondLayouts from '../layouts/second-layouts';
 import Thridlayouts from '../layouts/thrid-layouts';
