@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Sidebar from '../../components/sidebar/sidebar-seller';
 import CardStore from '../../components/card/seller/cardStore';
 import CardMyorder from '../../components/card/seller/cardMyorder';
 import box from '../../assets/icons/box.png';
 import FormAddProduct from '../../components/form/form-addProduct';
 import RadioInput from '../../components/Input/radio';
-import ButtonSuccess from '../../components/button/button-success';
-import ButtonWarning from '../../components/button/button-warning';
+import ButtonSuccess from '../../components/Button/button-success';
+import ButtonWarning from '../../components/Button/button-warning';
 import CardForm from '../../components/card/card-form';
-import Image from 'next/image';
 
 const Seller = () => {
   const [images, setImages] = useState([]);
   const [imageURLS, setImageURLS] = useState([]);
-  const [tag, setTag] = useState(null);
 
   const uploadImageToClient = event => {
     if (event.target.files && event.target.files[0]) {

@@ -1,3 +1,5 @@
+import NextNProgress from 'nextjs-progressbar';
+import { ToastContainer } from 'react-toastify';
 import MainLayouts from '../layouts/main-layouts';
 import SecondLayouts from '../layouts/second-layouts';
 import Thridlayouts from '../layouts/thrid-layouts';
@@ -9,16 +11,20 @@ const layouts = {
   ThridLayout: Thridlayouts
 };
 
-const NoLayout = ({ children }) => {
+function NoLayout({ children }) {
   return <>{children}</>;
-};
+}
 
 function MyApp({ Component, pageProps }) {
   const Layouts = layouts[Component.layouts] || NoLayout;
   return (
-    <Layouts>
-      <Component {...pageProps} />
-    </Layouts>
+    <>
+      <NextNProgress color="bg-primary" />
+      <ToastContainer />
+      <Layouts>
+        <Component {...pageProps} />
+      </Layouts>
+    </>
   );
 }
 

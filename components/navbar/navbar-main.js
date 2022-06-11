@@ -1,13 +1,17 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import notification from '../../assets/img/notification.png';
-import logo from '../../assets/img/logo.png';
-import SearchNavbar from '../search/search-navbar';
 import { BiUserCircle } from 'react-icons/bi';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { MdOutlineNotificationsNone } from 'react-icons/md';
 import { HiOutlineMail } from 'react-icons/hi';
+import SearchNavbar from '../search/search-navbar';
+import logo from '../../assets/img/logo.png';
+import notification from '../../assets/img/notification.png';
 import vector from '../../assets/icons/vector.png';
 import user from '../../assets/img/user.jpg';
 

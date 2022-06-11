@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonWarning from '../button/button-warning';
+import ButtonWarning from '../Button/button-warning';
 
 export default function CardTotalPrice(params) {
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import jas from '../../assets/img/jas.jpg';
 import CardCart from '../../components/card/card-cart';
-import ButtonWarning from '../../components/button/button-warning';
+import ButtonWarning from '../../components/Button/button-warning';
 import Checklist from '../../components/Input/checklist';
 
 const MyBag = () => {

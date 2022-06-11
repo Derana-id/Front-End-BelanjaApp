@@ -10,8 +10,8 @@ import Start from '../../components/star/start';
 import Color from '../../components/molecules/color';
 import SpinnerAction from '../../components/molecules/spinner';
 import FormValueNumber from '../../components/form/form-addvalue';
-import ButtonSuccess from '../../components/button/button-success';
-import ButtonWarning from '../../components/button/button-warning';
+import ButtonSuccess from '../../components/Button/button-success';
+import ButtonWarning from '../../components/Button/button-warning';
 import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
 
@@ -39,11 +39,11 @@ const Products = () => {
         </div>
         <div className="md:flex mt-12">
           <div
-            className="md:w-2/5 bg-secondary grid-cols-2 
+            className="md:w-2/5 bg-secondary grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
           >
             <div
-              className="grid grid-cols-2 
+              className="grid grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
             >
               <Img src={shoesOne} />
@@ -105,23 +105,23 @@ const Products = () => {
         <h1 className="mt-8 text-black text-3xl font-extrabold">You can also like this</h1>
         <p className="text-gray">You’ve never seen it before!</p>
         <div
-          className="w-content bg-secondary grid-cols-2 
+          className="w-content bg-secondary grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
         >
           <div
-            className="md:grid grid-cols-5 
+            className="md:grid grid-cols-5
                      grid-flow-row gap-4 auto-rows-auto"
           >
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
           </div>
         </div>
       </div>

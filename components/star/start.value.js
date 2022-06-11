@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 import React from 'react';
 import Image from 'next/image';
 import star from '../../assets/img/star.png';

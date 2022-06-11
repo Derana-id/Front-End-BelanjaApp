@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import user from '../../assets/img/user.jpg';
 
 export default function CardContact(params) {
   return (

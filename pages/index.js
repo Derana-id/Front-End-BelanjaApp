@@ -5,7 +5,7 @@ import SliderContainer from '../components/SliderCategory';
 import NewBrand from '../components/NewBrand';
 import PopularBrand from '../components/PopularBrand';
 
-const Home = () => {
+function Home() {
   return (
     <div>
       <Head>
@@ -27,7 +27,7 @@ const Home = () => {
       </div>
     </div>
   );
-};
+}
 
 Home.layouts = 'ThridLayout';
 export default Home;

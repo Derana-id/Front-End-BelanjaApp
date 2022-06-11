@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import jas from '../../assets/img/jas.jpg';
 
 export default function CardCheckout(params) {
   return (
