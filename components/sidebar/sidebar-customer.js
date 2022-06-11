@@ -12,29 +12,28 @@ export default function sidebarCustomer(params) {
       <div className="flex items-center">
         <Image src={user} width={60} height={60} className="rounded-full" />
         <div className="flex flex-col ml-2">
-          <label className="ml-3 mb-2">{params.name}</label>
+          <label className="ml-3 mb-2 font-semibold">{params.name}</label>
           <Image className="cursor-pointer" src={edit} />
         </div>
       </div>
-      <div className="flex flex-col justify-center mt-10">
+      <div className="flex flex-col ml-[47%] w-full mt-10">
         <div className="flex items-center m-2">
-          {/* <Image className='bg-[#456BF3] p-7 rounded-full' width={30} height={30} src={myaccount} /> */}
           <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
             <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myaccount} />
           </div>
-          <label className="ml-3  cursor-pointer">My account</label>
+          <button className="ml-3 cursor-pointer focus:font-semibold">My account</button>
         </div>
         <div className="flex items-center m-2">
           <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
             <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={address} />
           </div>
-          <label className="ml-3  cursor-pointer">Shipping Adrress</label>
+          <button className="ml-3 cursor-pointer focus:font-semibold">Shipping Adrress</button>
         </div>
         <div className="flex items-center m-2">
           <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
             <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myorder} />
           </div>
-          <label className="ml-3  cursor-pointer">My order</label>
+          <button className="ml-3 cursor-pointer focus:font-semibold">My order</button>
         </div>
       </div>
     </div>
