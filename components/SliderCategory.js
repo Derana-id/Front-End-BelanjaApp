@@ -43,12 +43,12 @@ export default function SliderCategory({ deviceType }) {
 
   return (
     <div className="font-sans leading-normal tracking-normal text-gray-100">
-      <div className="grid grid-cols-12 py-7">
+      <div className="md:grid md:grid-cols-12 py-7">
         <div className="col-span-2">
           <h1 className="text-black font-bold text-3xl">Category</h1>
           <p className="text-gray text-base">What are you currently looking for?</p>
         </div>
-        <div className="justify-between col-span-10 p-5">
+        <div className="md:col-span-10 md:p-5">
           <Carousel
             partialVisible={true}
             deviceType={deviceType}
@@ -56,6 +56,7 @@ export default function SliderCategory({ deviceType }) {
             responsive={responsive}
             removeArrowOnDeviceType={['tablet', 'mobile']}
             showDots={true}
+            className="py-5"
           >
             {images.map((each, index) => {
               return (

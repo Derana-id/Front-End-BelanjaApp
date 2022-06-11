@@ -13,7 +13,7 @@ export default function NewBrand() {
                      grid-flow-row gap-4 auto-rows-auto"
       >
         <div
-          className="grid grid-cols-5
+          className="md:grid grid-cols-5
                      grid-flow-row gap-4 auto-rows-auto"
         >
           <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
