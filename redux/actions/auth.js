@@ -3,7 +3,7 @@ import axios from '../../utils/axios';
 export const login = data => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`auth/login`, data)
+      .post('auth/login', data)
       .then(res => {
         resolve(res.data);
       })
@@ -16,7 +16,7 @@ export const login = data => {
 export const registerSeller = data => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`auth/register-seller`, data)
+      .post('auth/register-seller', data)
       .then(res => {
         resolve(res.data);
       })
@@ -29,7 +29,7 @@ export const registerSeller = data => {
 export const registerBuyer = data => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`auth/register-buyer`, data)
+      .post('auth/register-buyer', data)
       .then(res => {
         resolve(res.data);
       })
@@ -55,7 +55,7 @@ export const forgot = data => {
 export const reset = (data, token) => {
   return new Promise((resolve, reject) => {
     axios
-      .put(`auth/reset/token=${token}`, data)
+      .put(`auth/reset/${token}`, data)
       .then(res => {
         resolve(res.data);
       })
