@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import React from 'react'
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import React from 'react';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 export default function Slider({ deviceType }) {
   const responsive = {
@@ -20,28 +20,27 @@ export default function Slider({ deviceType }) {
       items: 1,
       paritialVisibilityGutter: 40
     }
-  }
-  const images = ['/images/CardPromotion.jpg', '/images/CardPromotion2.jpg']
-  
+  };
+  const images = ['/images/CardPromotion.jpg', '/images/CardPromotion2.jpg'];
+
   return (
-    <div className="font-sans leading-normal tracking-normal bg-primary">
+    <div className="font-sans">
       <Carousel
         partialVisbile
         deviceType={deviceType}
         itemClass="image-item"
         responsive={responsive}
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        showDots={true}
-        className='bg-white'
+        removeArrowOnDeviceType={['tablet', 'mobile']}
+        showDots
       >
         {images.map((each, index) => {
           return (
-            <div key={index} className='flex'>
-              <Image src={each} className='object-cover rounded-lg shadow-xl' width={456} height={180} />
+            <div key={index} className="">
+              <Image src={each} className="object-cover rounded-lg shadow-xl" width={456} height={180} />
             </div>
           );
         })}
       </Carousel>
     </div>
-  )
+  );
 }

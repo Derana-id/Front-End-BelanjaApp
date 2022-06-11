@@ -1,7 +1,11 @@
+import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
+import Slider from '../components/Slider';
+import SliderContainer from '../components/SliderCategory';
+import NewBrand from '../components/NewBrand';
+import PopularBrand from '../components/PopularBrand';
 
-export default function Home() {
+function Home() {
   return (
     <div>
       <Head>
@@ -9,9 +13,21 @@ export default function Home() {
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
-      <div className="bg-primary drop-shadow-2xl">
-        <h1 className="text-secondary text-3xl">Landing</h1>
+      <div className="text-start pt-20 pb-16">
+        <div className="px-28 bg-white py-12 ">
+          <Slider />
+        </div>
+        <div className="px-28 bg-gray-100">
+          <SliderContainer />
+        </div>
+        <div className="px-28">
+          <NewBrand />
+          <PopularBrand />
+        </div>
       </div>
     </div>
   );
 }
+
+Home.layouts = 'ThridLayout';
+export default Home;

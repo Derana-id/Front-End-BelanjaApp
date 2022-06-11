@@ -9,8 +9,8 @@ import Start from '../../components/star/start';
 import Color from '../../components/molecules/color';
 import SpinnerAction from '../../components/molecules/spinner';
 import FormValueNumber from '../../components/form/form-addvalue';
-import BtnActionProducts from '../../components/button/button-products';
-import ButtonBuyyer from '../../components/button/button-buyer';
+import ButtonSuccess from '../../components/Button/button-success';
+import ButtonWarning from '../../components/Button/button-warning';
 import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
 
@@ -34,11 +34,11 @@ const Products = () => {
         </div>
         <div className="flex mt-12">
           <div
-            className="w-2/5 bg-secondary grid-cols-2 
+            className="w-2/5 bg-secondary grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
           >
             <div
-              className="grid grid-cols-2 
+              className="grid grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
             >
               <Img src={shoesOne} />
@@ -86,11 +86,11 @@ const Products = () => {
             </div>
             <div className="mt-5 w-80">
               <div className="flex justify-between mt-5">
-                <BtnActionProducts onClick={() => alert('hai')} action="Chat" />
-                <BtnActionProducts onClick={() => alert('hai')} action="Add bag" />
+                <ButtonSuccess onClick={() => alert('hai')} action="Chat" />
+                <ButtonSuccess onClick={() => alert('hai')} action="Add bag" />
               </div>
               <div className="mt-5">
-                <ButtonBuyyer action="Buy Now" />
+                <ButtonWarning action="Buy Now" />
               </div>
             </div>
           </div>
@@ -100,23 +100,23 @@ const Products = () => {
         <h1 className="mt-8 text-black text-3xl font-extrabold">You can also like this</h1>
         <p className="text-gray">You’ve never seen it before!</p>
         <div
-          className="w-content bg-secondary grid-cols-2 
+          className="w-content bg-secondary grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
         >
           <div
-            className="grid grid-cols-5 
+            className="grid grid-cols-5
                      grid-flow-row gap-4 auto-rows-auto"
           >
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
           </div>
         </div>
       </div>
