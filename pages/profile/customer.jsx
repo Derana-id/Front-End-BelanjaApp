@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Head from 'next/head'
 import Input from '../../components/Input/input-profile'
 import Image from 'next/image'
@@ -8,8 +8,15 @@ import Datepicker from '../../components/Input/datepicker'
 import Sidebar from '../../components/sidebar/sidebar-customer'
 // import {FiHome} from 'react-icons/fi'
 import Modal from '../../components/modals/add-address'
+import CardMyorder from '../../components/card/seller/cardMyorder'
 
 const Customer = () => {
+    // const [show, setShow] = useState(false)
+
+    // const setShowModal = (index) => {
+    //     setShow(index)
+    // }
+    // console.log(show)
     return (
         <div>
             <Head>
@@ -67,23 +74,9 @@ const Customer = () => {
                        </div>
                     </div>
 
-                    <Modal/>
+                    <Modal />
                     {/* card my order */}
-                     {/* <div className='flex flex-col bg-white rounded w-3/4 h-auto mt-[120px] mx-12'>
-                        <div className='flex flex-col m-5 border-b-2 border-[#9B9B9B] pb-5'>
-                            <label className='font-semibold mb-2 text-lg'>My Profile</label>
-                            <label className='text-[#9B9B9B]'>Manage your profile information</label>
-                        </div>
-                        <div className='flex w-full'>
-                            <button className='w-full mx-10 h-20 border-2 border-dashed rounded text-[#9B9B9B]'>Add new address</button>
-                        </div>
-                        <div className='ml-10 mr-10 my-5 border-2 rounded border-primary h-auto relative flex items-start flex-col'>
-                            <label className='font-semibold m-2' htmlFor="">Andreas Jane</label>
-                            <p className='text-[#222222] m-2'>Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah, 53181 [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181</p>
-
-                            <button className='text-primary m-2 font-bold'>Change address</button>
-                       </div>
-                    </div> */}
+                     <CardMyorder/>
                 </div>
             </div>
         </div>
