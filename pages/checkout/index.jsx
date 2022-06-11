@@ -4,11 +4,7 @@ import BtnAction from '../../components/button/button-choose';
 import CardCheckout from '../../components/card/card-checkout';
 import jas from '../../assets/img/jas.jpg';
 import CardTotalPrice from '../../components/card/card-total-price';
-<<<<<<< HEAD
-=======
-import ButtonSuccess from '../../components/button/button-success';
 import ModalsPayment from '../../components/modals/modals-payment';
->>>>>>> 030b048993e8b4bde70d0abd41380bbfede92662
 
 const Checkout = () => {
   const [isPayment, setIsPayment] = useState(true);
