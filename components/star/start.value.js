@@ -13,11 +13,11 @@ export default function StartValue(params) {
       </div>
       {params.isTrue ? (
         <div className="mt-[6px] relative ml-5">
-          <div className="w-28 bg-primary h-[5px] rounded-full"></div>
+          <div className="w-16 md:w-28 bg-primary h-[5px] rounded-full"></div>
         </div>
       ) : (
         <div className="mt-[6px] relative ml-5">
-          <div className="w-28 h-[5px] rounded-full"></div>
+          <div className="w-16 md:w-28 h-[5px] rounded-full"></div>
         </div>
       )}
 

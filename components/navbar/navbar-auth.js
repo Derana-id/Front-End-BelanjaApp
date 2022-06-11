@@ -31,8 +31,8 @@ export default function AuthNavbar() {
         </div>
         <div className="w-2/5 h-12 flex items-center">
           <div className="flex justify-end w-full h-full items-center">
-            <Link href="mybag">
-              <div>
+            <Link href="/mybag">
+              <div className="hidden md:flex">
                 <AiOutlineShoppingCart className="text-2xl mr-6 text-gray cursor-pointer" />
               </div>
             </Link>
