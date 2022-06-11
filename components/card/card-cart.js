@@ -6,25 +6,33 @@ import FormValueNumber from '../form/form-addvalue';
 
 export default function CardCart(params) {
   return (
-    <div className="bg-white p-6 shadow-xl mt-5 flex items-center rounded-xl">
-      <Checklist />
-      <div className="w-24 h-24 flex items-center">
+    <div className="bg-white p-6 shadow-xl mt-5 md:flex items-center rounded-xl">
+      <div className="flex py-2 md:py-0">
+        <Checklist />
+        <p className="md:hidden font-bold">Select</p>
+      </div>
+      <div className="md:w-24 hidden md:h-24 md:flex items-center">
         <Image src={params.image} width={74} height={74} objectFit="cover" className="rounded-md" />
+      </div>
+      <div className="md:w-24 md:h-24 md:hidden flex items-center">
+        <Image src={params.image} objectFit="cover" className="rounded-md" />
       </div>
       <div
         className="relative w-96 p-3
       "
       >
-        <p className="text-black text-base">{params.productName}</p>
+        <p className="text-black text-base font-bold">{params.productName}</p>
         <p className="text-gray text-sm">{params.store}</p>
       </div>
-      <div className=" flex w-28 items-center justify-between">
-        <SpinnerAction action="+" />
-        <FormValueNumber defaultValue={params.defaultValue} />
-        <SpinnerAction action="-" />
-      </div>
-      <div className="flex justify-end items-end w-28 font-bold text-black text-xl">
-        <h6>{params.price}</h6>
+      <div className="flex">
+        <div className="flex w-28 items-center justify-between">
+          <SpinnerAction action="+" />
+          <FormValueNumber defaultValue={params.defaultValue} />
+          <SpinnerAction action="-" />
+        </div>
+        <div className="flex justify-end items-end w-28 font-bold text-black text-xl">
+          <h6>{params.price}</h6>
+        </div>
       </div>
     </div>
   );
