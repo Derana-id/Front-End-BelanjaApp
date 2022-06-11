@@ -6,8 +6,8 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 import logo from '../../assets/img/logo.png';
 import SearchNavbar from '../search/search-navbar';
 import vector from '../../assets/icons/vector.png';
-import ButtonSignup from '../button/button-signup';
-import ButtonLogin from '../button/button-login';
+import ButtonSignup from '../Button/button-signup';
+import ButtonLogin from '../Button/button-login';
 
 export default function AuthNavbar() {
   const router = useRouter();
