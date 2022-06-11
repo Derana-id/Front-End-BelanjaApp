@@ -6,7 +6,7 @@ import FormPayment from '../form/form-payment';
 import gopay from '../../assets/img/gopay.png';
 import pos from '../../assets/img/posindonesia.png';
 import mastercard from '../../assets/img/mastercard.png';
-import ButtonWarning from '../button/button-warning';
+import ButtonWarning from '../Button/button-warning';
 
 export default function ModalsPayment(params) {
   return (
