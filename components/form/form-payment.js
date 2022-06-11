@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function FormPayment(params) {
   return (
-    <div class="flex mt-3">
+    <div className="flex mt-3">
       <div className="flex-auto w-64 items-start flex">
         <label className="flex p-1 h-8" htmlFor={params.id}>
           <Image src={params.img} width={70} />
