@@ -11,9 +11,9 @@ const layouts = {
   ThridLayout: Thridlayouts
 };
 
-const NoLayout = ({ children }) => {
+function NoLayout({ children }) {
   return <>{children}</>;
-};
+}
 
 function MyApp({ Component, pageProps }) {
   const Layouts = layouts[Component.layouts] || NoLayout;
