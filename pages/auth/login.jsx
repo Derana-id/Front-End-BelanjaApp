@@ -5,8 +5,6 @@ import { login } from '../../redux/actions/auth';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 import JwtDecode from 'jwt-decode';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Head from 'next/head';
 import Image from 'next/image';
 import Input from '../../components/Input';
@@ -142,7 +140,7 @@ export default function index() {
               <label className="text-special-warning mr-0 cursor-pointer absolute right-6">Forgot password?</label>
             </Link>
 
-            {isLoading ? <Button disabled="disabled" name={<>Loading...</>} /> : <Button name="Login" type="submit" />}
+            {isLoading ? <Button disabled="disabled" name="Loading" /> : <Button name="Login" type="submit" />}
             <label className="ml-2 sm:ml-2 md:ml-12 lg:ml-12 mr-2">Don't have a Tokopedia account?</label>
             <Link href="/auth/register" className="text-special-warning">
               Register
