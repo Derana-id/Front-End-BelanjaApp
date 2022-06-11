@@ -136,7 +136,7 @@ export default function index() {
           <form className="w-full" onSubmit={handleSubmit}>
             <Input placeholder="Email" id="email" type="email" value={form.email} onChange={handleChange} />
             <Input placeholder="Password" id="password" type="password" value={form.password} onChange={handleChange} />
-            <Link href="/auth/reset/customer">
+            <Link href="/auth/forgot">
               <label className="text-special-warning mr-0 cursor-pointer absolute right-6">Forgot password?</label>
             </Link>
 
@@ -150,7 +150,7 @@ export default function index() {
           <form className="w-full">
             <Input placeholder="Email" />
             <Input placeholder="Password" />
-            <Link href="/auth/reset/seller">
+            <Link href="/auth/forgot">
               <label className="text-special-warning cursor-pointer mr-0 absolute right-6">Forgot password?</label>
             </Link>
             <Button name="Login" />
