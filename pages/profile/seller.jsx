@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+<<<<<<< HEAD
 import Image from 'next/image';
+=======
+>>>>>>> 030b048993e8b4bde70d0abd41380bbfede92662
 import Sidebar from '../../components/sidebar/sidebar-seller';
 import CardStore from '../../components/card/seller/cardStore';
 import CardMyorder from '../../components/card/seller/cardMyorder';
@@ -10,10 +13,18 @@ import RadioInput from '../../components/Input/radio';
 import ButtonSuccess from '../../components/button/button-success';
 import ButtonWarning from '../../components/button/button-warning';
 import CardForm from '../../components/card/card-form';
+<<<<<<< HEAD
+=======
+import Image from 'next/image';
+>>>>>>> 030b048993e8b4bde70d0abd41380bbfede92662
 
 const Seller = () => {
   const [images, setImages] = useState([]);
   const [imageURLS, setImageURLS] = useState([]);
+<<<<<<< HEAD
+=======
+  const [tag, setTag] = useState(null);
+>>>>>>> 030b048993e8b4bde70d0abd41380bbfede92662
 
   const uploadImageToClient = event => {
     if (event.target.files && event.target.files[0]) {
