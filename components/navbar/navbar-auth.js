@@ -12,7 +12,7 @@ import ButtonLogin from '../button/button-login';
 export default function AuthNavbar() {
   const router = useRouter();
   return (
-    <div className="w-full h-20 px-28 flex flex-row items-center fixed z-10 shadow-lg bg-white">
+    <div className="w-full h-16 md:h-20 md:px-28 py-3 p-3 flex flex-row items-center fixed z-10 shadow-lg bg-white">
       <div className="flex w-full items-center">
         <div className="w-1/5 h-12 flex items-center">
           <div className="relative flex items-center">

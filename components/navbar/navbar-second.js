@@ -19,7 +19,7 @@ export default function SecondNavbar() {
     }
   };
   return (
-    <div className="w-full h-20 px-28 flex flex-row items-center fixed z-10 shadow-lg bg-white">
+    <div className="w-full h-16 md:h-20 px-5 md:px-28 flex flex-row items-center fixed z-10 shadow-lg bg-white">
       <div className="flex w-full items-center">
         <div className="w-1/5 h-12 flex items-center">
           <div className="relative flex items-center">
@@ -52,13 +52,15 @@ export default function SecondNavbar() {
               </div>
             </Link>
             <div className="flex items-center justify-center">
-              <Image src={user} className="rounded-full" objectFit="cover" height={30} width={30} />
+              <div className="relative h-8 w-8">
+                <Image src={user} className="rounded-full" objectFit="cover" height={500} width={500} />
+              </div>
             </div>
           </div>
         </div>
       </div>
       {isActive ? (
-        <div className="absolute h-80 w-56 bg-white z-40 top-14 p-5 rounded-b-xl rounded-tl-xl shadow-lg right-60 flex justify-center items-center">
+        <div className="absolute h-80 w-56 bg-white z-40 top-16 md:top-14 p-5 rounded-b-xl rounded-tl-xl shadow-lg right-12 md:right-60 flex justify-center items-center">
           <Image src={notification} width={170} height={150} />
         </div>
       ) : null}
