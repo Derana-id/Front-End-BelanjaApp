@@ -9,8 +9,8 @@ import Start from '../../components/star/start';
 import Color from '../../components/molecules/color';
 import SpinnerAction from '../../components/molecules/spinner';
 import FormValueNumber from '../../components/form/form-addvalue';
-import ButtonSuccess from '../../components/button/button-success';
-import ButtonWarning from '../../components/button/button-warning';
+import ButtonSuccess from '../../components/Button/button-success';
+import ButtonWarning from '../../components/Button/button-warning';
 import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
 

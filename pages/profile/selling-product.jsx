@@ -4,8 +4,8 @@ import Image from 'next/image';
 import box from '../../assets/icons/box.png';
 import FormAddProduct from '../../components/form/form-addProduct';
 import RadioInput from '../../components/Input/radio';
-import ButtonSuccess from '../../components/button/button-success';
-import ButtonWarning from '../../components/button/button-warning';
+import ButtonSuccess from '../../components/Button/button-success';
+import ButtonWarning from '../../components/Button/button-warning';
 import CardForm from '../../components/card/card-form';
 
 const SellingProduct = () => {
