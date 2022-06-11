@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import Search from '../../../components/search/search';
+import Search from '../../search/search';
 import caricatur from '../../../assets/img/caricatur.png';
 
 export default function cardMyorder(params) {

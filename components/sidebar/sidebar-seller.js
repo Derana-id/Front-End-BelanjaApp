@@ -36,7 +36,7 @@ export default function sidebarSeller(params) {
             <div className='flex items-center'>
                 <Image src={user} width={60} height={60} className='rounded-full' />
                 <div className='flex flex-col ml-2'>
-                    <label className='ml-3 mb-2'>{params.name}</label>
+                    <label className='ml-3 mb-2 font-semibold'>{params.name}</label>
                     <Image className='cursor-pointer' src={edit} />
                 </div>
             </div>
@@ -45,11 +45,11 @@ export default function sidebarSeller(params) {
                     <div className='h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center'>
                         <Image className='absolute border-none p-7 rounded-full' width={20} height={20} src={store} />
                     </div>
-                    <button onClick={onSetNav} className='ml-3 text-base cursor-pointer '>Store</button>
+                    <button onClick={onSetNav} className='ml-3 text-base cursor-pointer focus:font-semibold'>Store</button>
                 </div>
                 {showNav === 0 ? (
                     <div>
-                        <button className='text-base ml-14 focus:text-gray cursor-pointer '>Store profile</button>
+                        <button className='text-base ml-14 focus:text-gray cursor-pointer'>Store profile</button>
                     </div>
                 ) : null
                 }
@@ -57,7 +57,7 @@ export default function sidebarSeller(params) {
                     <div className='h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center'>
                         <Image className='absolute border-none p-7 rounded-full' width={20} height={20} src={product} />
                     </div>
-                    <button onClick={onSetNav2} className='ml-3 text-base cursor-pointer'>Product</button>
+                    <button onClick={onSetNav2} className='ml-3 text-base cursor-pointer focus:font-semibold'>Product</button>
                 </div>
                 {showNav1 === 0 ? (
                     <div className='flex flex-col justify-start items-start'>
@@ -70,7 +70,7 @@ export default function sidebarSeller(params) {
                     <div className='h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center'>
                         <Image className='absolute border-none p-7 rounded-full' width={20} height={20} src={chart} />
                     </div>
-                    <button onClick={onSetNav3} className='ml-3 text-base  cursor-pointer'>Order</button>
+                    <button onClick={onSetNav3} className='ml-3 text-base  cursor-pointer focus:font-semibold'>Order</button>
                 </div>
                 {showNav2 === 0 ? (
                     <div className='flex flex-col justify-start items-start'>

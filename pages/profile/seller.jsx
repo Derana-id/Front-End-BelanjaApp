@@ -9,6 +9,7 @@ import RadioInput from '../../components/Input/radio';
 import ButtonSuccess from '../../components/button/button-success';
 import ButtonWarning from '../../components/button/button-warning';
 import CardForm from '../../components/card/card-form';
+import CardProduct from '../../components/card/seller/myProduct'
 import Image from 'next/image'
 
 const Seller = () => {
@@ -35,6 +36,7 @@ const Seller = () => {
                 </div>
                 <div className='w-3/4 bg-[#F5F5F5] min-h-screen'>
                     <CardStore />
+                    <CardProduct name='My Product'/>
                     <div className='flex flex-col bg-[#F5F5F5] rounded w-3/4 h-auto mt-[120px] mx-12'>
                         <div className="bg-white shadow-lg relative my-5 py-5 pb-6 rounded-md">
                             <h5 className="text-black relative ml-10 text-l font-bold">Inventory</h5>
@@ -101,7 +103,7 @@ const Seller = () => {
                         </div>
                         </div>
                     </div>
-                     <CardMyorder />
+                     <CardMyorder name='My order' />
                 </div>
             </div>
         </div>
