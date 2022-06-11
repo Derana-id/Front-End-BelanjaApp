@@ -1,9 +1,10 @@
+/* eslint-disable no-constant-condition */
 import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
+import { TbSend } from 'react-icons/tb';
 import user from '../../assets/img/user.jpg';
 import CardContact from '../../components/card/card-contact';
-import { TbSend } from 'react-icons/tb';
 import BubblessReciver from '../../components/bubbless/bubbless-reciver';
 import BubblessSender from '../../components/bubbless/bubbless-sender';
 
@@ -86,7 +87,7 @@ const Chat = () => {
               </div>
             </div>
             <div className="flex-1 w-2/5 ml-8 shadow-lg rounded">
-              <div className="border-solid border-b-[1px] border-gray pl-5 pt-11 pb-4"></div>
+              <div className="border-solid border-b-[1px] border-gray pl-5 pt-11 pb-4" />
             </div>
           </div>
         </div>
