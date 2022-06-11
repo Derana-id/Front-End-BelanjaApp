@@ -6,7 +6,7 @@ export default function FormPayment(params) {
     <div className="flex mt-3">
       <div className="flex-auto w-64 items-start flex">
         <label className="flex p-1 h-8" htmlFor={params.id}>
-          <Image src={params.img} width={70} />
+          <Image src={params.img} width={30} />
         </label>
       </div>
       <div className="flex-auto w-64">
