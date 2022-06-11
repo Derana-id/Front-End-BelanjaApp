@@ -31,7 +31,7 @@ export default function Slider({ deviceType }) {
         itemClass="image-item"
         responsive={responsive}
         removeArrowOnDeviceType={['tablet', 'mobile']}
-        showDots={true}
+        showDots
       >
         {images.map((each, index) => {
           return (

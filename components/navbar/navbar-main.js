@@ -1,11 +1,12 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from '../../assets/img/logo.png';
-import SearchNavbar from '../search/search-navbar';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { MdOutlineNotificationsNone } from 'react-icons/md';
 import { HiOutlineMail } from 'react-icons/hi';
+import SearchNavbar from '../search/search-navbar';
+import logo from '../../assets/img/logo.png';
 import vector from '../../assets/icons/vector.png';
 import user from '../../assets/img/user.jpg';
 

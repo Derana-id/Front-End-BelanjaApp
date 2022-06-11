@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
 import { toastify } from '../../utils/toastify';
 import { sweetAlert } from '../../utils/sweetalert';
 import { registerBuyer, registerSeller } from '../../redux/actions/auth';
-import Head from 'next/head';
-import Image from 'next/image';
 import Input from '../../components/Input';
-import Link from 'next/link';
 import Button from '../../components/Button';
 
 export default function index() {
@@ -61,7 +61,7 @@ export default function index() {
         .catch(err => {
           if (err.response.data.code === 422) {
             const { error } = err.response.data;
-            error.map(e => toastr(e, 'error'));
+            error.map(e => toastify(e, 'error'));
           } else {
             sweetAlert(err.response.data.message, 'error');
           }
@@ -99,7 +99,7 @@ export default function index() {
         .catch(err => {
           if (err.response.data.code === 422) {
             const { error } = err.response.data;
-            error.map(e => toastr(e, 'error'));
+            error.map(e => toastify(e, 'error'));
           } else {
             sweetAlert(err.response.data.message, 'error');
           }
