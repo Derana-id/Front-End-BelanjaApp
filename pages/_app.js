@@ -16,9 +16,13 @@ const NoLayout = ({ children }) => {
 function MyApp({ Component, pageProps }) {
   const Layouts = layouts[Component.layouts] || NoLayout;
   return (
-    <Layouts>
-      <Component {...pageProps} />
-    </Layouts>
+    <>
+      <NextNProgress color="bg-primary" />
+      <ToastContainer />
+      <Layouts>
+        <Component {...pageProps} />
+      </Layouts>
+    </>
   );
 }
 

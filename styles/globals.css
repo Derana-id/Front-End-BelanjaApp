@@ -1,5 +1,6 @@
 @import url('https://fontlibrary.org//face/metropolis');
-
+/* import react toastify style */
+@import 'react-toastify/dist/ReactToastify.css';
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
@@ -9,7 +10,4 @@
   margin: 0;
   padding: 0;
   font-family: 'Metropolis', sans-serif;
-}
-
-@layer components {
 }
