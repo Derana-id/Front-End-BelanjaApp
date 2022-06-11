@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import CardForm from '../../components/card/card-form';
 import Search from '../../components/search/search';
-import Image from 'next/image';
 import caricatur from '../../assets/img/caricatur.png';
 
 const MyOrder = () => {

@@ -11,7 +11,6 @@ import CardForm from '../../components/card/card-form';
 const SellingProduct = () => {
   const [images, setImages] = useState([]);
   const [imageURLS, setImageURLS] = useState([]);
-  const [tag, setTag] = useState(null);
 
   const uploadImageToClient = event => {
     if (event.target.files && event.target.files[0]) {

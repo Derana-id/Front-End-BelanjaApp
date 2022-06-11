@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { toastify } from '../../utils/toastify';
-import { login } from '../../redux/actions/auth';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 import JwtDecode from 'jwt-decode';
 import Head from 'next/head';
 import Image from 'next/image';
-import Input from '../../components/Input';
 import Link from 'next/link';
+import Input from '../../components/Input';
+import { login } from '../../redux/actions/auth';
+import { toastify } from '../../utils/toastify';
 import Button from '../../components/Button';
 
 export default function index() {
@@ -71,7 +71,7 @@ export default function index() {
         })
         .catch(err => {
           if (err.response.data.code === 422) {
-            const error = err.response.data.error;
+            const { error } = err.response.data;
             error.map(item => toastify(item, 'error'));
           } else {
             Swal.fire({
@@ -141,7 +141,7 @@ export default function index() {
             </Link>
 
             {isLoading ? <Button disabled="disabled" name="Loading" /> : <Button name="Login" type="submit" />}
-            <label className="ml-2 sm:ml-2 md:ml-12 lg:ml-12 mr-2">Don't have a Tokopedia account?</label>
+            <label className="ml-2 sm:ml-2 md:ml-12 lg:ml-12 mr-2">Don&apos;t have a Tokopedia account?</label>
             <Link href="/auth/register" className="text-special-warning">
               Register
             </Link>
@@ -154,7 +154,7 @@ export default function index() {
               <label className="text-special-warning cursor-pointer mr-0 absolute right-6">Forgot password?</label>
             </Link>
             <Button name="Login" />
-            <label className="ml-2 sm:ml-2 md:ml-12 lg:ml-12 mr-2">Don't have a Tokopedia account?</label>
+            <label className="ml-2 sm:ml-2 md:ml-12 lg:ml-12 mr-2">Don&apos;t have a Tokopedia account?</label>
             <Link href="/auth/register" className="text-special-warning">
               Register
             </Link>

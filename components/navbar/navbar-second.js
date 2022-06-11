@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import notification from '../../assets/img/notification.png';
-import logo from '../../assets/img/logo.png';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { MdOutlineNotificationsNone } from 'react-icons/md';
 import { HiOutlineMail } from 'react-icons/hi';
+import logo from '../../assets/img/logo.png';
+import notification from '../../assets/img/notification.png';
 import user from '../../assets/img/user.jpg';
 
 export default function SecondNavbar() {
@@ -30,7 +30,7 @@ export default function SecondNavbar() {
             </Link>
           </div>
         </div>
-        <div className="w-3/5 h-12 flex items-center"></div>
+        <div className="w-3/5 h-12 flex items-center" />
         <div className="w-1/5 h-12 flex items-center">
           <div className="flex justify-end w-full h-full items-center">
             <Link href="/mybag">

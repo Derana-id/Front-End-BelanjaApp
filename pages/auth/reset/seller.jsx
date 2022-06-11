@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import Input from '../../../components/Input';
 import Link from 'next/link';
+import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 
 export default function index() {
@@ -18,11 +18,11 @@ export default function index() {
         <label className="font-bold mb-10">Please login with your account</label>
         <form className="w-full">
           <Input placeholder="Email" />
-          <Link href="">
+          <Link href="/auth/confirm/seller">
             <label className="text-special-warning mr-0 absolute right-6">Forgot password?</label>
           </Link>
           <Button name="Login" />
-          <label className="ml-2 sm:ml-2 md:ml-12 lg:ml-12 mr-2">Don't have a Tokopedia account?</label>
+          <label className="ml-2 sm:ml-2 md:ml-12 lg:ml-12 mr-2">Don&apos;t have a Tokopedia account?</label>
           <Link href="/auth/register" className="text-special-warning">
             Register
           </Link>
