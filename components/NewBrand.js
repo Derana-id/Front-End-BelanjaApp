@@ -1,27 +1,33 @@
-import React from 'react'
-import ProductCard from '../components/ProductCard'
+import React from 'react';
+import CardProducts from '../components/card/card-products';
 
 export default function NewBrand() {
   return (
-    <div className="bg-white">
-      <div className="p-5">
-        <h1><b>New</b></h1>
-        <p className='text-gray'>You’ve never seen it before!</p>
+    <div className="bg-white mt-12">
+      <div className="">
+        <h1 className="font-bold text-3xl text-black">New</h1>
+        <p className="text-gray font-medium">You’ve never seen it before!</p>
       </div>
-      <div className="grid-flow-row grid-cols-2 gap-4 mt-1 w-content bg-secondary auto-rows-auto">
-        <div className='grid grid-flow-row grid-cols-5 gap-4 auto-rows-auto place-items-center h-screen'>
-          <ProductCard productName={`Men's formal suit - Black & White`} productPrice="$ 40.0" productOwner="Zalora Cloth" />
-          <ProductCard productName={`Men's formal suit - Black & White`} productPrice="$ 40.0" productOwner="Zalora Cloth" />
-          <ProductCard productName={`Men's formal suit - Black & White`} productPrice="$ 40.0" productOwner="Zalora Cloth" />
-          <ProductCard productName={`Men's formal suit - Black & White`} productPrice="$ 40.0" productOwner="Zalora Cloth" />
-          <ProductCard productName={`Men's formal suit - Black & White`} productPrice="$ 40.0" productOwner="Zalora Cloth" />
-          <ProductCard productName={`Men's formal suit - Black & White`} productPrice="$ 40.0" productOwner="Zalora Cloth" />
-          <ProductCard productName={`Men's formal suit - Black & White`} productPrice="$ 40.0" productOwner="Zalora Cloth" />
-          <ProductCard productName={`Men's formal suit - Black & White`} productPrice="$ 40.0" productOwner="Zalora Cloth" />
-          <ProductCard productName={`Men's formal suit - Black & White`} productPrice="$ 40.0" productOwner="Zalora Cloth" />
-          <ProductCard productName={`Men's formal suit - Black & White`} productPrice="$ 40.0" productOwner="Zalora Cloth" />
+      <div
+        className="w-content bg-secondary grid-cols-2 
+                     grid-flow-row gap-4 auto-rows-auto"
+      >
+        <div
+          className="grid grid-cols-5 
+                     grid-flow-row gap-4 auto-rows-auto"
+        >
+          <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+          <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+          <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+          <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+          <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+          <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+          <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+          <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+          <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
+          <CardProducts nameProduct={`Men's formal suit - Black & White`} price="$ 40.0" user="Zalora Cloth" />
         </div>
       </div>
     </div>
-  )
+  );
 }
