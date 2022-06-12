@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import BtnAction from '../../components/Button/button-choose';
+import AddAddress from '../../components/modals/add-address';
 import CardCheckout from '../../components/card/card-checkout';
 import jas from '../../assets/img/jas.jpg';
 import CardTotalPrice from '../../components/card/card-total-price';
@@ -29,7 +30,7 @@ const Checkout = () => {
                 [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181
               </p>
               <div className="mt-5">
-                <BtnAction action="Choose another address" />
+                <AddAddress />
               </div>
             </div>
             <CardCheckout image={jas} productName="Men's formal suit - Black" store="Zalora Cloth" price="$ 20.0" />

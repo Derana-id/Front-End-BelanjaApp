@@ -84,11 +84,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
 
-"@popperjs/core@^2.9.3":
-  "integrity" "sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw=="
-  "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.5.tgz"
-  "version" "2.11.5"
-
 "@react-icons/all-files@^4.1.0":
   "integrity" "sha512-hxBI2UOuVaI3O/BhQfhtb4kcGn9ft12RWAFVMUeNjqqhLsHvFtzIkFaptBJpFDANTKoDfdVoHTKZDlwKCACbMQ=="
   "resolved" "https://registry.npmjs.org/@react-icons/all-files/-/all-files-4.1.0.tgz"
@@ -982,14 +977,6 @@
   "resolved" "https://registry.npmjs.org/flatted/-/flatted-3.2.5.tgz"
   "version" "3.2.5"
 
-"flowbite@^1.4.7":
-  "integrity" "sha512-/U0gOIY9RFlMWEMAVnjZpVYzSG0uEDlZ0kLCuTURukXSxqkWi3xulqooPlfmf2aw0wEMJy7d/IWEm3DntP4aUw=="
-  "resolved" "https://registry.npmjs.org/flowbite/-/flowbite-1.4.7.tgz"
-  "version" "1.4.7"
-  dependencies:
-    "@popperjs/core" "^2.9.3"
-    "mini-svg-data-uri" "^1.4.3"
-
 "follow-redirects@^1.14.9":
   "integrity" "sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA=="
   "resolved" "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.1.tgz"
@@ -1519,11 +1506,6 @@
   "resolved" "https://registry.npmjs.org/mimic-fn/-/mimic-fn-4.0.0.tgz"
   "version" "4.0.0"
 
-"mini-svg-data-uri@^1.4.3":
-  "integrity" "sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg=="
-  "resolved" "https://registry.npmjs.org/mini-svg-data-uri/-/mini-svg-data-uri-1.4.4.tgz"
-  "version" "1.4.4"
-
 "minimatch@^3.0.4", "minimatch@^3.1.1", "minimatch@^3.1.2":
   "integrity" "sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw=="
   "resolved" "https://registry.npmjs.org/minimatch/-/minimatch-3.1.2.tgz"
@@ -1561,11 +1543,7 @@
   "resolved" "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
   "version" "1.4.0"
 
-<<<<<<< HEAD
-"next@>=10.2.0", "next@12.1.6":
-=======
 "next@>= 6.0.0", "next@>=10.2.0", "next@12.1.6":
->>>>>>> 8dab54971cd1e4a1e104413a0501b0806dcc424e
   "integrity" "sha512-cebwKxL3/DhNKfg9tPZDQmbRKjueqykHHbgaoG4VBRH3AHQJ2HO0dbKFiS1hPhe1/qgc2d/hFeadsbPicmLD+A=="
   "resolved" "https://registry.npmjs.org/next/-/next-12.1.6.tgz"
   "version" "12.1.6"
@@ -1904,8 +1882,6 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
-<<<<<<< HEAD
-=======
 "react-lifecycles-compat@^3.0.0":
   "integrity" "sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA=="
   "resolved" "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
@@ -1921,7 +1897,6 @@
     "react-lifecycles-compat" "^3.0.0"
     "warning" "^4.0.3"
 
->>>>>>> 8dab54971cd1e4a1e104413a0501b0806dcc424e
 "react-multi-carousel@^2.8.0":
   "integrity" "sha512-xuxQVGGiH8yWDDWgt9Z9+C+zzoACuBT740cV+6To52DYCwLlQGJIntDFLOCqMsO85Ist1x+630HA8lazb/a/tA=="
   "resolved" "https://registry.npmjs.org/react-multi-carousel/-/react-multi-carousel-2.8.0.tgz"
