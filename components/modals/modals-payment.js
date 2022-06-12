@@ -11,8 +11,11 @@ import ButtonWarning from '../Button/button-warning';
 export default function ModalsPayment(params) {
   return (
     <div className="flex items-center justify-center">
-      <div className="bg-black h-full w-full z-40 absolute top-0 opacity-50 overflow-hidden" onClick={params.onClick} />
-      <div className="bg-white shadow-xl w-[380px] opacity-100 absolute top-[100px] rounded z-50">
+      <div
+        className="bg-black h-screen w-full z-40 absolute top-0 opacity-50 overflow-hidden"
+        onClick={params.onClick}
+      />
+      <div className="bg-white shadow-xl w-72 md:w-[380px] opacity-100 absolute top-[100px] rounded z-50">
         <div className="bg-white shadow-md rounded-t p-3 px-4 flex">
           <RiCloseLine className="text-2xl font-bold text-gray cursor-pointer" onClick={params.onClick} />
           <h4 className="ml-2 font-bold">Payment</h4>

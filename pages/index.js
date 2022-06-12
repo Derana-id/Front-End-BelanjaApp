@@ -13,14 +13,14 @@ function Home() {
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
-      <div className="text-start pt-20 pb-16">
-        <div className="px-28 bg-white py-12 ">
+      <div className="text-start pt-16 md:pt-20 pb-16">
+        <div className="md:px-28 px-6 bg-white py-12 ">
           <Slider />
         </div>
-        <div className="px-28 bg-gray-100">
+        <div className="md:px-28 p-6 bg-gray-100">
           <SliderContainer />
         </div>
-        <div className="px-28">
+        <div className="md:px-28 p-6">
           <NewBrand />
           <PopularBrand />
         </div>
