@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
+import { AiOutlineMenu } from 'react-icons/ai';
+import Drawer from 'react-modern-drawer';
 import CardStore from '../../components/card/seller/cardStore';
 import CardMyorder from '../../components/card/seller/cardMyorder';
 import CardProduct from '../../components/card/seller/myProduct';
@@ -11,12 +13,18 @@ import edit from '../../assets/icons/edit.svg';
 import store from '../../assets/icons/store.svg';
 import product from '../../assets/icons/product.svg';
 import chart from '../../assets/icons/chart.svg';
+import 'react-modern-drawer/dist/index.css';
 
 const Seller = () => {
   const [showNav, setShowNav] = useState();
   const [showNav1, setShowNav1] = useState();
   const [showNav2, setShowNav2] = useState();
   const [showSideBar, setFormShowSideBar] = useState(0);
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState);
+  };
 
   const onSetNav = () => {
     if (showNav === 1) {
@@ -51,13 +59,13 @@ const Seller = () => {
         <link rel="icon" href="/logo.svg" />
       </Head>
       <div className="flex grid-cols-2">
-        <div className="w-1/4">
+        <div className="w-0 sm:w-0 md:w-1/4 lg:w-1/4 xl:w-1/4">
           <div className="w-full flex mx-[25%] flex-col mt-[120px]">
             <div className="flex items-center">
               <Image src={user} width={60} height={60} className="rounded-full" />
               <div className="flex flex-col ml-2">
                 <label className="ml-3 mb-2 font-semibold">Johanes Mikael</label>
-                <Image className="cursor-pointer" src={edit} />
+                <Image className="cursor-pointer hidden" width={25} height={25} src={edit} />
               </div>
             </div>
             {/* sidebar */}
@@ -255,7 +263,211 @@ const Seller = () => {
 
           </div>
         </div>
-        <div className="w-3/4 bg-[#F5F5F5] min-h-screen">
+        <div className="w-full sm:w-full md:w-3/4 lg:w-3/4 xl:w-3/4 bg-[#F5F5F5] min-h-screen">
+          <div className="w-full sm:w-full md:hidden lg:hidden xl:hidden mt-[80px] ml-[15px] absolute">
+            <AiOutlineMenu onClick={toggleDrawer} />
+            <Drawer
+              open={isOpen}
+              onClose={toggleDrawer}
+              direction="left"
+              style={{ width: '170px' }}
+            >
+              <div>
+                {/* sidebar */}
+                {showSideBar === 0 ? (
+                  <div className="flex flex-col justify-center mt-10">
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
+                      </div>
+                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer font-semibold">Store</button>
+                    </div>
+                    {showNav === 0 ? (
+                      <div>
+                        <button onClick={() => setCurrentShow(0)} className="text-base ml-14 font-semibold cursor-pointer">Store profile</button>
+                      </div>
+                    ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
+                      </div>
+                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">Product</button>
+                    </div>
+                    {showNav1 === 0 ? (
+                      <div className="flex flex-col justify-start items-start">
+                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer ">My products</button>
+                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer ">Selling products</button>
+                      </div>
+                    ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
+                      </div>
+                      <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">Order</button>
+                    </div>
+                    {showNav2 === 0 ? (
+                      <div className="flex flex-col justify-start items-start">
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">My order</button>
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">Order cancel</button>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : showSideBar === 1 ? (
+                  <div className="flex flex-col justify-center mt-10">
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
+                      </div>
+                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">Store</button>
+                    </div>
+                    {showNav === 0 ? (
+                      <div>
+                        <button onClick={() => setCurrentShow(0)} className="text-base ml-14 focus:text-gray cursor-pointer">Store profile</button>
+                      </div>
+                    ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
+                      </div>
+                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer font-semibold">Product</button>
+                    </div>
+                    {showNav1 === 0 ? (
+                      <div className="flex flex-col justify-start items-start">
+                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer font-semibold">My products</button>
+                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer ">Selling products</button>
+                      </div>
+                    ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
+                      </div>
+                      <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">Order</button>
+                    </div>
+                    {showNav2 === 0 ? (
+                      <div className="flex flex-col justify-start items-start">
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">My order</button>
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">Order cancel</button>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : showSideBar === 2 ? (
+                  <div className="flex flex-col justify-center mt-10">
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
+                      </div>
+                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">Store</button>
+                    </div>
+                    {showNav === 0 ? (
+                      <div>
+                        <button onClick={() => setCurrentShow(0)} className="text-base ml-14 focus:text-gray cursor-pointer">Store profile</button>
+                      </div>
+                    ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
+                      </div>
+                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer font-semibold">Product</button>
+                    </div>
+                    {showNav1 === 0 ? (
+                      <div className="flex flex-col justify-start items-start">
+                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">My products</button>
+                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer font-semibold">Selling products</button>
+                      </div>
+                    ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
+                      </div>
+                      <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">Order</button>
+                    </div>
+                    {showNav2 === 0 ? (
+                      <div className="flex flex-col justify-start items-start">
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">My order</button>
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">Order cancel</button>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : showSideBar === 3 ? (
+                  <div className="flex flex-col justify-center mt-10">
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
+                      </div>
+                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">Store</button>
+                    </div>
+                    {showNav === 0 ? (
+                      <div>
+                        <button onClick={() => setCurrentShow(0)} className="text-base ml-14 focus:text-gray cursor-pointer">Store profile</button>
+                      </div>
+                    ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
+                      </div>
+                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">Product</button>
+                    </div>
+                    {showNav1 === 0 ? (
+                      <div className="flex flex-col justify-start items-start">
+                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">My products</button>
+                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer">Selling products</button>
+                      </div>
+                    ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
+                      </div>
+                      <button onClick={onSetNav3} className="ml-3 text-base font-semibold cursor-pointer">Order</button>
+                    </div>
+                    {showNav2 === 0 ? (
+                      <div className="flex flex-col justify-start items-start">
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer font-semibold">My order</button>
+                        <button onClick={() => setCurrentShow(4)} className="ml-14 text-base cursor-pointer ">Order cancel</button>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : (
+                  <div className="flex flex-col justify-center mt-10">
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
+                      </div>
+                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">Store</button>
+                    </div>
+                    {showNav === 0 ? (
+                      <div>
+                        <button onClick={() => setCurrentShow(0)} className="text-base ml-14 focus:text-gray cursor-pointer">Store profile</button>
+                      </div>
+                    ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
+                      </div>
+                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">Product</button>
+                    </div>
+                    {showNav1 === 0 ? (
+                      <div className="flex flex-col justify-start items-start">
+                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">My products</button>
+                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer">Selling products</button>
+                      </div>
+                    ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
+                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
+                      </div>
+                      <button onClick={onSetNav3} className="ml-3 text-base font-semibold cursor-pointer">Order</button>
+                    </div>
+                    {showNav2 === 0 ? (
+                      <div className="flex flex-col justify-start items-start">
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer">My order</button>
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer  font-semibold">Order cancel</button>
+                      </div>
+                    ) : null}
+                  </div>
+                )}
+              </div>
+            </Drawer>
+          </div>
           {showSideBar === 0 ? (
             <CardStore />
           ) : showSideBar === 1 ? (
@@ -263,7 +475,7 @@ const Seller = () => {
           ) : showSideBar === 2 ? (
             <SellingProduct />
           ) : (
-            <CardMyorder name="My order" />
+            <CardMyorder />
           )}
         </div>
       </div>
