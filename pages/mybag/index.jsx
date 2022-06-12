@@ -13,10 +13,10 @@ const MyBag = () => {
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
-      <div className="p-28 bg-white">
+      <div className="md:p-28 p-6 pt-28 bg-white">
         <h1 className="mt-8 text-black text-3xl font-extrabold">My Bag</h1>
-        <div className="flex ">
-          <div className="flex-auto w-2/5">
+        <div className="md:flex pt-5 md:pt-0">
+          <div className="md:flex-auto md:w-2/5">
             <div className="bg-white p-6 rounded-md shadow-lg">
               <div className="flex items-cente justify-between">
                 <div className="flex">
@@ -49,7 +49,7 @@ const MyBag = () => {
               defaultValue="2"
             />
           </div>
-          <div className="flex-1 w-32 ml-8">
+          <div className="md:flex-1 md:w-32 md:ml-8 mt-10 md:mt-0">
             <div className="bg-white w-full rounded-md shadow-lg p-5">
               <p className="text-black font-bold">Shopping summary</p>
               <div className="flex justify-between mt-3">
