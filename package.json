@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
     "autoprefixer": "^10.4.7",
     "axios": "^0.27.2",
     "js-cookie": "^3.0.1",

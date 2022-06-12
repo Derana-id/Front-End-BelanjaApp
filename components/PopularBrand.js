@@ -6,7 +6,7 @@ export default function PopularBrand() {
     <div className="bg-white mt-12">
       <div className="">
         <h1 className="font-bold text-3xl text-black">Popular</h1>
-        <p style={{ color: 'gray' }}>Find clothes that are trending recently</p>
+        <p className="text-gray-500 font-medium">Find clothes that are trending recently</p>
       </div>
       <div
         className="w-content bg-secondary grid-cols-2
