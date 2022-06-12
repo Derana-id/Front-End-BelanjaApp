@@ -22,7 +22,7 @@ const Checkout = () => {
 
         <div className="md:flex">
           <div className="flex-auto md:w-2/5">
-            <p className="mb-2 font-semibold">Shipping Adress</p>
+            <p className="mb-2 font-semibold">Shipping Address</p>
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <p className="font-bold text-black text-lg">Andreas Jane</p>
               <p className="mt-2">
