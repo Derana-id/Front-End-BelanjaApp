@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import BtnAction from '../../components/Button/button-choose';
 import AddAddress from '../../components/modals/add-address';
 import CardCheckout from '../../components/card/card-checkout';
 import jas from '../../assets/img/jas.jpg';
@@ -8,7 +7,7 @@ import CardTotalPrice from '../../components/card/card-total-price';
 import ModalsPayment from '../../components/modals/modals-payment';
 
 const Checkout = () => {
-  const [isPayment, setIsPayment] = useState(true);
+  const [isPayment, setIsPayment] = useState(false);
 
   return (
     <div>
