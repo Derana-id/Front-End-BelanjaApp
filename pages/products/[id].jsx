@@ -24,6 +24,8 @@ const Products = () => {
   const [getSize, setSize] = useState(0);
   const [getAmount, setAmount] = useState(0);
 
+  console.log(document.cookie);
+
   useEffect(() => {
     dispatch(getDetailProduct(getId));
     dispatch(getPopularProducts());
@@ -36,7 +38,6 @@ const Products = () => {
   const getDetail = useSelector(state => {
     return state.getDetailProduct;
   });
-  setAmount;
 
   const onSize = e => {
     setSize(getSize + e);

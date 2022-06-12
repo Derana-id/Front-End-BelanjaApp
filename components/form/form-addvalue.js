@@ -8,7 +8,7 @@ export default function FormValueNumber(params) {
         className="font-bold text-base focus:outline-none w-5"
         defaultValue={params.defaultValue}
         id={params.id}
-        // value={params.value}
+        value={params.value}
         // onChange={params.onChange}
         readOnly
       />
