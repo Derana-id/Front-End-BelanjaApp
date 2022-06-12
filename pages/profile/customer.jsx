@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { AiOutlineMenu } from 'react-icons/ai';
 import Drawer from 'react-modern-drawer';
 import CardMyorder from '../../components/card/customer/cardMyorder';
-import CardShippingAddress from '../../components/card/customer/cardShippingAddress';
+import CardShippingAddress from '../../components/card/customer/cardShippingAddressProfile';
 import CardMyprofile from '../../components/card/customer/cardMyprofile';
 import user from '../../assets/img/user.jpg';
 import edit from '../../assets/icons/edit.svg';

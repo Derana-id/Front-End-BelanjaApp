@@ -7,7 +7,7 @@ export default function CardShippingAddress() {
   const [showEditModal, setShowEditModal] = useState();
   return (
     <div>
-      <div className="flex flex-col bg-white rounded w-3/4 h-auto mt-[20px] mx-24">
+      <div className="flex flex-col bg-white rounded w-3/4 h-auto mt-[120px] mx-24">
         <div className="flex w-full">
           <button onClick={() => setShowModal(true)} className="w-full mx-10 h-20 border-2 border-dashed rounded text-[#9B9B9B]">
             Add new address
