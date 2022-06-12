@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function radioButton() {
   return (
-    <div className="flex w-full">
+    <div className="flex flex-col mr-[80px]  sm:flex sm:flex-col md:flex md:flex-row md:mr-2 lg:flex lg:flex-row lg:mr-2 w-full">
       <div className="flex items-center mr-4">
         <input
           id="inline-radio"

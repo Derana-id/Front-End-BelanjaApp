@@ -2,9 +2,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import Image from 'next/image';
+import shoes from '../../../assets/img/shoes (1).jpg';
 import Search from '../../search/search';
 // import caricatur from '../../../assets/img/caricatur.png';
-import shoes from '../../../assets/img/shoes (1).jpg';
 
 export default function cardMyorder() {
   const [showNav, setFormShowNav] = useState(0);
