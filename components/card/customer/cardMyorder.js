@@ -1,7 +1,8 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
-// import Image from 'next/image';
+import Image from 'next/image';
+import shoes from '../../../assets/img/shoes (1).jpg';
 import Search from '../../search/search';
 // import caricatur from '../../../assets/img/caricatur.png';
 
@@ -35,31 +36,121 @@ export default function cardMyorder() {
         <div className="mt-8">
           <Search />
         </div>
-        <div className="flex justify-center items-center p-16">
+        <div className="flex justify-start min-h-[200px] p-4">
           {showNav === 0 ? (
-            <div className="w-2/5 h-2/5">
-              {/* <Image src={caricatur} /> */}
-              new
+            <div className="flex w-full border rounded min-h-[120px] relative">
+              <div className="w-0 sm:w-0 md:w-[120px] md:h-[120px] lg:w-[120px] h-auto">
+                <Image src={shoes} width={120} height={165} />
+              </div>
+              <div className="ml-2 flex flex-col">
+                <label className="font-semibold mb-10 sm:mb-10 md:mb-2 lg:mb-2">Invoice №1947034</label>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Product name :</label>
+                  <label className="font-semibold ">Mens formal suit</label>
+                </div>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Quantity: :</label>
+                  <label className="font-semibold ">15</label>
+                </div>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Total Amount: :</label>
+                  <label className="font-semibold ">112$</label>
+                </div>
+              </div>
+              <label className="absolute top-8 sm:top-8 md:top- lg:top-0 right-2 font-semibold text-gray-600">05-12-2019</label>
+              <label className="absolute right-2 bottom-0 text-special-success font-bold">New</label>
             </div>
           ) : showNav === 1 ? (
-            <div className="w-2/5 h-2/5">
-              {/* <Image src={caricatur} /> */}
-              Packed
+            <div className="flex w-full border rounded min-h-[120px] relative">
+              <div className="w-0 sm:w-0 md:w-[120px] md:h-[120px] lg:w-[120px] h-auto">
+                <Image src={shoes} width={120} height={165} />
+              </div>
+              <div className="ml-2 flex flex-col">
+                <label className="font-semibold mb-10 sm:mb-10 md:mb-2 lg:mb-2">Invoice №1947034</label>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Product name :</label>
+                  <label className="font-semibold ">Mens formal suit</label>
+                </div>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Quantity: :</label>
+                  <label className="font-semibold ">15</label>
+                </div>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Total Amount: :</label>
+                  <label className="font-semibold ">112$</label>
+                </div>
+              </div>
+              <label className="absolute top-8 sm:top-8 md:top- lg:top-0 right-2 font-semibold text-gray-600">05-12-2019</label>
+              <label className="absolute right-2 bottom-0 text-special-success font-bold">Packed</label>
             </div>
           ) : showNav === 2 ? (
-            <div className="w-2/5 h-2/5">
-              {/* <Image src={caricatur} /> */}
-              Sent
+            <div className="flex w-full border rounded min-h-[120px] relative">
+              <div className="w-0 sm:w-0 md:w-[120px] md:h-[120px] lg:w-[120px] h-auto">
+                <Image src={shoes} width={120} height={165} />
+              </div>
+              <div className="ml-2 flex flex-col">
+                <label className="font-semibold mb-10 sm:mb-10 md:mb-2 lg:mb-2">Invoice №1947034</label>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Product name :</label>
+                  <label className="font-semibold ">Mens formal suit</label>
+                </div>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Quantity: :</label>
+                  <label className="font-semibold ">15</label>
+                </div>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Total Amount: :</label>
+                  <label className="font-semibold ">112$</label>
+                </div>
+              </div>
+              <label className="absolute top-8 sm:top-8 md:top- lg:top-0 right-2 font-semibold text-gray-600">05-12-2019</label>
+              <label className="absolute right-2 bottom-0 text-special-success font-bold">Sent</label>
             </div>
           ) : showNav === 3 ? (
-            <div className="w-2/5 h-2/5">
-              {/* <Image src={caricatur} /> */}
-              Completed
+            <div className="flex w-full border rounded min-h-[120px] relative">
+              <div className="w-0 sm:w-0 md:w-[120px] md:h-[120px] lg:w-[120px] h-auto">
+                <Image src={shoes} width={120} height={165} />
+              </div>
+              <div className="ml-2 flex flex-col">
+                <label className="font-semibold mb-10 sm:mb-10 md:mb-2 lg:mb-2">Invoice №1947034</label>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Product name :</label>
+                  <label className="font-semibold ">Mens formal suit</label>
+                </div>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Quantity: :</label>
+                  <label className="font-semibold ">15</label>
+                </div>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Total Amount: :</label>
+                  <label className="font-semibold ">112$</label>
+                </div>
+              </div>
+              <label className="absolute top-8 sm:top-8 md:top- lg:top-0 right-2 font-semibold text-gray-600">05-12-2019</label>
+              <label className="absolute right-2 bottom-0 text-special-success font-bold">Complete</label>
             </div>
           ) : (
-            <div className="w-2/5 h-2/5">
-              {/* <Image src={caricatur} /> */}
-              Cancel order
+            <div className="flex w-full border rounded min-h-[120px] relative">
+              <div className="w-0 sm:w-0 md:w-[120px] md:h-[120px] lg:w-[120px] h-auto">
+                <Image src={shoes} width={120} height={165} />
+              </div>
+              <div className="ml-2 flex flex-col">
+                <label className="font-semibold mb-10 sm:mb-10 md:mb-2 lg:mb-2">Invoice №1947034</label>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Product name :</label>
+                  <label className="font-semibold ">Mens formal suit</label>
+                </div>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Quantity: :</label>
+                  <label className="font-semibold ">15</label>
+                </div>
+                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                  <label className="text-[#9B9B9B]">Total Amount: :</label>
+                  <label className="font-semibold ">112$</label>
+                </div>
+              </div>
+              <label className="absolute top-8 sm:top-8 md:top- lg:top-0 right-2 font-semibold text-gray-600">05-12-2019</label>
+              <label className="absolute right-2 bottom-0 text-primary font-bold">Cancel</label>
             </div>
           )}
 
