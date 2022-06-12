@@ -52,14 +52,15 @@ export const getDetailProduct = id => async dispatch => {
     dispatch({
       type: GET_DETAIL_PRODUCT_PENDING
     });
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}product/${id}`, {});
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}product/16eb8f3e-56f1-4349-9c63-f8318aecc9ad`, {});
     dispatch({
       type: GET_DETAIL_PRODUCT_SUCCESS,
       payload: res.data
     });
   } catch (error) {
     dispatch({
-      type: GET_DETAIL_PRODUCT_FAILED
+      type: GET_DETAIL_PRODUCT_FAILED,
+      payload: error.message
     });
   }
 };

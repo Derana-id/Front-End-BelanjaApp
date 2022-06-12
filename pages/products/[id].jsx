@@ -1,14 +1,10 @@
 /* eslint-disable react/jsx-indent */
 /* eslint-disable indent */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import shoesOne from '../../assets/img/shoes (1).jpg';
-import shoesTwo from '../../assets/img/shoes (2).jpg';
-import shoesThree from '../../assets/img/shoes (3).jpg';
-import shoesFourth from '../../assets/img/shoes (4).jpg';
 import Img from '../../components/img/Img';
 import Start from '../../components/star/start';
 import Color from '../../components/molecules/color';
@@ -24,12 +20,14 @@ const Products = () => {
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useDispatch();
+  const [getId] = useState(id);
+  const [getSize, setSize] = useState(0);
+  const [getAmount, setAmount] = useState(0);
 
-  console.log(id);
   useEffect(() => {
+    dispatch(getDetailProduct(getId));
     dispatch(getPopularProducts());
-    dispatch(getDetailProduct(id));
-  }, []);
+  }, [dispatch]);
 
   const getPopular = useSelector(state => {
     return state.getPopular;
@@ -38,7 +36,16 @@ const Products = () => {
   const getDetail = useSelector(state => {
     return state.getDetailProduct;
   });
-  console.log(getDetail);
+  setAmount;
+
+  const onSize = e => {
+    setSize(getSize + e);
+  };
+
+  const onAmount = e => {
+    setAmount(getAmount + e);
+  };
+
   return (
     <div>
       <Head>
@@ -57,73 +64,106 @@ const Products = () => {
               <li className="cursor-pointer">category</li>
             </Link>
             <li>{'>'} </li>
-            <li className="cursor-pointer">Shoes</li>
+            <li className="cursor-pointer">{getDetail.data.category[0].category_name}</li>
           </ul>
         </div>
-        <div className="md:flex mt-12">
-          <div
-            className="md:w-2/5 bg-secondary grid-cols-2
+        {getDetail.isLoading ? null : (
+          <div>
+            <div className="md:flex mt-12">
+              <div
+                className="md:w-2/5 bg-secondary grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
-          >
-            <div
-              className="grid grid-cols-2
+              >
+                <div
+                  className="grid grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
-            >
-              <Img src={shoesOne} />
-              <Img src={shoesTwo} />
-              <Img src={shoesThree} />
-              <Img src={shoesFourth} />
-            </div>
-          </div>
-          <div className="flex-auto md:w-3/5 bg-tertiary md:pl-9 md:pr-7 mt-5 md:mt-0">
-            <div>
-              <h3 className="text-2xl font-bold">Nike CruzrOne (Bright Crimson)</h3>
-              <p className="text-gray text-sm font-semibold">Nike {id}</p>
-              <Start valueReview="(10)" />
-            </div>
-            <div className="mt-5">
-              <p className="text-md text-gray font-semibold text-sm">price</p>
-              <h3 className="text-dark text-xl font-extrabold">$ 20.0</h3>
-            </div>
-            <div className="mt-5">
-              <p className="font-semibold text-md">Color</p>
-              <div className="flex w-44 p-1 justify-between">
-                <Color color="bg-primary" />
-                <Color color="bg-black" />
-                <Color color="bg-special-warning" />
-                <Color color="bg-special-success" />
-              </div>
-            </div>
-            <div className="flex justify-between w-full md:w-72 mt-5">
-              <div className="ralative">
-                <p className="font-bold text-base">Size</p>
-                <div className=" flex w-28 items-center justify-between">
-                  <SpinnerAction action="+" />
-                  <FormValueNumber defaultValue="28" />
-                  <SpinnerAction action="-" />
+                >
+                  <Img
+                    src={
+                      getDetail.data.image[0]
+                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                    }
+                  />
+                  <Img
+                    src={
+                      getDetail.data.image[1]
+                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                    }
+                  />
+                  <Img
+                    src={
+                      getDetail.data.image[2]
+                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                    }
+                  />
+                  <Img
+                    src={
+                      getDetail.data.image[2]
+                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                    }
+                  />
                 </div>
               </div>
-              <div className="ralative">
-                <p className="font-bold text-base">Jumlah</p>
-                <div className="flex w-28 items-center justify-between">
-                  <SpinnerAction action="+" />
-                  <FormValueNumber defaultValue="28" />
-                  <SpinnerAction action="-" />
+              <div className="flex-auto md:w-3/5 bg-tertiary md:pl-9 md:pr-7 mt-5 md:mt-0">
+                <div>
+                  <h3 className="text-2xl font-bold">{getDetail.data.product.product_name}</h3>
+                  <p className="text-gray text-sm font-semibold">{getDetail.data.brand[0].brand_name}</p>
+                  <Start valueReview="(10)" />
+                </div>
+                <div className="mt-5">
+                  <p className="text-md text-gray font-semibold text-sm">price</p>
+                  <h3 className="text-dark text-xl font-extrabold">$ {getDetail.data.product.price}</h3>
+                </div>
+                <div className="mt-5">
+                  <p className="font-semibold text-md">Color</p>
+                  <div className="flex w-44 p-1 justify-between">
+                    {getDetail.data.color.map((item, index) => (
+                      <div key={index}>
+                        <Color color={`${item.color_value}`} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex justify-between w-full md:w-72 mt-5">
+                  <div className="ralative">
+                    <p className="font-bold text-base">Size</p>
+                    <div className=" flex w-28 items-center justify-between">
+                      <SpinnerAction action="+" onClick={() => onSize(+1)} />
+                      <FormValueNumber defaultValue={getSize} value={getSize} />
+                      <SpinnerAction action="-" onClick={() => onSize(-1)} />
+                    </div>
+                  </div>
+                  <div className="ralative">
+                    <p className="font-bold text-base">Jumlah</p>
+                    <div className="flex w-28 items-center justify-between">
+                      <SpinnerAction action="+" onClick={() => onAmount(+1)} />
+                      <FormValueNumber defaultValue={getDetail.data.product.stock} value={getAmount} />
+                      <SpinnerAction action="-" onClick={() => onAmount(-1)} />
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-8 md:mt-5 md:w-80">
+                  <div className="flex justify-between mt-5">
+                    <ButtonSuccess onClick={() => alert('hai')} action="Chat" />
+                    <ButtonSuccess onClick={() => alert('hai')} action="Add bag" />
+                  </div>
+                  <div className="mt-5">
+                    <ButtonWarning action="Buy Now" />
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="mt-8 md:mt-5 md:w-80">
-              <div className="flex justify-between mt-5">
-                <ButtonSuccess onClick={() => alert('hai')} action="Chat" />
-                <ButtonSuccess onClick={() => alert('hai')} action="Add bag" />
-              </div>
-              <div className="mt-5">
-                <ButtonWarning action="Buy Now" />
-              </div>
-            </div>
+            <FormInformation
+              condition={getDetail.data.product.is_new === 1 ? 'New' : 'Old'}
+              description={getDetail.data.product.description}
+            />
           </div>
-        </div>
-        <FormInformation />
+        )}
+
         <hr className="text-gray mt-7" />
         <h1 className="mt-8 text-black text-3xl font-extrabold">You can also like this</h1>
         <p className="text-gray">You’ve never seen it before!</p>
