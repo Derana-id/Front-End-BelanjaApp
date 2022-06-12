@@ -1,22 +1,27 @@
+/* eslint-disable indent */
 /* eslint-disable react/jsx-indent */
 import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import Slider from '../components/Slider';
 import SliderContainer from '../components/SliderCategory';
-import PopularBrand from '../components/PopularBrand';
-import { getProducts } from '../redux/actions/products';
+import { getPopularProducts, getProducts } from '../redux/actions/products';
 import CardProducts from '../components/card/card-products';
 
 function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
+    dispatch(getPopularProducts());
   }, []);
   const getAllProducts = useSelector(state => {
     return state.products;
   });
-  console.log(getAllProducts);
+
+  const getPopular = useSelector(state => {
+    return state.getPopular;
+  });
+  console.log(getPopular);
   return (
     <div>
       <Head>
@@ -55,13 +60,42 @@ function Home() {
                           price={`$ ${item.product.price}`}
                           user={`${item.store[0].store_name}`}
                           href={`/products/${item.product.id}`}
+                          img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
                         />
                       </div>
                     ))}
               </div>
             </div>
           </div>
-          {/* <PopularBrand /> */}
+          <div className="bg-white mt-12">
+            <div className="">
+              <h1 className="font-bold text-3xl text-black">Popular</h1>
+              <p className="text-gray-500 font-medium">Find clothes that are trending recently</p>
+            </div>
+            <div
+              className="w-content bg-secondary grid-cols-2
+                     grid-flow-row gap-4 auto-rows-auto"
+            >
+              <div
+                className="md:grid grid-cols-5
+                     grid-flow-row gap-4 auto-rows-auto"
+              >
+                {getPopular.isLoading
+                  ? null
+                  : getPopular.data.map((item, index) => (
+                      <div key={index}>
+                        <CardProducts
+                          nameProduct={`${item.product.product_name}`}
+                          price={`$ ${item.product.price}`}
+                          user={`${item.store[0].store_name}`}
+                          href={`/products/${item.product.id}`}
+                          img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                        />
+                      </div>
+                    ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
