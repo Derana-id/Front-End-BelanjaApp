@@ -6,7 +6,7 @@ export default function NewBrand() {
     <div className="bg-white mt-12">
       <div className="">
         <h1 className="font-bold text-3xl text-black">New</h1>
-        <p className="text-gray font-medium">You’ve never seen it before!</p>
+        <p className="text-gray-500 font-medium">You’ve never seen it before!</p>
       </div>
       <div
         className="w-content bg-secondary grid-cols-2

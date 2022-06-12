@@ -8,7 +8,7 @@ export default function SliderCategory({ deviceType }) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 2,
+      items: 3,
       paritialVisibilityGutter: 60
     },
     tablet: {
@@ -46,7 +46,7 @@ export default function SliderCategory({ deviceType }) {
       <div className="grid grid-cols-12 py-7">
         <div className="col-span-2">
           <h1 className="text-black font-bold text-3xl">Category</h1>
-          <p className="text-gray text-base">What are you currently looking for?</p>
+          <p className="text-gray-500 font-medium">What are you currently looking for?</p>
         </div>
         <div className="justify-between col-span-10 p-5">
           <Carousel
