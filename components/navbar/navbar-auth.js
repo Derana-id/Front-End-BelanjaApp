@@ -12,7 +12,7 @@ import ButtonLogin from '../Button/button-login';
 export default function AuthNavbar() {
   const router = useRouter();
   return (
-    <div className="w-full h-20 px-28 flex flex-row items-center fixed z-10 shadow-lg bg-white">
+    <div className="w-full h-16 md:h-20 md:px-28 py-3 p-3 flex flex-row items-center fixed z-10 shadow-lg bg-white">
       <div className="flex w-full items-center">
         <div className="w-1/5 h-12 flex items-center">
           <div className="relative flex items-center">
@@ -31,8 +31,8 @@ export default function AuthNavbar() {
         </div>
         <div className="w-2/5 h-12 flex items-center">
           <div className="flex justify-end w-full h-full items-center">
-            <Link href="mybag">
-              <div>
+            <Link href="/mybag">
+              <div className="hidden md:flex">
                 <AiOutlineShoppingCart className="text-2xl mr-6 text-gray cursor-pointer" />
               </div>
             </Link>
