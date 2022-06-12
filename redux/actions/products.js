@@ -3,6 +3,9 @@ import {
   GET_ALL_PRODUCTS_FAILED,
   GET_ALL_PRODUCTS_PENDING,
   GET_ALL_PRODUCTS_SUCCESS,
+  GET_DETAIL_PRODUCT_FAILED,
+  GET_DETAIL_PRODUCT_PENDING,
+  GET_DETAIL_PRODUCT_SUCCESS,
   GET_POPULAR_PRODUCTS_FAILED,
   GET_POPULAR_PRODUCTS_PENDING,
   GET_POPULAR_PRODUCTS_SUCCESS
@@ -40,6 +43,23 @@ export const getPopularProducts = () => async dispatch => {
     dispatch({
       type: GET_POPULAR_PRODUCTS_FAILED,
       payload: error.message
+    });
+  }
+};
+
+export const getDetailProduct = id => async dispatch => {
+  try {
+    dispatch({
+      type: GET_DETAIL_PRODUCT_PENDING
+    });
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}product/${id}`, {});
+    dispatch({
+      type: GET_DETAIL_PRODUCT_SUCCESS,
+      payload: res.data
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_DETAIL_PRODUCT_FAILED
     });
   }
 };

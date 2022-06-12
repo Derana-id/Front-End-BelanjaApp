@@ -1,6 +1,10 @@
-import React from 'react';
+/* eslint-disable react/jsx-indent */
+/* eslint-disable indent */
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 import shoesOne from '../../assets/img/shoes (1).jpg';
 import shoesTwo from '../../assets/img/shoes (2).jpg';
 import shoesThree from '../../assets/img/shoes (3).jpg';
@@ -14,8 +18,27 @@ import ButtonSuccess from '../../components/Button/button-success';
 import ButtonWarning from '../../components/Button/button-warning';
 import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
+import { getDetailProduct, getPopularProducts } from '../../redux/actions/products';
 
 const Products = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const dispatch = useDispatch();
+
+  console.log(id);
+  useEffect(() => {
+    dispatch(getPopularProducts());
+    dispatch(getDetailProduct(id));
+  }, []);
+
+  const getPopular = useSelector(state => {
+    return state.getPopular;
+  });
+
+  const getDetail = useSelector(state => {
+    return state.getDetailProduct;
+  });
+  console.log(getDetail);
   return (
     <div>
       <Head>
@@ -55,7 +78,7 @@ const Products = () => {
           <div className="flex-auto md:w-3/5 bg-tertiary md:pl-9 md:pr-7 mt-5 md:mt-0">
             <div>
               <h3 className="text-2xl font-bold">Nike CruzrOne (Bright Crimson)</h3>
-              <p className="text-gray text-sm font-semibold">Nike</p>
+              <p className="text-gray text-sm font-semibold">Nike {id}</p>
               <Start valueReview="(10)" />
             </div>
             <div className="mt-5">
@@ -112,16 +135,19 @@ const Products = () => {
             className="md:grid grid-cols-5
                      grid-flow-row gap-4 auto-rows-auto"
           >
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            {getPopular.isLoading
+              ? null
+              : getPopular.data.map((item, index) => (
+                  <div key={index}>
+                    <CardProducts
+                      nameProduct={`${item.product.product_name}`}
+                      price={`$ ${item.product.price}`}
+                      user={`${item.store[0].store_name}`}
+                      href={`/products/${item.product.id}`}
+                      img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                    />
+                  </div>
+                ))}
           </div>
         </div>
       </div>

@@ -15,13 +15,12 @@ function Home() {
     dispatch(getPopularProducts());
   }, []);
   const getAllProducts = useSelector(state => {
-    return state.products;
+    return state.getAllProducts;
   });
 
   const getPopular = useSelector(state => {
     return state.getPopular;
   });
-  console.log(getPopular);
   return (
     <div>
       <Head>
