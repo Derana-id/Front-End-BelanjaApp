@@ -6,6 +6,9 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
+
 import { BiUserCircle } from 'react-icons/bi';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { MdOutlineNotificationsNone } from 'react-icons/md';
@@ -13,6 +16,8 @@ import { HiOutlineMail } from 'react-icons/hi';
 // import { useDispatch, useSelector } from 'react-redux';
 // import jwtDecode from 'jwt-decode';
 // import Cookies from 'js-cookie';
+import { getPopularProducts } from '../../redux/actions/products';
+
 import SearchNavbar from '../search/search-navbar';
 import logo from '../../assets/img/logo.png';
 import notification from '../../assets/img/notification.png';
@@ -31,9 +36,12 @@ export default function MainNavbar() {
   //   getId = id;
   // }
 
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [isActive, setActive] = useState(false);
   const [isProfile, setIsProfile] = useState(false);
   const [isfilter, setIsFilter] = useState(false);
+  const [getSearch, setSearch] = useState('');
 
   const getActive = e => {
     if (isActive) {
@@ -60,6 +68,12 @@ export default function MainNavbar() {
   // });
 
   // console.log(getProfile);
+  const onSearch = () => {
+    const search = getSearch;
+
+    dispatch(getPopularProducts(search));
+    router.push(`/?search=${getSearch}`);
+  };
 
   return (
     <div>
@@ -75,7 +89,7 @@ export default function MainNavbar() {
             </div>
           </div>
           <div className="w-4/5 md:3/5 h-12 flex items-center">
-            <SearchNavbar />
+            <SearchNavbar onChange={e => setSearch(e.target.value)} onSearch={() => onSearch()} />
             <div
               className="border-solid border-2 border-gray rounded-xl m-2 md:m-3 flex items-center p-1 w-8 md:w-11 md:p-2 justify-center cursor-pointer"
               onClick={() => setIsFilter(true)}
@@ -167,7 +181,11 @@ export default function MainNavbar() {
         {isfilter ? (
           <div className="w-full absolute top-0 bottom-0 right-0 left-0">
             <div>
-              <ModalsSearch onClick={() => setIsFilter(false)} />
+              <ModalsSearch
+                onClick={() => setIsFilter(false)}
+                onDiscard={() => setIsFilter(false)}
+                onApply={() => setIsFilter(false)}
+              />
             </div>
           </div>
         ) : null}

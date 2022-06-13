@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Checklist from '../Input/checklist';
 import SpinnerAction from '../molecules/spinner';
 import FormValueNumber from '../form/form-addvalue';
@@ -8,14 +8,14 @@ export default function CardCart(params) {
   return (
     <div className="bg-white p-6 shadow-xl mt-5 md:flex items-center rounded-xl">
       <div className="flex py-2 md:py-0">
-        <Checklist />
+        <Checklist onChange={params.onChange} onClick={params.onClick} />
         <p className="md:hidden font-bold">Select</p>
       </div>
       <div className="md:w-24 hidden md:h-24 md:flex items-center">
-        <Image src={params.image} width={74} height={74} objectFit="cover" className="rounded-md" />
+        <img src={params.image} alt="" width={74} height={74} objectFit="cover" className="rounded-md" />
       </div>
       <div className="md:w-24 md:h-24 md:hidden flex items-center">
-        <Image src={params.image} objectFit="cover" className="rounded-md" />
+        <img src={params.image} alt="" objectFit="cover" className="rounded-md" />
       </div>
       <div
         className="relative w-96 p-3
