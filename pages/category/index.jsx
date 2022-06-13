@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 import CardProducts from '../../components/card/card-products';
+import { getProducts } from '../../redux/actions/products';
 
 const Category = () => {
+  const router = useRouter();
+  const { query } = router.query;
+  const dispatch = useDispatch();
+
+  // console.log(query);
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
+
+  const getAll = useSelector(state => {
+    return state.getAllProducts;
+  });
+
+  // console.log(getAll.data);
   return (
     <div>
       <Head>
@@ -28,18 +46,22 @@ const Category = () => {
         >
           <div
             className="grid grid-cols-5
-                     grid-flow-row gap-4 auto-rows-auto"
+                   grid-flow-row gap-4 auto-rows-auto"
           >
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
-            <CardProducts nameProduct={"Men's formal suit - Black & White"} price="$ 40.0" user="Zalora Cloth" />
+            {getAll.isLoading ? null : getAll.data.map((item, index) => (
+              <>
+                {item.category[0].category_name === query ? (
+                  <CardProducts
+                    key={index}
+                    productName={`${item.product.product_name}`}
+                    nameProduct={`${item.product.product_name}`}
+                    price={`$ ${item.product.price}`}
+                    user={`${item.store[0].store_name}`}
+                    img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                  />
+                ) : (null)}
+              </>
+            ))}
           </div>
         </div>
       </div>
