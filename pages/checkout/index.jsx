@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import ContentLoader from 'react-content-loader';
 import AddAddress from '../../components/modals/add-address';
 import CardCheckout from '../../components/card/card-checkout';
 import jas from '../../assets/img/jas.jpg';
 import CardTotalPrice from '../../components/card/card-total-price';
 import ModalsPayment from '../../components/modals/modals-payment';
+import { getMyTransaction } from '../../redux/actions/transaction';
 
 const Checkout = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const myTransaction = useSelector(state => state.myTransaction);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [isPayment, setIsPayment] = useState(false);
 
   return (
