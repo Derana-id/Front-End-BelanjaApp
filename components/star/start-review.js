@@ -14,7 +14,7 @@ export default function StartReview() {
           <Start />
         </div>
       </div>
-      <div className="flex ml-10">
+      <div className="flex ml-5 md:ml-10">
         <StartColumn />
       </div>
     </div>

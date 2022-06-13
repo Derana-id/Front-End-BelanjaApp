@@ -2,11 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: []
+    domains: ['blanja-app.herokuapp.com']
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL
   }
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
