@@ -41,8 +41,9 @@ const Products = () => {
     setSize(getSize + e);
   };
 
-  const onBuy = () => {
+  const onBuy = e => {
     const data = {
+      productId: e,
       color: getColor,
       size: getSize,
       amount: getAmount
@@ -164,7 +165,7 @@ const Products = () => {
                 <div className="mt-8 md:mt-5 md:w-80">
                   <div className="flex justify-between mt-5">
                     <ButtonSuccess onClick={() => alert('hai')} action="Chat" />
-                    <ButtonSuccess onClick={() => onBuy()} action="Add bag" />
+                    <ButtonSuccess onClick={() => onBuy(getDetail.data.product.id)} action="Add bag" />
                   </div>
                   <div className="mt-5">
                     <ButtonWarning action="Buy Now" />
