@@ -1,17 +1,21 @@
 /* eslint-disable indent */
 /* eslint-disable react/jsx-indent */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import Slider from '../components/Slider';
-import SliderContainer from '../components/SliderCategory';
-import { getPopularProducts, getProducts } from '../redux/actions/products';
 import CardProducts from '../components/card/card-products';
+import { getCategory } from '../redux/actions/category';
+import { getPopularProducts, getProducts } from '../redux/actions/products';
 
-function Home() {
+function Home({ deviceType }) {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [getSearch, setSearch] = useState('');
 
   // console.log(router.query.search);
 
@@ -19,8 +23,15 @@ function Home() {
 
   useEffect(() => {
     dispatch(getProducts());
-    dispatch(getPopularProducts(search));
+    dispatch(getCategory());
+    dispatch(getPopularProducts(getSearch));
+    setSearch(search);
   }, []);
+
+  const getAllCategory = useSelector(state => {
+    return state.getAllCategory;
+  });
+
   const getAllProducts = useSelector(state => {
     return state.getAllProducts;
   });
@@ -33,6 +44,23 @@ function Home() {
     router.push(`/products/${e}`);
   };
 
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+      paritialVisibilityGutter: 60
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+      paritialVisibilityGutter: 40
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      paritialVisibilityGutter: 40
+    }
+  };
   return (
     <div>
       <Head>
@@ -45,7 +73,41 @@ function Home() {
           <Slider />
         </div>
         <div className="md:px-28 p-6 bg-gray-100">
-          <SliderContainer />
+          <div className="font-sans leading-normal tracking-normal text-gray-100">
+            <div className="md:grid md:grid-cols-12 py-7">
+              <div className="col-span-2">
+                <h1 className="text-black font-bold text-3xl">Category</h1>
+                <p className="text-black font-medium">What are you currently looking for?</p>
+              </div>
+              <div className="md:col-span-10 md:p-5">
+                {getAllCategory.isLoading ? null : (
+                  <Carousel
+                    partialVisible
+                    deviceType={deviceType}
+                    itemClass="image-item"
+                    responsive={responsive}
+                    removeArrowOnDeviceType={['tablet', 'mobile']}
+                    showDots
+                    className="py-5"
+                  >
+                    {getAllCategory.data.map((each, index) => {
+                      return (
+                        <div key={index} className="w-full h-full p-2">
+                          <Image
+                            src={`${process.env.NEXT_PUBLIC_API_URL}uploads/categories/${each.photo}`}
+                            className="rounded-lg shadow-xl"
+                            width={206}
+                            height={220}
+                            onClick={() => alert(each.category_name)}
+                          />
+                        </div>
+                      );
+                    })}
+                  </Carousel>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
         <div className="md:px-28 p-6">
           <div className="bg-white mt-12">
@@ -53,7 +115,7 @@ function Home() {
               <h1 className="font-bold text-3xl text-black">New</h1>
               <p className="text-gray-500 font-medium">You’ve never seen it before!</p>
             </div>
-
+            <p>{JSON.stringify(getAllCategory)}</p>
             <div
               className="w-content bg-secondary grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
@@ -80,8 +142,8 @@ function Home() {
           </div>
           <div className="bg-white mt-12 h-screen">
             <div className="">
-              <h1 className="font-bold text-3xl text-black">Popular</h1>
-              <p className="text-gray-500 font-medium">Find clothes that are trending recently</p>
+              <h1 className="font-bold text-3xl text-black">All Product</h1>
+              <p className="text-gray-500 font-medium">Find your favorite product</p>
             </div>
             <div
               className="w-content bg-secondary grid-cols-2

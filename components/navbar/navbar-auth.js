@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -12,6 +12,7 @@ import vector from '../../assets/icons/vector.png';
 import ButtonSignup from '../Button/button-signup';
 import ButtonLogin from '../Button/button-login';
 import ModalsSearch from '../modals/modals-filter';
+
 import { getPopularProducts } from '../../redux/actions/products';
 
 export default function AuthNavbar() {
