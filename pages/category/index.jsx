@@ -35,11 +35,11 @@ const Category = () => {
             <li>{'>'} </li>
             <li>category</li>
             <li>{'>'} </li>
-            <li>T-Shirt</li>
+            <li>{query}</li>
           </ul>
         </div>
 
-        <h1 className="mt-8 text-black text-3xl font-extrabold">T-Shirt</h1>
+        <h1 className="mt-8 text-black text-3xl font-extrabold">{query}</h1>
         <div
           className="w-content bg-secondary grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"

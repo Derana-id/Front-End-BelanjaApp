@@ -59,7 +59,8 @@ export const getDetailProduct = id => async dispatch => {
     });
   } catch (error) {
     dispatch({
-      type: GET_DETAIL_PRODUCT_FAILED
+      type: GET_DETAIL_PRODUCT_FAILED,
+      payload: error.message
     });
   }
 };
