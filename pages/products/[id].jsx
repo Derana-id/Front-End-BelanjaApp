@@ -20,10 +20,9 @@ const Products = () => {
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useDispatch();
+  const [getColor, setColor] = useState('');
   const [getSize, setSize] = useState(0);
   const [getAmount, setAmount] = useState(0);
-
-  console.log(id);
 
   useEffect(() => {
     dispatch(getDetailProduct(id));
@@ -40,6 +39,15 @@ const Products = () => {
 
   const onSize = e => {
     setSize(getSize + e);
+  };
+
+  const onBuy = () => {
+    const data = {
+      color: getColor,
+      size: getSize,
+      amount: getAmount
+    };
+    console.log(data);
   };
 
   const onAmount = e => {
@@ -130,7 +138,7 @@ const Products = () => {
                   <div className="flex w-44 p-1 justify-between">
                     {getDetail.data.color.map((item, index) => (
                       <div key={index}>
-                        <Color color={`${item.color_value}`} />
+                        <Color color={`${item.color_name}`.toLowerCase()} onClick={() => setColor(item.color_name)} />
                       </div>
                     ))}
                   </div>
@@ -156,7 +164,7 @@ const Products = () => {
                 <div className="mt-8 md:mt-5 md:w-80">
                   <div className="flex justify-between mt-5">
                     <ButtonSuccess onClick={() => alert('hai')} action="Chat" />
-                    <ButtonSuccess onClick={() => alert('hai')} action="Add bag" />
+                    <ButtonSuccess onClick={() => onBuy()} action="Add bag" />
                   </div>
                   <div className="mt-5">
                     <ButtonWarning action="Buy Now" />
@@ -174,7 +182,6 @@ const Products = () => {
         <hr className="text-gray mt-7" />
         <h1 className="mt-8 text-black text-3xl font-extrabold">You can also like this</h1>
         <p className="text-gray">You’ve never seen it before!</p>
-        <p>{JSON.stringify(getDetail)}</p>
         <div
           className="w-content bg-secondary grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
