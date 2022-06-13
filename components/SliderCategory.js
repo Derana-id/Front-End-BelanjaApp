@@ -46,7 +46,7 @@ export default function SliderCategory({ deviceType }) {
       <div className="md:grid md:grid-cols-12 py-7">
         <div className="col-span-2">
           <h1 className="text-black font-bold text-3xl">Category</h1>
-          <p className="text-gray-500 font-medium">What are you currently looking for?</p>
+          <p className="text-black font-medium">What are you currently looking for?</p>
         </div>
         <div className="md:col-span-10 md:p-5">
           <Carousel
