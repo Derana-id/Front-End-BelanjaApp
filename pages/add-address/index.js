@@ -1,19 +1,19 @@
-import React from 'react'
-import AddAddress from '../../components/modals/add-address'
+import React from 'react';
+import AddAddress from '../../components/modals/add-address';
 
 const addAddress = () => {
-  const toggleModal = () => {
-    document.getElementById('modal').classList.toggle('hidden')
-  }
+  // const toggleModal = () => {
+  //   document.getElementById('modal').classList.toggle('hidden');
+  // };
 
   return (
     <>
-      <div className='flex items-center justify-center h-screen'>
+      <div className="flex items-center justify-center h-screen">
         <AddAddress />
       </div>
     </>
-  )
-}
+  );
+};
 
-addAddress.layouts = 'MainLayout'
-export default addAddress
+addAddress.layouts = 'MainLayout';
+export default addAddress;
