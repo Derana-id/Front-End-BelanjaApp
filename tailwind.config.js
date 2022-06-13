@@ -13,7 +13,7 @@ module.exports = {
       '2xl': '1536px'
     },
     colors: {
-      transparent: 'transparent',
+      transparent: '0D',
       current: 'currentColor',
       black: colors.black,
       white: colors.white,
@@ -21,7 +21,7 @@ module.exports = {
       red: colors.red,
       yellow: colors.amber,
       green: colors.emerald,
-      blue: colors.blue,
+      blue: '#50C8D8',
       indigo: colors.indigo,
       purple: colors.violet,
       pink: colors.pink,

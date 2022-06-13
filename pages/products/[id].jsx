@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 import Img from '../../components/img/Img';
 import Start from '../../components/star/start';
 import Color from '../../components/molecules/color';
@@ -15,6 +16,7 @@ import ButtonWarning from '../../components/Button/button-warning';
 import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
 import { getDetailProduct, getPopularProducts } from '../../redux/actions/products';
+import { addCart } from '../../redux/actions/cart';
 
 const Products = () => {
   const router = useRouter();
@@ -41,14 +43,28 @@ const Products = () => {
     setSize(getSize + e);
   };
 
-  const onBuy = e => {
+  const onBuy = async e => {
     const data = {
-      productId: e,
-      color: getColor,
-      size: getSize,
-      amount: getAmount
+      product_id: e,
+      qty: getAmount,
+      color: getColor
     };
-    console.log(data);
+
+    addCart(data)
+      .then(res => {
+        Swal.fire({
+          title: 'Success!',
+          text: res.message,
+          icon: 'success'
+        });
+      })
+      .catch(err => {
+        Swal.fire({
+          title: 'Failed!',
+          text: err.message,
+          icon: 'error'
+        });
+      });
   };
 
   const onAmount = e => {
@@ -78,9 +94,11 @@ const Products = () => {
               <li className="cursor-pointer">category</li>
             </Link>
             <li>{'>'} </li>
-            {getDetail.data.length >= 0 ? null : (
-              <li className="cursor-pointer">{getDetail.data.category[0].category_name}</li>
-            )}
+            {/* {getDetail.data.category.length > 0 ? ( */}
+            <li className="cursor-pointer">
+              {getDetail.data.category ? getDetail.data.category[0].category_name : 'null'}
+            </li>
+            {/* ) : null} */}
           </ul>
         </div>
         {getDetail.data.length >= 0 ? null : (
@@ -126,13 +144,20 @@ const Products = () => {
               </div>
               <div className="flex-auto md:w-3/5 bg-tertiary md:pl-9 md:pr-7 mt-5 md:mt-0">
                 <div>
-                  <h3 className="text-2xl font-bold">{getDetail.data.product.product_name}</h3>
-                  <p className="text-gray text-sm font-semibold">{getDetail.data.brand[0].brand_name}</p>
+                  <h3 className="text-2xl font-bold">
+                    {getDetail.data.category ? getDetail.data.product.product_name : null}
+                  </h3>
+                  {getDetail.data.category ? (
+                    <p className="text-gray text-sm font-semibold">{getDetail.data.brand[0].brand_name}</p>
+                  ) : null}
+
                   <Start valueReview="(10)" />
                 </div>
                 <div className="mt-5">
                   <p className="text-md text-gray font-semibold text-sm">price</p>
-                  <h3 className="text-dark text-xl font-extrabold">$ {getDetail.data.product.price}</h3>
+                  <h3 className="text-dark text-xl font-extrabold">
+                    $ {getDetail.data.category ? getDetail.data.product.price : null}
+                  </h3>
                 </div>
                 <div className="mt-5">
                   <p className="font-semibold text-md">Color</p>

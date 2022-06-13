@@ -1,16 +1,66 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
-import Image from 'next/image';
+import DataTable from 'react-data-table-component';
 import Search from '../../search/search';
-// import caricatur from '../../../assets/img/caricatur.png';
-import shoes from '../../../assets/img/shoes (1).jpg';
 
 export default function cardMyorder() {
   const [showNav, setFormShowNav] = useState(0);
 
   const setCurrentShow = index => {
     setFormShowNav(index);
+  };
+
+  const columns = [
+    {
+      name: 'Invoice',
+      selector: row => row.invoice,
+    },
+    {
+      name: 'Total price',
+      selector: row => row.total,
+    },
+    {
+      name: 'Date',
+      selector: row => row.date,
+    },
+    {
+      name: 'Status',
+      selector: row => row.status,
+    },
+  ];
+
+  const data = [
+    {
+      id: 1,
+      invoice: 'ABC1243',
+      total: '10.000',
+      date: '11/05/1997',
+      status: 'success'
+    },
+  ];
+
+  const customStyles = {
+    rows: {
+      style: {
+        minHeight: '72px', // override the row height
+        border: '2px solid #F6F6F6'
+      },
+    },
+    headCells: {
+      style: {
+        paddingLeft: '8px', // override the cell padding for head cells
+        paddingRight: '8px',
+        backgroundColor: '#F6F6F6',
+        border: '2px solid #F6F6F6'
+      },
+    },
+    cells: {
+      style: {
+        paddingLeft: '8px', // override the cell padding for data cells
+        paddingRight: '8px',
+      },
+    },
   };
   return (
     <div className="flex flex-col bg-white rounded w-3/4 h-auto mt-[120px] mx-12">
@@ -39,118 +89,58 @@ export default function cardMyorder() {
         <div className="flex justify-start min-h-[200px] p-4">
           {showNav === 0 ? (
             <div className="flex w-full border rounded min-h-[120px] relative">
-              <div className="w-0 sm:w-0 md:w-[120px] md:h-[120px] lg:w-[120px] h-auto">
-                <Image src={shoes} width={120} height={165} />
-              </div>
-              <div className="ml-2 flex flex-col">
-                <label className="font-semibold mb-10 sm:mb-10 md:mb-2 lg:mb-2">Invoice №1947034</label>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Product name :</label>
-                  <label className="font-semibold ">Mens formal suit</label>
-                </div>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Quantity: :</label>
-                  <label className="font-semibold ">15</label>
-                </div>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Total Amount: :</label>
-                  <label className="font-semibold ">112$</label>
-                </div>
-              </div>
-              <label className="absolute top-8 sm:top-8 md:top- lg:top-0 right-2 font-semibold text-gray-600">05-12-2019</label>
-              <label className="absolute right-2 bottom-0 text-special-success font-bold">New</label>
+              <DataTable
+                className="bg-gray"
+                columns={columns}
+                fixedHeader
+                fixedHeaderScrollHeight="300px"
+                data={data}
+                customStyles={customStyles}
+              />
             </div>
           ) : showNav === 1 ? (
             <div className="flex w-full border rounded min-h-[120px] relative">
-              <div className="w-0 sm:w-0 md:w-[120px] md:h-[120px] lg:w-[120px] h-auto">
-                <Image src={shoes} width={120} height={165} />
-              </div>
-              <div className="ml-2 flex flex-col">
-                <label className="font-semibold mb-10 sm:mb-10 md:mb-2 lg:mb-2">Invoice №1947034</label>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Product name :</label>
-                  <label className="font-semibold ">Mens formal suit</label>
-                </div>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Quantity: :</label>
-                  <label className="font-semibold ">15</label>
-                </div>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Total Amount: :</label>
-                  <label className="font-semibold ">112$</label>
-                </div>
-              </div>
-              <label className="absolute top-8 sm:top-8 md:top- lg:top-0 right-2 font-semibold text-gray-600">05-12-2019</label>
-              <label className="absolute right-2 bottom-0 text-special-success font-bold">Packed</label>
+              <DataTable
+                className="bg-gray"
+                columns={columns}
+                fixedHeader
+                fixedHeaderScrollHeight="300px"
+                data={data}
+                customStyles={customStyles}
+              />
             </div>
           ) : showNav === 2 ? (
             <div className="flex w-full border rounded min-h-[120px] relative">
-              <div className="w-0 sm:w-0 md:w-[120px] md:h-[120px] lg:w-[120px] h-auto">
-                <Image src={shoes} width={120} height={165} />
-              </div>
-              <div className="ml-2 flex flex-col">
-                <label className="font-semibold mb-10 sm:mb-10 md:mb-2 lg:mb-2">Invoice №1947034</label>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Product name :</label>
-                  <label className="font-semibold ">Mens formal suit</label>
-                </div>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Quantity: :</label>
-                  <label className="font-semibold ">15</label>
-                </div>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Total Amount: :</label>
-                  <label className="font-semibold ">112$</label>
-                </div>
-              </div>
-              <label className="absolute top-8 sm:top-8 md:top- lg:top-0 right-2 font-semibold text-gray-600">05-12-2019</label>
-              <label className="absolute right-2 bottom-0 text-special-success font-bold">Sent</label>
+              <DataTable
+                className="bg-gray"
+                columns={columns}
+                fixedHeader
+                fixedHeaderScrollHeight="300px"
+                data={data}
+                customStyles={customStyles}
+              />
             </div>
           ) : showNav === 3 ? (
             <div className="flex w-full border rounded min-h-[120px] relative">
-              <div className="w-0 sm:w-0 md:w-[120px] md:h-[120px] lg:w-[120px] h-auto">
-                <Image src={shoes} width={120} height={165} />
-              </div>
-              <div className="ml-2 flex flex-col">
-                <label className="font-semibold mb-10 sm:mb-10 md:mb-2 lg:mb-2">Invoice №1947034</label>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Product name :</label>
-                  <label className="font-semibold ">Mens formal suit</label>
-                </div>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Quantity: :</label>
-                  <label className="font-semibold ">15</label>
-                </div>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Total Amount: :</label>
-                  <label className="font-semibold ">112$</label>
-                </div>
-              </div>
-              <label className="absolute top-8 sm:top-8 md:top- lg:top-0 right-2 font-semibold text-gray-600">05-12-2019</label>
-              <label className="absolute right-2 bottom-0 text-special-success font-bold">Complete</label>
+              <DataTable
+                className="bg-gray"
+                columns={columns}
+                fixedHeader
+                fixedHeaderScrollHeight="300px"
+                data={data}
+                customStyles={customStyles}
+              />
             </div>
           ) : (
             <div className="flex w-full border rounded min-h-[120px] relative">
-              <div className="w-0 sm:w-0 md:w-[120px] md:h-[120px] lg:w-[120px] h-auto">
-                <Image src={shoes} width={120} height={165} />
-              </div>
-              <div className="ml-2 flex flex-col">
-                <label className="font-semibold mb-10 sm:mb-10 md:mb-2 lg:mb-2">Invoice №1947034</label>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Product name :</label>
-                  <label className="font-semibold ">Mens formal suit</label>
-                </div>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Quantity: :</label>
-                  <label className="font-semibold ">15</label>
-                </div>
-                <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
-                  <label className="text-[#9B9B9B]">Total Amount: :</label>
-                  <label className="font-semibold ">112$</label>
-                </div>
-              </div>
-              <label className="absolute top-8 sm:top-8 md:top- lg:top-0 right-2 font-semibold text-gray-600">05-12-2019</label>
-              <label className="absolute right-2 bottom-0 text-primary font-bold">Cancel</label>
+              <DataTable
+                className="bg-gray"
+                columns={columns}
+                fixedHeader
+                fixedHeaderScrollHeight="300px"
+                data={data}
+                customStyles={customStyles}
+              />
             </div>
           )}
 

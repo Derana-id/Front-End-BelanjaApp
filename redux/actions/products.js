@@ -29,12 +29,13 @@ export const getProducts = () => async dispatch => {
   }
 };
 
-export const getPopularProducts = () => async dispatch => {
+export const getPopularProducts = search => async dispatch => {
+  const getValueSearch = search;
   try {
     dispatch({
       type: GET_POPULAR_PRODUCTS_PENDING
     });
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}product?sortType=DESC`, {});
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}product?search=${getValueSearch}&sortType=DESC`, {});
     dispatch({
       type: GET_POPULAR_PRODUCTS_SUCCESS,
       payload: res.data
@@ -59,8 +60,7 @@ export const getDetailProduct = id => async dispatch => {
     });
   } catch (error) {
     dispatch({
-      type: GET_DETAIL_PRODUCT_FAILED,
-      payload: error.message
+      type: GET_DETAIL_PRODUCT_FAILED
     });
   }
 };
