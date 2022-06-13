@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import ContentLoader from 'react-content-loader';
 import Img from '../../components/img/Img';
 import Start from '../../components/star/start';
 import Color from '../../components/molecules/color';
@@ -101,7 +102,9 @@ const Products = () => {
             {/* ) : null} */}
           </ul>
         </div>
-        {getDetail.data.length >= 0 ? <></> : (
+        {getDetail.data.length >= 0 ? (
+          <></>
+        ) : (
           <div>
             <div className="md:flex mt-12">
               <div
@@ -216,19 +219,21 @@ const Products = () => {
             className="md:grid grid-cols-5
                      grid-flow-row gap-4 auto-rows-auto"
           >
-            {getPopular.isLoading
-              ? null
-              : getPopular.data.map((item, index) => (
-                  <div key={index}>
-                    <CardProducts
-                      nameProduct={`${item.product.product_name}`}
-                      price={`$ ${item.product.price}`}
-                      user={`${item.store[0].store_name}`}
-                      onClick={() => onDetail(item.product.id)}
-                      img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
-                    />
-                  </div>
-                ))}
+            {getPopular.isLoading ? (
+              <ContentLoader />
+            ) : (
+              getPopular.data.map((item, index) => (
+                <div key={index}>
+                  <CardProducts
+                    nameProduct={`${item.product.product_name}`}
+                    price={`$ ${item.product.price}`}
+                    user={`${item.store[0].store_name}`}
+                    onClick={() => onDetail(item.product.id)}
+                    img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                  />
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
