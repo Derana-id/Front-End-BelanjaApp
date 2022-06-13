@@ -11,6 +11,8 @@ import myTransaction from './mytransaction';
 import getAllProducts from './getAllProducts';
 import getPopular from './popularProducts';
 import getDetailProduct from './getDetailProduct';
+import getIdProfile from './getIdProfile';
+import getIdStore from './getIdStore';
 import getAllCategory from './getCategory';
 
 export default combineReducers({
@@ -26,5 +28,7 @@ export default combineReducers({
   getAllProducts,
   getPopular,
   getDetailProduct,
+  getIdProfile,
+  getIdStore,
   getAllCategory
 });
