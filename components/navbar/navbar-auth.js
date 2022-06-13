@@ -13,8 +13,14 @@ import ButtonLogin from '../Button/button-login';
 import ModalsSearch from '../modals/modals-filter';
 
 export default function AuthNavbar() {
-  const [isfilter, setIsFilter] = useState(false);
   const router = useRouter();
+  const [isfilter, setIsFilter] = useState(false);
+  const [getSearch, setSearch] = useState('');
+
+  const onSearch = () => {
+    router.push(`/?search=${getSearch}`);
+  };
+
   return (
     <div className="w-full h-16 md:h-20 md:px-28 py-3 p-3 flex flex-row items-center fixed z-10 shadow-lg bg-white">
       <div className="flex w-full items-center">
@@ -28,7 +34,7 @@ export default function AuthNavbar() {
           </div>
         </div>
         <div className="w-2/5 h-12 flex items-center">
-          <SearchNavbar />
+          <SearchNavbar onChange={e => setSearch(e.target.value)} onSearch={() => onSearch()} />
           <div
             className="border-solid border-2 border-gray rounded-xl m-3 flex items-center p-2 justify-center cursor-pointer"
             onClick={() => setIsFilter(true)}
