@@ -1,11 +1,103 @@
-import React from 'react';
+/* eslint-disable no-nested-ternary */
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import jas from '../../assets/img/jas.jpg';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import ContentLoader from 'react-content-loader';
+import Swal from 'sweetalert2';
+import jwtDecode from 'jwt-decode';
+import Cookies from 'js-cookie';
 import CardCart from '../../components/card/card-cart';
 import ButtonWarning from '../../components/Button/button-warning';
 import Checklist from '../../components/Input/checklist';
+import { getMyCart, deleteCart, deleteCartUser } from '../../redux/actions/cart';
+import { toastify } from '../../utils/toastify';
+import { sweetAlert } from '../../utils/sweetalert';
 
 const MyBag = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const myCart = useSelector(state => state.myCart);
+  const [id, setId] = useState(null);
+  const token = Cookies.get('token');
+  const [total, setTotal] = useState(0);
+
+  let decoded = null;
+  if (token) {
+    decoded = jwtDecode(token);
+  }
+
+  useEffect(() => {
+    dispatch(getMyCart(router));
+  }, []);
+
+  useEffect(() => {
+    if (myCart.data) {
+      const getTotal = myCart.data.map(item => {
+        const price = Number(item.product[0].price);
+        return price;
+      });
+      const result = getTotal[0] * getTotal.length;
+      setTotal(Intl.NumberFormat('en-US').format(result));
+    }
+  }, [myCart]);
+
+  const handleDelete = (e, id) => {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Are you sure you want to delete the data ?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, I Sure!'
+    }).then(async confirm => {
+      if (confirm.isConfirmed) {
+        try {
+          const res = await deleteCart(id);
+          sweetAlert(res.message);
+          window.location.reload();
+        } catch (err) {
+          if (err.response.data.code === 422) {
+            const { error } = err.response.data;
+            error.map(item => toastify(item, 'error'));
+          } else {
+            sweetAlert(err.response.data.message, 'error');
+          }
+        }
+      }
+    });
+  };
+
+  const handleDeleteUser = (e, id) => {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Are you sure you want to delete the data ?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, I Sure!'
+    }).then(async confirm => {
+      if (confirm.isConfirmed) {
+        try {
+          const res = await deleteCartUser(id);
+          sweetAlert(res.message);
+          window.location.reload();
+        } catch (err) {
+          if (err.response.data.code === 422) {
+            const { error } = err.response.data;
+            error.map(item => toastify(item, 'error'));
+          } else {
+            sweetAlert(err.response.data.message, 'error');
+          }
+        }
+      }
+    });
+  };
+
   return (
     <div>
       <Head>
@@ -27,34 +119,34 @@ const MyBag = () => {
                 <button className="flex text-primary font-semibold">Delete</button>
               </div>
             </div>
-            <CardCart
-              image={jas}
-              productName="Men's formal suit - Black"
-              store="Zalora Cloth"
-              price="$ 20.0"
-              defaultValue="28"
-            />
-            <CardCart
-              image={jas}
-              productName="Men's formal suit - Black"
-              store="Zalora Cloth"
-              price="$ 20.0"
-              defaultValue="7"
-            />
-            <CardCart
-              image={jas}
-              productName="Men's formal suit - Black"
-              store="Zalora Cloth"
-              price="$ 20.0"
-              defaultValue="2"
-            />
+            {myCart.isLoading ? (
+              <ContentLoader />
+            ) : myCart.isError ? (
+              <div>Error</div>
+            ) : (
+              myCart.data.map((item, i) => (
+                <div key={i}>
+                  <CardCart
+                    image={`${
+                      item.image[0].photo
+                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                    }`}
+                    productName={item.product[0].product_name}
+                    store={item.store[0].store_name}
+                    price={`$ ${item.product[0].price}`}
+                    defaultValue="28"
+                  />
+                </div>
+              ))
+            )}
           </div>
           <div className="md:flex-1 md:w-32 md:ml-8 mt-10 md:mt-0">
             <div className="bg-white w-full rounded-md shadow-lg p-5">
               <p className="text-black font-bold">Shopping summary</p>
               <div className="flex justify-between mt-3">
                 <p className="text-gray text-md">Total Price</p>
-                <p className="font-bold text-black text-lg">$ 40.0</p>
+                <p className="font-bold text-black text-lg">$ {total}</p>
               </div>
               <div className="mt-8">
                 <ButtonWarning action="Buy" onClick={() => alert('Hallo')} />
@@ -68,4 +160,5 @@ const MyBag = () => {
 };
 
 MyBag.layouts = 'MainLayout';
+
 export default MyBag;
