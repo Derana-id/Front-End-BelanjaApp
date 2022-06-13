@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -10,8 +11,6 @@ const Category = () => {
   const { query } = router.query;
   const dispatch = useDispatch();
 
-  // console.log(query);
-
   useEffect(() => {
     dispatch(getProducts());
   }, []);
@@ -20,7 +19,6 @@ const Category = () => {
     return state.getAllProducts;
   });
 
-  // console.log(getAll.data);
   return (
     <div>
       <Head>
@@ -50,15 +48,17 @@ const Category = () => {
           >
             {getAll.isLoading ? null : getAll.data.map((item, index) => (
               <>
-                {item.category[0].category_name === query ? (
-                  <CardProducts
-                    key={index}
-                    productName={`${item.product.product_name}`}
-                    nameProduct={`${item.product.product_name}`}
-                    price={`$ ${item.product.price}`}
-                    user={`${item.store[0].store_name}`}
-                    img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
-                  />
+                {item.category.length > 0 ? (
+                  item.category[0].category_name === query ? (
+                    <CardProducts
+                      key={index}
+                      productName={`${item.product.product_name}`}
+                      nameProduct={`${item.product.product_name}`}
+                      price={`$ ${item.product.price}`}
+                      user={`${item.store[0].store_name}`}
+                      img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                    />
+                  ) : (null)
                 ) : (null)}
               </>
             ))}

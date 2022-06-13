@@ -3,21 +3,34 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BiUserCircle } from 'react-icons/bi';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { MdOutlineNotificationsNone } from 'react-icons/md';
 import { HiOutlineMail } from 'react-icons/hi';
+// import { useDispatch, useSelector } from 'react-redux';
+// import jwtDecode from 'jwt-decode';
+// import Cookies from 'js-cookie';
 import SearchNavbar from '../search/search-navbar';
 import logo from '../../assets/img/logo.png';
 import notification from '../../assets/img/notification.png';
 import vector from '../../assets/icons/vector.png';
 import user from '../../assets/img/user.jpg';
 import ModalsSearch from '../modals/modals-filter';
+// import { getDetailProfile } from '../../redux/actions/users';
 
 export default function MainNavbar() {
+  // const dispatch = useDispatch();
+  // const token = Cookies.get('token');
+
+  // let getId;
+  // if (token) {
+  //   const { id } = jwtDecode(token);
+  //   getId = id;
+  // }
+
   const [isActive, setActive] = useState(false);
   const [isProfile, setIsProfile] = useState(false);
   const [isfilter, setIsFilter] = useState(false);
@@ -37,6 +50,16 @@ export default function MainNavbar() {
       setIsProfile(true);
     }
   };
+
+  // useEffect(() => {
+  //   dispatch(getDetailProfile(getId));
+  // }, []);
+
+  // const getProfile = useSelector(state => {
+  //   return state.getIdProfile;
+  // });
+
+  // console.log(getProfile);
 
   return (
     <div>
