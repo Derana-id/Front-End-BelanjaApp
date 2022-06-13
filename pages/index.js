@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable indent */
 /* eslint-disable react/jsx-indent */
 import React, { useEffect, useState } from 'react';
@@ -26,6 +27,12 @@ function Home({ deviceType }) {
     dispatch(getCategory());
     dispatch(getPopularProducts(getSearch));
     setSearch(search);
+  }, []);
+
+  useEffect(() => {
+    if (search) {
+      dispatch(getPopularProducts(getSearch));
+    }
   }, []);
 
   const getAllCategory = useSelector(state => {
@@ -123,19 +130,23 @@ function Home({ deviceType }) {
                 className="md:grid grid-cols-5
                      grid-flow-row gap-4 auto-rows-auto"
               >
-                {getAllProducts.isLoading
-                  ? null
-                  : getAllProducts.data.map((item, index) => (
-                      <div key={index}>
-                        <CardProducts
-                          nameProduct={`${item.product.product_name}`}
-                          price={`$ ${item.product.price}`}
-                          user={`${item.store[0].store_name}`}
-                          onClick={() => onDetail(item.product.id)}
-                          img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
-                        />
-                      </div>
-                    ))}
+                {getAllProducts.isLoading ? (
+                  <></>
+                ) : getAllProducts.isError ? (
+                  <div>Data not found</div>
+                ) : (
+                  getAllProducts.data.map((item, index) => (
+                    <div key={index}>
+                      <CardProducts
+                        nameProduct={`${item.product.product_name}`}
+                        price={`$ ${item.product.price}`}
+                        user={`${item.store[0].store_name}`}
+                        onClick={() => onDetail(item.product.id)}
+                        img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                      />
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </div>
@@ -152,19 +163,23 @@ function Home({ deviceType }) {
                 className="md:grid grid-cols-5
                      grid-flow-row gap-4 auto-rows-auto md:h-[78vh] "
               >
-                {getPopular.isLoading
-                  ? null
-                  : getPopular.data.map((item, index) => (
-                      <div key={index}>
-                        <CardProducts
-                          nameProduct={`${item.product.product_name}`}
-                          price={`$ ${item.product.price}`}
-                          user={`${item.store[0].store_name}`}
-                          onClick={() => onDetail(item.product.id)}
-                          img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
-                        />
-                      </div>
-                    ))}
+                {getPopular.isLoading ? (
+                  <></>
+                ) : getPopular.isError ? (
+                  <div>Data not found</div>
+                ) : (
+                  getPopular.data.map((item, index) => (
+                    <div key={index}>
+                      <CardProducts
+                        nameProduct={`${item.product.product_name}`}
+                        price={`$ ${item.product.price}`}
+                        user={`${item.store[0].store_name}`}
+                        onClick={() => onDetail(item.product.id)}
+                        img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                      />
+                    </div>
+                  ))
+                )}
               </div>
             </div>
 

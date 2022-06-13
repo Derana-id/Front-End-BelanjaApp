@@ -101,7 +101,7 @@ const Products = () => {
             {/* ) : null} */}
           </ul>
         </div>
-        {getDetail.data.length >= 0 ? null : (
+        {getDetail.data.length >= 0 ? <></> : (
           <div>
             <div className="md:flex mt-12">
               <div
