@@ -30,7 +30,6 @@ export const getProducts = () => async dispatch => {
 };
 
 export const getPopularProducts = search => async dispatch => {
-  console.log(search);
   const getValueSearch = search;
   try {
     dispatch({
