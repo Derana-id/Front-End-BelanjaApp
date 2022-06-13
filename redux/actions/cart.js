@@ -59,3 +59,16 @@ export const deleteCartUser = () => {
       });
   });
 };
+
+export const addCart = data => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post('cart', data)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
