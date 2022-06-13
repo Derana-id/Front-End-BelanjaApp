@@ -132,8 +132,6 @@ function Home({ deviceType }) {
               >
                 {getAllProducts.isLoading ? (
                   <></>
-                ) : getAllProducts.isError ? (
-                  <div>Data not found</div>
                 ) : (
                   getAllProducts.data.map((item, index) => (
                     <div key={index}>
@@ -165,8 +163,6 @@ function Home({ deviceType }) {
               >
                 {getPopular.isLoading ? (
                   <></>
-                ) : getPopular.isError ? (
-                  <div>Data not found</div>
                 ) : (
                   getPopular.data.map((item, index) => (
                     <div key={index}>
