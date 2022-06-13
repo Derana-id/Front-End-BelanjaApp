@@ -48,7 +48,6 @@ const Products = () => {
       size: getSize,
       amount: getAmount
     };
-    console.log(data);
   };
 
   const onAmount = e => {
@@ -78,12 +77,12 @@ const Products = () => {
               <li className="cursor-pointer">category</li>
             </Link>
             <li>{'>'} </li>
-            {getDetail.data.length >= 0 ? null : (
+            {getDetail.data.length >= 0 ? <></> : (
               <li className="cursor-pointer">{getDetail.data.category[0].category_name}</li>
             )}
           </ul>
         </div>
-        {getDetail.data.length >= 0 ? null : (
+        {getDetail.data.length >= 0 ? <></> : (
           <div>
             <div className="md:flex mt-12">
               <div
