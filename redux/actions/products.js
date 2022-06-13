@@ -30,7 +30,6 @@ export const getProducts = () => async dispatch => {
 };
 
 export const getPopularProducts = search => async dispatch => {
-  console.log(search);
   const getValueSearch = search;
   try {
     dispatch({
@@ -61,8 +60,7 @@ export const getDetailProduct = id => async dispatch => {
     });
   } catch (error) {
     dispatch({
-      type: GET_DETAIL_PRODUCT_FAILED,
-      payload: error.message
+      type: GET_DETAIL_PRODUCT_FAILED
     });
   }
 };
