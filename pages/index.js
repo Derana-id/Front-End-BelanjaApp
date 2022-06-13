@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import ContentLoader from 'react-content-loader';
 import Slider from '../components/Slider';
 import CardProducts from '../components/card/card-products';
 import { getCategory } from '../redux/actions/category';
@@ -131,9 +132,7 @@ function Home({ deviceType }) {
                      grid-flow-row gap-4 auto-rows-auto"
               >
                 {getAllProducts.isLoading ? (
-                  <></>
-                ) : getAllProducts.isError ? (
-                  <div>Data not found</div>
+                  <ContentLoader />
                 ) : (
                   getAllProducts.data.map((item, index) => (
                     <div key={index}>
@@ -164,9 +163,7 @@ function Home({ deviceType }) {
                      grid-flow-row gap-4 auto-rows-auto md:h-[78vh] "
               >
                 {getPopular.isLoading ? (
-                  <></>
-                ) : getPopular.isError ? (
-                  <div>Data not found</div>
+                  <ContentLoader />
                 ) : (
                   getPopular.data.map((item, index) => (
                     <div key={index}>
