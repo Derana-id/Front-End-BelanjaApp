@@ -10,6 +10,7 @@ export default function FormValueNumber(params) {
         id={params.id}
         value={params.value}
         // onChange={params.onChange}
+        type="number"
         readOnly
       />
     </div>

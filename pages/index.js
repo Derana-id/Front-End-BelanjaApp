@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-indent */
 import React, { useEffect } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Slider from '../components/Slider';
 import SliderContainer from '../components/SliderCategory';
@@ -10,6 +11,8 @@ import CardProducts from '../components/card/card-products';
 
 function Home() {
   const dispatch = useDispatch();
+  const router = useRouter();
+
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getPopularProducts());
@@ -21,6 +24,11 @@ function Home() {
   const getPopular = useSelector(state => {
     return state.getPopular;
   });
+
+  const onDetail = e => {
+    router.push(`/products/${e}`);
+  };
+
   return (
     <div>
       <Head>
@@ -58,7 +66,7 @@ function Home() {
                           nameProduct={`${item.product.product_name}`}
                           price={`$ ${item.product.price}`}
                           user={`${item.store[0].store_name}`}
-                          href={`/products/${item.product.id}`}
+                          onClick={() => onDetail(item.product.id)}
                           img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
                         />
                       </div>

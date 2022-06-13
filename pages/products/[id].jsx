@@ -20,16 +20,15 @@ const Products = () => {
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useDispatch();
-  const [getId] = useState(id);
   const [getSize, setSize] = useState(0);
   const [getAmount, setAmount] = useState(0);
 
-  console.log(document.cookie);
+  console.log(id);
 
   useEffect(() => {
-    dispatch(getDetailProduct(getId));
+    dispatch(getDetailProduct(id));
     dispatch(getPopularProducts());
-  }, [dispatch]);
+  }, []);
 
   const getPopular = useSelector(state => {
     return state.getPopular;
@@ -45,6 +44,11 @@ const Products = () => {
 
   const onAmount = e => {
     setAmount(getAmount + e);
+  };
+
+  const onDetail = e => {
+    dispatch(getDetailProduct(e));
+    router.push(`/products/${e}`);
   };
 
   return (
@@ -65,10 +69,12 @@ const Products = () => {
               <li className="cursor-pointer">category</li>
             </Link>
             <li>{'>'} </li>
-            <li className="cursor-pointer">{getDetail.data.category[0].category_name}</li>
+            {getDetail.data.length >= 0 ? null : (
+              <li className="cursor-pointer">{getDetail.data.category[0].category_name}</li>
+            )}
           </ul>
         </div>
-        {getDetail.isLoading ? null : (
+        {getDetail.data.length >= 0 ? null : (
           <div>
             <div className="md:flex mt-12">
               <div
@@ -168,6 +174,7 @@ const Products = () => {
         <hr className="text-gray mt-7" />
         <h1 className="mt-8 text-black text-3xl font-extrabold">You can also like this</h1>
         <p className="text-gray">You’ve never seen it before!</p>
+        <p>{JSON.stringify(getDetail)}</p>
         <div
           className="w-content bg-secondary grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
@@ -184,7 +191,7 @@ const Products = () => {
                       nameProduct={`${item.product.product_name}`}
                       price={`$ ${item.product.price}`}
                       user={`${item.store[0].store_name}`}
-                      href={`/products/${item.product.id}`}
+                      onClick={() => onDetail(item.product.id)}
                       img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
                     />
                   </div>
