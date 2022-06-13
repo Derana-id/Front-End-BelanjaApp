@@ -1,7 +1,10 @@
+/* eslint-disable no-console */
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
+import { useDispatch, useSelector } from 'react-redux';
 import Search from '../../search/search';
+import { getDetailMyProduct } from '../../../redux/actions/storeProfile';
 
 export default function cardMyorder(params) {
   const [showNav, setFormShowNav] = useState(0);
@@ -9,6 +12,29 @@ export default function cardMyorder(params) {
   const setCurrentShow = index => {
     setFormShowNav(index);
   };
+  const customStyles = {
+    rows: {
+      style: {
+        minHeight: '72px', // override the row height
+        border: '2px solid #F6F6F6'
+      },
+    },
+    headCells: {
+      style: {
+        paddingLeft: '8px', // override the cell padding for head cells
+        paddingRight: '8px',
+        backgroundColor: '#F6F6F6',
+        border: '2px solid #F6F6F6'
+      },
+    },
+    cells: {
+      style: {
+        paddingLeft: '8px', // override the cell padding for data cells
+        paddingRight: '8px',
+      },
+    },
+  };
+
   const columns = [
     {
       name: 'Product name',
@@ -24,14 +50,29 @@ export default function cardMyorder(params) {
     },
   ];
 
+  // integrasi
+
   const data = [
     {
       id: 1,
       product: 'Beetlejuice',
       price: '10.000',
-      stock: '100'
+      stock: '100',
+      jaja: 'kafl'
     },
   ];
+
+  const dispatch = useDispatch();
+
+  const myProduct = useSelector((state) => {
+    return state.myProduct;
+  });
+
+  console.log(myProduct);
+
+  useEffect(() => {
+    dispatch(getDetailMyProduct);
+  });
 
   return (
     <div className="flex flex-col bg-white rounded w-3/4 h-auto mt-[120px] mx-12">
@@ -59,10 +100,8 @@ export default function cardMyorder(params) {
               fixedHeader
               fixedHeaderScrollHeight="300px"
               data={data}
+              customStyles={customStyles}
             />
-            {/* <div className="w-2/5 h-2/5">
-                        <Image src={caricatur} />
-                    </div> */}
           </div>
         ) : showNav === 1 ? (
           <div className="flex justify-center pt-4 items-center mb-10">
@@ -72,9 +111,9 @@ export default function cardMyorder(params) {
               fixedHeader
               fixedHeaderScrollHeight="300px"
               data={data}
+              customStyles={customStyles}
             />
           </div>
-
         ) : (
           <div className="flex justify-center pt-4 items-center mb-10">
             <DataTable
@@ -83,6 +122,7 @@ export default function cardMyorder(params) {
               fixedHeader
               fixedHeaderScrollHeight="300px"
               data={data}
+              customStyles={customStyles}
             />
           </div>
         )}
