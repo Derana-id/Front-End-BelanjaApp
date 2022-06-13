@@ -5,7 +5,7 @@ import RadioButton from '../../Input/radio-button';
 import Datepicker from '../../Input/datepicker';
 import user from '../../../assets/img/user.jpg';
 
-export default function cardMyprofile() {
+export default function cardMyprofile(params) {
   return (
     <div>
       <div className="flex flex-col bg-white rounded w-full h-auto mt-[120px] mx-2 sm:w-full md:w-3/4 lg:w-3/4 sm:mx-2 md:mx-12 lg:mx-12">
@@ -16,14 +16,14 @@ export default function cardMyprofile() {
         <div className="flex w-full">
           <form className="flex w-full">
             <div className="w-[70%] flex flex-col items-end">
-              <Input name="Name" type="text" />
-              <Input name="Email" type="text" />
-              <Input name="Phone Number" type="text" />
+              <Input name="Name" type="text" value={params.name} />
+              <Input name="Email" value={params.email} type="text" />
+              <Input name="Phone Number" value={params.phone} type="text" />
               <div className="flex mr-0 sm:mr-0 md:mr-[150px] lg-mr-[150px] xl:mr-[150px]">
                 <label className="mr-5 text-[#9B9B9B]">Gender</label>
-                <RadioButton />
+                <RadioButton value={params.gender} />
               </div>
-              <Datepicker />
+              <Datepicker value={params.birth} />
             </div>
             <div className="w-[30%] flex flex-col items-center border-l-2 border-gray my-4">
               <Image className="rounded-[100%] mb-9" src={user} layout="fixed" width={100} height={100} />
