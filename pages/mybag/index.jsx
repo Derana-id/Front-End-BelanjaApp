@@ -103,7 +103,7 @@ const MyBag = () => {
             <div className="bg-white p-6 rounded-md shadow-lg">
               <div className="flex items-cente justify-between">
                 <div className="flex">
-                  <Checklist onChange={() => handleDeleteUser()} />
+                  <Checklist onChange={e => handleDeleteUser(e)} />
                   <p className="text-black font-medium">Select all items</p>
                   <p className="text-gray ml-2">(2 items selected)</p>
                 </div>
@@ -113,7 +113,9 @@ const MyBag = () => {
             {myCart.isLoading ? (
               <ContentLoader />
             ) : myCart.isError ? (
-              <div>Data not found</div>
+              <div className="w-full h-full flex justify-center items-center">
+                <h1 className="text-3xl font-bold text-gray-light">Data not found</h1>
+              </div>
             ) : (
               myCart.data.map((item, i) => (
                 <div key={i}>
