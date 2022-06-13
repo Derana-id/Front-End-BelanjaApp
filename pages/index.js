@@ -115,7 +115,6 @@ function Home({ deviceType }) {
               <h1 className="font-bold text-3xl text-black">New</h1>
               <p className="text-gray-500 font-medium">You’ve never seen it before!</p>
             </div>
-            <p>{JSON.stringify(getAllCategory)}</p>
             <div
               className="w-content bg-secondary grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"

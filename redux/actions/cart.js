@@ -34,10 +34,10 @@ export const getMyCart = router => async dispatch => {
   }
 };
 
-export const deleteCart = (data, id) => {
+export const deleteCart = id => {
   return new Promise((resolve, reject) => {
     axios
-      .put(`cart/delete/${id}`, data)
+      .put(`cart/delete/${id}`)
       .then(res => {
         resolve(res.data);
       })
@@ -47,10 +47,10 @@ export const deleteCart = (data, id) => {
   });
 };
 
-export const deleteCartUser = (data, id) => {
+export const deleteCartUser = () => {
   return new Promise((resolve, reject) => {
     axios
-      .put(`cart/delete/user/${id}`, data)
+      .put('cart/delete/user')
       .then(res => {
         resolve(res.data);
       })

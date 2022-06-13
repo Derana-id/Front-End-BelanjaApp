@@ -9,7 +9,7 @@ import getAllCategory from './getCategory';
 
 export default combineReducers({
   myCart,
-  myTransaction
+  myTransaction,
   detailUser,
   getAllProducts,
   getPopular,

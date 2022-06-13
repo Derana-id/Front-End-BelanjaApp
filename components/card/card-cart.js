@@ -8,7 +8,7 @@ export default function CardCart(params) {
   return (
     <div className="bg-white p-6 shadow-xl mt-5 md:flex items-center rounded-xl">
       <div className="flex py-2 md:py-0">
-        <Checklist />
+        <Checklist onChange={params.onChange} onClick={params.onClick} />
         <p className="md:hidden font-bold">Select</p>
       </div>
       <div className="md:w-24 hidden md:h-24 md:flex items-center">

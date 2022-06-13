@@ -5,8 +5,6 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import ContentLoader from 'react-content-loader';
 import Swal from 'sweetalert2';
-import jwtDecode from 'jwt-decode';
-import Cookies from 'js-cookie';
 import CardCart from '../../components/card/card-cart';
 import ButtonWarning from '../../components/Button/button-warning';
 import Checklist from '../../components/Input/checklist';
@@ -18,14 +16,7 @@ const MyBag = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const myCart = useSelector(state => state.myCart);
-  const [id, setId] = useState(null);
-  const token = Cookies.get('token');
   const [total, setTotal] = useState(0);
-
-  let decoded = null;
-  if (token) {
-    decoded = jwtDecode(token);
-  }
 
   useEffect(() => {
     dispatch(getMyCart(router));
@@ -70,7 +61,7 @@ const MyBag = () => {
     });
   };
 
-  const handleDeleteUser = (e, id) => {
+  const handleDeleteUser = e => {
     e.preventDefault();
     Swal.fire({
       title: 'Are you sure?',
@@ -83,7 +74,7 @@ const MyBag = () => {
     }).then(async confirm => {
       if (confirm.isConfirmed) {
         try {
-          const res = await deleteCartUser(id);
+          const res = await deleteCartUser();
           sweetAlert(res.message);
           window.location.reload();
         } catch (err) {
@@ -112,7 +103,7 @@ const MyBag = () => {
             <div className="bg-white p-6 rounded-md shadow-lg">
               <div className="flex items-cente justify-between">
                 <div className="flex">
-                  <Checklist />
+                  <Checklist onChange={() => handleDeleteUser()} />
                   <p className="text-black font-medium">Select all items</p>
                   <p className="text-gray ml-2">(2 items selected)</p>
                 </div>
@@ -122,7 +113,7 @@ const MyBag = () => {
             {myCart.isLoading ? (
               <ContentLoader />
             ) : myCart.isError ? (
-              <div>Error</div>
+              <div>Data not found</div>
             ) : (
               myCart.data.map((item, i) => (
                 <div key={i}>
@@ -132,6 +123,7 @@ const MyBag = () => {
                         ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`
                         : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
                     }`}
+                    onChange={e => handleDelete(e, item.cart.id)}
                     productName={item.product[0].product_name}
                     store={item.store[0].store_name}
                     price={`$ ${item.product[0].price}`}
