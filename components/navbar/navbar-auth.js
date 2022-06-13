@@ -52,7 +52,11 @@ export default function AuthNavbar() {
         {isfilter ? (
           <div className="w-full absolute top-0 bottom-0 right-0 left-0">
             <div>
-              <ModalsSearch onClick={() => setIsFilter(false)} />
+              <ModalsSearch
+                onClick={() => setIsFilter(false)}
+                onDiscard={() => setIsFilter(false)}
+                onApply={() => setIsFilter(false)}
+              />
             </div>
           </div>
         ) : null}

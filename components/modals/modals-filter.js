@@ -1,34 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { RiCloseLine } from 'react-icons/ri';
 import ButtonSuccess from '../Button/button-success';
 import ButtonWarning from '../Button/button-warning';
 import Category from '../molecules/category';
-import Color from '../molecules/color';
 import Size from '../molecules/size';
 
 export default function ModalsSearch(params) {
-  const [isActive, setIsActive] = useState(false);
-  const [isCategory, setIsCategory] = useState(false);
+  const router = useRouter();
+
+  const [getSize, setSize] = useState('');
+  const [getColor, setColor] = useState('');
+  const [getCategory, setCategory] = useState('');
+  const [getBrand, setBrand] = useState('');
   const [isDropdown, setIsDropdown] = useState(false);
-
-  const onSize = () => {
-    if (isActive) {
-      setIsActive(false);
-    } else {
-      setIsActive(true);
-    }
-  };
-
-  const onCategory = () => {
-    if (isCategory) {
-      setIsCategory(false);
-    } else {
-      setIsCategory(true);
-    }
-  };
 
   const onDropdown = () => {
     if (isDropdown) {
@@ -36,6 +24,10 @@ export default function ModalsSearch(params) {
     } else {
       setIsDropdown(true);
     }
+  };
+
+  const apply = () => {
+    router.push(`/?color=${getColor}&size=${getSize}&category=${getCategory}&brand=${getBrand}`);
   };
   return (
     <div className="flex items-center justify-center">
@@ -52,41 +44,57 @@ export default function ModalsSearch(params) {
           <p className="ml-2 font-bold text-sm mt-3">Colors</p>
         </div>
         <div className="flex w-44 justify-between p-4 pt-0">
-          <Color color="bg-primary" onClick={() => alert('halo')} />
-          <Color color="bg-black" />
-          <Color color="bg-special-warning" />
-          <Color color="bg-special-success" />
+          <button
+            className="border-solid border-2 border-transparant focus:border-primary p-1 rounded-full m-1"
+            onClick={() => setColor('Black')}
+          >
+            <div className="w-9 h-9 bg-black rounded-full focus:border-2 focus:border-solid focus:border-dark cursor-pointer shadow-md" />
+          </button>
+          <button
+            className="border-solid border-2 border-transparant focus:border-primary p-1 rounded-full m-1"
+            onClick={() => setColor('White')}
+          >
+            <div className="w-9 h-9 bg-white rounded-full focus:border-2 focus:border-solid focus:border-dark cursor-pointer shadow-md" />
+          </button>
+          <button className="border-solid border-2 border-transparant focus:border-primary p-1 rounded-full m-1 shadow-md">
+            <div
+              className="w-9 h-9 bg-special-success rounded-full focus:border-2 focus:border-solid focus:border-dark cursor-pointer shadow-md"
+              onClick={() => setColor('Green')}
+            />
+          </button>
+          <button className="border-solid border-2 border-transparant focus:border-primary p-1 rounded-full m-1 shadow-md">
+            <div
+              className="w-9 h-9 bg-gray rounded-full focus:border-2 focus:border-solid focus:border-dark cursor-pointer"
+              onClick={() => setColor('Gray')}
+            />
+          </button>
+          <button className="border-solid border-2 border-transparant focus:border-primary p-1 rounded-full m-1 shadow-md">
+            <div
+              className="w-9 h-9 bg-blue rounded-full focus:border-2 focus:border-solid focus:border-dark cursor-pointer"
+              onClick={() => setColor('Blue')}
+            />
+          </button>
         </div>
         <hr className="text-gray-light mt-1 border-2" />
         <div className="p-4">
           <p className="font-bold">Size</p>
           <div className="flex justify-between full py-2">
-            <Size
-              title="XS"
-              fontColor={isActive ? 'text-white' : null}
-              color={isActive ? 'bg-primary border-0' : 'bg-white'}
-              onClick={() => onSize()}
-            />
-            <Size title="S" />
-            <Size title="M" />
-            <Size title="L" />
-            <Size title="XL" />
+            <Size title="XS" onClick={() => setSize('XZ')} />
+            <Size title="S" onClick={() => setSize('S')} />
+            <Size title="M" onClick={() => setSize('M')} />
+            <Size title="L" onClick={() => setSize('L')} />
+            <Size title="XL" onClick={() => setSize('XL')} />
           </div>
         </div>
         <hr className="text-gray-light mt-1 border-2" />
         <div className="p-4">
           <p className="font-bold">Category</p>
           <div className="justify-between py-2 grid grid-cols-3">
-            <Category
-              title="All"
-              fontColor={isCategory ? 'text-white' : null}
-              color={isCategory ? 'bg-primary border-0' : 'bg-white'}
-              onClick={() => onCategory()}
-            />
-            <Category title="Woman" />
-            <Category title="Men" />
-            <Category title="Boys" />
-            <Category title="Girls" />
+            <Category title="All" onClick={() => setCategory('')} />
+            <Category title="Woman" onClick={() => setCategory('Woman')} />
+            <Category title="Men" onClick={() => setCategory('Man')} />
+            <Category title="Boys" onClick={() => setCategory('Boys')} />
+            <Category title="Girls" onClick={() => setCategory('Girls')} />
           </div>
         </div>
         <hr className="text-gray-light border-2" />
@@ -118,41 +126,27 @@ export default function ModalsSearch(params) {
           </div>
           {isDropdown ? (
             <div
-              className="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              className="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 flex justify-center items-center focus:outline-none"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
               tabIndex="-1"
             >
               <div className="py-1" role="none">
-                <a
-                  href="#"
-                  className="text-gray-700 block px-4 py-2 text-sm"
-                  role="menuitem"
-                  tabIndex="-1"
-                  id="menu-item-0"
-                >
+                <button className="flex justify-center items-center" onClick={() => setBrand('Nike')}>
                   Nike
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 block px-4 py-2 text-sm"
-                  role="menuitem"
-                  tabIndex="-1"
-                  id="menu-item-1"
-                >
-                  Swallow
-                </a>
+                </button>
+                <button onClick={() => setBrand('Gucci')}>Gucci</button>
               </div>
             </div>
           ) : null}
         </div>
         <div className="bg-white rounded-t p-3 px-5 md:px-10 flex rounded shadow-2xl justify-between">
           <div>
-            <ButtonSuccess action="Discard" className="p-0" />
+            <ButtonSuccess action="Discard" className="p-0" onClick={params.onDiscard} />
           </div>
-          <div className="w-28">
-            <ButtonWarning action="Apply" className="p-[2px]" />
+          <div className="w-28" onClick={params.onApply}>
+            <ButtonWarning action="Apply" className="p-[2px]" onClick={() => apply()} />
           </div>
         </div>
       </div>
