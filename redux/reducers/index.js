@@ -5,12 +5,14 @@ import myTransaction from './mytransaction';
 import getAllProducts from './getAllProducts';
 import getPopular from './popularProducts';
 import getDetailProduct from './getDetailProduct';
+import getAllCategory from './getCategory';
 
 export default combineReducers({
   myCart,
-  myTransaction
+  myTransaction,
   detailUser,
   getAllProducts,
   getPopular,
-  getDetailProduct
+  getDetailProduct,
+  getAllCategory
 });
