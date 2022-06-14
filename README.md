@@ -145,7 +145,7 @@ Contributions are what make the open source community such an amazing place to b
       <td align="center">
         <a href="https://github.com/altrawan">
           <img width="100" src="https://avatars.githubusercontent.com/u/39686865?v=4" alt="Nur Muhammad Alif Putra Setiawan"><br/>
-          <sub><b>Nur Muhammad Alif Putra S</b></sub> <br/>
+          <sub><b>Nur Muhammad Alif</b></sub> <br/>
           <sub>Full Stack Web Developer</sub>
         </a>
       </td>
