@@ -108,8 +108,6 @@ const Customer = () => {
       });
   };
 
-  // console.log(form);
-
   return (
     <div>
       <Head>
@@ -121,16 +119,19 @@ const Customer = () => {
         <div className="w-0 sm:w-0 md:w-1/4 lg:w-1/4 xl:w-1/4">
           <div className="w-full flex justify-center items-center mr-10 flex-col mt-[120px]">
             <div className="flex items-center">
-              {/* <Image src={user} width={60} height={60} className="rounded-full" /> */}
-              <img
-                src={form.photo
-                  ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                  : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                alt="store"
-                width="100px"
-                height="100px"
-                className="rounded-[100%]"
-              />
+              {detailProfile.isLoading ? (<div>Laoding</div>)
+                : (
+                  <img
+                    src={form.photo
+                      ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
+                      : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                    alt=""
+                    width="100px"
+                    height="100px"
+                    className="rounded-[100%] mb-9"
+                    onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${detailProfile.data.profile.photo}`; }}
+                  />
+                )}
               <div className="flex flex-col ml-2">
                 <label className="ml-3 mb-2 font-semibold">{ form.name}</label>
                 <Image className="cursor-pointer hidden" src={edit} />
@@ -303,25 +304,19 @@ const Customer = () => {
                       <Datepicker onChange={(e) => setForm({ ...form, birth: e.target.value })} value={form.birth} />
                     </div>
                     <div className="w-[30%] flex flex-col items-center border-l-2 border-gray my-4">
-                      {/* <Image
-                        className="rounded-[100%] mb-9"
-                        // src={form.photo
-                        //   ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                        //   : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                        src={user}
-                        layout="fixed"
-                        width={100}
-                        height={100}
-                      /> */}
-                      <img
-                        src={form.photo
-                          ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                          : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                        alt=""
-                        width="100px"
-                        height="100px"
-                        className="rounded-[100%] mb-9"
-                      />
+                      {detailProfile.isLoading ? (<div>Laoding</div>)
+                        : (
+                          <img
+                            src={form.photo
+                              ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
+                              : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                            alt=""
+                            width="100px"
+                            height="100px"
+                            className="rounded-[100%] mb-9"
+                            onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${detailProfile.data.profile.photo}`; }}
+                          />
+                        )}
                       <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />
                       <label className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray" htmlFor="images">Select image</label>
                     </div>

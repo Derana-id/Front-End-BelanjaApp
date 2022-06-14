@@ -141,16 +141,19 @@ const Seller = () => {
         <div className="w-0 sm:w-0 md:w-1/4 lg:w-1/4 xl:w-1/4">
           <div className="w-full flex mx-[25%] flex-col mt-[120px]">
             <div className="flex items-center">
-              {/* <Image src={user} width={60} height={60} className="rounded-full" /> */}
-              <img
-                src={form.photo
-                  ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                  : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                alt="store"
-                width="100px"
-                height="100px"
-                className="rounded-[100%]"
-              />
+              {detailStore.isLoading ? (<div>Laoding</div>)
+                : (
+                  <img
+                    src={form.photo
+                      ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
+                      : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                    alt=""
+                    width="100px"
+                    height="100px"
+                    className="rounded-[100%] mb-9"
+                    onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${detailStore.data.store.photo}`; }}
+                  />
+                )}
               <div className="flex flex-col ml-2">
                 <label className=" mb-2 font-semibold">{ form.store_name}</label>
                 <Image className="cursor-pointer hidden" width={25} height={25} src={edit} />
@@ -572,16 +575,20 @@ const Seller = () => {
                     <TextArea onChange={(e) => setForm({ ...form, store_description: e.target.value })} value={form.store_description} name="Store descripiton" />
                   </div>
                   <div className="w-[30%] flex flex-col items-center border-l-2 border-gray my-4">
-                    {/* <Image className="rounded-[100%] mb-9" src={user} layout="fixed" width={100} height={100} /> */}
-                    <img
-                      src={form.photo
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                      alt=""
-                      width="100px"
-                      height="100px"
-                      className="rounded-[100%] mb-9"
-                    />
+                    {detailStore.isLoading ? (<div>Laoding</div>)
+                      : (
+                        <img
+                          src={form.photo
+                            ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
+                            : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                          alt=""
+                          width="100px"
+                          height="100px"
+                          className="rounded-[100%] mb-9"
+                          onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${detailStore.data.store.photo}`; }}
+                        />
+                      )}
+
                     <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />
                     <label className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray" htmlFor="images">
                       Select image
