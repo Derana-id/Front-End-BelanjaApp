@@ -69,6 +69,11 @@ function Home({ deviceType }) {
       paritialVisibilityGutter: 40
     }
   };
+
+  const onCategory = e => {
+    router.push(`/category?query=${e}`);
+  };
+
   return (
     <div>
       <Head>
@@ -103,10 +108,10 @@ function Home({ deviceType }) {
                         <div key={index} className="w-full h-full p-2">
                           <Image
                             src={`${process.env.NEXT_PUBLIC_API_URL}uploads/categories/${each.photo}`}
-                            className="rounded-lg shadow-xl"
+                            className="rounded-lg shadow-xl cursor-pointer"
                             width={206}
                             height={220}
-                            onClick={() => alert(each.category_name)}
+                            onClick={() => onCategory(each.category_name)}
                           />
                         </div>
                       );
