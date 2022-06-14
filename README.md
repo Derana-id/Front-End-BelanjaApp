@@ -145,7 +145,7 @@ Contributions are what make the open source community such an amazing place to b
       <td align="center">
         <a href="https://github.com/altrawan">
           <img width="100" src="https://avatars.githubusercontent.com/u/39686865?v=4" alt="Nur Muhammad Alif Putra Setiawan"><br/>
-          <sub><b>Nur Muhammad Alif Putra Setiawan</b></sub> <br/>
+          <sub><b>Nur Muhammad Alif Putra S</b></sub> <br/>
           <sub>Full Stack Web Developer</sub>
         </a>
       </td>
@@ -160,7 +160,7 @@ Contributions are what make the open source community such an amazing place to b
         <a href="https://github.com/bagus25dzikri06">
           <img width="100" src="https://avatars.githubusercontent.com/u/18045292?v=4" alt="Bagus Dzikri Hidayat"><br/>
           <sub><b>Bagus Dzikri Hidayat</b></sub> <br/>
-          <sub>Back End Web Developer</sub>
+          <sub>Front End Web Developer</sub>
         </a>
       </td>
     </tr>
