@@ -1,6 +1,9 @@
+/* eslint-disable react/jsx-indent */
+/* eslint-disable indent */
 /* eslint-disable no-nested-ternary */
 import React, { useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import CardProducts from '../../components/card/card-products';
@@ -28,10 +31,14 @@ const Category = () => {
       </Head>
       <div className="p-28 bg-white">
         <div>
-          <ul className="flex text-gray tex-sm w-56 justify-between">
-            <li>Home</li>
+          <ul className="flex text-gray tex-sm w-56 font-bold justify-between">
+            <Link href="/">
+              <li className="cursor-pointer">Home</li>
+            </Link>
             <li>{'>'} </li>
-            <li>category</li>
+            <Link href="/category">
+              <li className="cursor-pointer">category</li>
+            </Link>
             <li>{'>'} </li>
             <li>{query}</li>
           </ul>
@@ -46,22 +53,24 @@ const Category = () => {
             className="grid grid-cols-5
                    grid-flow-row gap-4 auto-rows-auto"
           >
-            {getAll.isLoading ? null : getAll.data.map((item, index) => (
-              <>
-                {item.category.length > 0 ? (
-                  item.category[0].category_name === query ? (
-                    <CardProducts
-                      key={index}
-                      productName={`${item.product.product_name}`}
-                      nameProduct={`${item.product.product_name}`}
-                      price={`$ ${item.product.price}`}
-                      user={`${item.store[0].store_name}`}
-                      img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
-                    />
-                  ) : (null)
-                ) : (null)}
-              </>
-            ))}
+            {getAll.isLoading
+              ? null
+              : getAll.data.map((item, index) => (
+                  <>
+                    {item.category.length > 0 ? (
+                      item.category[0].category_name === query ? (
+                        <CardProducts
+                          key={index}
+                          productName={`${item.product.product_name}`}
+                          nameProduct={`${item.product.product_name}`}
+                          price={`$ ${item.product.price}`}
+                          user={`${item.store[0].store_name}`}
+                          img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                        />
+                      ) : null
+                    ) : null}
+                  </>
+                ))}
           </div>
         </div>
       </div>
