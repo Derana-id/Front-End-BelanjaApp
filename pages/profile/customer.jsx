@@ -37,8 +37,8 @@ const Customer = () => {
             <div className="flex items-center">
               <Image src={user} width={60} height={60} className="rounded-full" />
               <div className="flex flex-col ml-2">
-                <label className="ml-3 mb-2 font-semibold">Johanes Mikael</label>
-                <Image className="cursor-pointer hidden" src={edit} />
+                <label className="mb-2 ml-3 font-semibold">Johanes Mikael</label>
+                <Image className="hidden cursor-pointer" src={edit} />
               </div>
             </div>
             {/* sidebar */}
@@ -46,19 +46,19 @@ const Customer = () => {
               <div className="flex flex-col ml-[47%] w-full mt-10">
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
-                    <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myaccount} />
+                    <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
                   </div>
-                  <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer font-semibold">My account</button>
+                  <button onClick={() => setCurrentShow(0)} className="ml-3 font-semibold cursor-pointer">My account</button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
-                    <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={address} />
+                    <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={address} />
                   </div>
                   <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer ">Shipping Adrress</button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
-                    <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myorder} />
+                    <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                   </div>
                   <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">My order</button>
                 </div>
@@ -67,19 +67,19 @@ const Customer = () => {
               <div className="flex flex-col ml-[47%] w-full mt-10">
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
-                    <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myaccount} />
+                    <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
                   </div>
                   <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer ">My account</button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
-                    <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={address} />
+                    <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={address} />
                   </div>
-                  <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer font-semibold ">Shipping Adrress</button>
+                  <button onClick={() => setCurrentShow(1)} className="ml-3 font-semibold cursor-pointer ">Shipping Adrress</button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
-                    <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myorder} />
+                    <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                   </div>
                   <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">My order</button>
                 </div>
@@ -88,21 +88,21 @@ const Customer = () => {
               <div className="flex flex-col ml-[47%] w-full mt-10">
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
-                    <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myaccount} />
+                    <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
                   </div>
                   <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer ">My account</button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
-                    <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={address} />
+                    <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={address} />
                   </div>
                   <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer">Shipping Adrress</button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
-                    <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myorder} />
+                    <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                   </div>
-                  <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer font-semibold ">My order</button>
+                  <button onClick={() => setCurrentShow(2)} className="ml-3 font-semibold cursor-pointer ">My order</button>
                 </div>
               </div>
             )}
@@ -123,19 +123,19 @@ const Customer = () => {
                   <div className="flex flex-col w-full mt-10">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
-                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myaccount} />
+                        <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
                       </div>
-                      <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer font-semibold">My account</button>
+                      <button onClick={() => setCurrentShow(0)} className="ml-3 font-semibold cursor-pointer">My account</button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
-                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={address} />
+                        <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={address} />
                       </div>
                       <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer ">Shipping Adrress</button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
-                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myorder} />
+                        <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                       </div>
                       <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">My order</button>
                     </div>
@@ -144,19 +144,19 @@ const Customer = () => {
                   <div className="flex flex-col w-full mt-10">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
-                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myaccount} />
+                        <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
                       </div>
                       <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer ">My account</button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
-                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={address} />
+                        <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={address} />
                       </div>
-                      <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer font-semibold ">Shipping Adrress</button>
+                      <button onClick={() => setCurrentShow(1)} className="ml-3 font-semibold cursor-pointer ">Shipping Adrress</button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
-                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myorder} />
+                        <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                       </div>
                       <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">My order</button>
                     </div>
@@ -165,21 +165,21 @@ const Customer = () => {
                   <div className="flex flex-col w-full mt-10">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
-                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myaccount} />
+                        <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
                       </div>
                       <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer ">My account</button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
-                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={address} />
+                        <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={address} />
                       </div>
                       <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer">Shipping Adrress</button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
-                        <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myorder} />
+                        <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                       </div>
-                      <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer font-semibold ">My order</button>
+                      <button onClick={() => setCurrentShow(2)} className="ml-3 font-semibold cursor-pointer ">My order</button>
                     </div>
                   </div>
                 )}
