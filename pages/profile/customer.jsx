@@ -1,18 +1,27 @@
+/* eslint-disable no-console */
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { AiOutlineMenu } from 'react-icons/ai';
 import Drawer from 'react-modern-drawer';
+import Cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
+import JwtDecode from 'jwt-decode';
+import Swal from 'sweetalert2';
 import CardMyorder from '../../components/card/customer/cardMyorder';
 import CardShippingAddress from '../../components/card/customer/cardShippingAddressProfile';
-import CardMyprofile from '../../components/card/customer/cardMyprofile';
-import user from '../../assets/img/user.jpg';
+// import user from '../../assets/img/user.jpg';
 import edit from '../../assets/icons/edit.svg';
 import myaccount from '../../assets/icons/myaccount.svg';
 import address from '../../assets/icons/address.svg';
 import myorder from '../../assets/icons/order.svg';
 import 'react-modern-drawer/dist/index.css';
+import { getDetailUser, updateProfile } from '../../redux/actions/userProfile';
+import Input from '../../components/Input/input-profile';
+import RadioButton from '../../components/Input/radio-button';
+import Datepicker from '../../components/Input/datepicker';
+import { toastify } from '../../utils/toastify';
 
 const Customer = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -24,6 +33,83 @@ const Customer = () => {
   const setCurrentShow = index => {
     setFormShowSideBar(index);
   };
+
+  // integrasi
+  const dispatch = useDispatch();
+  const token = Cookies.get('token');
+  let decoded = '';
+  if (token) {
+    decoded = JwtDecode(token);
+  }
+
+  const detailProfile = useSelector((state) => {
+    return state.detailCustomer;
+  });
+
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    gender: '',
+    birth: '',
+    photo: ''
+  });
+
+  useEffect(() => {
+    dispatch(getDetailUser(decoded.id, token));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (detailProfile.data.profile) {
+      setForm({
+        ...form,
+        name: detailProfile.data.profile.name,
+        email: detailProfile.data.user.email,
+        phone: detailProfile.data.profile.phone,
+        gender: detailProfile.data.profile.gender,
+        birth: detailProfile.data.profile.birth,
+        photo: detailProfile.data.profile.photo
+      });
+    }
+  }, [detailProfile]);
+
+  const onEditUser = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('name', form.name);
+    formData.append('email', form.email);
+    formData.append('phone', form.phone);
+    formData.append('gender', form.gender);
+    formData.append('birth', form.birth);
+    formData.append('photo', form.photo);
+
+    updateProfile(formData, token)
+      .then((res) => {
+        Swal.fire({
+          title: 'success',
+          text: res.message,
+          icon: 'success'
+        });
+        dispatch(getDetailUser(decoded.id));
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.data.code === 422) {
+          const { error } = err.response.data;
+          error.map(item => toastify(item, 'error'));
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: err.response.data.message,
+            icon: 'error'
+          });
+        }
+      });
+  };
+
+  // console.log(form);
+
   return (
     <div>
       <Head>
@@ -35,9 +121,18 @@ const Customer = () => {
         <div className="w-0 sm:w-0 md:w-1/4 lg:w-1/4 xl:w-1/4">
           <div className="w-full flex justify-center items-center mr-10 flex-col mt-[120px]">
             <div className="flex items-center">
-              <Image src={user} width={60} height={60} className="rounded-full" />
+              {/* <Image src={user} width={60} height={60} className="rounded-full" /> */}
+              <img
+                src={form.photo
+                  ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
+                  : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                alt="store"
+                width="100px"
+                height="100px"
+                className="rounded-[100%]"
+              />
               <div className="flex flex-col ml-2">
-                <label className="mb-2 ml-3 font-semibold">Johanes Mikael</label>
+                <label className="mb-2 ml-3 font-semibold">{ form.name}</label>
                 <Image className="hidden cursor-pointer" src={edit} />
               </div>
             </div>
@@ -188,7 +283,54 @@ const Customer = () => {
             </Drawer>
           </div>
           {showSideBar === 0
-            ? (<CardMyprofile />) : showSideBar === 1
+            ? (
+              <form onSubmit={(e) => onEditUser(e)} className="flex w-full">
+                <div className="flex flex-col bg-white rounded w-full h-auto mt-[120px] mx-2 sm:w-full md:w-3/4 lg:w-3/4 sm:mx-2 md:mx-12 lg:mx-12">
+                  <div className="flex flex-col m-5 border-b-2 border-[#9B9B9B] pb-5">
+                    <label className="mb-2 text-lg font-semibold">My Profile</label>
+                    <label className="text-[#9B9B9B]">Manage your profile information</label>
+                  </div>
+                  <div className="flex w-full">
+
+                    <div className="w-[70%] flex flex-col items-end">
+                      <Input onChange={(e) => setForm({ ...form, name: e.target.value })} name="Name" type="text" value={form.name} />
+                      <Input name="Email" value={form.email} type="text" readonly />
+                      <Input onChange={(e) => setForm({ ...form, phone: e.target.value })} name="Phone Number" value={form.phone} type="text" />
+                      <div className="flex mr-0 sm:mr-0 md:mr-[150px] lg-mr-[150px] xl:mr-[150px]">
+                        <label className="mr-5 text-[#9B9B9B]">Gender</label>
+                        <RadioButton onChange={(e) => setForm({ ...form, gender: e.target.value })} value={form.gender} />
+                      </div>
+                      <Datepicker onChange={(e) => setForm({ ...form, birth: e.target.value })} value={form.birth} />
+                    </div>
+                    <div className="w-[30%] flex flex-col items-center border-l-2 border-gray my-4">
+                      {/* <Image
+                        className="rounded-[100%] mb-9"
+                        // src={form.photo
+                        //   ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
+                        //   : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                        src={user}
+                        layout="fixed"
+                        width={100}
+                        height={100}
+                      /> */}
+                      <img
+                        src={form.photo
+                          ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
+                          : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                        alt=""
+                        width="100px"
+                        height="100px"
+                        className="rounded-[100%] mb-9"
+                      />
+                      <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />
+                      <label className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray" htmlFor="images">Select image</label>
+                    </div>
+
+                  </div>
+                  <button type="submit" className="w-32 h-10 mt-5 mb-10 text-white border ml-28 sm:ml-28 md:ml-44 lg:ml-44 bg-primary active:bg-white active:text-primary rounded-2xl">Save</button>
+                </div>
+              </form>
+            ) : showSideBar === 1
               ? (<CardShippingAddress />) : showSideBar === 2
                 ? (<CardMyorder />) : null}
         </div>

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -6,22 +7,22 @@ const axiosInterceptors = axios.create({
 });
 
 axiosInterceptors.interceptors.request.use(
-  function (config) {
+  config => {
     config.headers = {
       Authorization: `Bearer ${Cookies.get('token')}`
     };
     return config;
   },
-  function (error) {
+  error => {
     return Promise.reject(error);
   }
 );
 
 axiosInterceptors.interceptors.response.use(
-  function (response) {
+  response => {
     return response;
   },
-  function (error) {
+  error => {
     if (error.response.status === 403) {
       Cookies.remove('token');
       localStorage.clear();

@@ -1,9 +1,10 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-// import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
+import DataTable from 'react-data-table-component';
+import { useDispatch, useSelector } from 'react-redux';
 import Search from '../../search/search';
-// import caricatur from '../../../assets/img/caricatur.png';
+import { getMyOrder } from '../../../redux/actions/userProfile';
 
 export default function cardMyorder() {
   const [showNav, setFormShowNav] = useState(0);
@@ -11,6 +12,72 @@ export default function cardMyorder() {
   const setCurrentShow = index => {
     setFormShowNav(index);
   };
+
+  const customStyles = {
+    rows: {
+      style: {
+        minHeight: '72px', // override the row height
+        border: '2px solid #F6F6F6'
+      },
+    },
+    headCells: {
+      style: {
+        paddingLeft: '8px', // override the cell padding for head cells
+        paddingRight: '8px',
+        backgroundColor: '#F6F6F6',
+        border: '2px solid #F6F6F6'
+      },
+    },
+    cells: {
+      style: {
+        paddingLeft: '8px', // override the cell padding for data cells
+        paddingRight: '8px',
+      },
+    },
+  };
+
+  const columns = [
+    {
+      name: 'Invoice',
+      selector: row => row.invoice,
+    },
+    {
+      name: 'Total price',
+      selector: row => row.total,
+    },
+    {
+      name: 'Date',
+      selector: row => row.date,
+    },
+    {
+      name: 'Status',
+      selector: row => row.status,
+    },
+  ];
+
+  // integrasi
+  const dispatch = useDispatch();
+
+  const data = [
+    {
+      id: 1,
+      invoice: 'ABC1243',
+      total: '10.000',
+      date: '11/05/1997',
+      status: 'success'
+    },
+  ];
+
+  const myOrder = useSelector((state) => {
+    return state.myOrder;
+  });
+
+  console.log(myOrder);
+
+  useEffect(() => {
+    dispatch(getMyOrder());
+  }, [dispatch]);
+
   return (
     <div className="flex flex-col bg-white rounded w-3/4 h-auto mt-[120px] mx-12">
       <h5 className="text-black relative mt-10 ml-10 text-lg font-bold">My Order</h5>
@@ -35,31 +102,61 @@ export default function cardMyorder() {
         <div className="mt-8">
           <Search />
         </div>
-        <div className="flex justify-center items-center p-16">
+        <div className="flex justify-start min-h-[200px] p-4">
           {showNav === 0 ? (
-            <div className="w-2/5 h-2/5">
-              {/* <Image src={caricatur} /> */}
-              new
+            <div className="flex w-full border rounded min-h-[120px] relative">
+              <DataTable
+                className="bg-gray"
+                columns={columns}
+                fixedHeader
+                fixedHeaderScrollHeight="300px"
+                data={data}
+                customStyles={customStyles}
+              />
             </div>
           ) : showNav === 1 ? (
-            <div className="w-2/5 h-2/5">
-              {/* <Image src={caricatur} /> */}
-              Packed
+            <div className="flex w-full border rounded min-h-[120px] relative">
+              <DataTable
+                className="bg-gray"
+                columns={columns}
+                fixedHeader
+                fixedHeaderScrollHeight="300px"
+                data={data}
+                customStyles={customStyles}
+              />
             </div>
           ) : showNav === 2 ? (
-            <div className="w-2/5 h-2/5">
-              {/* <Image src={caricatur} /> */}
-              Sent
+            <div className="flex w-full border rounded min-h-[120px] relative">
+              <DataTable
+                className="bg-gray"
+                columns={columns}
+                fixedHeader
+                fixedHeaderScrollHeight="300px"
+                data={data}
+                customStyles={customStyles}
+              />
             </div>
           ) : showNav === 3 ? (
-            <div className="w-2/5 h-2/5">
-              {/* <Image src={caricatur} /> */}
-              Completed
+            <div className="flex w-full border rounded min-h-[120px] relative">
+              <DataTable
+                className="bg-gray"
+                columns={columns}
+                fixedHeader
+                fixedHeaderScrollHeight="300px"
+                data={data}
+                customStyles={customStyles}
+              />
             </div>
           ) : (
-            <div className="w-2/5 h-2/5">
-              {/* <Image src={caricatur} /> */}
-              Cancel order
+            <div className="flex w-full border rounded min-h-[120px] relative">
+              <DataTable
+                className="bg-gray"
+                columns={columns}
+                fixedHeader
+                fixedHeaderScrollHeight="300px"
+                data={data}
+                customStyles={customStyles}
+              />
             </div>
           )}
 
