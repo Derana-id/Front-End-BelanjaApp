@@ -7,7 +7,7 @@ import detailMyProductReducer from './detailMyProduct';
 import getMyOrderReducer from './myOrderBuyer';
 import myAddressReducer from './myAddress';
 import myCart from './myCart';
-import myTransaction from './mytransaction';
+import myTransaction from './myTransaction';
 import getAllProducts from './getAllProducts';
 import getPopular from './popularProducts';
 import getDetailProduct from './getDetailProduct';

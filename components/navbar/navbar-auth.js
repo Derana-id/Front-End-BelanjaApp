@@ -29,7 +29,7 @@ export default function AuthNavbar() {
   };
 
   return (
-    <div className="w-full h-16 md:h-20 md:px-28 py-3 p-3 flex flex-row items-center fixed z-10 shadow-lg bg-white">
+    <div className="w-full h-16 md:h-20 md:px-28 py-3 p-3 flex flex-row items-center fixed z-[1200] shadow-lg bg-white">
       <div className="flex w-full items-center">
         <div className="w-1/5 h-12 flex items-center">
           <div className="relative flex items-center">
@@ -56,7 +56,7 @@ export default function AuthNavbar() {
                 <AiOutlineShoppingCart className="text-2xl mr-6 text-gray cursor-pointer" />
               </div>
             </Link>
-            <div className="flex w-60 justify-between">
+            <div className="flex w-32 md:w-60 justify-between">
               <ButtonLogin onClick={() => router.push('/auth/login')} />
               <ButtonSignup onClick={() => router.push('/auth/register')} />
             </div>
