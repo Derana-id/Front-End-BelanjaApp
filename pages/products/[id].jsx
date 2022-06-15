@@ -311,5 +311,12 @@ const Products = () => {
   );
 };
 
-Products.layouts = 'ThridLayout';
+const token = false;
+
+if (token) {
+  Products.layouts = ' MainLayout';
+} else {
+  Products.layouts = 'ThridLayout';
+}
+
 export default Products;
