@@ -23,7 +23,7 @@ const MyBag = () => {
   }, []);
 
   useEffect(() => {
-    if (myCart.data) {
+    if (myCart) {
       const getTotal = myCart.data.map(item => {
         const price = Number(item.product[0].price);
         return price;

@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable indent */
 import React, { useEffect, useState } from 'react';
@@ -17,7 +18,7 @@ import ButtonWarning from '../../components/Button/button-warning';
 import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
 import { getDetailProduct, getPopularProducts } from '../../redux/actions/products';
-import { addCart } from '../../redux/actions/cart';
+import { addCart, getMyCart, updateCart } from '../../redux/actions/cart';
 
 const Products = () => {
   const router = useRouter();
@@ -30,7 +31,12 @@ const Products = () => {
   useEffect(() => {
     dispatch(getDetailProduct(id));
     dispatch(getPopularProducts());
+    dispatch(getMyCart());
   }, []);
+
+  const myCart = useSelector(state => {
+    return state.myCart;
+  });
 
   const getPopular = useSelector(state => {
     return state.getPopular;
@@ -45,27 +51,91 @@ const Products = () => {
   };
 
   const onBuy = async e => {
-    const data = {
-      product_id: e,
-      qty: getAmount,
-      color: getColor
-    };
+    try {
+      const data = {
+        product_id: e,
+        qty: getAmount,
+        color: getColor,
+        id: ''
+      };
 
-    addCart(data)
-      .then(res => {
-        Swal.fire({
-          title: 'Success!',
-          text: res.message,
-          icon: 'success'
-        });
-      })
-      .catch(err => {
+      if (data.qty === '' || data.qty === 0) {
         Swal.fire({
           title: 'Failed!',
-          text: err.message,
+          text: 'Number of items must be filled!',
           icon: 'error'
         });
+      } else {
+        myCart.data.map(item => {
+          if (item.cart.product_id === e) {
+            const getData = {
+              ...data,
+              id: e
+            };
+            updateCart(getData)
+              .then(res => {
+                Swal.fire({
+                  title: 'Success!',
+                  text: res.message,
+                  icon: 'success'
+                });
+                dispatch(getMyCart());
+              })
+              .catch(err => {
+                Swal.fire({
+                  title: 'Failed!',
+                  text: err.message,
+                  icon: 'error'
+                });
+              });
+          }
+          return false;
+        });
+
+        // const cekValue = addProduct.map(e => {
+        //   if (e.value === true) {
+        //     const value = {
+        //       id: e.id,
+        //       isTrue: true
+        //     };
+        //     return value;
+        //   }
+        // });
+        // console.log(cekValue);
+
+        // if (cekValue.isTrue) {
+        //   const getData = {
+        //     product_id: e,
+        //     qty: getAmount,
+        //     color: getColor,
+        //     id: cekValue.id
+        //   };
+        // } else {
+        //   addCart(data)
+        //     .then(res => {
+        //       Swal.fire({
+        //         title: 'Success!',
+        //         text: res.message,
+        //         icon: 'success'
+        //       });
+        //       dispatch(getMyCart());
+        //     })
+        //     .catch(err => {
+        //       Swal.fire({
+        //         title: 'Failed!',
+        //         text: err.message,
+        //         icon: 'error'
+        //       });
+        //     });
+        // }
+      }
+    } catch (error) {
+      Swal.fire({
+        title: 'Failed!',
+        text: error.message,
+        icon: 'error'
       });
+    }
   };
 
   const onAmount = e => {
