@@ -66,31 +66,37 @@ const Products = () => {
           icon: 'error'
         });
       } else {
-        myCart.data.map(item => {
+        const addCart = myCart.data.map(item => {
           if (item.cart.product_id === e) {
             const getData = {
-              ...data,
+              cart_id: item.cart.id,
+              value: true,
               id: e
             };
-            updateCart(getData)
-              .then(res => {
-                Swal.fire({
-                  title: 'Success!',
-                  text: res.message,
-                  icon: 'success'
-                });
-                dispatch(getMyCart());
-              })
-              .catch(err => {
-                Swal.fire({
-                  title: 'Failed!',
-                  text: err.message,
-                  icon: 'error'
-                });
-              });
+            alert('data sudah adas');
+            // console.log(getData);
+            // updateCart(getData)
+            //   .then(res => {
+            //     Swal.fire({
+            //       title: 'Success!',
+            //       text: res.message,
+            //       icon: 'success'
+            //     });
+            //     dispatch(getMyCart());
+            //   })
+            //   .catch(err => {
+            //     Swal.fire({
+            //       title: 'Failed!',
+            //       text: err.message,
+            //       icon: 'error'
+            //     });
+            //   });
+            return getData;
           }
+
           return false;
         });
+        console.log(addCart);
 
         // const cekValue = addProduct.map(e => {
         //   if (e.value === true) {
@@ -167,7 +173,7 @@ const Products = () => {
             <li>{'>'} </li>
             {/* {getDetail.data.category.length > 0 ? ( */}
             <li className="cursor-pointer">
-              {getDetail.data.category ? getDetail.data.category[0].category_name : 'null'}
+              {/* {getDetail.data.category ? getDetail.data.category[0].category_name : null} */}
             </li>
             {/* ) : null} */}
           </ul>
@@ -188,29 +194,30 @@ const Products = () => {
                   <Img
                     src={
                       getDetail.data.image[0]
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                        ? `https://drive.google.com/uc?export=view&id=
+                        ${getDetail.data.image[0].photo}`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                   <Img
                     src={
                       getDetail.data.image[1]
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[0].photo}`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                   <Img
                     src={
                       getDetail.data.image[2]
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[0].photo}`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                   <Img
                     src={
                       getDetail.data.image[2]
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                        ? 'https://drive.google.com/uc?export=view&id={getDetail.data.image[0].photo}'
+                        : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                 </div>
@@ -220,9 +227,9 @@ const Products = () => {
                   <h3 className="text-2xl font-bold">
                     {getDetail.data.category ? getDetail.data.product.product_name : null}
                   </h3>
-                  {getDetail.data.category ? (
+                  {/* {getDetail.data.category ? (
                     <p className="text-gray text-sm font-semibold">{getDetail.data.brand[0].brand_name}</p>
-                  ) : null}
+                  ) : null} */}
 
                   <Start valueReview="(10)" />
                 </div>
@@ -299,7 +306,8 @@ const Products = () => {
                     price={`$ ${item.product.price}`}
                     user={`${item.store[0].store_name}`}
                     onClick={() => onDetail(item.product.id)}
-                    img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                    // img={`https://drive.google.com/uc?export=view&id=${item.image[0].photo}`}
+                    img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
                   />
                 </div>
               ))

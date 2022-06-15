@@ -122,8 +122,9 @@ const MyBag = () => {
                   <CardCart
                     image={`${
                       item.image[0].photo
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                        ? `https://drive.google.com/uc?export=view&id=${item.image[0].photo}`
+                        : `https://drive.google.com/uc?export=view&id=
+                        default.png`
                     }`}
                     onChange={e => handleDelete(e, item.cart.id)}
                     productName={item.product[0].product_name}
