@@ -1,15 +1,11 @@
 /* eslint-disable consistent-return */
 /* eslint-disable operator-linebreak */
 import { NextResponse } from 'next/server';
-import Cookies from 'js-cookie';
 import JwtDecode from 'jwt-decode';
 
 export default function middleware(req) {
   const { token } = req.cookies;
-  // const isCustomer = true;
 
-  // const token = Cookies.get('token');
-  // const token = Cookies.get('token');
   let decoded = '';
   if (token) {
     decoded = JwtDecode(token);
