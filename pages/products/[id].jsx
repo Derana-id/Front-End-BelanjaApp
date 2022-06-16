@@ -73,7 +73,7 @@ const Products = () => {
         });
       } else {
         addCart(data)
-          .then(() => {
+          .then(res => {
             Swal.fire({
               title: 'Success!',
               text: 'Successfully added product to cart!',
