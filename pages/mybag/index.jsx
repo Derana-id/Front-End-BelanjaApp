@@ -17,6 +17,9 @@ const MyBag = () => {
   const dispatch = useDispatch();
   const myCart = useSelector(state => state.myCart);
   const [total, setTotal] = useState(0);
+  const [getAmount, setAmount] = useState(0);
+
+  console.log(myCart);
 
   useEffect(() => {
     dispatch(getMyCart(router));
@@ -89,6 +92,16 @@ const MyBag = () => {
     });
   };
 
+  const onAmount = e => {
+    if (getAmount <= 0 && e === -1) {
+      setAmount(0);
+    } else if (getAmount >= 10 && e === 1) {
+      setAmount(10);
+    } else {
+      setAmount(getAmount + e);
+    }
+  };
+
   return (
     <div>
       <Head>
@@ -120,17 +133,19 @@ const MyBag = () => {
               myCart.data.map((item, i) => (
                 <div key={i}>
                   <CardCart
-                    image={`${
-                      item.image[0].photo
-                        ? `https://drive.google.com/uc?export=view&id=${item.image[0].photo}`
-                        : `https://drive.google.com/uc?export=view&id=
-                        default.png`
-                    }`}
+                    // image={`${
+                    //   item.image[0].photo
+                    //     ? `https://drive.google.com/uc?export=view&id=${item.image[0].photo}`
+                    //     : `https://drive.google.com/uc?export=view&id=
+                    //     default.png`
+                    // }`}
                     onChange={e => handleDelete(e, item.cart.id)}
                     productName={item.product[0].product_name}
                     store={item.store[0].store_name}
-                    price={`$ ${item.product[0].price}`}
-                    defaultValue="28"
+                    price={`RP. ${item.product[0].price}`}
+                    value={getAmount}
+                    onPlus={() => onAmount(1)}
+                    onMin={() => onAmount(-1)}
                   />
                 </div>
               ))

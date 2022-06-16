@@ -18,7 +18,7 @@ import ButtonWarning from '../../components/Button/button-warning';
 import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
 import { getDetailProduct, getPopularProducts } from '../../redux/actions/products';
-import { addCart, getMyCart, updateCart } from '../../redux/actions/cart';
+import { addCart, getMyCart } from '../../redux/actions/cart';
 
 const Products = () => {
   const router = useRouter();
@@ -31,13 +31,13 @@ const Products = () => {
   useEffect(() => {
     dispatch(getDetailProduct(id));
     dispatch(getPopularProducts());
-    // dispatch(getMyCart());
+    dispatch(getMyCart());
   }, []);
 
-  // const myCart = useSelector(state => {
-  //   return state.myCart;
-  // });
-  // console.log(myCart);
+  // eslint-disable-next-line no-unused-vars
+  const myCart = useSelector(state => {
+    return state.myCart;
+  });
 
   const getPopular = useSelector(state => {
     return state.getPopular;
@@ -79,6 +79,7 @@ const Products = () => {
               text: 'Successfully added product to cart!',
               icon: 'success'
             });
+            dispatch(getMyCart());
           })
           .catch(err => {
             Swal.fire({
