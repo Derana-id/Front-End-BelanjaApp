@@ -15,6 +15,7 @@ export default function index() {
   const router = useRouter();
   const [formShow, setFormShow] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  // const [roles, setRoles] = useState(1);
   const [form, setForm] = useState({
     email: '',
     password: ''
@@ -30,6 +31,8 @@ export default function index() {
       [e.target.id]: e.target.value
     });
   };
+
+  console.log(formShow);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -49,24 +52,24 @@ export default function index() {
 
           const decoded = JwtDecode(res.token);
 
-          if (decoded.level === 0) {
-            Swal.fire({
-              title: 'Error!',
-              text: "You don't have permission!",
-              icon: 'success'
-            });
-          } else if (decoded.level === 1) {
+          if (decoded.level === 1 && formShow === 1) {
             Swal.fire({
               title: 'Success!',
               text: res.message,
               icon: 'success'
             }).then(() => router.push('/profile/seller'));
-          } else {
+          } else if (decoded.level === 2 && formShow === 0) {
             Swal.fire({
               title: 'Success!',
               text: res.message,
               icon: 'success'
             }).then(() => router.push('/profile/customer'));
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: "You don't have permission!",
+              icon: 'error'
+            });
           }
         })
         .catch(err => {
@@ -147,13 +150,17 @@ export default function index() {
             </Link>
           </form>
         ) : (
-          <form className="w-full">
-            <Input placeholder="Email" />
-            <Input placeholder="Password" />
+          <form className="w-full" onSubmit={handleSubmit}>
+            <Input placeholder="Email" id="email" type="email" value={form.email} onChange={handleChange} />
+            <Input placeholder="Password" id="password" type="password" value={form.password} onChange={handleChange} />
             <Link href="/auth/forgot">
               <label className="text-special-warning cursor-pointer mr-0 absolute right-6">Forgot password?</label>
             </Link>
-            <Button name="Login" />
+            {isLoading ? <Button disabled="disabled" name="Loading" /> : <Button name="Login" type="submit" />}
+            <label className="ml-2 sm:ml-2 md:ml-12 lg:ml-12 mr-2">Don&apos;t have a Tokopedia account?</label>
+            <Link href="/auth/register" className="text-special-warning">
+              Register
+            </Link>
             <label className="ml-2 sm:ml-2 md:ml-12 lg:ml-12 mr-2">Don&apos;t have a Tokopedia account?</label>
             <Link href="/auth/register" className="text-special-warning">
               Register
