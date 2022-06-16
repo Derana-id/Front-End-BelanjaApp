@@ -253,5 +253,6 @@ function Home({ deviceType }) {
   );
 }
 
-Home.layouts = 'ThridLayout';
+Home.layouts = 'MainLayout';
+
 export default Home;

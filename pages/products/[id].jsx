@@ -171,11 +171,11 @@ const Products = () => {
               <li className="cursor-pointer">category</li>
             </Link>
             <li>{'>'} </li>
-            {/* {getDetail.data.category.length > 0 ? ( */}
-            <li className="cursor-pointer">
-              {/* {getDetail.data.category ? getDetail.data.category[0].category_name : null} */}
-            </li>
-            {/* ) : null} */}
+            {/* {getDetail.data.category.length > 0 ? (
+              <li className="cursor-pointer">
+                {getDetail.data.category ? getDetail.data.category[0].category_name : null}
+              </li>
+            ) : null} */}
           </ul>
         </div>
         {getDetail.data.length >= 0 ? (
@@ -227,9 +227,9 @@ const Products = () => {
                   <h3 className="text-2xl font-bold">
                     {getDetail.data.category ? getDetail.data.product.product_name : null}
                   </h3>
-                  {/* {getDetail.data.category ? (
+                  {getDetail.data.category.length > 0 ? (
                     <p className="text-gray text-sm font-semibold">{getDetail.data.brand[0].brand_name}</p>
-                  ) : null} */}
+                  ) : null}
 
                   <Start valueReview="(10)" />
                 </div>
@@ -319,12 +319,6 @@ const Products = () => {
   );
 };
 
-const token = false;
-
-if (token) {
-  Products.layouts = ' MainLayout';
-} else {
-  Products.layouts = 'ThridLayout';
-}
+Products.layouts = 'MainLayout';
 
 export default Products;
