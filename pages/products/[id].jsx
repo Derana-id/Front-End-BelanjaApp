@@ -31,12 +31,13 @@ const Products = () => {
   useEffect(() => {
     dispatch(getDetailProduct(id));
     dispatch(getPopularProducts());
-    dispatch(getMyCart());
+    // dispatch(getMyCart());
   }, []);
 
-  const myCart = useSelector(state => {
-    return state.myCart;
-  });
+  // const myCart = useSelector(state => {
+  //   return state.myCart;
+  // });
+  // console.log(myCart);
 
   const getPopular = useSelector(state => {
     return state.getPopular;
@@ -47,7 +48,13 @@ const Products = () => {
   });
 
   const onSize = e => {
-    setSize(getSize + e);
+    if (getSize <= 0 && e === -1) {
+      setSize(0);
+    } else if (getSize >= 10 && e === 1) {
+      setSize(10);
+    } else {
+      setSize(getSize + e);
+    }
   };
 
   const onBuy = async e => {
@@ -58,7 +65,6 @@ const Products = () => {
         color: getColor,
         id: ''
       };
-
       if (data.qty === '' || data.qty === 0) {
         Swal.fire({
           title: 'Failed!',
@@ -66,74 +72,21 @@ const Products = () => {
           icon: 'error'
         });
       } else {
-        const addCart = myCart.data.map(item => {
-          if (item.cart.product_id === e) {
-            const getData = {
-              cart_id: item.cart.id,
-              value: true,
-              id: e
-            };
-            alert('data sudah adas');
-            // console.log(getData);
-            // updateCart(getData)
-            //   .then(res => {
-            //     Swal.fire({
-            //       title: 'Success!',
-            //       text: res.message,
-            //       icon: 'success'
-            //     });
-            //     dispatch(getMyCart());
-            //   })
-            //   .catch(err => {
-            //     Swal.fire({
-            //       title: 'Failed!',
-            //       text: err.message,
-            //       icon: 'error'
-            //     });
-            //   });
-            return getData;
-          }
-
-          return false;
-        });
-        console.log(addCart);
-
-        // const cekValue = addProduct.map(e => {
-        //   if (e.value === true) {
-        //     const value = {
-        //       id: e.id,
-        //       isTrue: true
-        //     };
-        //     return value;
-        //   }
-        // });
-        // console.log(cekValue);
-
-        // if (cekValue.isTrue) {
-        //   const getData = {
-        //     product_id: e,
-        //     qty: getAmount,
-        //     color: getColor,
-        //     id: cekValue.id
-        //   };
-        // } else {
-        //   addCart(data)
-        //     .then(res => {
-        //       Swal.fire({
-        //         title: 'Success!',
-        //         text: res.message,
-        //         icon: 'success'
-        //       });
-        //       dispatch(getMyCart());
-        //     })
-        //     .catch(err => {
-        //       Swal.fire({
-        //         title: 'Failed!',
-        //         text: err.message,
-        //         icon: 'error'
-        //       });
-        //     });
-        // }
+        addCart(data)
+          .then(() => {
+            Swal.fire({
+              title: 'Success!',
+              text: 'Successfully added product to cart!',
+              icon: 'success'
+            });
+          })
+          .catch(err => {
+            Swal.fire({
+              title: 'Failed!',
+              text: err.message,
+              icon: 'error'
+            });
+          });
       }
     } catch (error) {
       Swal.fire({
@@ -145,7 +98,13 @@ const Products = () => {
   };
 
   const onAmount = e => {
-    setAmount(getAmount + e);
+    if (getAmount <= 0 && e === -1) {
+      setAmount(0);
+    } else if (getAmount >= getDetail.data.product.stock && e === 1) {
+      setAmount(getDetail.data.product.stock);
+    } else {
+      setAmount(getAmount + e);
+    }
   };
 
   const onDetail = e => {
@@ -250,7 +209,7 @@ const Products = () => {
                   </div>
                 </div>
                 <div className="flex justify-between w-full md:w-72 mt-5">
-                  <div className="ralative">
+                  <div className="relative">
                     <p className="font-bold text-base">Size</p>
                     <div className=" flex w-28 items-center justify-between">
                       <SpinnerAction action="+" onClick={() => onSize(+1)} />
@@ -258,9 +217,9 @@ const Products = () => {
                       <SpinnerAction action="-" onClick={() => onSize(-1)} />
                     </div>
                   </div>
-                  <div className="ralative">
+                  <div className="relative">
                     <p className="font-bold text-base">Jumlah</p>
-                    <div className="flex w-28 items-center justify-between">
+                    <div className="flex w-8 items-center justify-between">
                       <SpinnerAction action="+" onClick={() => onAmount(+1)} />
                       <FormValueNumber defaultValue={getDetail.data.product.stock} value={getAmount} />
                       <SpinnerAction action="-" onClick={() => onAmount(-1)} />

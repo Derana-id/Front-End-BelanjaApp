@@ -76,7 +76,7 @@ export const addCart = data => {
 export const updateCart = data => {
   return new Promise((resolve, reject) => {
     axios
-      .put('cart', data)
+      .put(`cart/${data.id}`, data)
       .then(res => {
         resolve(res.data);
       })
