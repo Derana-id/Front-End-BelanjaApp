@@ -106,7 +106,7 @@ const MyBag = () => {
     };
     if (amount === 1 && e === -1) {
       alert('sure?');
-    } else if (e >= stock && e === 1) {
+    } else if (e === 1 && amount >= 10) {
       alert('fre');
     } else {
       updateCart(data)
