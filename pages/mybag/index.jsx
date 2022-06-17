@@ -102,21 +102,22 @@ const MyBag = () => {
     const data = {
       id,
       product_id: productId,
-      qty: e
+      qty: amount + e
     };
-    if (amount === 1 && e === -1) {
-      alert('sure?');
-    } else if (e === 1 && amount >= 10) {
-      alert('fre');
-    } else {
+    if (amount >= 1 && e === -1 && amount <= 1 && e === -1) {
+      Swal.fire({
+        title: 'Failed!',
+        text: 'null',
+        icon: 'error'
+      });
+    } else if (amount <= stock) {
       updateCart(data)
+        // eslint-disable-next-line no-unused-vars
         .then(res => {
-          console.log(res);
           dispatch(getMyCart(router));
         })
-        .catch(err => {
-          console.log(err);
-        });
+        // eslint-disable-next-line no-unused-vars
+        .catch(err => {});
     }
   };
 
@@ -163,22 +164,10 @@ const MyBag = () => {
                     price={`RP. ${item.product[0].price * item.cart.qty}`}
                     value={item.cart.qty}
                     onPlus={() =>
-                      valueAction(
-                        item.cart.qty + 1,
-                        item.cart.id,
-                        item.cart.product_id,
-                        item.cart.qty,
-                        item.product.stock
-                      )
+                      valueAction(1, item.cart.id, item.cart.product_id, item.cart.qty, item.product[0].stock)
                     }
                     onMin={() =>
-                      valueAction(
-                        item.cart.qty - 1,
-                        item.cart.id,
-                        item.cart.product_id,
-                        item.cart.qty,
-                        item.product.stock
-                      )
+                      valueAction(-1, item.cart.id, item.cart.product_id, item.cart.qty, item.product[0].stock)
                     }
                   />
                 </div>
