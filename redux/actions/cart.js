@@ -72,3 +72,16 @@ export const addCart = data => {
       });
   });
 };
+
+export const updateCart = data => {
+  return new Promise((resolve, reject) => {
+    axios
+      .put(`cart/${data.id}`, data)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};

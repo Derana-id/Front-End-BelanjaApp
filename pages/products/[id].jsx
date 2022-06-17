@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable indent */
 import React, { useEffect, useState } from 'react';
@@ -19,7 +20,7 @@ import ButtonWarning from '../../components/Button/button-warning';
 import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
 import { getDetailProduct, getPopularProducts } from '../../redux/actions/products';
-import { addCart } from '../../redux/actions/cart';
+import { addCart, getMyCart } from '../../redux/actions/cart';
 import { chat } from '../../redux/actions/chat';
 
 const Products = () => {
@@ -33,7 +34,13 @@ const Products = () => {
   useEffect(() => {
     dispatch(getDetailProduct(id));
     dispatch(getPopularProducts());
+    dispatch(getMyCart());
   }, []);
+
+  // eslint-disable-next-line no-unused-vars
+  const myCart = useSelector(state => {
+    return state.myCart;
+  });
 
   const getPopular = useSelector(state => {
     return state.getPopular;
@@ -44,35 +51,64 @@ const Products = () => {
   });
 
   const onSize = e => {
-    setSize(getSize + e);
+    if (getSize <= 0 && e === -1) {
+      setSize(0);
+    } else if (getSize >= 10 && e === 1) {
+      setSize(10);
+    } else {
+      setSize(getSize + e);
+    }
   };
 
   const onBuy = async e => {
-    const data = {
-      product_id: e,
-      qty: getAmount,
-      color: getColor
-    };
-
-    addCart(data)
-      .then(res => {
-        Swal.fire({
-          title: 'Success!',
-          text: res.message,
-          icon: 'success'
-        });
-      })
-      .catch(err => {
+    try {
+      const data = {
+        product_id: e,
+        qty: getAmount,
+        color: getColor,
+        id: ''
+      };
+      if (data.qty === '' || data.qty === 0) {
         Swal.fire({
           title: 'Failed!',
-          text: err.message,
+          text: 'Number of items must be filled!',
           icon: 'error'
         });
+      } else {
+        addCart(data)
+          .then(res => {
+            Swal.fire({
+              title: 'Success!',
+              text: res.message,
+              icon: 'success'
+            });
+            dispatch(getMyCart());
+          })
+          .catch(err => {
+            Swal.fire({
+              title: 'Failed!',
+              text: err.message,
+              icon: 'error'
+            });
+          });
+      }
+    } catch (error) {
+      Swal.fire({
+        title: 'Failed!',
+        text: error.message,
+        icon: 'error'
       });
+    }
   };
 
   const onAmount = e => {
-    setAmount(getAmount + e);
+    if (getAmount <= 0 && e === -1) {
+      setAmount(0);
+    } else if (getAmount >= getDetail.data.product.stock && e === 1) {
+      setAmount(getDetail.data.product.stock);
+    } else {
+      setAmount(getAmount + e);
+    }
   };
 
   const onDetail = e => {
@@ -118,11 +154,11 @@ const Products = () => {
               <li className="cursor-pointer">category</li>
             </Link>
             <li>{'>'} </li>
-            {/* {getDetail.data.category.length > 0 ? ( */}
-            <li className="cursor-pointer">
-              {getDetail.data.category ? getDetail.data.category[0].category_name : 'null'}
-            </li>
-            {/* ) : null} */}
+            {getDetail.data.category ? (
+              <li className="cursor-pointer">
+                {getDetail.data.category ? getDetail.data.category[0].category_name : null}
+              </li>
+            ) : null}
           </ul>
         </div>
         {getDetail.data.length >= 0 ? (
@@ -141,29 +177,30 @@ const Products = () => {
                   <Img
                     src={
                       getDetail.data.image[0]
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                        ? `https://drive.google.com/uc?export=view&id=
+                        ${getDetail.data.image[0].photo}`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                   <Img
                     src={
                       getDetail.data.image[1]
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[1].photo}`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                   <Img
                     src={
                       getDetail.data.image[2]
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[2].photo}`
+                        : 'https://drive.google.com/uc?export=view&id=default-pants.png'
                     }
                   />
                   <Img
                     src={
-                      getDetail.data.image[2]
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                      getDetail.data.image[3]
+                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[3].photo}`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                 </div>
@@ -173,7 +210,7 @@ const Products = () => {
                   <h3 className="text-2xl font-bold">
                     {getDetail.data.category ? getDetail.data.product.product_name : null}
                   </h3>
-                  {getDetail.data.category ? (
+                  {getDetail.data.category.length > 0 ? (
                     <p className="text-gray text-sm font-semibold">{getDetail.data.brand[0].brand_name}</p>
                   ) : null}
 
@@ -196,7 +233,7 @@ const Products = () => {
                   </div>
                 </div>
                 <div className="flex justify-between w-full md:w-72 mt-5">
-                  <div className="ralative">
+                  <div className="relative">
                     <p className="font-bold text-base">Size</p>
                     <div className=" flex w-28 items-center justify-between">
                       <SpinnerAction action="+" onClick={() => onSize(+1)} />
@@ -204,9 +241,9 @@ const Products = () => {
                       <SpinnerAction action="-" onClick={() => onSize(-1)} />
                     </div>
                   </div>
-                  <div className="ralative">
+                  <div className="relative">
                     <p className="font-bold text-base">Jumlah</p>
-                    <div className="flex w-28 items-center justify-between">
+                    <div className="flex w-8 items-center justify-between">
                       <SpinnerAction action="+" onClick={() => onAmount(+1)} />
                       <FormValueNumber defaultValue={getDetail.data.product.stock} value={getAmount} />
                       <SpinnerAction action="-" onClick={() => onAmount(-1)} />
@@ -219,7 +256,7 @@ const Products = () => {
                     <ButtonSuccess onClick={() => onBuy(getDetail.data.product.id)} action="Add bag" />
                   </div>
                   <div className="mt-5">
-                    <ButtonWarning action="Buy Now" />
+                    <ButtonWarning action="Buy Now" onClick={() => alert(id)} />
                   </div>
                 </div>
               </div>
@@ -252,7 +289,8 @@ const Products = () => {
                     price={`$ ${item.product.price}`}
                     user={`${item.store[0].store_name}`}
                     onClick={() => onDetail(item.product.id)}
-                    img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                    // img={`https://drive.google.com/uc?export=view&id=${item.image[0].photo}`}
+                    img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
                   />
                 </div>
               ))
@@ -264,5 +302,6 @@ const Products = () => {
   );
 };
 
-Products.layouts = 'ThridLayout';
+Products.layouts = 'MainLayout';
+
 export default Products;
