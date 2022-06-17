@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import ContentLoader from 'react-content-loader';
+import jwtDecode from 'jwt-decode';
+import Cookies from 'js-cookie';
 import Img from '../../components/img/Img';
 import Start from '../../components/star/start';
 import Color from '../../components/molecules/color';
@@ -18,6 +20,7 @@ import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
 import { getDetailProduct, getPopularProducts } from '../../redux/actions/products';
 import { addCart } from '../../redux/actions/cart';
+import { chat } from '../../redux/actions/chat';
 
 const Products = () => {
   const router = useRouter();
@@ -75,6 +78,26 @@ const Products = () => {
   const onDetail = e => {
     dispatch(getDetailProduct(e));
     router.push(`/products/${e}`);
+  };
+
+  const initialChat = e => {
+    const decoded = jwtDecode(Cookies.get('token'));
+    e.preventDefault();
+
+    chat({
+      sender: getDetail.data.store_id,
+      receiver: decoded.id
+    })
+      .then(() => {
+        router.push('/chat');
+      })
+      .catch(error => {
+        Swal.fire({
+          title: 'Error!',
+          text: error.response.data.message,
+          icon: 'error'
+        });
+      });
   };
 
   return (
@@ -192,7 +215,7 @@ const Products = () => {
                 </div>
                 <div className="mt-8 md:mt-5 md:w-80">
                   <div className="flex justify-between mt-5">
-                    <ButtonSuccess onClick={() => alert('hai')} action="Chat" />
+                    <ButtonSuccess onClick={initialChat} action="Chat" />
                     <ButtonSuccess onClick={() => onBuy(getDetail.data.product.id)} action="Add bag" />
                   </div>
                   <div className="mt-5">

@@ -32,8 +32,6 @@ export default function index() {
     });
   };
 
-  console.log(formShow);
-
   const handleSubmit = e => {
     e.preventDefault();
 
