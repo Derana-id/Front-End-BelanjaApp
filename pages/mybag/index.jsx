@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
@@ -17,7 +19,6 @@ const MyBag = () => {
   const dispatch = useDispatch();
   const myCart = useSelector(state => state.myCart);
   const [total, setTotal] = useState(0);
-  const [getAmount, setAmount] = useState(0);
 
   // console.log(myCart);
 
@@ -97,23 +98,13 @@ const MyBag = () => {
     });
   };
 
-  const onAmount = e => {
-    if (getAmount <= 0 && e === -1) {
-      setAmount(0);
-    } else if (getAmount >= 10 && e === 1) {
-      setAmount(10);
-    } else {
-      setAmount(getAmount + e);
-    }
-  };
-
   const valueAction = (e, id, productId, amount, stock) => {
     const data = {
       id,
       product_id: productId,
       qty: e
     };
-    if (amount <= 0 && e === -1) {
+    if (amount === 1 && e === -1) {
       alert('sure?');
     } else if (e >= stock && e === 1) {
       alert('fre');

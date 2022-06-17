@@ -76,7 +76,7 @@ const Products = () => {
           .then(res => {
             Swal.fire({
               title: 'Success!',
-              text: 'Successfully added product to cart!',
+              text: res.message,
               icon: 'success'
             });
             dispatch(getMyCart());
@@ -131,11 +131,11 @@ const Products = () => {
               <li className="cursor-pointer">category</li>
             </Link>
             <li>{'>'} </li>
-            {/* {getDetail.data.category.length > 0 ? (
+            {getDetail.data.category.length > 0 ? (
               <li className="cursor-pointer">
                 {getDetail.data.category ? getDetail.data.category[0].category_name : null}
               </li>
-            ) : null} */}
+            ) : null}
           </ul>
         </div>
         {getDetail.data.length >= 0 ? (
@@ -162,21 +162,21 @@ const Products = () => {
                   <Img
                     src={
                       getDetail.data.image[1]
-                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[0].photo}`
+                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[1].photo}`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                   <Img
                     src={
                       getDetail.data.image[2]
-                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[0].photo}`
-                        : 'https://drive.google.com/uc?export=view&id=default.png'
+                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[2].photo}`
+                        : 'https://drive.google.com/uc?export=view&id=default-pants.png'
                     }
                   />
                   <Img
                     src={
-                      getDetail.data.image[2]
-                        ? 'https://drive.google.com/uc?export=view&id={getDetail.data.image[0].photo}'
+                      getDetail.data.image[3]
+                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[3].photo}`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
@@ -233,7 +233,7 @@ const Products = () => {
                     <ButtonSuccess onClick={() => onBuy(getDetail.data.product.id)} action="Add bag" />
                   </div>
                   <div className="mt-5">
-                    <ButtonWarning action="Buy Now" />
+                    <ButtonWarning action="Buy Now" onClick={() => alert(id)} />
                   </div>
                 </div>
               </div>

@@ -21,7 +21,6 @@ export default function middleware(req) {
     pathname !== '/auth/forgot' &&
     pathname !== '/auth/' &&
     pathname !== '/' &&
-    pathname !== '/products/[id]' &&
     pathname !== '/category'
   ) {
     return NextResponse.redirect(`${origin}/auth/login`);
