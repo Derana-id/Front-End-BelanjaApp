@@ -121,7 +121,7 @@ const Products = () => {
     e.preventDefault();
 
     chat({
-      sender: getDetail.data.store_id,
+      sender: getDetail.data.product.store_id,
       receiver: decoded.id
     })
       .then(() => {
