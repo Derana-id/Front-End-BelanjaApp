@@ -5,14 +5,10 @@ import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import { wrapper, store } from '../redux/store';
 import MainLayouts from '../layouts/main-layouts';
-import SecondLayouts from '../layouts/second-layouts';
-import Thridlayouts from '../layouts/thrid-layouts';
 import '../styles/globals.css';
 
 const layouts = {
-  MainLayout: MainLayouts,
-  SecondLayout: SecondLayouts,
-  ThridLayout: Thridlayouts
+  MainLayout: MainLayouts
 };
 
 function NoLayout({ children }) {

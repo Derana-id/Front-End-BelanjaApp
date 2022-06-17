@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
@@ -8,7 +10,7 @@ import Swal from 'sweetalert2';
 import CardCart from '../../components/card/card-cart';
 import ButtonWarning from '../../components/Button/button-warning';
 import Checklist from '../../components/Input/checklist';
-import { getMyCart, deleteCart, deleteCartUser } from '../../redux/actions/cart';
+import { getMyCart, deleteCart, deleteCartUser, updateCart } from '../../redux/actions/cart';
 import { toastify } from '../../utils/toastify';
 import { sweetAlert } from '../../utils/sweetalert';
 
@@ -18,18 +20,25 @@ const MyBag = () => {
   const myCart = useSelector(state => state.myCart);
   const [total, setTotal] = useState(0);
 
+  // console.log(myCart);
+
   useEffect(() => {
     dispatch(getMyCart(router));
   }, []);
 
   useEffect(() => {
-    if (myCart.data) {
+    if (myCart) {
       const getTotal = myCart.data.map(item => {
-        const price = Number(item.product[0].price);
+        const price = Number(item.product[0].price * item.cart.qty);
         return price;
       });
-      const result = getTotal[0] * getTotal.length;
-      setTotal(Intl.NumberFormat('en-US').format(result));
+
+      let sum = 0;
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < getTotal.length; i++) {
+        sum += getTotal[i];
+      }
+      setTotal(Intl.NumberFormat('en-US').format(sum));
     }
   }, [myCart]);
 
@@ -89,6 +98,28 @@ const MyBag = () => {
     });
   };
 
+  const valueAction = (e, id, productId, amount, stock) => {
+    const data = {
+      id,
+      product_id: productId,
+      qty: e
+    };
+    if (amount === 1 && e === -1) {
+      alert('sure?');
+    } else if (e >= stock && e === 1) {
+      alert('fre');
+    } else {
+      updateCart(data)
+        .then(res => {
+          console.log(res);
+          dispatch(getMyCart(router));
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  };
+
   return (
     <div>
       <Head>
@@ -120,16 +151,35 @@ const MyBag = () => {
               myCart.data.map((item, i) => (
                 <div key={i}>
                   <CardCart
-                    image={`${
-                      item.image[0].photo
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
-                    }`}
+                    // image={`${
+                    //   item.image[0].photo
+                    //     ? `https://drive.google.com/uc?export=view&id=${item.image[0].photo}`
+                    //     : `https://drive.google.com/uc?export=view&id=
+                    //     default.png`
+                    // }`}
                     onChange={e => handleDelete(e, item.cart.id)}
                     productName={item.product[0].product_name}
                     store={item.store[0].store_name}
-                    price={`$ ${item.product[0].price}`}
-                    defaultValue="28"
+                    price={`RP. ${item.product[0].price * item.cart.qty}`}
+                    value={item.cart.qty}
+                    onPlus={() =>
+                      valueAction(
+                        item.cart.qty + 1,
+                        item.cart.id,
+                        item.cart.product_id,
+                        item.cart.qty,
+                        item.product.stock
+                      )
+                    }
+                    onMin={() =>
+                      valueAction(
+                        item.cart.qty - 1,
+                        item.cart.id,
+                        item.cart.product_id,
+                        item.cart.qty,
+                        item.product.stock
+                      )
+                    }
                   />
                 </div>
               ))
