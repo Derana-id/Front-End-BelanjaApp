@@ -131,7 +131,7 @@ const Products = () => {
               <li className="cursor-pointer">category</li>
             </Link>
             <li>{'>'} </li>
-            {getDetail.data.category.length > 0 ? (
+            {getDetail.data.category ? (
               <li className="cursor-pointer">
                 {getDetail.data.category ? getDetail.data.category[0].category_name : null}
               </li>
