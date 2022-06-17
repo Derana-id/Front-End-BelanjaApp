@@ -4,6 +4,7 @@ import detailStoreReducer from './detailStore';
 import getAllBrandReducer from './brand';
 import getAllCategoryReducer from './categoty';
 import detailMyProductReducer from './detailMyProduct';
+import getDetailMyAddressReducer from './getDetailMyAddress';
 import getMyOrderReducer from './myOrderBuyer';
 import myAddressReducer from './myAddress';
 import myCart from './myCart';
@@ -23,6 +24,7 @@ export default combineReducers({
   myProduct: detailMyProductReducer,
   myOrder: getMyOrderReducer,
   myAddress: myAddressReducer,
+  myDetailAddress: getDetailMyAddressReducer,
   myCart,
   myTransaction,
   getAllProducts,
