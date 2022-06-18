@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-console */
 /* eslint-disable no-constant-condition */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -80,7 +82,7 @@ export default function MainNavbar(req) {
     router.push(`/?search=${getSearch}`);
   };
 
-  console.log(getProfile.data[0].profile.photo);
+  console.log(getProfile);
 
   return (
     <div>
@@ -132,19 +134,35 @@ export default function MainNavbar(req) {
                     <div className="flex items-center justify-center">
                       <Link href="/profile/customer">
                         <div className="relative h-8 w-8">
-                          {getProfile.isLoading ? null : (
-                            <Image
-                              src={
+                          {getProfile.isLoading ? (<div>Loading</div>)
+                            : getProfile.data[0].user.level === 1
+                              ? (
+                                <Image
+                                  src={
+                                getProfile.data.length >= 0
+                                  ? `https://drive.google.com/uc?export=view&id=${getProfile.data[0].store.photo}`
+                                  : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
+                              }
+                                  className="rounded-full cursor-pointer"
+                                  objectFit="cover"
+                                  height={50}
+                                  width={50}
+                                />
+                              )
+                              : getProfile.data[0].user.level === 2
+                                ? (
+                                  <Image
+                                    src={
                                 getProfile.data.length >= 0
                                   ? `https://drive.google.com/uc?export=view&id=${getProfile.data[0].profile.photo}`
                                   : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
                               }
-                              className="rounded-full cursor-pointer"
-                              objectFit="cover"
-                              height={50}
-                              width={50}
-                            />
-                          )}
+                                    className="rounded-full cursor-pointer"
+                                    objectFit="cover"
+                                    height={50}
+                                    width={50}
+                                  />
+                                ) : null}
                         </div>
                       </Link>
                     </div>
