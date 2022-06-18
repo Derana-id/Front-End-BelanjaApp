@@ -90,48 +90,48 @@ export default function MainNavbar(req) {
         <div>
           {token ? (
             <div className="w-full h-16 md:h-20 md:px-28 flex flex-row items-center fixed shadow-lg bg-white p-5 py-3 z-[1200]">
-              <div className="flex w-full items-center">
-                <div className="w-1/5 h-12 flex items-center">
+              <div className="flex items-center w-full">
+                <div className="flex items-center w-1/5 h-12">
                   <div className="relative flex items-center">
                     <Link href="/">
                       <div>
-                        <Image src={logo} className="w-14 h-4 cursor-pointer" width={110} height={40} />
+                        <Image src={logo} className="h-4 cursor-pointer w-14" width={110} height={40} />
                       </div>
                     </Link>
                   </div>
                 </div>
-                <div className="w-4/5 md:3/5 h-12 flex items-center">
+                <div className="flex items-center w-4/5 h-12 md:3/5">
                   <SearchNavbar onChange={e => setSearch(e.target.value)} onSearch={() => onSearch()} />
                   <div
-                    className="border-solid border-2 border-gray rounded-xl m-2 md:m-3 flex items-center p-1 w-8 md:w-11 md:p-2 justify-center cursor-pointer"
+                    className="flex items-center justify-center w-8 p-1 m-2 border-2 border-solid cursor-pointer border-gray rounded-xl md:m-3 md:w-11 md:p-2"
                     onClick={() => setIsFilter(true)}
                   >
                     <Image src={vector} />
                   </div>
                 </div>
-                <div className="w-1/5 hidden md:ml-10 md:flex h-12 items-center">
-                  <div className="flex justify-end w-full h-full items-center">
+                <div className="items-center hidden w-1/5 h-12 md:ml-10 md:flex">
+                  <div className="flex items-center justify-end w-full h-full">
                     <Link href="/mybag">
                       <div>
-                        <AiOutlineShoppingCart className="text-2xl mr-6 text-gray cursor-pointer" />
+                        <AiOutlineShoppingCart className="mr-6 text-2xl cursor-pointer text-gray" />
                       </div>
                     </Link>
                     <Link href="">
                       <div>
                         <MdOutlineNotificationsNone
-                          className="text-2xl m-4 text-gray cursor-pointer"
+                          className="m-4 text-2xl cursor-pointer text-gray"
                           onClick={() => getActive()}
                         />
                       </div>
                     </Link>
                     <Link href="/chat">
                       <div>
-                        <HiOutlineMail className="text-2xl m-4 mr-6 text-gray cursor-pointer" />
+                        <HiOutlineMail className="m-4 mr-6 text-2xl cursor-pointer text-gray" />
                       </div>
                     </Link>
                     <div className="flex items-center justify-center">
                       <Link href="/profile/customer">
-                        <div className="relative h-8 w-8">
+                        <div className="relative w-8 h-8">
                           {getProfile.isLoading ? null : (
                             <Image
                               src={
@@ -154,7 +154,7 @@ export default function MainNavbar(req) {
                   <Link href="">
                     <div>
                       <MdOutlineNotificationsNone
-                        className="text-2xl m-4 text-gray cursor-pointer md:hidden"
+                        className="m-4 text-2xl cursor-pointer text-gray md:hidden"
                         onClick={() => getActive()}
                       />
                     </div>
@@ -173,29 +173,29 @@ export default function MainNavbar(req) {
                 </div>
               </div>
               {isActive ? (
-                <div className="absolute h-80 w-56 bg-white z-40 top-16 md:top-14 p-5 rounded-b-xl rounded-tl-xl shadow-lg right-12 md:right-60 flex justify-center items-center">
+                <div className="absolute z-40 flex items-center justify-center w-56 p-5 bg-white shadow-lg h-80 top-16 md:top-14 rounded-b-xl rounded-tl-xl right-12 md:right-60">
                   <Image src={notification} width={170} height={150} />
                 </div>
               ) : null}
 
               {isProfile ? (
-                <div className="absolute h-28 w-28 bg-white z-40 top-14 p-5 rounded-b-md rounded-tl-md shadow-lg right-12 md:right-60 flex justify-center items-center">
+                <div className="absolute z-40 flex items-center justify-center p-5 bg-white shadow-lg h-28 w-28 top-14 rounded-b-md rounded-tl-md right-12 md:right-60">
                   <div>
                     <Link href="/profile/customer">
                       <div className="flex p-1" onClick={() => setIsProfile(false)}>
-                        <BiUserCircle className="text-2xl mr-2 text-gray cursor-pointer" />
+                        <BiUserCircle className="mr-2 text-2xl cursor-pointer text-gray" />
                         <p className="cursor-pointer">Profile</p>
                       </div>
                     </Link>
                     <Link href="/chat">
                       <div className="flex p-1" onClick={() => setIsProfile(false)}>
-                        <HiOutlineMail className="text-2xl mr-2  font-bold text-gray cursor-pointer" />
+                        <HiOutlineMail className="mr-2 text-2xl font-bold cursor-pointer text-gray" />
                         <p className="cursor-pointer">Chat</p>
                       </div>
                     </Link>
                     <Link href="/mybag">
                       <div className="flex p-1" onClick={() => setIsProfile(false)}>
-                        <AiOutlineShoppingCart className="text-2xl mr-2 text-gray cursor-pointer" />
+                        <AiOutlineShoppingCart className="mr-2 text-2xl cursor-pointer text-gray" />
                         <p className="cursor-pointer">Cart</p>
                       </div>
                     </Link>
@@ -203,7 +203,7 @@ export default function MainNavbar(req) {
                 </div>
               ) : null}
               {isfilter ? (
-                <div className="w-full absolute top-0 bottom-0 right-0 left-0">
+                <div className="absolute top-0 bottom-0 left-0 right-0 w-full">
                   <div>
                     <ModalsSearch
                       onClick={() => setIsFilter(false)}
@@ -216,40 +216,40 @@ export default function MainNavbar(req) {
             </div>
           ) : (
             <div className="w-full h-16 md:h-20 md:px-28 py-3 p-3 flex flex-row items-center fixed z-[1200] shadow-lg bg-white">
-              <div className="flex w-full items-center">
-                <div className="w-1/5 h-12 flex items-center">
+              <div className="flex items-center w-full">
+                <div className="flex items-center w-1/5 h-12">
                   <div className="relative flex items-center">
                     <Link href="/">
                       <div>
-                        <Image src={logo} className="w-14 h-4 cursor-pointer" width={110} height={40} />
+                        <Image src={logo} className="h-4 cursor-pointer w-14" width={110} height={40} />
                       </div>
                     </Link>
                   </div>
                 </div>
-                <div className="w-2/5 h-12 flex items-center">
+                <div className="flex items-center w-2/5 h-12">
                   <SearchNavbar onChange={e => setSearch(e.target.value)} onSearch={() => onSearch()} />
                   <div
-                    className="border-solid border-2 border-gray rounded-xl m-3 flex items-center p-2 justify-center cursor-pointer"
+                    className="flex items-center justify-center p-2 m-3 border-2 border-solid cursor-pointer border-gray rounded-xl"
                     onClick={() => setIsFilter(true)}
                   >
                     <Image src={vector} width={20} height={20} />
                   </div>
                 </div>
-                <div className="w-2/5 h-12 flex items-center">
-                  <div className="flex justify-end w-full h-full items-center">
+                <div className="flex items-center w-2/5 h-12">
+                  <div className="flex items-center justify-end w-full h-full">
                     <Link href="/mybag">
                       <div className="hidden md:flex">
-                        <AiOutlineShoppingCart className="text-2xl mr-6 text-gray cursor-pointer" />
+                        <AiOutlineShoppingCart className="mr-6 text-2xl cursor-pointer text-gray" />
                       </div>
                     </Link>
-                    <div className="flex w-32 md:w-60 justify-between">
+                    <div className="flex justify-between w-32 md:w-60">
                       <ButtonLogin onClick={() => router.push('/auth/login')} />
                       <ButtonSignup onClick={() => router.push('/auth/register')} />
                     </div>
                   </div>
                 </div>
                 {isfilter ? (
-                  <div className="w-full absolute top-0 bottom-0 right-0 left-0">
+                  <div className="absolute top-0 bottom-0 left-0 right-0 w-full">
                     <div>
                       <ModalsSearch
                         onClick={() => setIsFilter(false)}

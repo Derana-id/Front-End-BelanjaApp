@@ -11,7 +11,6 @@ import AddAddress from '../../components/modals/add-address';
 import CardCheckout from '../../components/card/card-checkout';
 import CardTotalPrice from '../../components/card/card-total-price';
 import ModalsPayment from '../../components/modals/modals-payment';
-import { getAddress } from '../../redux/actions/userProfile';
 // import { getMyTransaction } from '../../redux/actions/transaction';
 
 const Checkout = () => {
@@ -61,12 +60,6 @@ const Checkout = () => {
     dispatch(getAddress());
     dispatch(getMyCart(router));
   }, []);
-
-  const dispatch = useDispatch();
-
-  const myAddress = useSelector((state) => {
-    return state.myAddress;
-  });
 
   useEffect(() => {
     dispatch(getAddress());

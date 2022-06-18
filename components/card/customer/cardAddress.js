@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import Image from 'next/image';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
@@ -14,7 +14,6 @@ export default function CardAddress() {
   const [showModal, setShowModal] = useState();
   const [showEditModal, setShowEditModal] = useState();
   const [id, setID] = useState('');
-  const router = useRouter();
   
   const dispatch = useDispatch();
   const myAddress = useSelector((state) => {
@@ -74,7 +73,6 @@ export default function CardAddress() {
           text: res.message,
           icon: 'success'
         });
-        router.push('/checkout');
       })
       .catch((err) => {
         if (err.response.data.code === 422) {
@@ -88,6 +86,8 @@ export default function CardAddress() {
           });
         }
       });
+
+      Router.push('/checkout');
   };
 
   const onEditAddress = (e, id) => {
@@ -122,6 +122,8 @@ export default function CardAddress() {
           });
         }
       });
+      
+      Router.push('/checkout');
   };
   console.log(getDetailAddress(id));
 
@@ -148,6 +150,8 @@ export default function CardAddress() {
           });
         }
       });
+
+      Router.push('/checkout');
   };
 
   return (
