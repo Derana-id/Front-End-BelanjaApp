@@ -37,7 +37,7 @@ export const getMyCart = router => async dispatch => {
 export const deleteCart = id => {
   return new Promise((resolve, reject) => {
     axios
-      .put(`cart/delete/${id}`)
+      .delete(`cart/delete/${id}`)
       .then(res => {
         resolve(res.data);
       })
@@ -47,23 +47,36 @@ export const deleteCart = id => {
   });
 };
 
-export const deleteCartUser = () => {
-  return new Promise((resolve, reject) => {
-    axios
-      .put('cart/delete/user')
-      .then(res => {
-        resolve(res.data);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
-};
+// export const deleteCartUser = () => {
+//   return new Promise((resolve, reject) => {
+//     axios
+//       .put('cart/delete/user')
+//       .then(res => {
+//         resolve(res.data);
+//       })
+//       .catch(err => {
+//         reject(err);
+//       });
+//   });
+// };
 
 export const addCart = data => {
   return new Promise((resolve, reject) => {
     axios
       .post('cart', data)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+export const updateCart = data => {
+  return new Promise((resolve, reject) => {
+    axios
+      .put(`cart/${data.id}`, data)
       .then(res => {
         resolve(res.data);
       })

@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
@@ -5,10 +7,12 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import ContentLoader from 'react-content-loader';
 import Swal from 'sweetalert2';
+import Cookies from 'js-cookie';
+import JwtDecode from 'jwt-decode';
 import CardCart from '../../components/card/card-cart';
 import ButtonWarning from '../../components/Button/button-warning';
 import Checklist from '../../components/Input/checklist';
-import { getMyCart, deleteCart, deleteCartUser } from '../../redux/actions/cart';
+import { getMyCart, deleteCart, updateCart } from '../../redux/actions/cart';
 import { toastify } from '../../utils/toastify';
 import { sweetAlert } from '../../utils/sweetalert';
 
@@ -18,18 +22,31 @@ const MyBag = () => {
   const myCart = useSelector(state => state.myCart);
   const [total, setTotal] = useState(0);
 
+  const token = Cookies.get('token');
+  let decoded = '';
+  if (token) {
+    decoded = JwtDecode(token);
+  }
+
+  // console.log(myCart);
+
   useEffect(() => {
     dispatch(getMyCart(router));
   }, []);
 
   useEffect(() => {
-    if (myCart.data) {
+    if (myCart) {
       const getTotal = myCart.data.map(item => {
-        const price = Number(item.product[0].price);
+        const price = Number(item.product[0].price * item.cart.qty);
         return price;
       });
-      const result = getTotal[0] * getTotal.length;
-      setTotal(Intl.NumberFormat('en-US').format(result));
+
+      let sum = 0;
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < getTotal.length; i++) {
+        sum += getTotal[i];
+      }
+      setTotal(Intl.NumberFormat('en-US').format(sum));
     }
   }, [myCart]);
 
@@ -74,7 +91,7 @@ const MyBag = () => {
     }).then(async confirm => {
       if (confirm.isConfirmed) {
         try {
-          const res = await deleteCartUser();
+          const res = await deleteCart(decoded.id);
           sweetAlert(res.message);
           window.location.reload();
         } catch (err) {
@@ -87,6 +104,29 @@ const MyBag = () => {
         }
       }
     });
+  };
+
+  const valueAction = (e, id, productId, amount, stock) => {
+    const data = {
+      id,
+      product_id: productId,
+      qty: amount + e
+    };
+    if (amount >= 1 && e === -1 && amount <= 1 && e === -1) {
+      Swal.fire({
+        title: 'Failed!',
+        text: 'null',
+        icon: 'error'
+      });
+    } else if (amount <= stock) {
+      updateCart(data)
+        // eslint-disable-next-line no-unused-vars
+        .then(res => {
+          dispatch(getMyCart(router));
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch(err => {});
+    }
   };
 
   return (
@@ -104,10 +144,8 @@ const MyBag = () => {
               <div className="flex items-cente justify-between">
                 <div className="flex">
                   <Checklist onChange={e => handleDeleteUser(e)} />
-                  <p className="text-black font-medium">Select all items</p>
-                  <p className="text-gray ml-2">(2 items selected)</p>
+                  <p className="font-medium text-primary">Delete all items</p>
                 </div>
-                <button className="flex text-primary font-semibold">Delete</button>
               </div>
             </div>
             {myCart.isLoading ? (
@@ -120,16 +158,23 @@ const MyBag = () => {
               myCart.data.map((item, i) => (
                 <div key={i}>
                   <CardCart
-                    image={`${
-                      item.image[0].photo
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
-                    }`}
+                    // image={`${
+                    //   item.image[0].photo
+                    //     ? `https://drive.google.com/uc?export=view&id=${item.image[0].photo}`
+                    //     : `https://drive.google.com/uc?export=view&id=
+                    //     default.png`
+                    // }`}
                     onChange={e => handleDelete(e, item.cart.id)}
                     productName={item.product[0].product_name}
                     store={item.store[0].store_name}
-                    price={`$ ${item.product[0].price}`}
-                    defaultValue="28"
+                    price={`$ ${item.product[0].price * item.cart.qty}`}
+                    value={item.cart.qty}
+                    onPlus={() =>
+                      valueAction(1, item.cart.id, item.cart.product_id, item.cart.qty, item.product[0].stock)
+                    }
+                    onMin={() =>
+                      valueAction(-1, item.cart.id, item.cart.product_id, item.cart.qty, item.product[0].stock)
+                    }
                   />
                 </div>
               ))

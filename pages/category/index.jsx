@@ -71,7 +71,8 @@ const Category = () => {
                           price={`$ ${item.product.price}`}
                           user={`${item.store[0].store_name}`}
                           onClick={() => onDetail(item.product.id)}
-                          img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                          // img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                          img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
                         />
                       ) : null
                     ) : null}
@@ -85,4 +86,5 @@ const Category = () => {
 };
 
 Category.layouts = 'MainLayout';
+
 export default Category;
