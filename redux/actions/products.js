@@ -30,7 +30,8 @@ export const getProducts = () => async dispatch => {
 };
 
 export const getPopularProducts = search => async dispatch => {
-  const getValueSearch = search;
+  const getValueSearch = search || '';
+  console.log(getValueSearch);
   try {
     dispatch({
       type: GET_POPULAR_PRODUCTS_PENDING
