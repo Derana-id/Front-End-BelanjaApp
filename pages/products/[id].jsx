@@ -174,33 +174,39 @@ const Products = () => {
                   className="grid grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
                 >
-                  {/* <p>{getDetail.data.image[0].id}</p> */}
                   <Img
                     src={
                       getDetail.data.image.length >= 0
-                        ? `https://drive.google.com/uc?export=view&id=
-                        ${getDetail.data.image.length >= 0 ? getDetail.data.image[0].photo : 'default.png'}`
+                        ? `https://drive.google.com/uc?export=view&id=${
+                            getDetail.data.image[0] ? getDetail.data.image[0].photo : 'default.png'
+                          }`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                   <Img
                     src={
-                      getDetail.data.image[1]
-                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[1].photo}`
+                      getDetail.data.image.length >= 0
+                        ? `https://drive.google.com/uc?export=view&id=${
+                            getDetail.data.image[0] ? getDetail.data.image[0].photo : 'default.png'
+                          }`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                   <Img
                     src={
-                      getDetail.data.image[2]
-                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[2].photo}`
-                        : 'https://drive.google.com/uc?export=view&id=default-pants.png'
+                      getDetail.data.image.length >= 0
+                        ? `https://drive.google.com/uc?export=view&id=${
+                            getDetail.data.image[0] ? getDetail.data.image[0].photo : 'default.png'
+                          }`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                   <Img
                     src={
-                      getDetail.data.image[3]
-                        ? `https://drive.google.com/uc?export=view&id=${getDetail.data.image[3].photo}`
+                      getDetail.data.image.length >= 0
+                        ? `https://drive.google.com/uc?export=view&id=${
+                            getDetail.data.image[0] ? getDetail.data.image[0].photo : 'default.png'
+                          }`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
