@@ -73,6 +73,8 @@ const Seller = () => {
     return state.detailStore;
   });
 
+  console.log(detailStore);
+
   const [form, setForm] = useState({
     store_name: '',
     email: '',
@@ -82,18 +84,18 @@ const Seller = () => {
   });
 
   useEffect(() => {
-    dispatch(getDetailStore(decoded.id, token));
+    dispatch(getDetailStore(decoded.id));
   }, [dispatch]);
 
   useEffect(() => {
-    if (detailStore.data.store) {
+    if (detailStore.data[0]) {
       setForm({
         ...form,
-        store_name: detailStore.data.store.store_name,
-        email: detailStore.data.user.email,
-        store_phone: detailStore.data.store.store_phone,
-        store_description: detailStore.data.store.store_description,
-        photo: detailStore.data.store.photo
+        store_name: detailStore.data[0].store.store_name,
+        email: detailStore.data[0].user.email,
+        store_phone: detailStore.data[0].store.store_phone,
+        store_description: detailStore.data[0].store.store_description,
+        photo: detailStore.data[0].store.photo
       });
     }
   }, [detailStore]);

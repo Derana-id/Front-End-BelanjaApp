@@ -23,7 +23,7 @@ export const getDetailStore = (id) => async (dispatch) => {
     });
 
     const res = await axios.get(
-      `store/${id}`,
+      `user/${id}`,
     );
 
     dispatch({
@@ -41,7 +41,7 @@ export const getDetailStore = (id) => async (dispatch) => {
 export const updateStore = (data) => {
   return new Promise((resolve, reject) => {
     axios
-      .put('store', data)
+      .put('user', data)
       .then(res => {
         resolve(res.data);
       })

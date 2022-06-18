@@ -20,7 +20,7 @@ export const getDetailUser = (id, token) => async (dispatch) => {
     });
 
     const res = await axios.get(
-      `profile/${id}`,
+      `user/${id}`,
       {
         headers: { token },
       }
@@ -41,7 +41,7 @@ export const getDetailUser = (id, token) => async (dispatch) => {
 export const updateProfile = (data, token) => {
   return new Promise((resolve, reject) => {
     axios
-      .put('profile', data, {
+      .put('user', data, {
         headers: {
           token,
           'Content-Type': 'multipart/form-data'

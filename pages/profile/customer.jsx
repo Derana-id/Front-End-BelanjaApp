@@ -60,15 +60,15 @@ const Customer = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (detailProfile.data.profile) {
+    if (detailProfile.data[0]) {
       setForm({
         ...form,
-        name: detailProfile.data.profile.name,
-        email: detailProfile.data.user.email,
-        phone: detailProfile.data.profile.phone,
-        gender: detailProfile.data.profile.gender,
-        birth: detailProfile.data.profile.birth,
-        photo: detailProfile.data.profile.photo
+        name: detailProfile.data[0].profile.name,
+        email: detailProfile.data[0].user.email,
+        phone: detailProfile.data[0].profile.phone,
+        gender: detailProfile.data[0].profile.gender,
+        birth: detailProfile.data[0].profile.birth,
+        photo: detailProfile.data[0].profile.photo
       });
     }
   }, [detailProfile]);
@@ -94,7 +94,6 @@ const Customer = () => {
         dispatch(getDetailUser(decoded.id));
       })
       .catch((err) => {
-        console.log(err);
         if (err.response.data.code === 422) {
           const { error } = err.response.data;
           error.map(item => toastify(item, 'error'));
@@ -107,8 +106,6 @@ const Customer = () => {
         }
       });
   };
-
-  console.log(form.photo);
 
   return (
     <div>
