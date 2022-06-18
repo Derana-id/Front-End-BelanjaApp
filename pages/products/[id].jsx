@@ -218,7 +218,11 @@ const Products = () => {
                     {getDetail.data.category ? getDetail.data.product.product_name : null}
                   </h3>
                   {getDetail.data.category.length > 0 ? (
-                    <p className="text-gray text-sm font-semibold">{getDetail.data.brand[0].brand_name}</p>
+                    <div className="flex">
+                      <p className="text-gray text-sm font-semibold">{getDetail.data.brand[0].brand_name}</p>
+                      <p className="text-sm text-gray ml-2">|</p>
+                      <p className="text-sm text-gray ml-2"> {getDetail.data.product.stock} stock</p>
+                    </div>
                   ) : null}
 
                   <Start valueReview="(10)" />
