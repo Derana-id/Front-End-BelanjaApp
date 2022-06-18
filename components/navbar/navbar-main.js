@@ -76,8 +76,8 @@ export default function MainNavbar(req) {
   const onSearch = () => {
     const search = getSearch;
 
-    dispatch(getPopularProducts(search));
     router.push(`/?search=${getSearch}`);
+    dispatch(getPopularProducts(getSearch));
   };
 
   return (
