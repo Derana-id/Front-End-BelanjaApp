@@ -130,7 +130,7 @@ export default function MainNavbar(req) {
                     <div className="flex items-center justify-center">
                       <Link href="/profile/customer">
                         <div className="relative h-8 w-8">
-                          {getProfile.isLoading ? null : (
+                          {/* {getProfile.isLoading ? null : (
                             <Image
                               src={`https://drive.google.com/uc?export=view&id=${getProfile.data.profile.photo}`}
                               className="rounded-full cursor-pointer"
@@ -138,7 +138,7 @@ export default function MainNavbar(req) {
                               height={50}
                               width={50}
                             />
-                          )}
+                          )} */}
                         </div>
                       </Link>
                     </div>

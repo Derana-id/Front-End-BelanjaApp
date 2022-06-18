@@ -54,8 +54,6 @@ export default function cardShippingAddress({ myAddress }) {
   //     });
   // };
 
-export default function cardShippingAddress()
-{
   return (
     <div>
       <div className="flex flex-col bg-white rounded w-3/4 pb-8 h-auto mt-[120px] mx-12">

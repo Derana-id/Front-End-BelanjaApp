@@ -1,13 +1,16 @@
+/* eslint-disable radix */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { Code } from 'react-content-loader';
+import { Code, List, Instagram } from 'react-content-loader';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 import jas from '../../assets/img/jas.jpg';
-import { getMyCart } from '../../redux/actions/cart';
+// import { getMyCart } from '../../redux/actions/cart';
+import { getMyTransaction } from '../../redux/actions/transaction';
 import { getMyAddress, createAddress } from '../../redux/actions/address';
+import { toastify } from '../../utils/toastify';
 import AddAddress from '../../components/modals/add-address';
 import CardCheckout from '../../components/card/card-checkout';
 import CardTotalPrice from '../../components/card/card-total-price';
@@ -20,7 +23,7 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const token = Cookies.get('token');
   const myAddress = useSelector(state => state.myAddress);
-  const myCart = useSelector(state => state.myCart);
+  const myTransaction = useSelector(state => state.myTransaction);
   const [isPayment, setIsPayment] = useState(false);
   const [formAddress, setFormAddress] = useState({
     label: '',
@@ -85,20 +88,12 @@ const Checkout = () => {
     }
   };
 
+  console.log(myTransaction);
+
   useEffect(() => {
     dispatch(getMyAddress());
-    dispatch(getMyCart());
+    dispatch(getMyTransaction());
   }, []);
-
-  const dispatch = useDispatch();
-
-  const myAddress = useSelector(state => {
-    return state.myAddress;
-  });
-
-  useEffect(() => {
-    dispatch(getAddress());
-  }, [dispatch]);
 
   return (
     <div>
@@ -118,7 +113,7 @@ const Checkout = () => {
             ) : myAddress.error === 'Addres Not Found' ? (
               <button>Add New Address</button>
             ) : myAddress.isError ? (
-              <div>Error</div>
+              <div>{myAddress.error}</div>
             ) : myAddress.data.length > 0 ? (
               myAddress.data.map((item, index) =>
                 item.is_primary ? (
@@ -138,11 +133,47 @@ const Checkout = () => {
             ) : (
               <button>Add New Address</button>
             )}
-            <CardCheckout image={jas} productName="Men's formal suit - Black" store="Zalora Cloth" price="$ 20.0" />
-            <CardCheckout image={jas} productName="Men's formal suit - Black" store="Zalora Cloth" price="$ 20.0" />
+            {myTransaction.isLoading ? (
+              <List />
+            ) : myTransaction.error === 'Not Found' ? (
+              <div>Product Not Found</div>
+            ) : myTransaction.isError ? (
+              <div>{myTransaction.error}</div>
+            ) : myTransaction.data.length > 0 ? (
+              myTransaction.data.map((item, index) => (
+                <div key={index}>
+                  <CardCheckout
+                    image={`https://drive.google.com/uc?export=view&id=${item.image[0].photo}`}
+                    productName={item.product.product_name}
+                    store="Zalora Cloth"
+                    price={new Intl.NumberFormat('id-ID', {
+                      style: 'currency',
+                      currency: 'IDR',
+                      minimumFractionDigits: 0
+                    }).format(parseInt(item.product.price))}
+                  />
+                </div>
+              ))
+            ) : (
+              <></>
+            )}
           </div>
           <div className="flex-1 mt-4 md:mt-0 md:w-32 md:ml-8">
-            <CardTotalPrice order="$ 40.0" delivery="$ 5.0" totalPrice="$ 45.0" onClick={() => setIsPayment(true)} />
+            {myTransaction.isLoading ? (
+              <Instagram />
+            ) : (
+              <></>
+              // <CardTotalPrice
+              //   order={new Intl.NumberFormat('id-ID', {
+              //     style: 'currency',
+              //     currency: 'IDR',
+              //     minimumFractionDigits: 0
+              //   }).format(parseInt(myTransaction.data[0].product.price) * 1)}
+              //   delivery="$ 5.0"
+              //   totalPrice="$ 45.0"
+              //   onClick={() => setIsPayment(true)}
+              // />
+            )}
           </div>
         </div>
       </div>
