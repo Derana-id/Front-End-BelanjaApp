@@ -47,10 +47,6 @@ export default function SecondNavbar(req) {
   const [getSearch, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
-
   const getActive = e => {
     if (isActive) {
       setActive(false);
@@ -69,6 +65,7 @@ export default function SecondNavbar(req) {
 
   useEffect(() => {
     dispatch(getDetailUser(getId));
+    setIsLoading(false);
   }, []);
 
   const getProfile = useSelector(state => {
@@ -134,7 +131,7 @@ export default function SecondNavbar(req) {
                     <div className="flex items-center justify-center">
                       <Link href="/profile/customer">
                         <div className="relative h-8 w-8">
-                          {getProfile.isLoading ? (<div>Loading</div>)
+                          {getProfile.isLoading || isLoading ? (<div>Loading</div>)
                             : getProfile.data[0].user.level === 1
                               ? (
                                 <Image
@@ -179,7 +176,7 @@ export default function SecondNavbar(req) {
                   </Link>
                   <div className="flex items-center justify-center md:hidden">
                     <div className="relative h-7 w-7" onClick={() => onProfile()}>
-                      {getProfile.isLoading ? (<div>Loading</div>)
+                      {getProfile.isLoading || isLoading ? (<div>Loading</div>)
                         : getProfile.data[0].user.level === 1
                           ? (
                             <Image
@@ -218,41 +215,43 @@ export default function SecondNavbar(req) {
                 </div>
               ) : null}
 
-              {isProfile ? (
-                <div className="absolute h-28 w-28 bg-white z-40 top-14 p-5 rounded-b-md rounded-tl-md shadow-lg right-12 md:right-60 flex justify-center items-center">
-                  <div>
-                    <Link href="/profile/customer">
-                      <div className="flex p-1" onClick={() => setIsProfile(false)}>
-                        <BiUserCircle className="text-2xl mr-2 text-gray cursor-pointer" />
-                        <p className="cursor-pointer">Profile</p>
-                      </div>
-                    </Link>
-                    <Link href="/chat">
-                      <div className="flex p-1" onClick={() => setIsProfile(false)}>
-                        <HiOutlineMail className="text-2xl mr-2  font-bold text-gray cursor-pointer" />
-                        <p className="cursor-pointer">Chat</p>
-                      </div>
-                    </Link>
-                    <Link href="/mybag">
-                      <div className="flex p-1" onClick={() => setIsProfile(false)}>
-                        <AiOutlineShoppingCart className="text-2xl mr-2 text-gray cursor-pointer" />
-                        <p className="cursor-pointer">Cart</p>
-                      </div>
-                    </Link>
+              {isLoading ? (<></>) :
+                isProfile ? (
+                  <div className="absolute h-28 w-28 bg-white z-40 top-14 p-5 rounded-b-md rounded-tl-md shadow-lg right-12 md:right-60 flex justify-center items-center">
+                    <div>
+                      <Link href="/profile/customer">
+                        <div className="flex p-1" onClick={() => setIsProfile(false)}>
+                          <BiUserCircle className="text-2xl mr-2 text-gray cursor-pointer" />
+                          <p className="cursor-pointer">Profile</p>
+                        </div>
+                      </Link>
+                      <Link href="/chat">
+                        <div className="flex p-1" onClick={() => setIsProfile(false)}>
+                          <HiOutlineMail className="text-2xl mr-2  font-bold text-gray cursor-pointer" />
+                          <p className="cursor-pointer">Chat</p>
+                        </div>
+                      </Link>
+                      <Link href="/mybag">
+                        <div className="flex p-1" onClick={() => setIsProfile(false)}>
+                          <AiOutlineShoppingCart className="text-2xl mr-2 text-gray cursor-pointer" />
+                          <p className="cursor-pointer">Cart</p>
+                        </div>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              ) : null}
-              {isfilter ? (
-                <div className="w-full absolute top-0 bottom-0 right-0 left-0">
-                  <div>
-                    <ModalsSearch
-                      onClick={() => setIsFilter(false)}
-                      onDiscard={() => setIsFilter(false)}
-                      onApply={() => setIsFilter(false)}
-                    />
+                ) : null}
+              {isLoading ? (<></>) :
+                isfilter ? (
+                  <div className="w-full absolute top-0 bottom-0 right-0 left-0">
+                    <div>
+                      <ModalsSearch
+                        onClick={() => setIsFilter(false)}
+                        onDiscard={() => setIsFilter(false)}
+                        onApply={() => setIsFilter(false)}
+                      />
+                    </div>
                   </div>
-                </div>
-              ) : null}
+                ) : null}
             </div>
           ) : (
             <div className="w-full h-16 md:h-20 md:px-28 py-3 p-3 flex flex-row items-center fixed z-[1200] shadow-lg bg-white">
@@ -288,17 +287,18 @@ export default function SecondNavbar(req) {
                     </div>
                   </div>
                 </div>
-                {isfilter ? (
-                  <div className="w-full absolute top-0 bottom-0 right-0 left-0">
-                    <div>
-                      <ModalsSearch
-                        onClick={() => setIsFilter(false)}
-                        onDiscard={() => setIsFilter(false)}
-                        onApply={() => setIsFilter(false)}
-                      />
+                {isLoading ? (<></>) :
+                  isfilter ? (
+                    <div className="w-full absolute top-0 bottom-0 right-0 left-0">
+                      <div>
+                        <ModalsSearch
+                          onClick={() => setIsFilter(false)}
+                          onDiscard={() => setIsFilter(false)}
+                          onApply={() => setIsFilter(false)}
+                        />
+                      </div>
                     </div>
-                  </div>
-                ) : null}
+                  ) : null}
               </div>
             </div>
           )}

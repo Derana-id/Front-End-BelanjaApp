@@ -121,17 +121,17 @@ const Seller = () => {
       })
       .catch(err => {
         console.log(err);
-      //   // if (err.response.data.code === 422) {
-      //   //   const { error } = err.response.data;
-      //   //   error.map(item => toastify(item, 'error'));
-      //   // } else {
-      //   //   Swal.fire({
-      //   //     title: 'Error!',
-      //   //     text: err.response.data.message,
-      //   //     icon: 'error'
-      //   //   });
-      //   // }
-      // });
+        // if (err.response.data.code === 422) {
+        //   const { error } = err.response.data;
+        //   error.map(item => toastify(item, 'error'));
+        // } else {
+        //   Swal.fire({
+        //     title: 'Error!',
+        //     text: err.response.data.message,
+        //     icon: 'error'
+        //   });
+        // }
+      });
   };
   return (
     <div>
