@@ -17,22 +17,23 @@ import { getPopularProducts, getProducts } from '../redux/actions/products';
 function Home({ deviceType }) {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [getSearch, setSearch] = useState('');
+  // const [getSearch, setSearch] = useState('');
 
   // console.log(router.query.search);
 
   const { search } = router.query;
+  console.log(search);
 
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getCategory());
-    dispatch(getPopularProducts(getSearch));
-    setSearch(search);
+    dispatch(getPopularProducts(search));
+    // setSearch(search);
   }, []);
 
   useEffect(() => {
     if (search) {
-      dispatch(getPopularProducts(getSearch));
+      dispatch(getPopularProducts(search));
     }
   }, []);
 
@@ -47,6 +48,8 @@ function Home({ deviceType }) {
   const getPopular = useSelector(state => {
     return state.getPopular;
   });
+
+  console.log(getPopular);
 
   const onDetail = e => {
     router.push(`/products/${e}`);
@@ -151,8 +154,7 @@ function Home({ deviceType }) {
                             ? `https://drive.google.com/uc?export=view&id=${
                                 item.image[0] ? item.image[0].photo : 'default.png'
                               }`
-                            : `https://drive.google.com/uc?export=view&id=
-                            default.png`
+                            : `${process.env.NEXT_PUBLIC_API_URL}/public/uploads/products/default.png`
                         }`}
                         // img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
                       />

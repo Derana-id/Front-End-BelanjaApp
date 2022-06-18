@@ -14,9 +14,9 @@ import CardContact from '../../components/card/card-contact';
 import BubblessReciver from '../../components/bubbless/bubbless-reciver';
 import BubblessSender from '../../components/bubbless/bubbless-sender';
 import { getDetailProfile } from '../../redux/actions/users';
-import { getDetailStore } from '../../redux/actions/storeProfile';
+import { getDetailUser } from '../../redux/actions/userProfile';
 
-const Chat = req => {
+const Chat = () => {
   const dispatch = useDispatch();
 
   const [isMessage, setIsMessage] = useState(false);
@@ -28,7 +28,7 @@ const Chat = req => {
   // console.log(getActiveReceiver);
 
   const token = Cookies.get('token');
-  const receiver = Cookies.get('receiver');
+  // const receiver = Cookies.get('receiver');
 
   let getId;
   if (token) {
@@ -47,13 +47,13 @@ const Chat = req => {
   });
 
   useEffect(() => {
-    dispatch(getDetailStore('dc9e00a6-53f9-45c5-833d-14a8b030b295'));
+    dispatch(getDetailUser('dc9e00a6-53f9-45c5-833d-14a8b030b295'));
   }, []);
 
   // console.log(store);
 
   const getProfile = useSelector(state => {
-    return state.getIdProfile;
+    return state.detailCustomer;
   });
 
   useEffect(() => {

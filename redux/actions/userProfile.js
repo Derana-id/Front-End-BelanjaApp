@@ -19,9 +19,12 @@ export const getDetailUser = (id, token) => async dispatch => {
       payload: null
     });
 
-    const res = await axios.get(`user/${id}`, {
-      headers: { token }
-    });
+    const res = await axios.get(
+      `user/${id}`,
+      {
+        headers: { token },
+      }
+    );
 
     dispatch({
       type: GET_DETAIL_USER_SUCCESS,
@@ -38,7 +41,7 @@ export const getDetailUser = (id, token) => async dispatch => {
 export const updateProfile = (data, token) => {
   return new Promise((resolve, reject) => {
     axios
-      .put('profile', data, {
+      .put('user', data, {
         headers: {
           token,
           'Content-Type': 'multipart/form-data'
