@@ -120,17 +120,18 @@ const Seller = () => {
         dispatch(getDetailStore(decoded.id, token));
       })
       .catch(err => {
-        if (err.response.data.code === 422) {
-          const { error } = err.response.data;
-          error.map(item => toastify(item, 'error'));
-        } else {
-          Swal.fire({
-            title: 'Error!',
-            text: err.response.data.message,
-            icon: 'error'
-          });
-        }
-      });
+        console.log(err);
+      //   // if (err.response.data.code === 422) {
+      //   //   const { error } = err.response.data;
+      //   //   error.map(item => toastify(item, 'error'));
+      //   // } else {
+      //   //   Swal.fire({
+      //   //     title: 'Error!',
+      //   //     text: err.response.data.message,
+      //   //     icon: 'error'
+      //   //   });
+      //   // }
+      // });
   };
   return (
     <div>
@@ -153,7 +154,7 @@ const Seller = () => {
                     width="100px"
                     height="100px"
                     className="rounded-[100%] mb-9"
-                    onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data.store.photo}`; }}
+                    onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data[0].store.photo}`; }}
                   />
                 )}
               <div className="flex flex-col ml-2">
@@ -474,7 +475,7 @@ const Seller = () => {
                       width="70px"
                       height="70px"
                       className="rounded-[100%] mb-9"
-                      onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data.store.photo}`; }}
+                      onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data[0].store.photo}`; }}
                     />
                   )}
                 <div className="flex flex-col ml-2">
@@ -825,7 +826,7 @@ const Seller = () => {
                           width="100px"
                           height="100px"
                           className="rounded-[100%] mb-9"
-                          onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data.store.photo}`; }}
+                          onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data[0].store.photo}`; }}
                         />
                       )}
                     <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />
@@ -852,5 +853,5 @@ const Seller = () => {
   );
 };
 
-Seller.layouts = 'MainLayout';
+Seller.layouts = 'SecondLayout';
 export default Seller;
