@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineMenu, AiOutlineLogout } from 'react-icons/ai';
 import Drawer from 'react-modern-drawer';
 // import CardStore from '../../components/card/seller/cardStore';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import JwtDecode from 'jwt-decode';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/router';
 import CardMyorder from '../../components/card/seller/cardMyorder';
 import CardProduct from '../../components/card/seller/myProduct';
 import SellingProduct from '../../components/card/seller/sellingProduct';
@@ -31,6 +32,7 @@ const Seller = () => {
   const [showNav2, setShowNav2] = useState();
   const [showSideBar, setFormShowSideBar] = useState(0);
   const [isOpen, setIsOpen] = React.useState(false);
+  const router = useRouter();
 
   const toggleDrawer = () => {
     setIsOpen(prevState => !prevState);
@@ -61,6 +63,11 @@ const Seller = () => {
     setFormShowSideBar(index);
   };
 
+  const onLogout = () => {
+    Cookies.remove('token');
+    router.push('/auth/login');
+  };
+
   // integrasi
   const dispatch = useDispatch();
   const token = Cookies.get('token');
@@ -73,7 +80,7 @@ const Seller = () => {
     return state.detailStore;
   });
 
-  console.log(detailStore);
+  // console.log(detailStore);
 
   const [form, setForm] = useState({
     store_name: '',
@@ -110,27 +117,27 @@ const Seller = () => {
     formData.append('store_description', form.store_description);
     formData.append('photo', form.photo);
 
-    updateStore(formData, token)
+    updateStore(formData)
       .then(res => {
         Swal.fire({
           title: 'success',
           text: res.message,
           icon: 'success'
         });
-        dispatch(getDetailStore(decoded.id, token));
+        dispatch(getDetailStore(decoded.id));
       })
       .catch(err => {
         console.log(err);
-        // if (err.response.data.code === 422) {
-        //   const { error } = err.response.data;
-        //   error.map(item => toastify(item, 'error'));
-        // } else {
-        //   Swal.fire({
-        //     title: 'Error!',
-        //     text: err.response.data.message,
-        //     icon: 'error'
-        //   });
-        // }
+        if (err.response.data.code === 422) {
+          const { error } = err.response.data;
+          error.map(item => toastify(item, 'error'));
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: err.response.data.message,
+            icon: 'error'
+          });
+        }
       });
   };
   return (
@@ -216,6 +223,14 @@ const Seller = () => {
                     </button>
                   </div>
                 ) : null}
+                <div className="flex items-center m-2">
+                  <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                    <AiOutlineLogout />
+                  </div>
+                  <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                    Logout
+                  </button>
+                </div>
               </div>
             ) : showSideBar === 1 ? (
               <div className="flex flex-col justify-center mt-10">
@@ -276,6 +291,14 @@ const Seller = () => {
                     </button>
                   </div>
                 ) : null}
+                <div className="flex items-center m-2">
+                  <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                    <AiOutlineLogout />
+                  </div>
+                  <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                    Logout
+                  </button>
+                </div>
               </div>
             ) : showSideBar === 2 ? (
               <div className="flex flex-col justify-center mt-10">
@@ -333,6 +356,14 @@ const Seller = () => {
                     </button>
                   </div>
                 ) : null}
+                <div className="flex items-center m-2">
+                  <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                    <AiOutlineLogout />
+                  </div>
+                  <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                    Logout
+                  </button>
+                </div>
               </div>
             ) : showSideBar === 3 ? (
               <div className="flex flex-col justify-center mt-10">
@@ -393,6 +424,14 @@ const Seller = () => {
                     </button>
                   </div>
                 ) : null}
+                <div className="flex items-center m-2">
+                  <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                    <AiOutlineLogout />
+                  </div>
+                  <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                    Logout
+                  </button>
+                </div>
               </div>
             ) : (
               <div className="flex flex-col justify-center mt-10">
@@ -450,6 +489,14 @@ const Seller = () => {
                     </button>
                   </div>
                 ) : null}
+                <div className="flex items-center m-2">
+                  <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                    <AiOutlineLogout />
+                  </div>
+                  <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                    Logout
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -487,7 +534,7 @@ const Seller = () => {
               <div>
                 {/* sidebar */}
                 {showSideBar === 0 ? (
-                  <div className="flex flex-col justify-center">
+                  <div className="flex flex-col justify-center mt-10">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
@@ -498,10 +545,7 @@ const Seller = () => {
                     </div>
                     {showNav === 0 ? (
                       <div>
-                        <button
-                          onClick={() => setCurrentShow(0)}
-                          className="text-base ml-14 font-semibold cursor-pointer"
-                        >
+                        <button onClick={() => setCurrentShow(0)} className="text-base ml-14 font-semibold cursor-pointer">
                           Store profile
                         </button>
                       </div>
@@ -542,6 +586,14 @@ const Seller = () => {
                         </button>
                       </div>
                     ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                        <AiOutlineLogout />
+                      </div>
+                      <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 ) : showSideBar === 1 ? (
                   <div className="flex flex-col justify-center mt-10">
@@ -602,6 +654,14 @@ const Seller = () => {
                         </button>
                       </div>
                     ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                        <AiOutlineLogout />
+                      </div>
+                      <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 ) : showSideBar === 2 ? (
                   <div className="flex flex-col justify-center mt-10">
@@ -636,10 +696,7 @@ const Seller = () => {
                         <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">
                           My products
                         </button>
-                        <button
-                          onClick={() => setCurrentShow(2)}
-                          className="ml-14 text-base cursor-pointer font-semibold"
-                        >
+                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer font-semibold">
                           Selling products
                         </button>
                       </div>
@@ -662,6 +719,14 @@ const Seller = () => {
                         </button>
                       </div>
                     ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                        <AiOutlineLogout />
+                      </div>
+                      <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 ) : showSideBar === 3 ? (
                   <div className="flex flex-col justify-center mt-10">
@@ -722,6 +787,14 @@ const Seller = () => {
                         </button>
                       </div>
                     ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                        <AiOutlineLogout />
+                      </div>
+                      <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <div className="flex flex-col justify-center mt-10">
@@ -774,14 +847,19 @@ const Seller = () => {
                         <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer">
                           My order
                         </button>
-                        <button
-                          onClick={() => setCurrentShow(3)}
-                          className="ml-14 text-base cursor-pointer  font-semibold"
-                        >
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer  font-semibold">
                           Order cancel
                         </button>
                       </div>
                     ) : null}
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                        <AiOutlineLogout />
+                      </div>
+                      <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>

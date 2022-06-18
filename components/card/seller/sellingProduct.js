@@ -9,6 +9,7 @@ import React, { useState, useEffect } from 'react';
 // import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 // import box from '../../../assets/icons/box.png';
+// import Swal from 'sweetalert2';
 import FormAddProduct from '../../form/form-addProduct';
 import RadioInput from '../../Input/radio';
 import ButtonSuccess from '../../Button/button-success';
@@ -50,55 +51,6 @@ export default function sellingProduct() {
     photo: [],
     product_size: []
   });
-
-  const [images, setImages] = useState([]);
-
-  const fileSelectedHandler = e => {
-    setImages([...images, e.target.files[0]]);
-    // setForm({ ...form, photo: e.target.files[0] });
-  };
-
-  // console.log(images);
-
-  // Image
-  // const addImage = () => {
-  //   setForm({
-  //     ...form,
-  //     photo: [
-  //       ...form.photo,
-  //     ]
-  //   });
-  // };
-
-  // const handleInputImage = (e, index) => {
-  //   const newImage = form.photo.map((item, i) => {
-  //     if (i === index) {
-  //       return {
-  //         ...item,
-  //         e
-  //       };
-  //     }
-  //     return item;
-  //   });
-
-  //   setForm({
-  //     ...form,
-  //     photo: newImage,
-  //   });
-  //   console.log(form.photo);
-  // };
-
-  // const deleteImage = (index) => {
-  //   const newImage = form.photo.filter((item, i) => {
-  //     if (i !== index) {
-  //       return item;
-  //     }
-  //   });
-  //   setForm({
-  //     ...form,
-  //     photo: newImage,
-  //   });
-  // };
 
   // Color
   const addIColor = () => {
@@ -160,7 +112,13 @@ export default function sellingProduct() {
   };
   const createProduct = e => {
     e.preventDefault();
-
+    // if (form.category_id === '' || form.product_name === '' || form.brand_id === '' || form.price === '' || form.stock === '' || form.description === '' || form.is_new === '' || form.photo === [] || form.product_size === []) {
+    //   Swal.fire({
+    //     title: 'Error',
+    //     text: 'All input must be filled',
+    //     icon: 'error'
+    //   });
+    // } else {
     const formData = new FormData();
     formData.append('category_id', form.category_id);
     formData.append('product_name', form.product_name);
@@ -177,17 +135,6 @@ export default function sellingProduct() {
       }
     }
 
-    // formData.append('product_size', JSON.stringify(form.product_size));
-    // form.product_color.map((item) => {
-    //   formData.append('color_name', item.color_name);
-    //   formData.append('color_value', item.color_value);
-    // });
-    // form.product_size.map((item) => {
-    //   formData.append('size', item.size);
-    // });
-
-    // formData.append('photo', images);
-
     createProductStore(formData)
       .then(res => {
         console.log(res);
@@ -197,7 +144,6 @@ export default function sellingProduct() {
       });
   };
 
-  // console.log(form);
   return (
     <div>
       <form onSubmit={e => createProduct(e)}>
@@ -268,7 +214,7 @@ export default function sellingProduct() {
           <CardForm>
             <h5 className="text-black relative ml-10 text-lg font-bold">Product Color</h5>
             <hr className="text-gray mt-3" />
-            <div className="flex flex-col">
+            <div className="flex flex-col ml-10">
               {form.product_color.map((item, index) => (
                 <div key={index}>
                   <FormAddProduct
@@ -292,7 +238,7 @@ export default function sellingProduct() {
               ))}
               {/* <hr className="text-gray w-full mt-8" /> */}
               <div className="flex justify-center mt-5">
-                <ButtonSuccess onClick={addIColor} action="Add Color" className="p-[5px]" />
+                <ButtonSuccess onClick={addIColor} action="Add Color" className="-ml-10 p-[5px]" />
               </div>
             </div>
           </CardForm>
@@ -300,7 +246,7 @@ export default function sellingProduct() {
           <CardForm>
             <h5 className="text-black relative ml-10 text-lg font-bold">Product Size</h5>
             <hr className="text-gray mt-3" />
-            <div className="flex flex-col">
+            <div className="flex flex-col ml-10">
               {form.product_size.map((item, index) => (
                 <div key={index}>
                   <FormAddProduct
@@ -315,7 +261,7 @@ export default function sellingProduct() {
               ))}
 
               <div className="flex justify-center mt-5">
-                <ButtonSuccess onClick={addSize} action="Add Foto" className="p-[5px]" />
+                <ButtonSuccess onClick={addSize} action="Add Foto" className="-ml-10 p-[5px]" />
               </div>
             </div>
           </CardForm>

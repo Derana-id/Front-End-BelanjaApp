@@ -19,10 +19,6 @@ import jwtDecode from 'jwt-decode';
 import Cookies from 'js-cookie';
 import { getPopularProducts } from '../../redux/actions/products';
 
-import SearchNavbar from '../search/search-navbar';
-import ButtonSignup from '../Button/button-signup';
-import ButtonLogin from '../Button/button-login';
-
 import logo from '../../assets/img/logo.png';
 import notification from '../../assets/img/notification.png';
 import vector from '../../assets/icons/vector.png';
@@ -100,21 +96,16 @@ export default function SecondNavbar(req) {
                   </div>
                 </div>
                 <div className="w-4/5 md:3/5 h-12 flex items-center">
-                  <SearchNavbar onChange={e => setSearch(e.target.value)} onSearch={() => onSearch()} />
+                  {/* <SearchNavbar onChange={e => setSearch(e.target.value)} onSearch={() => onSearch()} />
                   <div
                     className="border-solid border-2 border-gray rounded-xl m-2 md:m-3 flex items-center p-1 w-8 md:w-11 md:p-2 justify-center cursor-pointer"
                     onClick={() => setIsFilter(true)}
                   >
                     <Image src={vector} />
-                  </div>
+                  </div> */}
                 </div>
-                <div className="w-1/5 hidden md:ml-10 md:flex h-12 items-center">
+                <div className="w-1/5 md:ml-10 md:flex h-12 items-center">
                   <div className="flex justify-end w-full h-full items-center">
-                    <Link href="/mybag">
-                      <div>
-                        <AiOutlineShoppingCart className="text-2xl mr-6 text-gray cursor-pointer" />
-                      </div>
-                    </Link>
                     <Link href="">
                       <div>
                         <MdOutlineNotificationsNone
@@ -165,49 +156,6 @@ export default function SecondNavbar(req) {
                     </div>
                   </div>
                 </div>
-                <div className="flex">
-                  <Link href="">
-                    <div>
-                      <MdOutlineNotificationsNone
-                        className="text-2xl m-4 text-gray cursor-pointer md:hidden"
-                        onClick={() => getActive()}
-                      />
-                    </div>
-                  </Link>
-                  <div className="flex items-center justify-center md:hidden">
-                    <div className="relative h-7 w-7" onClick={() => onProfile()}>
-                      {getProfile.isLoading || isLoading ? (<div>Loading</div>)
-                        : getProfile.data[0].user.level === 1
-                          ? (
-                            <Image
-                              src={
-                                getProfile.data.length >= 0
-                                  ? `https://drive.google.com/uc?export=view&id=${getProfile.data[0].store.photo}`
-                                  : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
-                              }
-                              className="rounded-full cursor-pointer"
-                              objectFit="cover"
-                              height={50}
-                              width={50}
-                            />
-                          )
-                          : getProfile.data[0].user.level === 2
-                            ? (
-                              <Image
-                                src={
-                                getProfile.data.length >= 0
-                                  ? `https://drive.google.com/uc?export=view&id=${getProfile.data[0].profile.photo}`
-                                  : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
-                              }
-                                className="rounded-full cursor-pointer"
-                                objectFit="cover"
-                                height={50}
-                                width={50}
-                              />
-                            ) : null}
-                    </div>
-                  </div>
-                </div>
               </div>
               {isActive ? (
                 <div className="absolute h-80 w-56 bg-white z-40 top-16 md:top-14 p-5 rounded-b-xl rounded-tl-xl shadow-lg right-12 md:right-60 flex justify-center items-center">
@@ -254,53 +202,7 @@ export default function SecondNavbar(req) {
                 ) : null}
             </div>
           ) : (
-            <div className="w-full h-16 md:h-20 md:px-28 py-3 p-3 flex flex-row items-center fixed z-[1200] shadow-lg bg-white">
-              <div className="flex w-full items-center">
-                <div className="w-1/5 h-12 flex items-center">
-                  <div className="relative flex items-center">
-                    <Link href="/">
-                      <div>
-                        <Image src={logo} className="w-14 h-4 cursor-pointer" width={110} height={40} />
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-                <div className="w-2/5 h-12 flex items-center">
-                  <SearchNavbar onChange={e => setSearch(e.target.value)} onSearch={() => onSearch()} />
-                  <div
-                    className="border-solid border-2 border-gray rounded-xl m-3 flex items-center p-2 justify-center cursor-pointer"
-                    onClick={() => setIsFilter(true)}
-                  >
-                    <Image src={vector} width={20} height={20} />
-                  </div>
-                </div>
-                <div className="w-2/5 h-12 flex items-center">
-                  <div className="flex justify-end w-full h-full items-center">
-                    <Link href="/mybag">
-                      <div className="hidden md:flex">
-                        <AiOutlineShoppingCart className="text-2xl mr-6 text-gray cursor-pointer" />
-                      </div>
-                    </Link>
-                    <div className="flex w-32 md:w-60 justify-between">
-                      <ButtonLogin onClick={() => router.push('/auth/login')} />
-                      <ButtonSignup onClick={() => router.push('/auth/register')} />
-                    </div>
-                  </div>
-                </div>
-                {isLoading ? (<></>) :
-                  isfilter ? (
-                    <div className="w-full absolute top-0 bottom-0 right-0 left-0">
-                      <div>
-                        <ModalsSearch
-                          onClick={() => setIsFilter(false)}
-                          onDiscard={() => setIsFilter(false)}
-                          onApply={() => setIsFilter(false)}
-                        />
-                      </div>
-                    </div>
-                  ) : null}
-              </div>
-            </div>
+            <></>
           )}
         </div>
       )}
