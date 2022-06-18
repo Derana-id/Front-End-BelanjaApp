@@ -60,15 +60,15 @@ const Customer = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (detailProfile.data.profile) {
+    if (detailProfile.data[0]) {
       setForm({
         ...form,
-        name: detailProfile.data.profile.name,
-        email: detailProfile.data.user.email,
-        phone: detailProfile.data.profile.phone,
-        gender: detailProfile.data.profile.gender,
-        birth: detailProfile.data.profile.birth,
-        photo: detailProfile.data.profile.photo
+        name: detailProfile.data[0].profile.name,
+        email: detailProfile.data[0].user.email,
+        phone: detailProfile.data[0].profile.phone,
+        gender: detailProfile.data[0].profile.gender,
+        birth: detailProfile.data[0].profile.birth,
+        photo: detailProfile.data[0].profile.photo
       });
     }
   }, [detailProfile]);
@@ -94,7 +94,6 @@ const Customer = () => {
         dispatch(getDetailUser(decoded.id));
       })
       .catch((err) => {
-        console.log(err);
         if (err.response.data.code === 422) {
           const { error } = err.response.data;
           error.map(item => toastify(item, 'error'));
@@ -108,8 +107,6 @@ const Customer = () => {
       });
   };
 
-  // console.log(form);
-
   return (
     <div>
       <Head>
@@ -121,19 +118,22 @@ const Customer = () => {
         <div className="w-0 sm:w-0 md:w-1/4 lg:w-1/4 xl:w-1/4">
           <div className="w-full flex justify-center items-center mr-10 flex-col mt-[120px]">
             <div className="flex items-center">
-              {/* <Image src={user} width={60} height={60} className="rounded-full" /> */}
-              <img
-                src={form.photo
-                  ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                  : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                alt="store"
-                width="100px"
-                height="100px"
-                className="rounded-[100%]"
-              />
+              {detailProfile.isLoading ? (<div>Laoding</div>)
+                : (
+                  <img
+                    src={form.photo
+                      ? `https://drive.google.com/uc?export=view&id=${form.photo}`
+                      : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                    alt=""
+                    width="100px"
+                    height="100px"
+                    className="rounded-[100%] mb-9"
+                    onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data.profile.photo}`; }}
+                  />
+                )}
               <div className="flex flex-col ml-2">
-                <label className="mb-2 ml-3 font-semibold">{ form.name}</label>
-                <Image className="hidden cursor-pointer" src={edit} />
+                <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[120px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">{ form.name}</label>
+                <Image className="cursor-pointer hidden" src={edit} />
               </div>
             </div>
             {/* sidebar */}
@@ -210,12 +210,33 @@ const Customer = () => {
               open={isOpen}
               onClose={toggleDrawer}
               direction="left"
-              style={{ width: '170px' }}
+              style={{ width: '200px' }}
+              zIndex={3000}
             >
+              <div className="mt-10 flex flex-row">
+                {detailProfile.isLoading ? (<div>Laoding</div>)
+                  : (
+                    <img
+                      src={form.photo
+                        ? `https://drive.google.com/uc?export=view&id=${form.photo}`
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                      alt=""
+                      width="100px"
+                      height="100px"
+                      className="rounded-[100%] mb-9"
+                      onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data.profile.photo}`; }}
+                    />
+                  )}
+                <div className="flex flex-col ml-2">
+                  <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[75px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">{ form.name}</label>
+                  <Image className="cursor-pointer hidden" width={25} height={25} src={edit} />
+                </div>
+              </div>
+
               <div className="">
                 {/* sidebar */}
                 {showSideBar === 0 ? (
-                  <div className="flex flex-col w-full mt-10">
+                  <div className="flex flex-col w-full">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
@@ -296,32 +317,26 @@ const Customer = () => {
                       <Input onChange={(e) => setForm({ ...form, name: e.target.value })} name="Name" type="text" value={form.name} />
                       <Input name="Email" value={form.email} type="text" readonly />
                       <Input onChange={(e) => setForm({ ...form, phone: e.target.value })} name="Phone Number" value={form.phone} type="text" />
-                      <div className="flex mr-0 sm:mr-0 md:mr-[150px] lg-mr-[150px] xl:mr-[150px]">
+                      <div className="flex -mr-4 sm:-mr-4 md:mr-[150px] lg-mr-[150px] xl:mr-[150px]">
                         <label className="mr-5 text-[#9B9B9B]">Gender</label>
                         <RadioButton onChange={(e) => setForm({ ...form, gender: e.target.value })} value={form.gender} />
                       </div>
                       <Datepicker onChange={(e) => setForm({ ...form, birth: e.target.value })} value={form.birth} />
                     </div>
                     <div className="w-[30%] flex flex-col items-center border-l-2 border-gray my-4">
-                      {/* <Image
-                        className="rounded-[100%] mb-9"
-                        // src={form.photo
-                        //   ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                        //   : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                        src={user}
-                        layout="fixed"
-                        width={100}
-                        height={100}
-                      /> */}
-                      <img
-                        src={form.photo
-                          ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                          : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                        alt=""
-                        width="100px"
-                        height="100px"
-                        className="rounded-[100%] mb-9"
-                      />
+                      {detailProfile.isLoading ? (<div>Laoding</div>)
+                        : (
+                          <img
+                            src={form.photo
+                              ? `https://drive.google.com/uc?export=view&id=${form.photo}`
+                              : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                            alt=""
+                            width="100px"
+                            height="100px"
+                            className="rounded-[100%] mb-9"
+                            onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data.profile.photo}`; }}
+                          />
+                        )}
                       <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />
                       <label className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray" htmlFor="images">Select image</label>
                     </div>

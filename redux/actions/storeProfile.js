@@ -22,7 +22,9 @@ export const getDetailStore = id => async dispatch => {
       payload: null
     });
 
-    const res = await axios.get(`store/${id}`);
+    const res = await axios.get(
+      `user/${id}`,
+    );
 
     dispatch({
       type: GET_DETAIL_STORE_SUCCESS,
@@ -39,7 +41,7 @@ export const getDetailStore = id => async dispatch => {
 export const updateStore = data => {
   return new Promise((resolve, reject) => {
     axios
-      .put('store', data)
+      .put('user', data)
       .then(res => {
         resolve(res.data);
       })
@@ -52,7 +54,7 @@ export const updateStore = data => {
 export const createProductStore = data => {
   return new Promise((resolve, reject) => {
     axios
-      .put('address', data)
+      .post('product', data)
       .then(res => {
         resolve(res.data);
       })

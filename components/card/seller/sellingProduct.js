@@ -1,9 +1,13 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable prefer-const */
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Cookies from 'js-cookie';
+// import Image from 'next/image';
+// import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
-import box from '../../../assets/icons/box.png';
+// import box from '../../../assets/icons/box.png';
 import FormAddProduct from '../../form/form-addProduct';
 import RadioInput from '../../Input/radio';
 import ButtonSuccess from '../../Button/button-success';
@@ -14,24 +18,12 @@ import FormAddBrand from '../../form/form-brand';
 import FormAddCategory from '../../form/form-category';
 
 export default function sellingProduct() {
-  const [images, setImages] = useState([]);
-  const [imageURLS, setImageURLS] = useState([]);
-
-  const uploadImageToClient = event => {
-    if (event.target.files && event.target.files[0]) {
-      setImages(imageList => [...imageList, event.target.files[0]]);
-      setImageURLS(urlList => [...urlList, URL.createObjectURL(event.target.files[0])]);
-    }
-  };
-
   // integrasi
   const dispatch = useDispatch();
-  const token = Cookies.get('token');
 
   const allCategory = useSelector((state) => {
     return state.allCategory;
   });
-
   const allBrand = useSelector((state) => {
     return state.allBrand;
   });
@@ -46,33 +38,148 @@ export default function sellingProduct() {
 
   const [form, setForm] = useState({
     category_id: '',
-    productName: '',
+    product_name: '',
     brand_id: '',
     price: '',
     stock: '',
-    store_description: '',
-    product_color: '',
-    condition: '',
-    product_image: '',
-    product_size: ''
+    description: '',
+    is_new: '',
+    product_color: [],
+    photo: [],
+    product_size: []
   });
 
+  const [images, setImages] = useState([]);
+
+  const fileSelectedHandler = (e) => {
+    setImages([...images, e.target.files[0]]);
+    // setForm({ ...form, photo: e.target.files[0] });
+  };
+
+  // console.log(images);
+
+  // Image
+  // const addImage = () => {
+  //   setForm({
+  //     ...form,
+  //     photo: [
+  //       ...form.photo,
+  //     ]
+  //   });
+  // };
+
+  // const handleInputImage = (e, index) => {
+  //   const newImage = form.photo.map((item, i) => {
+  //     if (i === index) {
+  //       return {
+  //         ...item,
+  //         e
+  //       };
+  //     }
+  //     return item;
+  //   });
+
+  //   setForm({
+  //     ...form,
+  //     photo: newImage,
+  //   });
+  //   console.log(form.photo);
+  // };
+
+  // const deleteImage = (index) => {
+  //   const newImage = form.photo.filter((item, i) => {
+  //     if (i !== index) {
+  //       return item;
+  //     }
+  //   });
+  //   setForm({
+  //     ...form,
+  //     photo: newImage,
+  //   });
+  // };
+
+  console.log(JSON.stringify(form.product_color));
+
+  // Color
+  const addIColor = () => {
+    setForm({
+      ...form,
+      product_color: [
+        ...form.product_color,
+        {
+          color_name: '',
+          color_value: ''
+        }
+      ]
+    });
+  };
+  const handleInputColor = (e, index) => {
+    const newColor = form.product_color.map((item, i) => {
+      if (i === index) {
+        return {
+          ...item,
+          [e.target.id]: e.target.value,
+        };
+      }
+      return item;
+    });
+
+    setForm({
+      ...form,
+      product_color: newColor,
+    });
+  };
+
+  // Size;
+  const addSize = () => {
+    setForm({
+      ...form,
+      product_size: [
+        ...form.product_size,
+        {
+          size: ''
+        }
+      ]
+    });
+  };
+  const handleInputSize = (e, index) => {
+    const newSize = form.product_size.map((item, i) => {
+      if (i === index) {
+        return {
+          ...item,
+          [e.target.id]: e.target.value,
+        };
+      }
+      return item;
+    });
+
+    setForm({
+      ...form,
+      product_size: newSize,
+    });
+  };
   const createProduct = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append('category_id', form.category_id);
-    formData.append('product_name', form.productName);
+    formData.append('product_name', form.product_name);
     formData.append('brand_id', form.brand_id);
     formData.append('price', form.price);
     formData.append('stock', form.stock);
-    formData.append('description', form.store_description);
-    formData.append('product_color', form.product_color);
-    formData.append('is_new', form.condition);
-    formData.append('product_image', form.product_image);
-    formData.append('product_size', form.product_size);
+    formData.append('description', form.description);
+    formData.append('is_new', form.is_new);
+    // form.product_color.map((item) => {
+    //   formData.append('color_name', item.color_name);
+    //   formData.append('color_value', item.color_value);
+    // });
+    // form.product_size.map((item) => {
+    //   formData.append('size', item.size);
+    // });
+    formData.append('product_color', JSON.stringify(form.product_color));
+    // formData.append('photo', images);
 
-    createProductStore(formData, token)
+    createProductStore(formData)
       .then((res) => {
         console.log(res);
       })
@@ -81,7 +188,7 @@ export default function sellingProduct() {
       });
   };
 
-  console.log(form);
+  // console.log(form);
   return (
     <div>
       <form onSubmit={(e) => createProduct(e)}>
@@ -90,73 +197,121 @@ export default function sellingProduct() {
             <h5 className="text-black relative ml-10 text-l font-bold">Inventory</h5>
             <hr className="text-gray mt-3" />
             <div className="ml-10">
-              <FormAddProduct onChange={(e) => setForm({ ...form, productName: e.target.value })} title="Name of goods" id="name" />
-              {allBrand.isLoading ? (
-                <div>Loading</div>
-              ) : (
-                <FormAddBrand onChange={(e) => setForm({ ...form, brand_id: e.target.value })} brand={allBrand} title="Brand" id="category" />
-              )}
-
-              {allCategory.isLoading ? (
-                <div>Loading</div>
-              ) : (
-                <FormAddCategory onChange={(e) => setForm({ ...form, category_id: e.target.value })} category={allCategory} title="Category" id="brand" />
-              )}
+              <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                <FormAddProduct onChange={(e) => setForm({ ...form, product_name: e.target.value })} title="Name of goods" id="product_name" />
+                {allBrand.isLoading ? (
+                  <div>Loading</div>
+                ) : (
+                  <FormAddBrand onChange={(e) => setForm({ ...form, brand_id: e.target.value })} brand={allBrand} title="Brand" id="category" />
+                )}
+              </div>
+              <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                {allCategory.isLoading ? (
+                  <div>Loading</div>
+                ) : (
+                  <FormAddCategory onChange={(e) => setForm({ ...form, category_id: e.target.value })} category={allCategory} title="Category" id="brand" />
+                )}
+                <FormAddProduct onChange={(e) => setForm({ ...form, price: e.target.value })} title="Unit price" id="price" />
+              </div>
+              <div className="flex flex-col sm:flex sm:flex-col md:flex md:flex-row lg:flex lg:flex-row">
+                <FormAddProduct onChange={(e) => setForm({ ...form, stock: e.target.value })} title="Stock" id="stock" />
+                <div className="flex flex-col">
+                  <p className="text-gray mt-5 mb-2">Condition</p>
+                  <div className="flex">
+                    <RadioInput onChange={(e) => setForm({ ...form, is_new: e.target.value })} id="new" name="is_new" title="Baru" value="1" />
+                    <RadioInput onChange={(e) => setForm({ ...form, is_new: e.target.value })} id="old" name="is_new" title="Bekas" value="0" />
+                  </div>
+                </div>
+              </div>
 
             </div>
           </div>
+          {/* color */}
           <CardForm>
-            <h5 className="text-black relative ml-10 text-lg font-bold">Item details</h5>
+            <h5 className="text-black relative ml-10 text-lg font-bold">Product Color</h5>
             <hr className="text-gray mt-3" />
-            <div className="flex flex-col ml-10">
-              <FormAddProduct onChange={(e) => setForm({ ...form, price: e.target.value })} title="Unit price" id="price" />
-              <FormAddProduct onChange={(e) => setForm({ ...form, stock: e.target.value })} title="Stock" id="stock" />
-              <FormAddProduct onChange={(e) => setForm({ ...form, product_color: e.target.value })} title="Color" id="color" />
-              <FormAddProduct onChange={(e) => setForm({ ...form, product_size: e.target.value })} title="Size" id="name" />
-              <p className="text-gray mt-5 mb-2">Condition</p>
-              <div className="flex">
-                <RadioInput onChange={(e) => setForm({ ...form, condition: e.target.value })} id="new" name="condition" title="Baru" value="baru" />
-                <RadioInput onChange={(e) => setForm({ ...form, condition: e.target.value })} id="old" name="condition" title="Bekas" value="bekas" />
+            <div className="flex flex-col">
+              {form.product_color.map((item, index) => (
+                <div key={index}>
+                  <FormAddProduct onChange={(e) => handleInputColor(e, index)} value={item.color_name} title="Color Name" id="color_name" />
+                  <div className="flex flex-col mt-5">
+                    <label className="text-gray max-w-[150px] text-sm mb-1 cursor-pointer"> Color</label>
+                    <input
+                      className="w-52 sm:w-52 md:w-80 lg:w-80 xl:w-80 border-gray border-2 border-solid h-10 rounded focus:outline-none px-3"
+                      type="color"
+                      id="color_value"
+                      value={item.color_value}
+                      onChange={(e) => handleInputColor(e, index)}
+                    />
+                  </div>
+                  <hr className="text-gray w-full mt-8" />
+                </div>
+              ))}
+              {/* <hr className="text-gray w-full mt-8" /> */}
+              <div className="flex justify-center mt-5">
+                <ButtonSuccess onClick={addIColor} action="Add Color" className="p-[5px]" />
               </div>
             </div>
           </CardForm>
-
+          {/* size */}
           <CardForm>
-            <h5 className="text-black relative ml-10 text-lg font-bold">Photo of goods</h5>
+            <h5 className="text-black relative ml-10 text-lg font-bold">Product Size</h5>
+            <hr className="text-gray mt-3" />
+            <div className="flex flex-col">
+              {form.product_size.map((item, index) => (
+                <div key={index}>
+                  <FormAddProduct
+                    onChange={(e) => handleInputSize(e, index)}
+                    title="Size"
+                    id="size"
+                    value={item.size}
+                    type="number"
+                  />
+                  <hr className="text-gray w-full mt-8" />
+                </div>
+              ))}
+
+              <div className="flex justify-center mt-5">
+                <ButtonSuccess onClick={addSize} action="Add Foto" className="p-[5px]" />
+              </div>
+            </div>
+          </CardForm>
+          {/* photo */}
+          <CardForm>
+            <h5 className="text-black relative ml-10 text-lg font-bold">Photo</h5>
             <hr className="text-gray mt-3" />
             <div className="border-2 border-dashed border-gray opacity-60 m-6 p-7 mx-10 flex flex-col justify-center">
-              <div className="">
-                <div className="flex justify-between items-center">
-                  {images.length < 4 ? (
-                    <label
-                      className="bg-gray-light w-40 h-40 cursor-pointer flex items-center justify-center rounded"
-                      htmlFor="id"
-                    >
-                      <Image src={box} />
-                    </label>
-                  ) : null}
-                  <input type="file" onChange={uploadImageToClient} id="id" hidden />
-                  {images.map((file, index) => {
-                    return (
-                      <div className="flex-end m-2">
-                        <Image src={imageURLS[index]} width={150} height={150} className="z-9 object-cover" />
-                      </div>
-                    );
-                  })}
-                </div>
+              {/* <div className="">
+                {form.photo.map((item, index) => (
+                  <div className="flex justify-center items-center">
+                    <div key={index} className="flex flex-row justify-between items-center relative">
+                      <label
+                        className="bg-gray-light w-40 h-40 cursor-pointer flex items-center justify-center  rounded"
+                        htmlFor="id"
+                      >
+                        <Image src={box} />
+                      </label>
+                      <button className="absolute font-bold -top-2 -right-2 text-primary">X</button>
+
+                      <input type="file" multiple="multiple" onChange={(e) => handleInputImage(e.target.files[0], index)} id="id" hidden />
+
+                    </div>
+                  </div>
+                ))}
                 <hr className="text-gray w-full mt-8" />
                 <div className="flex justify-center mt-5">
-                  <ButtonSuccess action="Upload Foto" className="p-[5px]" />
+                  <ButtonSuccess onClick={addImage} action="Add Foto" className="p-[5px]" />
                 </div>
-              </div>
+              </div> */}
+              <input type="file" multiple="multiple" onChange={(e) => fileSelectedHandler(e)} />
             </div>
           </CardForm>
-
+          {/* description */}
           <CardForm>
             <h5 className="text-black relative ml-10 text-lg font-bold">Description</h5>
             <hr className="text-gray mt-3" />
             <div className="opacity-60 m-6 mx-10 flex flex-col justify-center rounded">
-              <textarea onChange={(e) => setForm({ ...form, store_description: e.target.value })} className="border-solid border-2 rounded border-gray max-h-60 min-h-[15rem] focus:outline-none p-5" />
+              <textarea onChange={(e) => setForm({ ...form, description: e.target.value })} className="border-solid border-2 rounded border-gray max-h-60 min-h-[15rem] focus:outline-none p-5" />
             </div>
           </CardForm>
           <div className="flex justify-end mt-5">
