@@ -108,6 +108,8 @@ const Customer = () => {
       });
   };
 
+  console.log(form.photo);
+
   return (
     <div>
       <Head>
@@ -123,17 +125,17 @@ const Customer = () => {
                 : (
                   <img
                     src={form.photo
-                      ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                      : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                      ? `https://drive.google.com/uc?export=view&id=${form.photo}`
+                      : 'https://drive.google.com/uc?export=view&id=default.png'}
                     alt=""
                     width="100px"
                     height="100px"
                     className="rounded-[100%] mb-9"
-                    onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${detailProfile.data.profile.photo}`; }}
+                    onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data.profile.photo}`; }}
                   />
                 )}
               <div className="flex flex-col ml-2">
-                <label className="ml-3 mb-2 font-semibold">{ form.name}</label>
+                <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[120px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">{ form.name}</label>
                 <Image className="cursor-pointer hidden" src={edit} />
               </div>
             </div>
@@ -211,12 +213,33 @@ const Customer = () => {
               open={isOpen}
               onClose={toggleDrawer}
               direction="left"
-              style={{ width: '170px' }}
+              style={{ width: '200px' }}
+              zIndex={3000}
             >
+              <div className="mt-10 flex flex-row">
+                {detailProfile.isLoading ? (<div>Laoding</div>)
+                  : (
+                    <img
+                      src={form.photo
+                        ? `https://drive.google.com/uc?export=view&id=${form.photo}`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'}
+                      alt=""
+                      width="100px"
+                      height="100px"
+                      className="rounded-[100%] mb-9"
+                      onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data.profile.photo}`; }}
+                    />
+                  )}
+                <div className="flex flex-col ml-2">
+                  <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[75px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">{ form.name}</label>
+                  <Image className="cursor-pointer hidden" width={25} height={25} src={edit} />
+                </div>
+              </div>
+
               <div className="">
                 {/* sidebar */}
                 {showSideBar === 0 ? (
-                  <div className="flex flex-col w-full mt-10">
+                  <div className="flex flex-col w-full">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={myaccount} />
@@ -297,7 +320,7 @@ const Customer = () => {
                       <Input onChange={(e) => setForm({ ...form, name: e.target.value })} name="Name" type="text" value={form.name} />
                       <Input name="Email" value={form.email} type="text" readonly />
                       <Input onChange={(e) => setForm({ ...form, phone: e.target.value })} name="Phone Number" value={form.phone} type="text" />
-                      <div className="flex mr-0 sm:mr-0 md:mr-[150px] lg-mr-[150px] xl:mr-[150px]">
+                      <div className="flex -mr-4 sm:-mr-4 md:mr-[150px] lg-mr-[150px] xl:mr-[150px]">
                         <label className="mr-5 text-[#9B9B9B]">Gender</label>
                         <RadioButton onChange={(e) => setForm({ ...form, gender: e.target.value })} value={form.gender} />
                       </div>
@@ -308,13 +331,13 @@ const Customer = () => {
                         : (
                           <img
                             src={form.photo
-                              ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                              : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                              ? `https://drive.google.com/uc?export=view&id=${form.photo}`
+                              : 'https://drive.google.com/uc?export=view&id=default.png'}
                             alt=""
                             width="100px"
                             height="100px"
                             className="rounded-[100%] mb-9"
-                            onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${detailProfile.data.profile.photo}`; }}
+                            onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data.profile.photo}`; }}
                           />
                         )}
                       <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />

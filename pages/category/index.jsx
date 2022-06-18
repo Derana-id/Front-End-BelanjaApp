@@ -63,7 +63,7 @@ const Category = () => {
               : getAll.data.map((item, index) => (
                   <>
                     {item.category.length > 0 ? (
-                      item.category[0].category_name === query ? (
+                      item.category[0].category_name.toLowerCase() === query.toLowerCase() ? (
                         <CardProducts
                           key={index}
                           productName={`${item.product.product_name}`}

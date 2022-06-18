@@ -54,7 +54,7 @@ export const updateStore = (data) => {
 export const createProductStore = (data) => {
   return new Promise((resolve, reject) => {
     axios
-      .put('address', data)
+      .post('product', data)
       .then(res => {
         resolve(res.data);
       })

@@ -4,7 +4,7 @@ import React from 'react';
 export default function FormAddCategory(params) {
   // console.log(params.category);
   return (
-    <div className="flex flex-col mt-5">
+    <div className="flex flex-col mt-5 mr-3">
       <label htmlFor={params.id} className="text-gray max-w-[150px] text-sm mb-1 cursor-pointer">
         {params.title}
       </label>

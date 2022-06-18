@@ -145,17 +145,17 @@ const Seller = () => {
                 : (
                   <img
                     src={form.photo
-                      ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                      : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                      ? `https://drive.google.com/uc?export=view&id=${form.photo}`
+                      : 'https://drive.google.com/uc?export=view&id=default.png'}
                     alt=""
                     width="100px"
                     height="100px"
                     className="rounded-[100%] mb-9"
-                    onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${detailStore.data.store.photo}`; }}
+                    onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data.store.photo}`; }}
                   />
                 )}
               <div className="flex flex-col ml-2">
-                <label className=" mb-2 font-semibold">{ form.store_name}</label>
+                <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[120px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">{ form.store_name}</label>
                 <Image className="cursor-pointer hidden" width={25} height={25} src={edit} />
               </div>
             </div>
@@ -361,12 +361,33 @@ const Seller = () => {
               open={isOpen}
               onClose={toggleDrawer}
               direction="left"
-              style={{ width: '170px' }}
+              style={{ width: '190px' }}
+              zIndex={3000}
             >
+              <div className="mt-10 flex flex-row">
+                {detailStore.isLoading ? (<div>Laoding</div>)
+                  : (
+                    <img
+                      src={form.photo
+                        ? `https://drive.google.com/uc?export=view&id=${form.photo}`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'}
+                      alt=""
+                      width="70px"
+                      height="70px"
+                      className="rounded-[100%] mb-9"
+                      onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data.store.photo}`; }}
+                    />
+                  )}
+                <div className="flex flex-col ml-2">
+                  <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[100px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">{ form.store_name}</label>
+                  <Image className="cursor-pointer hidden" width={25} height={25} src={edit} />
+                </div>
+              </div>
+
               <div>
                 {/* sidebar */}
                 {showSideBar === 0 ? (
-                  <div className="flex flex-col justify-center mt-10">
+                  <div className="flex flex-col justify-center">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
@@ -579,16 +600,15 @@ const Seller = () => {
                       : (
                         <img
                           src={form.photo
-                            ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                            : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                            ? `https://drive.google.com/uc?export=view&id=${form.photo}`
+                            : 'https://drive.google.com/uc?export=view&id=default.png'}
                           alt=""
                           width="100px"
                           height="100px"
                           className="rounded-[100%] mb-9"
-                          onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${detailStore.data.store.photo}`; }}
+                          onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data.store.photo}`; }}
                         />
                       )}
-
                     <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />
                     <label className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray" htmlFor="images">
                       Select image
