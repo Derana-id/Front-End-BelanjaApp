@@ -146,7 +146,7 @@ const Seller = () => {
                   <img
                     src={form.photo
                       ? `https://drive.google.com/uc?export=view&id=${form.photo}`
-                      : 'https://drive.google.com/uc?export=view&id=default.png'}
+                      : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
                     alt=""
                     width="100px"
                     height="100px"
@@ -370,7 +370,7 @@ const Seller = () => {
                     <img
                       src={form.photo
                         ? `https://drive.google.com/uc?export=view&id=${form.photo}`
-                        : 'https://drive.google.com/uc?export=view&id=default.png'}
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
                       alt=""
                       width="70px"
                       height="70px"
@@ -601,7 +601,7 @@ const Seller = () => {
                         <img
                           src={form.photo
                             ? `https://drive.google.com/uc?export=view&id=${form.photo}`
-                            : 'https://drive.google.com/uc?export=view&id=default.png'}
+                            : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
                           alt=""
                           width="100px"
                           height="100px"
