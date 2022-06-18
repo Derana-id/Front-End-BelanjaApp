@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import JwtDecode from 'jwt-decode';
 import Close from '../../../assets/icons/close.svg';
-import { createAddressBuyer, updateAddressBuyer, getAddress } from '../../../redux/actions/userProfile';
+import { createAddressBuyer, updateAddressBuyer, deleteAddressBuyer, getAddress } from '../../../redux/actions/userProfile';
 import { getDetailAddress } from '../../../redux/actions/address';
 import { toastify } from '../../../utils/toastify';
 
@@ -13,6 +14,7 @@ export default function CardAddress() {
   const [showModal, setShowModal] = useState();
   const [showEditModal, setShowEditModal] = useState();
   const [id, setID] = useState('');
+  const router = useRouter();
   
   const dispatch = useDispatch();
   const myAddress = useSelector((state) => {
@@ -62,7 +64,7 @@ export default function CardAddress() {
 
   console.log(myDetailAddress);
   
-  const onAddAdress = (e) => {
+  const onAddAddress = (e) => {
     e.preventDefault();
 
     createAddressBuyer(form)
@@ -72,6 +74,7 @@ export default function CardAddress() {
           text: res.message,
           icon: 'success'
         });
+        router.push('/checkout');
       })
       .catch((err) => {
         if (err.response.data.code === 422) {
@@ -87,7 +90,7 @@ export default function CardAddress() {
       });
   };
 
-  const onEditAddress = (e) => {
+  const onEditAddress = (e, id) => {
     e.preventDefault();
   
     const formData = new FormData();
@@ -98,7 +101,7 @@ export default function CardAddress() {
     formData.append('postalCode', form.postalCode);
     formData.append('city', form.city);
       
-    updateAddressBuyer(form)
+    updateAddressBuyer(id, formData)
       .then((res) => {
         Swal.fire({
           title: 'success',
@@ -120,7 +123,32 @@ export default function CardAddress() {
         }
       });
   };
-  //console.log(id)
+  console.log(getDetailAddress(id));
+
+  const onDeleteAddress = (e, id) => {
+    e.preventDefault();
+
+    deleteAddressBuyer(id)
+      .then((res) => {
+        Swal.fire({
+          title: 'success',
+          text: res.message,
+          icon: 'success'
+        });
+      })
+      .catch((err) => {
+        if (err.response.data.code === 422) {
+          const { error } = err.response.data;
+          error.map(item => toastify(item, 'error'));
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: err.response.data.message,
+            icon: 'error'
+          });
+        }
+      });
+  };
 
   return (
     <div>
@@ -143,7 +171,7 @@ export default function CardAddress() {
               </p>
 
               <button type="button" onClick={(e) => clickDetail(e, items.id)} className="m-2 font-bold text-primary">Change address</button>
-              <button type="button" className="m-2 font-bold text-gray">Delete address</button>
+              <button type="button" onClick={(e) => onDeleteAddress(e, items.id)} className="m-2 font-bold text-gray">Delete address</button>
             </div>
           ))
         )}
@@ -151,7 +179,7 @@ export default function CardAddress() {
       </div>
       {showModal ? (
         <>
-          <form onSubmit={(e) => onAddAdress(e)}>
+          <form onSubmit={(e) => onAddAddress(e)}>
             <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
               <div className="relative w-auto max-w-4xl mx-auto my-6">
                 {/* content */}
@@ -231,7 +259,7 @@ export default function CardAddress() {
       ) : null}
       {showEditModal ? (
         <>
-          <form onSubmit={(e) => onEditAddress(e)}>
+          <form onSubmit={(e) => onEditAddress(e, id)}>
             <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
               <div className="relative w-auto max-w-4xl mx-auto my-6">
                 {/* content */}

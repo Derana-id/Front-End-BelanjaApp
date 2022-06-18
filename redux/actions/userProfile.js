@@ -120,15 +120,10 @@ export const createAddressBuyer = (data) => {
   });
 };
 
-export const updateAddressBuyer = (id, data, token) => {
+export const updateAddressBuyer = (id, data) => {
   return new Promise((resolve, reject) => {
     axios
-      .put(`address/${id}`, data, {
-        headers: {
-          token,
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+      .put(`address/${id}`, data)
       .then(res => {
         resolve(res.data);
       })
@@ -138,10 +133,10 @@ export const updateAddressBuyer = (id, data, token) => {
   });
 };
 
-export const deleteAddressBuyer = (id, data) => {
+export const deleteAddressBuyer = (id) => {
   return new Promise((resolve, reject) => {
     axios
-      .put(`address/delete/${id}`, data)
+      .put(`address/delete/${id}`)
       .then(res => {
         resolve(res.data);
       })

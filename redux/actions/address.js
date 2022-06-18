@@ -1,5 +1,6 @@
-import axios from '../../utils/axios';
 import Cookies from 'js-cookie';
+import Router from 'next/router';
+import axios from '../../utils/axios';
 
 import {
   GET_USER_ADDRESS_PENDING,
@@ -10,15 +11,14 @@ import {
   GET_USER_ADDRESS_DETAIL_FAILED
 } from '../types';
 
-export const getListOfMyAddress = (Router) => async (dispatch) => {
+export const getListOfMyAddress = () => async (dispatch) => {
   try {
     dispatch({
       type: GET_USER_ADDRESS_PENDING,
       payload: null,
     });
 
-    const res = await axios.get(`myaddress`);
-    console.log(res.data)
+    const res = await axios.get('myaddress');
 
     dispatch({
       type: GET_USER_ADDRESS_SUCCESS,
@@ -102,7 +102,7 @@ export const getDetailAddress = (id) => async (dispatch) => {
 
 export const addAddress = async (body, setErrors) => {
   try {
-    await axios.post(`address`, body);
+    await axios.post('address', body);
 
     return true;
   } catch (error) {
