@@ -1,15 +1,10 @@
-/* eslint-disable default-param-last */
-import {
-  GET_MY_ADDRESS_FAILED,
-  GET_MY_ADDRESS_PENDING,
-  GET_MY_ADDRESS_SUCCESS,
-} from '../types';
+import { GET_MY_ADDRESS_FAILED, GET_MY_ADDRESS_PENDING, GET_MY_ADDRESS_SUCCESS } from '../types';
 
 const initialState = {
   isLoading: false,
   isError: false,
   data: [],
-  error: null,
+  error: null
 };
 
 const myAddressReducer = (state = initialState, action) => {
@@ -21,14 +16,14 @@ const myAddressReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: false,
-        data: action.payload.data,
+        data: action.payload.data
       };
     case GET_MY_ADDRESS_FAILED:
       return {
         ...state,
         isLoading: false,
         isError: true,
-        error: action.payload,
+        error: action.payload
       };
     default:
       return state;

@@ -6,10 +6,7 @@ import {
   GET_DETAIL_USER_FAILED,
   GET_MY_ORDER_PENDING,
   GET_MY_ORDER_SUCCESS,
-  GET_MY_ORDER_FAILED,
-  GET_MY_ADDRESS_PENDING,
-  GET_MY_ADDRESS_SUCCESS,
-  GET_MY_ADDRESS_FAILED
+  GET_MY_ORDER_FAILED
 } from '../types';
 
 export const getDetailUser = (id, token) => async dispatch => {
@@ -19,12 +16,9 @@ export const getDetailUser = (id, token) => async dispatch => {
       payload: null
     });
 
-    const res = await axios.get(
-      `user/${id}`,
-      {
-        headers: { token },
-      }
-    );
+    const res = await axios.get(`user/${id}`, {
+      headers: { token }
+    });
 
     dispatch({
       type: GET_DETAIL_USER_SUCCESS,
@@ -139,25 +133,4 @@ export const deleteAddressBuyer = (id) => {
         reject(err);
       });
   });
-};
-
-export const getAddress = () => async dispatch => {
-  try {
-    dispatch({
-      type: GET_MY_ADDRESS_PENDING,
-      payload: null
-    });
-
-    const res = await axios.get('myaddress');
-
-    dispatch({
-      type: GET_MY_ADDRESS_SUCCESS,
-      payload: res.data
-    });
-  } catch (error) {
-    dispatch({
-      type: GET_MY_ADDRESS_FAILED,
-      payload: error.message
-    });
-  }
 };

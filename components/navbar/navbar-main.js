@@ -82,8 +82,6 @@ export default function MainNavbar(req) {
     dispatch(getPopularProducts(getSearch));
   };
 
-  // console.log(getProfile);
-
   return (
     <div>
       {isLoading ? (
