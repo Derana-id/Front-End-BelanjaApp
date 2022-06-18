@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-console */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
@@ -8,6 +9,11 @@ import { getDetailMyProduct } from '../../../redux/actions/storeProfile';
 
 export default function cardMyorder(params) {
   const [showNav, setFormShowNav] = useState(0);
+  const dispatch = useDispatch();
+
+  const myProduct = useSelector((state) => {
+    return state.myProduct;
+  });
 
   const setCurrentShow = index => {
     setFormShowNav(index);
@@ -16,7 +22,7 @@ export default function cardMyorder(params) {
     rows: {
       style: {
         minHeight: '72px', // override the row height
-        border: '2px solid #F6F6F6'
+        border: '3px solid #F6F6F6'
       },
     },
     headCells: {
@@ -24,7 +30,7 @@ export default function cardMyorder(params) {
         paddingLeft: '8px', // override the cell padding for head cells
         paddingRight: '8px',
         backgroundColor: '#F6F6F6',
-        border: '2px solid #F6F6F6'
+        border: '2px solid #F6F6F6',
       },
     },
     cells: {
@@ -38,11 +44,12 @@ export default function cardMyorder(params) {
   const columns = [
     {
       name: 'Product name',
-      selector: row => row.product,
+      selector: row => row.product_name,
     },
     {
       name: 'Price',
       selector: row => row.price,
+      // style: { marginLeft: '300px' }
     },
     {
       name: 'Stock',
@@ -52,27 +59,18 @@ export default function cardMyorder(params) {
 
   // integrasi
 
-  const data = [
-    {
-      id: 1,
-      product: 'Beetlejuice',
-      price: '10.000',
-      stock: '100',
-      jaja: 'kafl'
-    },
-  ];
+  let data = [];
+  if (myProduct.data) {
+    myProduct.data.map((item) => (
+      data.push(item.product)
+    ));
+  }
 
-  const dispatch = useDispatch();
-
-  const myProduct = useSelector((state) => {
-    return state.myProduct;
-  });
-
-  console.log(myProduct);
+  console.log(data);
 
   useEffect(() => {
-    dispatch(getDetailMyProduct);
-  });
+    dispatch(getDetailMyProduct());
+  }, [dispatch]);
 
   return (
     <div className="flex flex-col bg-white rounded w-3/4 h-auto mt-[120px] mx-12">
