@@ -28,7 +28,13 @@ export default function middleware(req) {
   if (decoded.level === 2 && pathname === '/profile/seller') {
     return NextResponse.redirect(`${origin}/profile/customer`);
   }
-  if (decoded.level === 1 && pathname === '/profile/customer') {
+  if (
+    (decoded.level === 1 && pathname === '/profile/customer') ||
+    pathname === '/mybag' ||
+    pathname === '/' ||
+    pathname === '/checkout' ||
+    pathname === '/products'
+  ) {
     return NextResponse.redirect(`${origin}/profile/seller`);
   }
 }
