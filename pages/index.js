@@ -146,13 +146,15 @@ function Home({ deviceType }) {
                         price={`$ ${item.product.price}`}
                         user={`${item.store[0].store_name}`}
                         onClick={() => onDetail(item.product.id)}
-                        // img={`${
-                        //   item.image[0].photo
-                        //     ? `https://drive.google.com/uc?export=view&id=${item.image[0].photo}`
-                        //     : `https://drive.google.com/uc?export=view&id=
-                        //     default.png`
-                        // }`}
-                        img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
+                        img={`${
+                          item.image.length >= 0
+                            ? `https://drive.google.com/uc?export=view&id=${
+                                item.image[0] ? item.image[0].photo : 'default.png'
+                              }`
+                            : `https://drive.google.com/uc?export=view&id=
+                            default.png`
+                        }`}
+                        // img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
                       />
                     </div>
                   ))
@@ -183,8 +185,15 @@ function Home({ deviceType }) {
                         price={`$ ${item.product.price}`}
                         user={`${item.store[0].store_name}`}
                         onClick={() => onDetail(item.product.id)}
-                        // img={`https://drive.google.com/uc?export=view&id=${item.image[0].photo}`}
-                        img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
+                        img={`${
+                          item.image.length >= 0
+                            ? `https://drive.google.com/uc?export=view&id=${
+                                item.image[0] ? item.image[0].photo : 'default.png'
+                              }`
+                            : `https://drive.google.com/uc?export=view&id=
+                            default.png`
+                        }`}
+                        // img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
                       />
                     </div>
                   ))
