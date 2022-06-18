@@ -98,6 +98,8 @@ export default function sellingProduct() {
   //   });
   // };
 
+  console.log(JSON.stringify(form.product_color));
+
   // Color
   const addIColor = () => {
     setForm({
@@ -156,7 +158,6 @@ export default function sellingProduct() {
       product_size: newSize,
     });
   };
-
   const createProduct = (e) => {
     e.preventDefault();
 
@@ -175,6 +176,7 @@ export default function sellingProduct() {
     // form.product_size.map((item) => {
     //   formData.append('size', item.size);
     // });
+    formData.append('product_color', JSON.stringify(form.product_color));
     // formData.append('photo', images);
 
     createProductStore(formData)
@@ -186,7 +188,7 @@ export default function sellingProduct() {
       });
   };
 
-  console.log(form);
+  // console.log(form);
   return (
     <div>
       <form onSubmit={(e) => createProduct(e)}>
