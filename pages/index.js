@@ -107,7 +107,7 @@ function Home({ deviceType }) {
                       return (
                         <div key={index} className="w-full h-full p-2">
                           <Image
-                            src={`${process.env.NEXT_PUBLIC_API_URL}uploads/categories/${each.photo}`}
+                            src={`https://drive.google.com/uc?export=view&id=${each.photo}`}
                             className="rounded-lg shadow-xl cursor-pointer"
                             width={206}
                             height={220}
@@ -146,7 +146,15 @@ function Home({ deviceType }) {
                         price={`$ ${item.product.price}`}
                         user={`${item.store[0].store_name}`}
                         onClick={() => onDetail(item.product.id)}
-                        img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                        img={`${
+                          item.image.length >= 0
+                            ? `https://drive.google.com/uc?export=view&id=${
+                                item.image[0] ? item.image[0].photo : 'default.png'
+                              }`
+                            : `https://drive.google.com/uc?export=view&id=
+                            default.png`
+                        }`}
+                        // img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
                       />
                     </div>
                   ))
@@ -177,7 +185,15 @@ function Home({ deviceType }) {
                         price={`$ ${item.product.price}`}
                         user={`${item.store[0].store_name}`}
                         onClick={() => onDetail(item.product.id)}
-                        img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                        img={`${
+                          item.image.length >= 0
+                            ? `https://drive.google.com/uc?export=view&id=${
+                                item.image[0] ? item.image[0].photo : 'default.png'
+                              }`
+                            : `https://drive.google.com/uc?export=view&id=
+                            default.png`
+                        }`}
+                        // img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
                       />
                     </div>
                   ))
@@ -246,5 +262,6 @@ function Home({ deviceType }) {
   );
 }
 
-Home.layouts = 'ThridLayout';
+Home.layouts = 'MainLayout';
+
 export default Home;

@@ -33,7 +33,7 @@ const Seller = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState);
+    setIsOpen(prevState => !prevState);
   };
   const onSetNav = () => {
     if (showNav === 1) {
@@ -69,7 +69,7 @@ const Seller = () => {
     decoded = JwtDecode(token);
   }
 
-  const detailStore = useSelector((state) => {
+  const detailStore = useSelector(state => {
     return state.detailStore;
   });
 
@@ -98,7 +98,7 @@ const Seller = () => {
     }
   }, [detailStore]);
 
-  const onEditStore = (e) => {
+  const onEditStore = e => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -109,7 +109,7 @@ const Seller = () => {
     formData.append('photo', form.photo);
 
     updateStore(formData, token)
-      .then((res) => {
+      .then(res => {
         Swal.fire({
           title: 'success',
           text: res.message,
@@ -117,7 +117,7 @@ const Seller = () => {
         });
         dispatch(getDetailStore(decoded.id, token));
       })
-      .catch((err) => {
+      .catch(err => {
         if (err.response.data.code === 422) {
           const { error } = err.response.data;
           error.map(item => toastify(item, 'error'));
@@ -143,16 +143,18 @@ const Seller = () => {
             <div className="flex items-center">
               {/* <Image src={user} width={60} height={60} className="rounded-full" /> */}
               <img
-                src={form.photo
-                  ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                  : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                src={
+                  form.photo
+                    ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
+                    : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`
+                }
                 alt="store"
                 width="100px"
                 height="100px"
                 className="rounded-[100%]"
               />
               <div className="flex flex-col ml-2">
-                <label className=" mb-2 font-semibold">{ form.store_name}</label>
+                <label className=" mb-2 font-semibold">{form.store_name}</label>
                 <Image className="cursor-pointer hidden" width={25} height={25} src={edit} />
               </div>
             </div>
@@ -163,35 +165,51 @@ const Seller = () => {
                   <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
                   </div>
-                  <button onClick={onSetNav} className="ml-3 text-base cursor-pointer font-semibold">Store</button>
+                  <button onClick={onSetNav} className="ml-3 text-base cursor-pointer font-semibold">
+                    Store
+                  </button>
                 </div>
                 {showNav === 0 ? (
                   <div>
-                    <button onClick={() => setCurrentShow(0)} className="text-base ml-14 font-semibold cursor-pointer">Store profile</button>
+                    <button onClick={() => setCurrentShow(0)} className="text-base ml-14 font-semibold cursor-pointer">
+                      Store profile
+                    </button>
                   </div>
                 ) : null}
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
                   </div>
-                  <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">Product</button>
+                  <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">
+                    Product
+                  </button>
                 </div>
                 {showNav1 === 0 ? (
                   <div className="flex flex-col justify-start items-start">
-                    <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer ">My products</button>
-                    <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer ">Selling products</button>
+                    <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer ">
+                      My products
+                    </button>
+                    <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer ">
+                      Selling products
+                    </button>
                   </div>
                 ) : null}
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
                   </div>
-                  <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">Order</button>
+                  <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">
+                    Order
+                  </button>
                 </div>
                 {showNav2 === 0 ? (
                   <div className="flex flex-col justify-start items-start">
-                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">My order</button>
-                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">Order cancel</button>
+                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">
+                      My order
+                    </button>
+                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">
+                      Order cancel
+                    </button>
                   </div>
                 ) : null}
               </div>
@@ -201,35 +219,57 @@ const Seller = () => {
                   <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
                   </div>
-                  <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">Store</button>
+                  <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">
+                    Store
+                  </button>
                 </div>
                 {showNav === 0 ? (
                   <div>
-                    <button onClick={() => setCurrentShow(0)} className="text-base ml-14 focus:text-gray cursor-pointer">Store profile</button>
+                    <button
+                      onClick={() => setCurrentShow(0)}
+                      className="text-base ml-14 focus:text-gray cursor-pointer"
+                    >
+                      Store profile
+                    </button>
                   </div>
                 ) : null}
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
                   </div>
-                  <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer font-semibold">Product</button>
+                  <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer font-semibold">
+                    Product
+                  </button>
                 </div>
                 {showNav1 === 0 ? (
                   <div className="flex flex-col justify-start items-start">
-                    <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer font-semibold">My products</button>
-                    <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer ">Selling products</button>
+                    <button
+                      onClick={() => setCurrentShow(1)}
+                      className="ml-14 text-base mb-3 cursor-pointer font-semibold"
+                    >
+                      My products
+                    </button>
+                    <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer ">
+                      Selling products
+                    </button>
                   </div>
                 ) : null}
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
                   </div>
-                  <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">Order</button>
+                  <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">
+                    Order
+                  </button>
                 </div>
                 {showNav2 === 0 ? (
                   <div className="flex flex-col justify-start items-start">
-                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">My order</button>
-                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">Order cancel</button>
+                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">
+                      My order
+                    </button>
+                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">
+                      Order cancel
+                    </button>
                   </div>
                 ) : null}
               </div>
@@ -239,35 +279,54 @@ const Seller = () => {
                   <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
                   </div>
-                  <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">Store</button>
+                  <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">
+                    Store
+                  </button>
                 </div>
                 {showNav === 0 ? (
                   <div>
-                    <button onClick={() => setCurrentShow(0)} className="text-base ml-14 focus:text-gray cursor-pointer">Store profile</button>
+                    <button
+                      onClick={() => setCurrentShow(0)}
+                      className="text-base ml-14 focus:text-gray cursor-pointer"
+                    >
+                      Store profile
+                    </button>
                   </div>
                 ) : null}
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
                   </div>
-                  <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer font-semibold">Product</button>
+                  <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer font-semibold">
+                    Product
+                  </button>
                 </div>
                 {showNav1 === 0 ? (
                   <div className="flex flex-col justify-start items-start">
-                    <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">My products</button>
-                    <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer font-semibold">Selling products</button>
+                    <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">
+                      My products
+                    </button>
+                    <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer font-semibold">
+                      Selling products
+                    </button>
                   </div>
                 ) : null}
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
                   </div>
-                  <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">Order</button>
+                  <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">
+                    Order
+                  </button>
                 </div>
                 {showNav2 === 0 ? (
                   <div className="flex flex-col justify-start items-start">
-                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">My order</button>
-                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">Order cancel</button>
+                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">
+                      My order
+                    </button>
+                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">
+                      Order cancel
+                    </button>
                   </div>
                 ) : null}
               </div>
@@ -277,35 +336,57 @@ const Seller = () => {
                   <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
                   </div>
-                  <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">Store</button>
+                  <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">
+                    Store
+                  </button>
                 </div>
                 {showNav === 0 ? (
                   <div>
-                    <button onClick={() => setCurrentShow(0)} className="text-base ml-14 focus:text-gray cursor-pointer">Store profile</button>
+                    <button
+                      onClick={() => setCurrentShow(0)}
+                      className="text-base ml-14 focus:text-gray cursor-pointer"
+                    >
+                      Store profile
+                    </button>
                   </div>
                 ) : null}
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
                   </div>
-                  <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">Product</button>
+                  <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">
+                    Product
+                  </button>
                 </div>
                 {showNav1 === 0 ? (
                   <div className="flex flex-col justify-start items-start">
-                    <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">My products</button>
-                    <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer">Selling products</button>
+                    <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">
+                      My products
+                    </button>
+                    <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer">
+                      Selling products
+                    </button>
                   </div>
                 ) : null}
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
                   </div>
-                  <button onClick={onSetNav3} className="ml-3 text-base font-semibold cursor-pointer">Order</button>
+                  <button onClick={onSetNav3} className="ml-3 text-base font-semibold cursor-pointer">
+                    Order
+                  </button>
                 </div>
                 {showNav2 === 0 ? (
                   <div className="flex flex-col justify-start items-start">
-                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer font-semibold">My order</button>
-                    <button onClick={() => setCurrentShow(4)} className="ml-14 text-base cursor-pointer ">Order cancel</button>
+                    <button
+                      onClick={() => setCurrentShow(3)}
+                      className="ml-14 text-base mb-3 cursor-pointer font-semibold"
+                    >
+                      My order
+                    </button>
+                    <button onClick={() => setCurrentShow(4)} className="ml-14 text-base cursor-pointer ">
+                      Order cancel
+                    </button>
                   </div>
                 ) : null}
               </div>
@@ -315,51 +396,64 @@ const Seller = () => {
                   <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
                   </div>
-                  <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">Store</button>
+                  <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">
+                    Store
+                  </button>
                 </div>
                 {showNav === 0 ? (
                   <div>
-                    <button onClick={() => setCurrentShow(0)} className="text-base ml-14 focus:text-gray cursor-pointer">Store profile</button>
+                    <button
+                      onClick={() => setCurrentShow(0)}
+                      className="text-base ml-14 focus:text-gray cursor-pointer"
+                    >
+                      Store profile
+                    </button>
                   </div>
                 ) : null}
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
                   </div>
-                  <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">Product</button>
+                  <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">
+                    Product
+                  </button>
                 </div>
                 {showNav1 === 0 ? (
                   <div className="flex flex-col justify-start items-start">
-                    <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">My products</button>
-                    <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer">Selling products</button>
+                    <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">
+                      My products
+                    </button>
+                    <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer">
+                      Selling products
+                    </button>
                   </div>
                 ) : null}
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
                   </div>
-                  <button onClick={onSetNav3} className="ml-3 text-base font-semibold cursor-pointer">Order</button>
+                  <button onClick={onSetNav3} className="ml-3 text-base font-semibold cursor-pointer">
+                    Order
+                  </button>
                 </div>
                 {showNav2 === 0 ? (
                   <div className="flex flex-col justify-start items-start">
-                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer">My order</button>
-                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer  font-semibold">Order cancel</button>
+                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer">
+                      My order
+                    </button>
+                    <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer  font-semibold">
+                      Order cancel
+                    </button>
                   </div>
                 ) : null}
               </div>
             )}
-
           </div>
         </div>
         <div className="w-full sm:w-full md:w-3/4 lg:w-3/4 xl:w-3/4 bg-[#F5F5F5] min-h-screen">
           <div className="w-full sm:w-full md:hidden lg:hidden xl:hidden mt-[80px] ml-[15px] absolute">
             <AiOutlineMenu onClick={toggleDrawer} />
-            <Drawer
-              open={isOpen}
-              onClose={toggleDrawer}
-              direction="left"
-              style={{ width: '170px' }}
-            >
+            <Drawer open={isOpen} onClose={toggleDrawer} direction="left" style={{ width: '170px' }}>
               <div>
                 {/* sidebar */}
                 {showSideBar === 0 ? (
@@ -368,35 +462,54 @@ const Seller = () => {
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
                       </div>
-                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer font-semibold">Store</button>
+                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer font-semibold">
+                        Store
+                      </button>
                     </div>
                     {showNav === 0 ? (
                       <div>
-                        <button onClick={() => setCurrentShow(0)} className="text-base ml-14 font-semibold cursor-pointer">Store profile</button>
+                        <button
+                          onClick={() => setCurrentShow(0)}
+                          className="text-base ml-14 font-semibold cursor-pointer"
+                        >
+                          Store profile
+                        </button>
                       </div>
                     ) : null}
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
                       </div>
-                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">Product</button>
+                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">
+                        Product
+                      </button>
                     </div>
                     {showNav1 === 0 ? (
                       <div className="flex flex-col justify-start items-start">
-                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer ">My products</button>
-                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer ">Selling products</button>
+                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer ">
+                          My products
+                        </button>
+                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer ">
+                          Selling products
+                        </button>
                       </div>
                     ) : null}
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
                       </div>
-                      <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">Order</button>
+                      <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">
+                        Order
+                      </button>
                     </div>
                     {showNav2 === 0 ? (
                       <div className="flex flex-col justify-start items-start">
-                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">My order</button>
-                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">Order cancel</button>
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">
+                          My order
+                        </button>
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">
+                          Order cancel
+                        </button>
                       </div>
                     ) : null}
                   </div>
@@ -406,35 +519,57 @@ const Seller = () => {
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
                       </div>
-                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">Store</button>
+                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">
+                        Store
+                      </button>
                     </div>
                     {showNav === 0 ? (
                       <div>
-                        <button onClick={() => setCurrentShow(0)} className="text-base ml-14 focus:text-gray cursor-pointer">Store profile</button>
+                        <button
+                          onClick={() => setCurrentShow(0)}
+                          className="text-base ml-14 focus:text-gray cursor-pointer"
+                        >
+                          Store profile
+                        </button>
                       </div>
                     ) : null}
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
                       </div>
-                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer font-semibold">Product</button>
+                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer font-semibold">
+                        Product
+                      </button>
                     </div>
                     {showNav1 === 0 ? (
                       <div className="flex flex-col justify-start items-start">
-                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer font-semibold">My products</button>
-                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer ">Selling products</button>
+                        <button
+                          onClick={() => setCurrentShow(1)}
+                          className="ml-14 text-base mb-3 cursor-pointer font-semibold"
+                        >
+                          My products
+                        </button>
+                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer ">
+                          Selling products
+                        </button>
                       </div>
                     ) : null}
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
                       </div>
-                      <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">Order</button>
+                      <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">
+                        Order
+                      </button>
                     </div>
                     {showNav2 === 0 ? (
                       <div className="flex flex-col justify-start items-start">
-                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">My order</button>
-                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">Order cancel</button>
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">
+                          My order
+                        </button>
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">
+                          Order cancel
+                        </button>
                       </div>
                     ) : null}
                   </div>
@@ -444,35 +579,57 @@ const Seller = () => {
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
                       </div>
-                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">Store</button>
+                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">
+                        Store
+                      </button>
                     </div>
                     {showNav === 0 ? (
                       <div>
-                        <button onClick={() => setCurrentShow(0)} className="text-base ml-14 focus:text-gray cursor-pointer">Store profile</button>
+                        <button
+                          onClick={() => setCurrentShow(0)}
+                          className="text-base ml-14 focus:text-gray cursor-pointer"
+                        >
+                          Store profile
+                        </button>
                       </div>
                     ) : null}
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
                       </div>
-                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer font-semibold">Product</button>
+                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer font-semibold">
+                        Product
+                      </button>
                     </div>
                     {showNav1 === 0 ? (
                       <div className="flex flex-col justify-start items-start">
-                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">My products</button>
-                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer font-semibold">Selling products</button>
+                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">
+                          My products
+                        </button>
+                        <button
+                          onClick={() => setCurrentShow(2)}
+                          className="ml-14 text-base cursor-pointer font-semibold"
+                        >
+                          Selling products
+                        </button>
                       </div>
                     ) : null}
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
                       </div>
-                      <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">Order</button>
+                      <button onClick={onSetNav3} className="ml-3 text-base  cursor-pointer">
+                        Order
+                      </button>
                     </div>
                     {showNav2 === 0 ? (
                       <div className="flex flex-col justify-start items-start">
-                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">My order</button>
-                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">Order cancel</button>
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer ">
+                          My order
+                        </button>
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer ">
+                          Order cancel
+                        </button>
                       </div>
                     ) : null}
                   </div>
@@ -482,35 +639,57 @@ const Seller = () => {
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
                       </div>
-                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">Store</button>
+                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">
+                        Store
+                      </button>
                     </div>
                     {showNav === 0 ? (
                       <div>
-                        <button onClick={() => setCurrentShow(0)} className="text-base ml-14 focus:text-gray cursor-pointer">Store profile</button>
+                        <button
+                          onClick={() => setCurrentShow(0)}
+                          className="text-base ml-14 focus:text-gray cursor-pointer"
+                        >
+                          Store profile
+                        </button>
                       </div>
                     ) : null}
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
                       </div>
-                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">Product</button>
+                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">
+                        Product
+                      </button>
                     </div>
                     {showNav1 === 0 ? (
                       <div className="flex flex-col justify-start items-start">
-                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">My products</button>
-                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer">Selling products</button>
+                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">
+                          My products
+                        </button>
+                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer">
+                          Selling products
+                        </button>
                       </div>
                     ) : null}
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
                       </div>
-                      <button onClick={onSetNav3} className="ml-3 text-base font-semibold cursor-pointer">Order</button>
+                      <button onClick={onSetNav3} className="ml-3 text-base font-semibold cursor-pointer">
+                        Order
+                      </button>
                     </div>
                     {showNav2 === 0 ? (
                       <div className="flex flex-col justify-start items-start">
-                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer font-semibold">My order</button>
-                        <button onClick={() => setCurrentShow(4)} className="ml-14 text-base cursor-pointer ">Order cancel</button>
+                        <button
+                          onClick={() => setCurrentShow(3)}
+                          className="ml-14 text-base mb-3 cursor-pointer font-semibold"
+                        >
+                          My order
+                        </button>
+                        <button onClick={() => setCurrentShow(4)} className="ml-14 text-base cursor-pointer ">
+                          Order cancel
+                        </button>
                       </div>
                     ) : null}
                   </div>
@@ -520,35 +699,57 @@ const Seller = () => {
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={store} />
                       </div>
-                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">Store</button>
+                      <button onClick={onSetNav} className="ml-3 text-base cursor-pointer">
+                        Store
+                      </button>
                     </div>
                     {showNav === 0 ? (
                       <div>
-                        <button onClick={() => setCurrentShow(0)} className="text-base ml-14 focus:text-gray cursor-pointer">Store profile</button>
+                        <button
+                          onClick={() => setCurrentShow(0)}
+                          className="text-base ml-14 focus:text-gray cursor-pointer"
+                        >
+                          Store profile
+                        </button>
                       </div>
                     ) : null}
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={product} />
                       </div>
-                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">Product</button>
+                      <button onClick={onSetNav2} className="ml-3 text-base cursor-pointer">
+                        Product
+                      </button>
                     </div>
                     {showNav1 === 0 ? (
                       <div className="flex flex-col justify-start items-start">
-                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">My products</button>
-                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer">Selling products</button>
+                        <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">
+                          My products
+                        </button>
+                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer">
+                          Selling products
+                        </button>
                       </div>
                     ) : null}
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none p-7 rounded-full" width={20} height={20} src={chart} />
                       </div>
-                      <button onClick={onSetNav3} className="ml-3 text-base font-semibold cursor-pointer">Order</button>
+                      <button onClick={onSetNav3} className="ml-3 text-base font-semibold cursor-pointer">
+                        Order
+                      </button>
                     </div>
                     {showNav2 === 0 ? (
                       <div className="flex flex-col justify-start items-start">
-                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer">My order</button>
-                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer  font-semibold">Order cancel</button>
+                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer">
+                          My order
+                        </button>
+                        <button
+                          onClick={() => setCurrentShow(3)}
+                          className="ml-14 text-base cursor-pointer  font-semibold"
+                        >
+                          Order cancel
+                        </button>
                       </div>
                     ) : null}
                   </div>
@@ -557,33 +758,56 @@ const Seller = () => {
             </Drawer>
           </div>
           {showSideBar === 0 ? (
-            <form onSubmit={(e) => onEditStore(e)} className="flex w-full">
+            <form onSubmit={e => onEditStore(e)} className="flex w-full">
               <div className="flex flex-col bg-white rounded w-full h-auto mt-[120px] mx-2 sm:w-full md:w-3/4 lg:w-3/4 sm:mx-2 md:mx-12 lg:mx-12">
                 <div className="flex flex-col m-5 border-b-2 border-[#9B9B9B] pb-5">
                   <label className="font-semibold mb-2 text-lg">My profile store</label>
                   <label className="text-[#9B9B9B]">Manage your profile information</label>
                 </div>
                 <div className="flex w-full">
-
                   <div className="w-[70%] flex flex-col items-end">
-                    <Input onChange={(e) => setForm({ ...form, store_name: e.target.value })} value={form.store_name} name="Store name" type="text" />
+                    <Input
+                      onChange={e => setForm({ ...form, store_name: e.target.value })}
+                      value={form.store_name}
+                      name="Store name"
+                      type="text"
+                    />
                     <Input value={form.email} name="Email" type="text" />
-                    <Input onChange={(e) => setForm({ ...form, store_phone: e.target.value })} value={form.store_phone} name="Phone Number" type="text" />
-                    <TextArea onChange={(e) => setForm({ ...form, store_description: e.target.value })} value={form.store_description} name="Store descripiton" />
+                    <Input
+                      onChange={e => setForm({ ...form, store_phone: e.target.value })}
+                      value={form.store_phone}
+                      name="Phone Number"
+                      type="text"
+                    />
+                    <TextArea
+                      onChange={e => setForm({ ...form, store_description: e.target.value })}
+                      value={form.store_description}
+                      name="Store descripiton"
+                    />
                   </div>
                   <div className="w-[30%] flex flex-col items-center border-l-2 border-gray my-4">
                     {/* <Image className="rounded-[100%] mb-9" src={user} layout="fixed" width={100} height={100} /> */}
                     <img
-                      src={form.photo
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                      src={
+                        form.photo
+                          ? `${process.env.NEXT_PUBLIC_API_URL}uploads/users/${form.photo}`
+                          : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`
+                      }
                       alt=""
                       width="100px"
                       height="100px"
                       className="rounded-[100%] mb-9"
                     />
-                    <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />
-                    <label className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray" htmlFor="images">
+                    <input
+                      onChange={e => setForm({ ...form, photo: e.target.files[0] })}
+                      id="images"
+                      type="file"
+                      className="hidden"
+                    />
+                    <label
+                      className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray"
+                      htmlFor="images"
+                    >
                       Select image
                     </label>
                   </div>

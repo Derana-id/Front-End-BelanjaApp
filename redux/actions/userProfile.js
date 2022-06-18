@@ -12,23 +12,20 @@ import {
   GET_MY_ADDRESS_FAILED
 } from '../types';
 
-export const getDetailUser = (id, token) => async (dispatch) => {
+export const getDetailUser = (id, token) => async dispatch => {
   try {
     dispatch({
       type: GET_DETAIL_USER_PENDING,
-      payload: null,
+      payload: null
     });
 
-    const res = await axios.get(
-      `profile/${id}`,
-      {
-        headers: { token },
-      }
-    );
+    const res = await axios.get(`user/${id}`, {
+      headers: { token }
+    });
 
     dispatch({
       type: GET_DETAIL_USER_SUCCESS,
-      payload: res.data,
+      payload: res.data
     });
   } catch (error) {
     dispatch({
@@ -58,23 +55,20 @@ export const updateProfile = (data, token) => {
 
 // address Profile
 
-export const getAddressUser = (id, token) => async (dispatch) => {
+export const getAddressUser = (id, token) => async dispatch => {
   try {
     dispatch({
       type: GET_DETAIL_USER_PENDING,
-      payload: null,
+      payload: null
     });
 
-    const res = await axios.get(
-      `address/detail/${id}`,
-      {
-        headers: { token },
-      }
-    );
+    const res = await axios.get(`address/detail/${id}`, {
+      headers: { token }
+    });
 
     dispatch({
       type: GET_DETAIL_USER_SUCCESS,
-      payload: res.data,
+      payload: res.data
     });
   } catch (error) {
     dispatch({
@@ -84,20 +78,18 @@ export const getAddressUser = (id, token) => async (dispatch) => {
   }
 };
 
-export const getMyOrder = () => async (dispatch) => {
+export const getMyOrder = () => async dispatch => {
   try {
     dispatch({
       type: GET_MY_ORDER_PENDING,
-      payload: null,
+      payload: null
     });
 
-    const res = await axios.get(
-      'mytransaction'
-    );
+    const res = await axios.get('mytransaction');
 
     dispatch({
       type: GET_MY_ORDER_SUCCESS,
-      payload: res.data,
+      payload: res.data
     });
   } catch (error) {
     dispatch({
@@ -107,7 +99,7 @@ export const getMyOrder = () => async (dispatch) => {
   }
 };
 
-export const createAddressBuyer = (data) => {
+export const createAddressBuyer = data => {
   return new Promise((resolve, reject) => {
     axios
       .post('address', data)
@@ -146,20 +138,18 @@ export const deleteAddressBuyer = (id) => {
   });
 };
 
-export const getAddress = () => async (dispatch) => {
+export const getAddress = () => async dispatch => {
   try {
     dispatch({
       type: GET_MY_ADDRESS_PENDING,
-      payload: null,
+      payload: null
     });
 
-    const res = await axios.get(
-      'myaddress'
-    );
+    const res = await axios.get('myaddress');
 
     dispatch({
       type: GET_MY_ADDRESS_SUCCESS,
-      payload: res.data,
+      payload: res.data
     });
   } catch (error) {
     dispatch({
