@@ -12,6 +12,8 @@ import AddAddress from '../../components/modals/add-address';
 import CardCheckout from '../../components/card/card-checkout';
 import CardTotalPrice from '../../components/card/card-total-price';
 import ModalsPayment from '../../components/modals/modals-payment';
+import { getAddress } from '../../redux/actions/userProfile';
+// import { getMyTransaction } from '../../redux/actions/transaction';
 
 const Checkout = () => {
   const router = useRouter();
@@ -88,6 +90,16 @@ const Checkout = () => {
     dispatch(getMyCart());
   }, []);
 
+  const dispatch = useDispatch();
+
+  const myAddress = useSelector(state => {
+    return state.myAddress;
+  });
+
+  useEffect(() => {
+    dispatch(getAddress());
+  }, [dispatch]);
+
   return (
     <div>
       <Head>
@@ -95,8 +107,8 @@ const Checkout = () => {
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
-      <div className="p-6 pt-16 md:p-28 bg-white">
-        <h1 className="mt-8 text-black text-3xl font-extrabold">Checkout</h1>
+      <div className="p-6 pt-16 bg-white md:p-28">
+        <h1 className="mt-8 text-3xl font-extrabold text-black">Checkout</h1>
 
         <div className="md:flex">
           <div className="flex-auto md:w-2/5">

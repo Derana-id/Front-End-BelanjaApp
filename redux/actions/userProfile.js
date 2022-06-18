@@ -108,3 +108,34 @@ export const createAddressBuyer = data => {
       });
   });
 };
+
+export const updateAddressBuyer = (id, data, token) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .put(`address/${id}`, data, {
+        headers: {
+          token,
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+export const deleteAddressBuyer = (id, data) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .put(`address/delete/${id}`, data)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Close from '../../assets/icons/close.svg';
 import CardShippingAddress from '../card/customer/cardShippingAddressProfile';
+import CardAddress from '../card/customer/cardAddress';
 
 export default function AddAddress({ myAddress }) {
   const [showModal, setShowModal] = useState(false);
@@ -9,7 +10,7 @@ export default function AddAddress({ myAddress }) {
   return (
     <div>
       <button
-        className="text-gray-500 border border-gray-500 hover:bg-gray-500 hover:text-white active:bg-gray-600 font-bold px-8 py-3 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className="px-8 py-3 mb-1 mr-1 font-bold transition-all duration-150 ease-linear border rounded-full outline-none text text-gr text-gray border-gray hover:bg-gray hover:text-white active:bg-gray focus:outline-none"
         type="button"
         onClick={() => setShowModal(true)}
       >
@@ -17,19 +18,19 @@ export default function AddAddress({ myAddress }) {
       </button>
       {showModal ? (
         <>
-          <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+          <div className="fixed inset-0 z-50 overflow-x-hidden overflow-y-scroll outline-none mt mt-justify-center it-ems-center mt-[120px] focus:outline-none">
+            <div className="relative w-auto max-w-3xl mx-auto my-6">
+              <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
                 <div className="flex flex-col items-start justify-between p-5 rounded-t">
                   <button
-                    className="p-1 ml-auto bg-transparent border-0 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    className="float-right p-1 ml-auto text-3xl font-semibold leading-none bg-transparent border-0 outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}
                   >
-                    <span className="bg-transparent h-6 w-6 text-2xl block outline-none focus:outline-none">
+                    <span className="block w-6 h-6 text-2xl bg-transparent outline-none focus:outline-none">
                       <Image src={Close} />
                     </span>
                   </button>
-                  <div className="mt-6 mx-auto">
+                  <div className="mx-auto mt-6">
                     <h3 className="text-3xl font-semibold">Choose another address</h3>
                   </div>
                 </div>

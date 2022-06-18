@@ -15,20 +15,18 @@ import {
   GET_DETAIL_MY_PRODUCT_FAILED
 } from '../types';
 
-export const getDetailStore = (id) => async (dispatch) => {
+export const getDetailStore = id => async dispatch => {
   try {
     dispatch({
       type: GET_DETAIL_STORE_PENDING,
-      payload: null,
+      payload: null
     });
 
-    const res = await axios.get(
-      `store/${id}`,
-    );
+    const res = await axios.get(`store/${id}`);
 
     dispatch({
       type: GET_DETAIL_STORE_SUCCESS,
-      payload: res.data,
+      payload: res.data
     });
   } catch (error) {
     dispatch({
@@ -38,7 +36,7 @@ export const getDetailStore = (id) => async (dispatch) => {
   }
 };
 
-export const updateStore = (data) => {
+export const updateStore = data => {
   return new Promise((resolve, reject) => {
     axios
       .put('store', data)
@@ -51,7 +49,7 @@ export const updateStore = (data) => {
   });
 };
 
-export const createProductStore = (data) => {
+export const createProductStore = data => {
   return new Promise((resolve, reject) => {
     axios
       .put('address', data)
@@ -64,20 +62,18 @@ export const createProductStore = (data) => {
   });
 };
 
-export const getDetailMyProduct = () => async (dispatch) => {
+export const getDetailMyProduct = () => async dispatch => {
   try {
     dispatch({
       type: GET_DETAIL_MY_PRODUCT_PENDING,
-      payload: null,
+      payload: null
     });
 
-    const res = await axios.get(
-      'product/user'
-    );
+    const res = await axios.get('product/user');
 
     dispatch({
       type: GET_DETAIL_MY_PRODUCT_SUCCESS,
-      payload: res.data,
+      payload: res.data
     });
   } catch (error) {
     dispatch({
@@ -87,20 +83,18 @@ export const getDetailMyProduct = () => async (dispatch) => {
   }
 };
 
-export const getAllCategory = () => async (dispatch) => {
+export const getAllCategory = () => async dispatch => {
   try {
     dispatch({
       type: GET_CATEGORY_PENDING,
-      payload: null,
+      payload: null
     });
 
-    const res = await axios.get(
-      'category'
-    );
+    const res = await axios.get('category');
 
     dispatch({
       type: GET_CATEGORY_SUCCESS,
-      payload: res.data,
+      payload: res.data
     });
   } catch (error) {
     dispatch({
@@ -110,20 +104,18 @@ export const getAllCategory = () => async (dispatch) => {
   }
 };
 
-export const getAllBrand = () => async (dispatch) => {
+export const getAllBrand = () => async dispatch => {
   try {
     dispatch({
       type: GET_BRAND_PENDING,
-      payload: null,
+      payload: null
     });
 
-    const res = await axios.get(
-      '/brand',
-    );
+    const res = await axios.get('/brand');
 
     dispatch({
       type: GET_BRAND_SUCCESS,
-      payload: res.data,
+      payload: res.data
     });
   } catch (error) {
     dispatch({
