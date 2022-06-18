@@ -23,7 +23,7 @@ const Chat = req => {
   const [socketio, setSocketio] = useState(null);
   const [listChat, setListChat] = useState([]);
   const [getActiveReceiver, setActiveReceiver] = useState({});
-  console.log(getActiveReceiver);
+  // console.log(getActiveReceiver);
 
   const token = Cookies.get('token');
   const receiver = Cookies.get('receiver');
@@ -54,9 +54,6 @@ const Chat = req => {
     return state.getIdProfile;
   });
 
-  console.log(getProfile.data.profile);
-  console.log(getProfile.data.profile);
-
   useEffect(() => {
     const socket = io(process.env.NEXT_PUBLIC_API_URL);
     socket.on('send-message-response', response => {
@@ -68,21 +65,21 @@ const Chat = req => {
   // console.log(getActiveReceiver.store.id);
   //  Send message
   const [message, setMessage] = useState('');
-  console.log(message);
   const onSubmit = e => {
     e.preventDefault();
+    // console.log(message);
 
     const payload = {
       sender: getProfile.data.profile.name,
       senderId: getProfile.data.profile.id,
-      receiver: getActiveReceiver.store.name,
-      receiverId: getActiveReceiver.store.id
+      receiver: getActiveReceiver.user.name,
+      receiverId: getActiveReceiver.user.id
     };
     setListChat([...listChat, payload]);
 
     const data = {
       sender: getProfile.data.profile.name,
-      receiver: getActiveReceiver.store.id,
+      receiver: getActiveReceiver.user.id,
       message
     };
     socketio.emit('send-message', data);
@@ -91,6 +88,7 @@ const Chat = req => {
 
   // select receiver
   const selectReceiver = item => {
+    console.log(item);
     setListChat([]);
     setActiveReceiver(item);
     // document.cookie = `receiver=${JSON.stringify(item)};path/`;
@@ -98,7 +96,7 @@ const Chat = req => {
 
     const data = {
       sender: getProfile.id,
-      receiver: item.id
+      receiver: item.user.id
     };
     socketio.emit('chat-history', data);
   };
@@ -229,11 +227,11 @@ const Chat = req => {
                   <BubblessReciver message="hallo" /> */}
                   {listChat.map((item, index) => (
                     <div key={index}>
-                      {/* {item.sender === getProfile.data.profile.name ? ( */}
-                      <BubblessReciver message={item.message} />
-                      {/* ) : ( */}
-                      <BubblessSender message={item.message} />
-                      {/* )} */}
+                      {item.sender === getProfile.data.profile.name ? (
+                        <BubblessSender message={item.message} />
+                      ) : (
+                        <BubblessReciver message={item.message} />
+                      )}
                     </div>
                   ))}
                   {/* {JSON.stringify(listChat)} */}
