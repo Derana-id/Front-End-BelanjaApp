@@ -22,6 +22,8 @@ import CardProducts from '../../components/card/card-products';
 import { getDetailProduct, getPopularProducts } from '../../redux/actions/products';
 import { addCart, getMyCart } from '../../redux/actions/cart';
 import { chat } from '../../redux/actions/chat';
+import { createTransaction } from '../../redux/actions/transaction';
+import { toastify } from '../../utils/toastify';
 
 const Products = () => {
   const router = useRouter();
@@ -120,10 +122,7 @@ const Products = () => {
     const decoded = jwtDecode(Cookies.get('token'));
     e.preventDefault();
 
-    chat({
-      sender: getDetail.data.product.store_id,
-      receiver: decoded.id
-    })
+    chat({})
       .then(() => {
         router.push('/chat');
       })
@@ -133,6 +132,36 @@ const Products = () => {
           text: error.response.data.message,
           icon: 'error'
         });
+      });
+  };
+
+  const handleBuyNow = e => {
+    e.preventDefault();
+
+    createTransaction({
+      productId: getDetail.data.product.id,
+      price: getDetail.data.product.price,
+      qty: getAmount
+    })
+      .then(res => {
+        Swal.fire({
+          title: 'Success!',
+          text: res.message,
+          icon: 'success'
+        });
+        router.push('/checkout');
+      })
+      .catch(err => {
+        if (err.response.data.code === 422) {
+          const { error } = err.response.data;
+          error.map(item => toastify(item, 'error'));
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: err.response.data.message,
+            icon: 'error'
+          });
+        }
       });
   };
 
@@ -267,7 +296,7 @@ const Products = () => {
                     <ButtonSuccess onClick={() => onBuy(getDetail.data.product.id)} action="Add bag" />
                   </div>
                   <div className="mt-5">
-                    <ButtonWarning action="Buy Now" onClick={() => alert(id)} />
+                    <ButtonWarning action="Buy Now" onClick={handleBuyNow} />
                   </div>
                 </div>
               </div>
