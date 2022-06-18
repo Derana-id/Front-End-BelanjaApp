@@ -80,8 +80,6 @@ export default function MainNavbar(req) {
     router.push(`/?search=${getSearch}`);
   };
 
-  console.log(getProfile.data[0].profile.photo);
-
   return (
     <div>
       {isLoading ? (
