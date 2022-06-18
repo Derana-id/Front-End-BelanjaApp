@@ -26,7 +26,7 @@ import notification from '../../assets/img/notification.png';
 import vector from '../../assets/icons/vector.png';
 import user from '../../assets/img/user.jpg';
 import ModalsSearch from '../modals/modals-filter';
-import { getDetailProfile } from '../../redux/actions/users';
+import { getDetailUser } from '../../redux/actions/userProfile';
 
 export default function MainNavbar(req) {
   const token = Cookies.get('token');
@@ -66,11 +66,11 @@ export default function MainNavbar(req) {
   };
 
   useEffect(() => {
-    dispatch(getDetailProfile(getId));
+    dispatch(getDetailUser(getId));
   }, []);
 
   const getProfile = useSelector(state => {
-    return state.getIdProfile;
+    return state.detailCustomer;
   });
 
   const onSearch = () => {
@@ -79,6 +79,8 @@ export default function MainNavbar(req) {
     dispatch(getPopularProducts(search));
     router.push(`/?search=${getSearch}`);
   };
+
+  console.log(getProfile.data[0].profile.photo);
 
   return (
     <div>
@@ -132,7 +134,11 @@ export default function MainNavbar(req) {
                         <div className="relative h-8 w-8">
                           {/* {getProfile.isLoading ? null : (
                             <Image
-                              src={`https://drive.google.com/uc?export=view&id=${getProfile.data.profile.photo}`}
+                              src={
+                                getProfile.data.length >= 0
+                                  ? `https://drive.google.com/uc?export=view&id=${getProfile.data[0].profile.photo}`
+                                  : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
+                              }
                               className="rounded-full cursor-pointer"
                               objectFit="cover"
                               height={50}

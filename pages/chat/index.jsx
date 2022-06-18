@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { TbSend } from 'react-icons/tb';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
+import ContentLoader from 'react-content-loader';
 import user from '../../assets/img/user.jpg';
 import CardContact from '../../components/card/card-contact';
 import BubblessReciver from '../../components/bubbless/bubbless-reciver';
@@ -20,10 +21,11 @@ const Chat = req => {
 
   const [isMessage, setIsMessage] = useState(false);
   const [getChatUser, setChatUser] = useState(false);
+
   const [socketio, setSocketio] = useState(null);
   const [listChat, setListChat] = useState([]);
   const [getActiveReceiver, setActiveReceiver] = useState({});
-  console.log(getActiveReceiver);
+  // console.log(getActiveReceiver);
 
   const token = Cookies.get('token');
   const receiver = Cookies.get('receiver');
@@ -34,7 +36,7 @@ const Chat = req => {
     getId = id;
   }
 
-  // console.log(receiver);
+  console.log(getActiveReceiver);
 
   useEffect(() => {
     getDetailProfile(getId);
@@ -54,9 +56,6 @@ const Chat = req => {
     return state.getIdProfile;
   });
 
-  console.log(getProfile.data.profile);
-  console.log(getProfile.data.profile);
-
   useEffect(() => {
     const socket = io(process.env.NEXT_PUBLIC_API_URL);
     socket.on('send-message-response', response => {
@@ -68,21 +67,21 @@ const Chat = req => {
   // console.log(getActiveReceiver.store.id);
   //  Send message
   const [message, setMessage] = useState('');
-  console.log(message);
   const onSubmit = e => {
     e.preventDefault();
+    // console.log(message);
 
     const payload = {
       sender: getProfile.data.profile.name,
       senderId: getProfile.data.profile.id,
-      receiver: getActiveReceiver.store.name,
-      receiverId: getActiveReceiver.store.id
+      receiver: getActiveReceiver.user.name,
+      receiverId: getActiveReceiver.user.id
     };
     setListChat([...listChat, payload]);
 
     const data = {
       sender: getProfile.data.profile.name,
-      receiver: getActiveReceiver.store.id,
+      receiver: getActiveReceiver.user.id,
       message
     };
     socketio.emit('send-message', data);
@@ -91,6 +90,8 @@ const Chat = req => {
 
   // select receiver
   const selectReceiver = item => {
+    console.log(item);
+    setChatUser(true);
     setListChat([]);
     setActiveReceiver(item);
     // document.cookie = `receiver=${JSON.stringify(item)};path/`;
@@ -98,12 +99,13 @@ const Chat = req => {
 
     const data = {
       sender: getProfile.id,
-      receiver: item.id
+      receiver: item.user.id
     };
     socketio.emit('chat-history', data);
   };
 
   // console.log(getDetailStore.data);
+  console.log(store);
 
   return (
     <div>
@@ -194,30 +196,37 @@ const Chat = req => {
                     <h6 className="text-black font-semibold text-lg">Chat</h6>
                   </div>
                   <div className="pl-5 pt-3 h-[410px] scroll-m-2 overflow-auto">
-                    <CardContact
-                      img="https://drive.google.com/uc?export=view&id=saad"
-                      username="Reza Akbar"
-                      message="Lorem ipsum dolor sit as Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa amet atque cum et
-            maxime! Est voluptas at distinctio, repudiandae quo rem magnam fugit in nulla aspernatur facilis quas soluta
-            vitae."
-                      onClick={() => selectReceiver(store.data)}
-                    />
+                    {store ? (
+                      <CardContact
+                        // img={`https://drive.google.com/uc?export=view&id=${store.data.store.photo}`}
+                        img={user}
+                        // username={store.data ? store.data.store.name : null}
+                        username="Halo"
+                        message="Lorem ipsum dolor sit as Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa amet atque cum et
+                                maxime! Est voluptas at distinctio, repudiandae quo rem magnam fugit in nulla aspernatur facilis quas soluta
+                                vitae."
+                        onClick={() => selectReceiver(store.data)}
+                      />
+                    ) : (
+                      <ContentLoader />
+                    )}
                   </div>
                 </div>
               </div>
-              <div className="flex-1 w-2/5 ml-8 shadow-lg rounded">
-                <div className="border-solid border-b-[1px] border-gray pl-5 pt-3">
-                  <div className="flex">
-                    <div>
-                      <Image src={user} width={40} height={40} className="object-cover rounded-full" />
-                    </div>
-                    <div className="ml-4 flex items-center">
-                      <p className="text-black font-semibold text-lg max-w-sm">Reza Akbar</p>
+              {getChatUser ? (
+                <div className="flex-1 w-2/5 ml-8 shadow-lg rounded">
+                  <div className="border-solid border-b-[1px] border-gray pl-5 pt-3">
+                    <div className="flex">
+                      <div>
+                        <Image src={user} width={40} height={40} className="object-cover rounded-full" />
+                      </div>
+                      <div className="ml-4 flex items-center">
+                        <p className="text-black font-semibold text-lg max-w-sm">{getActiveReceiver.store.name}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="pl-5 pt-3 h-[340px] overflow-auto px-5">
-                  {/* <BubblessReciver message="hallo" />
+                  <div className="pl-5 pt-3 h-[340px] overflow-auto px-5">
+                    {/* <BubblessReciver message="hallo" />
                   <BubblessReciver message="hallo" />
                   <BubblessSender message="Juga" />
                   <BubblessReciver message="hallo" />
@@ -227,31 +236,36 @@ const Chat = req => {
                   <BubblessReciver message="hallo" />
                   <BubblessSender message="Juga" />
                   <BubblessReciver message="hallo" /> */}
-                  {listChat.map((item, index) => (
-                    <div key={index}>
-                      {/* {item.sender === getProfile.data.profile.name ? ( */}
-                      <BubblessReciver message={item.message} />
-                      {/* ) : ( */}
-                      <BubblessSender message={item.message} />
-                      {/* )} */}
-                    </div>
-                  ))}
-                  {/* {JSON.stringify(listChat)} */}
+                    {listChat.map((item, index) => (
+                      <div key={index}>
+                        {item.sender === getProfile.data.profile.name ? (
+                          <BubblessSender message={item.message} />
+                        ) : (
+                          <BubblessReciver message={item.message} />
+                        )}
+                      </div>
+                    ))}
+                    {/* {JSON.stringify(listChat)} */}
+                  </div>
+                  <div className="p-5 flex">
+                    <input
+                      type="text"
+                      value={message}
+                      onChange={e => setMessage(e.target.value)}
+                      onSubmit={onSubmit}
+                      placeholder="Type your message..."
+                      className="w-full p-2 pl-4 border-solid border-2 border-gray focus:outline-none pr-4 rounded-full"
+                    />
+                    <button onClick={e => onSubmit(e)} className="rounded-full p-3 mx-2 text-white bg-primary text-2xl">
+                      <TbSend />
+                    </button>
+                  </div>
                 </div>
-                <div className="p-5 flex">
-                  <input
-                    type="text"
-                    value={message}
-                    onChange={e => setMessage(e.target.value)}
-                    onSubmit={onSubmit}
-                    placeholder="Type your message..."
-                    className="w-full p-2 pl-4 border-solid border-2 border-gray focus:outline-none pr-4 rounded-full"
-                  />
-                  <button onClick={e => onSubmit(e)} className="rounded-full p-3 mx-2 text-white bg-primary text-2xl">
-                    <TbSend />
-                  </button>
+              ) : (
+                <div className="flex-1 w-2/5 ml-8 shadow-lg rounded flex justify-center items-center">
+                  <h1 className="text-xl text-gray">click user to start communicating</h1>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
