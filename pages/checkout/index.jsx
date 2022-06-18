@@ -1,10 +1,10 @@
-
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 // import { Code } from 'react-content-loader';
 // import Cookies from 'js-cookie';
+import itemImage from '../../public/images/gez-xavier-mansfield-b34E1vh1tYU-unsplash1.jpg'
 import { getMyCart } from '../../redux/actions/cart';
 import { getAddress } from '../../redux/actions/userProfile';
 import AddAddress from '../../components/modals/add-address';
@@ -101,8 +101,8 @@ const Checkout = () => {
                 <AddAddress />
               </div>
             </div>
-            <CardCheckout productName="Men's formal suit - Black" store="Zalora Cloth" price="$ 20.0" />
-            <CardCheckout productName="Men's formal suit - Black" store="Zalora Cloth" price="$ 20.0" />
+            <CardCheckout image={itemImage} productName="Men's formal suit - Black" store="Zalora Cloth" price="$ 20.0" />
+            <CardCheckout image={itemImage} productName="Men's formal suit - Black" store="Zalora Cloth" price="$ 20.0" />
           </div>
           <div className="flex-1 mt-4 md:mt-0 md:w-32 md:ml-8">
             <CardTotalPrice order="$ 40.0" delivery="$ 5.0" totalPrice="$ 45.0" onClick={() => setIsPayment(true)} />
