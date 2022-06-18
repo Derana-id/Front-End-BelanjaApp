@@ -7,10 +7,12 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import ContentLoader from 'react-content-loader';
 import Swal from 'sweetalert2';
+import Cookies from 'js-cookie';
+import JwtDecode from 'jwt-decode';
 import CardCart from '../../components/card/card-cart';
 import ButtonWarning from '../../components/Button/button-warning';
 import Checklist from '../../components/Input/checklist';
-import { getMyCart, deleteCart, deleteCartUser, updateCart } from '../../redux/actions/cart';
+import { getMyCart, deleteCart, updateCart } from '../../redux/actions/cart';
 import { toastify } from '../../utils/toastify';
 import { sweetAlert } from '../../utils/sweetalert';
 
@@ -19,6 +21,12 @@ const MyBag = () => {
   const dispatch = useDispatch();
   const myCart = useSelector(state => state.myCart);
   const [total, setTotal] = useState(0);
+
+  const token = Cookies.get('token');
+  let decoded = '';
+  if (token) {
+    decoded = JwtDecode(token);
+  }
 
   // console.log(myCart);
 
@@ -83,7 +91,7 @@ const MyBag = () => {
     }).then(async confirm => {
       if (confirm.isConfirmed) {
         try {
-          const res = await deleteCartUser();
+          const res = await deleteCart(decoded.id);
           sweetAlert(res.message);
           window.location.reload();
         } catch (err) {
@@ -102,21 +110,22 @@ const MyBag = () => {
     const data = {
       id,
       product_id: productId,
-      qty: e
+      qty: amount + e
     };
-    if (amount === 1 && e === -1) {
-      alert('sure?');
-    } else if (e === 1 && amount >= 10) {
-      alert('fre');
-    } else {
+    if (amount >= 1 && e === -1 && amount <= 1 && e === -1) {
+      Swal.fire({
+        title: 'Failed!',
+        text: 'null',
+        icon: 'error'
+      });
+    } else if (amount <= stock) {
       updateCart(data)
+        // eslint-disable-next-line no-unused-vars
         .then(res => {
-          console.log(res);
           dispatch(getMyCart(router));
         })
-        .catch(err => {
-          console.log(err);
-        });
+        // eslint-disable-next-line no-unused-vars
+        .catch(err => {});
     }
   };
 
@@ -135,10 +144,8 @@ const MyBag = () => {
               <div className="flex items-cente justify-between">
                 <div className="flex">
                   <Checklist onChange={e => handleDeleteUser(e)} />
-                  <p className="text-black font-medium">Select all items</p>
-                  <p className="text-gray ml-2">(2 items selected)</p>
+                  <p className="font-medium text-primary">Delete all items</p>
                 </div>
-                <button className="flex text-primary font-semibold">Delete</button>
               </div>
             </div>
             {myCart.isLoading ? (
@@ -160,25 +167,13 @@ const MyBag = () => {
                     onChange={e => handleDelete(e, item.cart.id)}
                     productName={item.product[0].product_name}
                     store={item.store[0].store_name}
-                    price={`RP. ${item.product[0].price * item.cart.qty}`}
+                    price={`$ ${item.product[0].price * item.cart.qty}`}
                     value={item.cart.qty}
                     onPlus={() =>
-                      valueAction(
-                        item.cart.qty + 1,
-                        item.cart.id,
-                        item.cart.product_id,
-                        item.cart.qty,
-                        item.product.stock
-                      )
+                      valueAction(1, item.cart.id, item.cart.product_id, item.cart.qty, item.product[0].stock)
                     }
                     onMin={() =>
-                      valueAction(
-                        item.cart.qty - 1,
-                        item.cart.id,
-                        item.cart.product_id,
-                        item.cart.qty,
-                        item.product.stock
-                      )
+                      valueAction(-1, item.cart.id, item.cart.product_id, item.cart.qty, item.product[0].stock)
                     }
                   />
                 </div>

@@ -174,11 +174,12 @@ const Products = () => {
                   className="grid grid-cols-2
                      grid-flow-row gap-4 auto-rows-auto"
                 >
+                  {/* <p>{getDetail.data.image[0].id}</p> */}
                   <Img
                     src={
-                      getDetail.data.image[0]
+                      getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=
-                        ${getDetail.data.image[0].photo}`
+                        ${getDetail.data.image.length >= 0 ? getDetail.data.image[0].photo : 'default.png'}`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
@@ -289,8 +290,14 @@ const Products = () => {
                     price={`$ ${item.product.price}`}
                     user={`${item.store[0].store_name}`}
                     onClick={() => onDetail(item.product.id)}
-                    // img={`https://drive.google.com/uc?export=view&id=${item.image[0].photo}`}
-                    img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
+                    img={`${
+                      item.image.length >= 0
+                        ? `https://drive.google.com/uc?export=view&id=${
+                            item.image[0] ? item.image[0].photo : 'default.png'
+                          }`
+                        : `https://drive.google.com/uc?export=view&id=
+                        default.png`
+                    }`}
                   />
                 </div>
               ))
