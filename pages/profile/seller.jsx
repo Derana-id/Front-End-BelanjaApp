@@ -24,7 +24,6 @@ import Input from '../../components/Input/input-profile';
 // import user from '../../../assets/img/user.jpg';
 import TextArea from '../../components/Input/input-textarea-profile';
 import { getDetailStore, updateStore } from '../../redux/actions/storeProfile';
-import { toastify } from '../../utils/toastify';
 
 const Seller = () => {
   const [showNav, setShowNav] = useState();

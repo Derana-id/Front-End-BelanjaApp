@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Close from '../../assets/icons/close.svg';
 import CardShippingAddress from '../card/customer/cardShippingAddressProfile';
-import CardAddress from '../card/customer/cardAddress';
 
 export default function AddAddress({ myAddress }) {
   const [showModal, setShowModal] = useState(false);

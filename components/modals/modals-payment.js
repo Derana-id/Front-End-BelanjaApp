@@ -22,29 +22,53 @@ export default function ModalsPayment(params) {
         </div>
         <div className="p-4">
           <p className="ml-2 font-bold text-sm mt-3">Payment method</p>
-          <FormPayment title="Gopay" id="gopay" img={gopay} />
-          <FormPayment title="Pos Indonesia" id="pos" img={pos} />
-          <FormPayment title="Mastercard" id="mastercard" img={mastercard} />
+          <FormPayment title="Gopay" id="gopay" img={gopay} value="1" onChange={() => params.setPayment(1)} />
+          <FormPayment title="Pos Indonesia" id="pos" img={pos} value="2" onChange={() => params.setPayment(2)} />
+          <FormPayment
+            title="Mastercard"
+            id="mastercard"
+            img={mastercard}
+            value="3"
+            onChange={() => params.setPayment(3)}
+          />
         </div>
         <hr className="text-gray mt-8" />
         <div className="p-4">
           <p className="font-bold">Shopping summary</p>
           <div className="flex justify-between">
             <p className="text-gray font-semibold text-sm">Order</p>
-            <p className="text-black font-bold text-sm">$ 40.0</p>
+            <p className="text-black font-bold text-sm">
+              {new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+              }).format(params.setOrder)}
+            </p>
           </div>
           <div className="flex justify-between h-24">
             <p className="text-gray font-semibold">Delivery</p>
-            <p className="text-black font-black">$ 5.0</p>
+            <p className="text-black font-black">
+              {new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+              }).format(5000)}
+            </p>
           </div>
         </div>
         <div className="bg-white rounded-t p-3 px-4 flex rounded shadow-2xl justify-between">
           <div>
             <h4 className="ml-2 font-bold">Shopping summary</h4>
-            <p className="text-primary font-bold ml-2">$ 45.0</p>
+            <p className="text-primary font-bold ml-2">
+              {new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+              }).format(5000 + params.setOrder)}
+            </p>
           </div>
           <div className="w-28">
-            <ButtonWarning action="Buy" className="p-0" />
+            <ButtonWarning action="Buy" className="p-0" onClick={params.handlePayment} />
           </div>
         </div>
       </div>
