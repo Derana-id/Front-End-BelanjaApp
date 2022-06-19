@@ -8,16 +8,13 @@ import { Code, List, Instagram } from 'react-content-loader';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 import _ from 'lodash';
-// import { getMyCart } from '../../redux/actions/cart';
 import { getMyTransaction, updatePayment } from '../../redux/actions/transaction';
-import { getMyAddress, createAddress } from '../../redux/actions/address';
+import { getMyAddress, createAddress, editAddress, deleteAddress } from '../../redux/actions/address';
 import { toastify } from '../../utils/toastify';
 import AddAddress from '../../components/modals/add-address';
 import CardCheckout from '../../components/card/card-checkout';
 import CardTotalPrice from '../../components/card/card-total-price';
 import ModalsPayment from '../../components/modals/modals-payment';
-import { getAddress } from '../../redux/actions/userProfile';
-// import { getMyTransaction } from '../../redux/actions/transaction';
 
 const Checkout = () => {
   const router = useRouter();
@@ -45,20 +42,6 @@ const Checkout = () => {
   });
   const [payment, setPayment] = useState(0);
 
-  const editAddress = item => {
-    if (item) {
-      setFormAddress({
-        label: item.label,
-        recipientName: item.recipient_name,
-        recipent_name: item.recipient_phone,
-        address: item.address,
-        postalCode: item.postal_code,
-        city: item.city,
-        isPrimary: item.is_primary
-      });
-    }
-  };
-
   const AddNewAddress = e => {
     e.preventDefault();
     if (
@@ -72,7 +55,10 @@ const Checkout = () => {
       Swal.fire('Failed!', 'All field must be filled', 'warning');
     } else {
       createAddress(formAddress)
-        .then(() => {})
+        .then(res => {
+          Swal.fire('Success!', res.message, 'success');
+          window.location.reload();
+        })
         .catch(err => {
           if (err.response.data.code === 422) {
             const { error } = err.response.data;
@@ -86,6 +72,71 @@ const Checkout = () => {
           }
         });
     }
+  };
+
+  const EditAddress = (e, id) => {
+    e.preventDefault();
+    if (
+      !formAddress.label ||
+      !formAddress.recipientName ||
+      !formAddress.recipientPhone ||
+      !formAddress.address ||
+      !formAddress.postalCode ||
+      !formAddress.city
+    ) {
+      Swal.fire('Failed!', 'All field must be filled', 'warning');
+    } else {
+      editAddress(formAddress, id)
+        .then(res => {
+          Swal.fire('Success!', res.message, 'success');
+          window.location.reload();
+        })
+        .catch(err => {
+          if (err.response.data.code === 422) {
+            const { error } = err.response.data;
+            error.map(item => toastify(item, 'error'));
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: err.response.data.message,
+              icon: 'error'
+            });
+          }
+        });
+    }
+  };
+
+  const DeleteAddress = (e, id) => {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Are you sure you want to restore the data ?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, I Sure!'
+    }).then(async confirm => {
+      if (confirm.isConfirmed) {
+        deleteAddress(id)
+          .then(res => {
+            Swal.fire('Success!', res.message, 'success');
+            window.location.reload();
+          })
+          .catch(err => {
+            if (err.response.data.code === 422) {
+              const { error } = err.response.data;
+              error.map(item => toastify(item, 'error'));
+            } else {
+              Swal.fire({
+                title: 'Error!',
+                text: err.response.data.message,
+                icon: 'error'
+              });
+            }
+          });
+      }
+    });
   };
 
   const order = [];
@@ -161,7 +212,14 @@ const Checkout = () => {
                       {`[${item.label}] ${item.address},  ${item.city}, ${item.postal_code}, (HP: ${item.recipient_phone})`}
                     </p>
                     <div className="mt-5">
-                      <AddAddress myAddress={myAddress} />
+                      <AddAddress
+                        myAddress={myAddress}
+                        formAddress={formAddress}
+                        setFormAddress={setFormAddress}
+                        AddNewAddress={AddNewAddress}
+                        EditAddress={EditAddress}
+                        DeleteAddress={DeleteAddress}
+                      />
                     </div>
                   </div>
                 ) : (

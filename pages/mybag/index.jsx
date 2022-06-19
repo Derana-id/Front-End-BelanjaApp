@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-nested-ternary */
@@ -15,6 +16,7 @@ import Checklist from '../../components/Input/checklist';
 import { getMyCart, deleteCart, updateCart } from '../../redux/actions/cart';
 import { toastify } from '../../utils/toastify';
 import { sweetAlert } from '../../utils/sweetalert';
+import { createTransaction } from '../../redux/actions/transaction';
 
 const MyBag = () => {
   const router = useRouter();
@@ -27,8 +29,6 @@ const MyBag = () => {
   if (token) {
     decoded = JwtDecode(token);
   }
-
-  // console.log(myCart);
 
   useEffect(() => {
     dispatch(getMyCart(router));
@@ -50,35 +50,38 @@ const MyBag = () => {
     }
   }, [myCart]);
 
-  // const handleBuy = e => {
-  //   e.preventDefault();
-
-  //   createTransaction({
-  //     productId: getDetail.data.product.id,
-  //     qty: getAmount,
-  //     isBuy: 0
-  //   })
-  //     .then(res => {
-  //       Swal.fire({
-  //         title: 'Success!',
-  //         text: res.message,
-  //         icon: 'success'
-  //       });
-  //       router.push('/checkout');
-  //     })
-  //     .catch(err => {
-  //       if (err.response.data.code === 422) {
-  //         const { error } = err.response.data;
-  //         error.map(item => toastify(item, 'error'));
-  //       } else {
-  //         Swal.fire({
-  //           title: 'Error!',
-  //           text: err.response.data.message,
-  //           icon: 'error'
-  //         });
-  //       }
-  //     });
-  // };
+  const handleBuy = e => {
+    e.preventDefault();
+    if (myCart) {
+      myCart.data.map(item => {
+        createTransaction({
+          productId: item.cart.product_id,
+          qty: item.cart.qty,
+          isBuy: 0
+        })
+          .then(res => {
+            Swal.fire({
+              title: 'Success!',
+              text: res.message,
+              icon: 'success'
+            });
+            router.push('/checkout');
+          })
+          .catch(err => {
+            if (err.response.data.code === 422) {
+              const { error } = err.response.data;
+              error.map(item => toastify(item, 'error'));
+            } else {
+              Swal.fire({
+                title: 'Error!',
+                text: err.response.data.message,
+                icon: 'error'
+              });
+            }
+          });
+      });
+    }
+  };
 
   const handleDelete = (e, id) => {
     e.preventDefault();
@@ -188,16 +191,16 @@ const MyBag = () => {
               myCart.data.map((item, i) => (
                 <div key={i}>
                   <CardCart
-                    // image={`${
-                    //   item.image[0].photo
-                    //     ? `https://drive.google.com/uc?export=view&id=${item.image[0].photo}`
-                    //     : `https://drive.google.com/uc?export=view&id=
-                    //     default.png`
-                    // }`}
+                    image={`${
+                      item.image.length >= 0
+                        ? `https://drive.google.com/uc?export=view&id=${item.image[0].photo}`
+                        : `https://drive.google.com/uc?export=view&id=
+                        default.png`
+                    }`}
                     onChange={e => handleDelete(e, item.cart.id)}
                     productName={item.product[0].product_name}
                     store={item.store[0].store_name}
-                    price={`$ ${item.product[0].price * item.cart.qty}`}
+                    price={`Rp ${item.product[0].price * item.cart.qty}`}
                     value={item.cart.qty}
                     onPlus={() =>
                       valueAction(1, item.cart.id, item.cart.product_id, item.cart.qty, item.product[0].stock)
@@ -215,10 +218,10 @@ const MyBag = () => {
               <p className="text-black font-bold">Shopping summary</p>
               <div className="flex justify-between mt-3">
                 <p className="text-gray text-md">Total Price</p>
-                <p className="font-bold text-black text-lg">$ {total}</p>
+                <p className="font-bold text-black text-lg">Rp {total}</p>
               </div>
               <div className="mt-8">
-                <ButtonWarning action="Buy" onClick={() => alert('Hallo')} />
+                <ButtonWarning action="Buy" onClick={handleBuy} />
               </div>
             </div>
           </div>

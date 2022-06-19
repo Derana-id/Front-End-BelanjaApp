@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable indent */
 /* eslint-disable react/jsx-indent */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -140,7 +140,7 @@ function Home({ deviceType }) {
                     <div key={index}>
                       <CardProducts
                         nameProduct={`${item.product.product_name}`}
-                        price={`$ ${item.product.price}`}
+                        price={`Rp ${item.product.price}`}
                         user={`${item.store[0].store_name}`}
                         onClick={() => onDetail(item.product.id)}
                         img={`${
@@ -178,7 +178,7 @@ function Home({ deviceType }) {
                     <div key={index}>
                       <CardProducts
                         nameProduct={`${item.product.product_name}`}
-                        price={`$ ${item.product.price}`}
+                        price={`Rp ${item.product.price}`}
                         user={`${item.store[0].store_name}`}
                         onClick={() => onDetail(item.product.id)}
                         img={`${

@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable react/jsx-indent */
 /* eslint-disable no-constant-condition */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
@@ -13,7 +15,7 @@ import user from '../../assets/img/user.jpg';
 import CardContact from '../../components/card/card-contact';
 import BubblessReciver from '../../components/bubbless/bubbless-reciver';
 import BubblessSender from '../../components/bubbless/bubbless-sender';
-import { getDetailProfile } from '../../redux/actions/users';
+import { getDetailProfile, getListUserChat } from '../../redux/actions/users';
 // import { getDetailUser } from '../../redux/actions/userProfile';
 
 const Chat = () => {
@@ -25,10 +27,9 @@ const Chat = () => {
   const [socketio, setSocketio] = useState(null);
   const [listChat, setListChat] = useState([]);
   const [getActiveReceiver, setActiveReceiver] = useState({});
-  // console.log(getActiveReceiver);
+  // console.log(getActiveReceiver.store[0].store_name);
 
   const token = Cookies.get('token');
-  // const receiver = Cookies.get('receiver');
 
   let getId;
   if (token) {
@@ -36,18 +37,22 @@ const Chat = () => {
     getId = id;
   }
 
-  console.log(getActiveReceiver);
-
   useEffect(() => {
     getDetailProfile(getId);
   }, []);
 
-  const store = useSelector(state => {
-    return state.detailStore;
+  useEffect(() => {
+    dispatch(getListUserChat());
+  }, []);
+
+  const listUser = useSelector(state => {
+    return state.listUserChat;
   });
 
+  // console.log(listUser);
+
   useEffect(() => {
-    dispatch(getDetailProfile('dc9e00a6-53f9-45c5-833d-14a8b030b295'));
+    dispatch(getDetailProfile(getId));
   }, []);
 
   // console.log(store);
@@ -55,6 +60,8 @@ const Chat = () => {
   const getProfile = useSelector(state => {
     return state.getIdProfile;
   });
+
+  // console.log(getProfile.data[0].profile.name);
 
   useEffect(() => {
     const socket = io(process.env.NEXT_PUBLIC_API_URL);
@@ -72,16 +79,16 @@ const Chat = () => {
     // console.log(message);
 
     const payload = {
-      sender: getProfile.data.profile.name,
-      senderId: getProfile.data.profile.id,
-      receiver: getActiveReceiver.user.name,
-      receiverId: getActiveReceiver.user.id
+      sender: getProfile.data[0].profile.name,
+      senderId: getProfile.data[0].profile.user_id,
+      receiver: getActiveReceiver.store[0].store_name,
+      receiverId: getActiveReceiver.store[0].user_id
     };
     setListChat([...listChat, payload]);
 
     const data = {
       sender: getProfile.data[0].profile.name,
-      receiver: getActiveReceiver.user.id,
+      receiver: getActiveReceiver.store[0].user_id,
       message
     };
     socketio.emit('send-message', data);
@@ -90,27 +97,25 @@ const Chat = () => {
 
   // select receiver
   const selectReceiver = item => {
-    console.log(item);
+    // console.log(item);
     setChatUser(true);
     setListChat([]);
     setActiveReceiver(item);
     // document.cookie = `receiver=${JSON.stringify(item)};path/`;
-    socketio.emit('join-room', getProfile);
+
+    socketio.emit('join-room', getId);
 
     const data = {
       sender: getProfile.data[0].user.id,
-      receiver: item.user
+      receiver: getActiveReceiver.store[0].user_id
     };
     socketio.emit('chat-history', data);
   };
 
-  console.log(getProfile.data[0]);
-  console.log(store);
-
   return (
     <div>
       <Head>
-        <title>Blanja | My Bag</title>
+        <title>Blanja | Chat</title>
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
@@ -196,17 +201,21 @@ const Chat = () => {
                     <h6 className="text-black font-semibold text-lg">Chat</h6>
                   </div>
                   <div className="pl-5 pt-3 h-[410px] scroll-m-2 overflow-auto">
-                    {store ? (
-                      <CardContact
-                        // img={`https://drive.google.com/uc?export=view&id=${store.data.store.photo}`}
-                        img={user}
-                        // username={store.data ? store.data.store.name : null}
-                        username="Halo"
-                        message="Lorem ipsum dolor sit as Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa amet atque cum et
-                                maxime! Est voluptas at distinctio, repudiandae quo rem magnam fugit in nulla aspernatur facilis quas soluta
-                                vitae."
-                        onClick={() => selectReceiver(store.data)}
-                      />
+                    {listUser.data ? (
+                      <div>
+                        {listUser.data
+                          ? listUser.data.map(item => (
+                              <CardContact
+                                img={`https://drive.google.com/uc?export=view&id=${item.store[0].photo}`}
+                                // img={user}
+                                // username={store.data ? store.data.store.name : null}
+                                username={item.store[0].name}
+                                message={item.message[0].message}
+                                onClick={() => selectReceiver(item)}
+                              />
+                            ))
+                          : null}
+                      </div>
                     ) : (
                       <ContentLoader />
                     )}
@@ -236,7 +245,7 @@ const Chat = () => {
                   <BubblessReciver message="hallo" />
                   <BubblessSender message="Juga" />
                   <BubblessReciver message="hallo" /> */}
-                    {listChat.map((item, index) => (
+                    {/* {listChat.map((item, index) => (
                       <div key={index}>
                         {item.sender === getProfile.data.profile.name ? (
                           <BubblessSender message={item.message} />
@@ -244,8 +253,8 @@ const Chat = () => {
                           <BubblessReciver message={item.message} />
                         )}
                       </div>
-                    ))}
-                    {/* {JSON.stringify(listChat)} */}
+                    ))} */}
+                    {JSON.stringify(listChat)}
                   </div>
                   <div className="p-5 flex">
                     <input
