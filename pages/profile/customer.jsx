@@ -49,6 +49,8 @@ const Customer = () => {
     return state.detailCustomer;
   });
 
+  console.log(detailProfile);
+
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -59,11 +61,11 @@ const Customer = () => {
   });
 
   useEffect(() => {
-    dispatch(getDetailUser(decoded.id, token));
+    dispatch(getDetailUser(decoded.id));
   }, [dispatch]);
 
   useEffect(() => {
-    if (detailProfile.data[0]) {
+    if (detailProfile.data.length > 0) {
       setForm({
         ...form,
         name: detailProfile.data[0].profile.name,

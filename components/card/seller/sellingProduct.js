@@ -9,7 +9,8 @@ import React, { useState, useEffect } from 'react';
 // import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 // import box from '../../../assets/icons/box.png';
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
+import { useRouter } from 'next/router';
 import FormAddProduct from '../../form/form-addProduct';
 import RadioInput from '../../Input/radio';
 import ButtonSuccess from '../../Button/button-success';
@@ -22,6 +23,7 @@ import FormAddCategory from '../../form/form-category';
 export default function sellingProduct() {
   // integrasi
   const dispatch = useDispatch();
+  const router = useRouter();
   const [image, setImage] = useState(null);
 
   const allCategory = useSelector(state => {
@@ -112,36 +114,49 @@ export default function sellingProduct() {
   };
   const createProduct = e => {
     e.preventDefault();
-    // if (form.category_id === '' || form.product_name === '' || form.brand_id === '' || form.price === '' || form.stock === '' || form.description === '' || form.is_new === '' || form.photo === [] || form.product_size === []) {
-    //   Swal.fire({
-    //     title: 'Error',
-    //     text: 'All input must be filled',
-    //     icon: 'error'
-    //   });
-    // } else {
-    const formData = new FormData();
-    formData.append('category_id', form.category_id);
-    formData.append('product_name', form.product_name);
-    formData.append('brand_id', form.brand_id);
-    formData.append('price', form.price);
-    formData.append('stock', form.stock);
-    formData.append('description', form.description);
-    formData.append('is_new', form.is_new);
-    formData.append('product_color', JSON.stringify(form.product_color));
-    formData.append('product_size', JSON.stringify(form.product_size));
-    if (image) {
-      for (let i = 0; i < image.length; i++) {
-        formData.append('photo', image[i]);
-      }
-    }
-
-    createProductStore(formData)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
+    if (form.category_id === '' || form.product_name === '' || form.brand_id === '' || form.price === '' || form.stock === '' || form.description === '' || form.is_new === '' || form.photo === [] || form.product_size === []) {
+      Swal.fire({
+        title: 'Error',
+        text: 'All input must be filled',
+        icon: 'error'
       });
+    } else {
+      const formData = new FormData();
+      formData.append('category_id', form.category_id);
+      formData.append('product_name', form.product_name);
+      formData.append('brand_id', form.brand_id);
+      formData.append('price', form.price);
+      formData.append('stock', form.stock);
+      formData.append('description', form.description);
+      formData.append('is_new', form.is_new);
+      formData.append('product_color', JSON.stringify(form.product_color));
+      formData.append('product_size', JSON.stringify(form.product_size));
+      if (image) {
+        for (let i = 0; i < image.length; i++) {
+          formData.append('photo', image[i]);
+        }
+      }
+
+      createProductStore(formData)
+        .then(res => {
+          if (res.code === 200) {
+            Swal.fire({
+              title: 'Success',
+              text: `${res.message}`,
+              icon: 'success'
+            });
+          }
+          router.push('/profile/seller');
+        })
+        .catch(err => {
+          // console.log(err.response.data.error);
+          Swal.fire({
+            title: 'Error',
+            text: `${err.response.data.error}`,
+            icon: 'error'
+          });
+        });
+    }
   };
 
   return (
@@ -261,7 +276,7 @@ export default function sellingProduct() {
               ))}
 
               <div className="flex justify-center mt-5">
-                <ButtonSuccess onClick={addSize} action="Add Foto" className="-ml-10 p-[5px]" />
+                <ButtonSuccess onClick={addSize} action="Add Size" className="-ml-10 p-[5px]" />
               </div>
             </div>
           </CardForm>
