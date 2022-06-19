@@ -79,7 +79,7 @@ export default function MainNavbar(req) {
     const search = getSearch;
 
     router.push(`/?search=${getSearch}`);
-    dispatch(getPopularProducts(getSearch));
+    getPopularProducts(getSearch);
   };
 
   return (
@@ -181,35 +181,33 @@ export default function MainNavbar(req) {
                   </Link>
                   <div className="flex items-center justify-center md:hidden">
                     <div className="relative h-7 w-7" onClick={() => onProfile()}>
-                      {getProfile.isLoading ? (<div>Loading</div>)
-                        : getProfile.data[0].user.level === 1
-                          ? (
-                            <Image
-                              src={
-                                getProfile.data.length >= 0
-                                  ? `https://drive.google.com/uc?export=view&id=${getProfile.data[0].store.photo}`
-                                  : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
-                              }
-                              className="rounded-full cursor-pointer"
-                              objectFit="cover"
-                              height={50}
-                              width={50}
-                            />
-                          )
-                          : getProfile.data[0].user.level === 2
-                            ? (
-                              <Image
-                                src={
-                                getProfile.data.length >= 0
-                                  ? `https://drive.google.com/uc?export=view&id=${getProfile.data[0].profile.photo}`
-                                  : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
-                              }
-                                className="rounded-full cursor-pointer"
-                                objectFit="cover"
-                                height={50}
-                                width={50}
-                              />
-                            ) : null}
+                      {getProfile.isLoading ? (
+                        <div>Loading</div>
+                      ) : getProfile.data[0].user.level === 1 ? (
+                        <Image
+                          src={
+                            getProfile.data.length >= 0
+                              ? `https://drive.google.com/uc?export=view&id=${getProfile.data[0].store.photo}`
+                              : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
+                          }
+                          className="rounded-full cursor-pointer"
+                          objectFit="cover"
+                          height={50}
+                          width={50}
+                        />
+                      ) : getProfile.data[0].user.level === 2 ? (
+                        <Image
+                          src={
+                            getProfile.data.length >= 0
+                              ? `https://drive.google.com/uc?export=view&id=${getProfile.data[0].profile.photo}`
+                              : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
+                          }
+                          className="rounded-full cursor-pointer"
+                          objectFit="cover"
+                          height={50}
+                          width={50}
+                        />
+                      ) : null}
                     </div>
                   </div>
                 </div>

@@ -29,11 +29,12 @@ export default function middleware(req) {
     return NextResponse.redirect(`${origin}/profile/customer`);
   }
   if (
-    (decoded.level === 1 && pathname === '/profile/customer') ||
-    pathname === '/mybag' ||
-    pathname === '/' ||
-    pathname === '/checkout' ||
-    pathname === '/products'
+    decoded.level === 1 &&
+    (pathname === '/profile/customer' ||
+      pathname === '/mybag' ||
+      pathname === '/' ||
+      pathname === '/checkout' ||
+      pathname === '/products')
   ) {
     return NextResponse.redirect(`${origin}/profile/seller`);
   }

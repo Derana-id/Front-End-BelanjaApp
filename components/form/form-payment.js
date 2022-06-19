@@ -15,7 +15,14 @@ export default function FormPayment(params) {
         </label>
       </div>
       <div className="flex items-center">
-        <input type="checkbox" name="payment" className="accent-primary cursor-pointer h-5 w-5" id={params.id} />
+        <input
+          type="radio"
+          name="payment"
+          className="accent-primary cursor-pointer h-5 w-5"
+          id={params.id}
+          value={params.value}
+          onChange={params.onChange}
+        />
       </div>
     </div>
   );

@@ -140,8 +140,8 @@ const Products = () => {
 
     createTransaction({
       productId: getDetail.data.product.id,
-      price: getDetail.data.product.price,
-      qty: getAmount
+      qty: getAmount,
+      isBuy: 1
     })
       .then(res => {
         Swal.fire({
