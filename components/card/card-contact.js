@@ -11,7 +11,7 @@ export default function CardContact(params) {
       </div>
       <div className="ml-4">
         <p className="text-black font-semibold text-[15px] max-w-sm">{params.username}</p>
-        <p className="text-gray font-medium text-xs overflow-hidden text-ellipsis whitespace-nowrap max-w-[182px] inline-block float-right">
+        <p className="relative text-gray font-medium text-xs overflow-hidden text-ellipsis whitespace-nowrap max-w-[182px] inline-block">
           {params.message}
         </p>
       </div>

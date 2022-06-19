@@ -188,16 +188,16 @@ const MyBag = () => {
               myCart.data.map((item, i) => (
                 <div key={i}>
                   <CardCart
-                    // image={`${
-                    //   item.image[0].photo
-                    //     ? `https://drive.google.com/uc?export=view&id=${item.image[0].photo}`
-                    //     : `https://drive.google.com/uc?export=view&id=
-                    //     default.png`
-                    // }`}
+                    image={`${
+                      item.image.length >= 0
+                        ? `https://drive.google.com/uc?export=view&id=${item.image[0].photo}`
+                        : `https://drive.google.com/uc?export=view&id=
+                        default.png`
+                    }`}
                     onChange={e => handleDelete(e, item.cart.id)}
                     productName={item.product[0].product_name}
                     store={item.store[0].store_name}
-                    price={`$ ${item.product[0].price * item.cart.qty}`}
+                    price={`Rp ${item.product[0].price * item.cart.qty}`}
                     value={item.cart.qty}
                     onPlus={() =>
                       valueAction(1, item.cart.id, item.cart.product_id, item.cart.qty, item.product[0].stock)
@@ -215,7 +215,7 @@ const MyBag = () => {
               <p className="text-black font-bold">Shopping summary</p>
               <div className="flex justify-between mt-3">
                 <p className="text-gray text-md">Total Price</p>
-                <p className="font-bold text-black text-lg">$ {total}</p>
+                <p className="font-bold text-black text-lg">Rp {total}</p>
               </div>
               <div className="mt-8">
                 <ButtonWarning action="Buy" onClick={() => alert('Hallo')} />
