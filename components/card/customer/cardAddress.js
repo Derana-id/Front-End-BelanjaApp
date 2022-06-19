@@ -13,7 +13,7 @@ export default function CardAddress() {
   const [showModal, setShowModal] = useState();
   const [showEditModal, setShowEditModal] = useState();
   const [id, setID] = useState('');
-  
+
   const dispatch = useDispatch();
   const myAddress = useSelector((state) => {
     return state.myAddress;
@@ -24,17 +24,17 @@ export default function CardAddress() {
 
   useEffect(() => {
     dispatch(getAddress);
-    //dispatch(getDetailAddress(id));
+    // dispatch(getDetailAddress(id));
   }, [dispatch]);
 
   const clickDetail = (e, id) => {
     e.preventDefault();
-  
+
     dispatch(getDetailAddress(id));
-    //console.log(myDetailAddress);
+    // console.log(myDetailAddress);
     setShowEditModal(true);
-  }
-  
+  };
+
   const [form, setForm] = useState({
     label: '',
     recipientName: '',
@@ -61,7 +61,7 @@ export default function CardAddress() {
   }, [myDetailAddress]);
 
   console.log(myDetailAddress);
-  
+
   const onAddAdress = (e) => {
     e.preventDefault();
 
@@ -89,7 +89,7 @@ export default function CardAddress() {
 
   const onEditAddress = (e) => {
     e.preventDefault();
-  
+
     const formData = new FormData();
     formData.append('label', form.label);
     formData.append('recipientName', form.recipientName);
@@ -97,7 +97,7 @@ export default function CardAddress() {
     formData.append('address', form.address);
     formData.append('postalCode', form.postalCode);
     formData.append('city', form.city);
-      
+
     updateAddressBuyer(form)
       .then((res) => {
         Swal.fire({
@@ -120,7 +120,7 @@ export default function CardAddress() {
         }
       });
   };
-  //console.log(id)
+  // console.log(id)
 
   return (
     <div>

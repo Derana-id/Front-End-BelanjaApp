@@ -64,8 +64,26 @@ const Seller = () => {
   };
 
   const onLogout = () => {
-    Cookies.remove('token');
-    router.push('/auth/login');
+    Swal.fire({
+      title: 'Are you sure to Logout?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Cookies.remove('token');
+        router.push('/auth/login');
+        Swal.fire(
+          'Success to logout!',
+          'Success to logout.',
+          'success'
+        );
+      }
+    });
+    // Cookies.remove('token');
+    // router.push('/auth/login');
   };
 
   // integrasi

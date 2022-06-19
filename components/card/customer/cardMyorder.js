@@ -52,7 +52,7 @@ export default function cardMyorder() {
     },
     {
       name: 'Status',
-      selector: row => row.status,
+      selector: row => row.status === 0 ? 'New' : row.status === 1 ? 'Packed' : row.status === 2 ? 'Sent' : row.status === 3 ? 'Completed' : 'Cancel order'
     },
   ];
 
@@ -73,7 +73,7 @@ export default function cardMyorder() {
     return state.listTransactionBuyer;
   });
 
-  console.log(myOrder);
+  // console.log(myOrder);
 
   let data = [];
   if (myOrder.data.length > 0) {
@@ -131,7 +131,7 @@ export default function cardMyorder() {
                 columns={columns}
                 fixedHeader
                 fixedHeaderScrollHeight="300px"
-                data={data2}
+                // data={data2}
                 customStyles={customStyles}
               />
             </div>

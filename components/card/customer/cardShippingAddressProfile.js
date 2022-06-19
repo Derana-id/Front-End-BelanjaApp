@@ -157,8 +157,13 @@ export default function cardShippingAddress(params) {
                     </div>
                     <div className="mb-2">
                       <input
-                        value="1"
-                        onChange={e => params.setFormAddress({ ...params.formAddress, isPrimary: e.target.value })}
+                        onChange={e => {
+                          if (e.target.checked) {
+                            params.setFormAddress({ ...params.formAddress, isPrimary: 1 });
+                          } else {
+                            params.setFormAddress({ ...params.formAddress, isPrimary: 0 });
+                          }
+                        }}
                         type="checkbox"
                         className="mr-4 mt-8"
                       />
