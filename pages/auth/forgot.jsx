@@ -8,6 +8,7 @@ import { sweetAlert } from '../../utils/sweetalert';
 import { forgot } from '../../redux/actions/auth';
 import Input from '../../components/Input/index';
 import Button from '../../components/Button';
+import logoAuth from '../../public/logoAuth.png';
 
 export default function index() {
   const router = useRouter();
@@ -50,8 +51,8 @@ export default function index() {
         <link rel="icon" href="/logo.svg" />
       </Head>
       <div className="sm:w-full md:w-2/6 border-slate-200 rounded-xl mx-auto p-5 flex flex-col items-center relative">
-        <Image src="/logoAuth.svg" width={150} height={100} layout="fixed" />
-        <label className="font-bold mb-10">Reset Password</label>
+        <Image src={logoAuth} width={150} height={60} objectFit="center" layout="fixed" />
+        <label className="font-bold mb-10 mt-4">Reset Password</label>
         <form className="w-full" onSubmit={handleSubmit}>
           <Input placeholder="Email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Link href="/auth/confirm/seller">
