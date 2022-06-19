@@ -47,13 +47,13 @@ const Chat = () => {
   });
 
   useEffect(() => {
-    dispatch(getDetailUser('dc9e00a6-53f9-45c5-833d-14a8b030b295'));
+    dispatch(getDetailProfile('dc9e00a6-53f9-45c5-833d-14a8b030b295'));
   }, []);
 
   // console.log(store);
 
   const getProfile = useSelector(state => {
-    return state.detailCustomer;
+    return state.getIdProfile;
   });
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const Chat = () => {
     setListChat([...listChat, payload]);
 
     const data = {
-      sender: getProfile.data.profile.name,
+      sender: getProfile.data[0].profile.name,
       receiver: getActiveReceiver.user.id,
       message
     };
@@ -98,13 +98,13 @@ const Chat = () => {
     socketio.emit('join-room', getProfile);
 
     const data = {
-      sender: getProfile.id,
-      receiver: item.user.id
+      sender: getProfile.data[0].user.id,
+      receiver: item.user
     };
     socketio.emit('chat-history', data);
   };
 
-  // console.log(getDetailStore.data);
+  console.log(getProfile.data[0]);
   console.log(store);
 
   return (
@@ -221,7 +221,7 @@ const Chat = () => {
                         <Image src={user} width={40} height={40} className="object-cover rounded-full" />
                       </div>
                       <div className="ml-4 flex items-center">
-                        <p className="text-black font-semibold text-lg max-w-sm">{getActiveReceiver.store.name}</p>
+                        {/* <p className="text-black font-semibold text-lg max-w-sm">{getActiveReceiver.store.name}</p> */}
                       </div>
                     </div>
                   </div>

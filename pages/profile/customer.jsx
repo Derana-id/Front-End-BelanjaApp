@@ -3,12 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineMenu, AiOutlineLogout } from 'react-icons/ai';
 import Drawer from 'react-modern-drawer';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import JwtDecode from 'jwt-decode';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/router';
 import CardMyorder from '../../components/card/customer/cardMyorder';
 import CardShippingAddress from '../../components/card/customer/cardShippingAddressProfile';
 // import user from '../../assets/img/user.jpg';
@@ -25,6 +26,7 @@ import { toastify } from '../../utils/toastify';
 
 const Customer = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const router = useRouter();
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
@@ -72,6 +74,11 @@ const Customer = () => {
       });
     }
   }, [detailProfile]);
+
+  const onLogout = () => {
+    Cookies.remove('token');
+    router.push('/auth/login');
+  };
 
   const onEditUser = (e) => {
     e.preventDefault();
@@ -128,7 +135,7 @@ const Customer = () => {
                     width="100px"
                     height="100px"
                     className="rounded-[100%] mb-9"
-                    onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data.profile.photo}`; }}
+                    onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data[0].profile.photo}`; }}
                   />
                 )}
               <div className="flex flex-col ml-2">
@@ -157,6 +164,14 @@ const Customer = () => {
                   </div>
                   <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">My order</button>
                 </div>
+                <div className="flex items-center m-2">
+                  <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                    <AiOutlineLogout />
+                  </div>
+                  <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                    Logout
+                  </button>
+                </div>
               </div>
             ) : showSideBar === 1 ? (
               <div className="flex flex-col ml-[47%] w-full mt-10">
@@ -178,6 +193,14 @@ const Customer = () => {
                   </div>
                   <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">My order</button>
                 </div>
+                <div className="flex items-center m-2">
+                  <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                    <AiOutlineLogout />
+                  </div>
+                  <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                    Logout
+                  </button>
+                </div>
               </div>
             ) : (
               <div className="flex flex-col ml-[47%] w-full mt-10">
@@ -198,6 +221,14 @@ const Customer = () => {
                     <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                   </div>
                   <button onClick={() => setCurrentShow(2)} className="ml-3 font-semibold cursor-pointer ">My order</button>
+                </div>
+                <div className="flex items-center m-2">
+                  <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                    <AiOutlineLogout />
+                  </div>
+                  <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                    Logout
+                  </button>
                 </div>
               </div>
             )}
@@ -224,7 +255,7 @@ const Customer = () => {
                       width="100px"
                       height="100px"
                       className="rounded-[100%] mb-9"
-                      onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data.profile.photo}`; }}
+                      onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data[0].profile.photo}`; }}
                     />
                   )}
                 <div className="flex flex-col ml-2">
@@ -236,7 +267,7 @@ const Customer = () => {
               <div className="">
                 {/* sidebar */}
                 {showSideBar === 0 ? (
-                  <div className="flex flex-col w-full">
+                  <div className="flex flex-col ml-[47%] w-full mt-10">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
@@ -255,9 +286,17 @@ const Customer = () => {
                       </div>
                       <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">My order</button>
                     </div>
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                        <AiOutlineLogout />
+                      </div>
+                      <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 ) : showSideBar === 1 ? (
-                  <div className="flex flex-col w-full mt-10">
+                  <div className="flex flex-col ml-[47%] w-full mt-10">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
@@ -276,9 +315,17 @@ const Customer = () => {
                       </div>
                       <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">My order</button>
                     </div>
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                        <AiOutlineLogout />
+                      </div>
+                      <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 ) : (
-                  <div className="flex flex-col w-full mt-10">
+                  <div className="flex flex-col ml-[47%] w-full mt-10">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
@@ -296,6 +343,14 @@ const Customer = () => {
                         <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                       </div>
                       <button onClick={() => setCurrentShow(2)} className="ml-3 font-semibold cursor-pointer ">My order</button>
+                    </div>
+                    <div className="flex items-center m-2">
+                      <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
+                        <AiOutlineLogout />
+                      </div>
+                      <button onClick={onLogout} className="ml-3 text-base  cursor-pointer">
+                        Logout
+                      </button>
                     </div>
                   </div>
                 )}
@@ -334,7 +389,7 @@ const Customer = () => {
                             width="100px"
                             height="100px"
                             className="rounded-[100%] mb-9"
-                            onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data.profile.photo}`; }}
+                            onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data[0].profile.photo}`; }}
                           />
                         )}
                       <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />
