@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
+import { BulletList } from 'react-content-loader';
 import Head from 'next/head';
 import Image from 'next/image';
 import { AiOutlineMenu, AiOutlineLogout } from 'react-icons/ai';
@@ -360,46 +361,51 @@ const Customer = () => {
           </div>
           {showSideBar === 0
             ? (
-              <form onSubmit={(e) => onEditUser(e)} className="flex w-full">
-                <div className="flex flex-col bg-white rounded w-full h-auto mt-[120px] mx-2 sm:w-full md:w-3/4 lg:w-3/4 sm:mx-2 md:mx-12 lg:mx-12">
-                  <div className="flex flex-col m-5 border-b-2 border-[#9B9B9B] pb-5">
-                    <label className="mb-2 text-lg font-semibold">My Profile</label>
-                    <label className="text-[#9B9B9B]">Manage your profile information</label>
-                  </div>
-                  <div className="flex w-full">
+              detailProfile.isLoading ? (
+                <BulletList />
+              ) : (
+                <form onSubmit={(e) => onEditUser(e)} className="flex w-full">
+                  <div className="flex flex-col bg-white rounded w-full h-auto mt-[120px] mx-2 sm:w-full md:w-3/4 lg:w-3/4 sm:mx-2 md:mx-12 lg:mx-12">
+                    <div className="flex flex-col m-5 border-b-2 border-[#9B9B9B] pb-5">
+                      <label className="mb-2 text-lg font-semibold">My Profile</label>
+                      <label className="text-[#9B9B9B]">Manage your profile information</label>
+                    </div>
+                    <div className="flex w-full">
 
-                    <div className="w-[70%] flex flex-col items-end">
-                      <Input onChange={(e) => setForm({ ...form, name: e.target.value })} name="Name" type="text" value={form.name} />
-                      <Input name="Email" value={form.email} type="text" readonly />
-                      <Input onChange={(e) => setForm({ ...form, phone: e.target.value })} name="Phone Number" value={form.phone} type="text" />
-                      <div className="flex -mr-4 sm:-mr-4 md:mr-[150px] lg-mr-[150px] xl:mr-[150px]">
-                        <label className="mr-5 text-[#9B9B9B]">Gender</label>
-                        <RadioButton onChange={(e) => setForm({ ...form, gender: e.target.value })} value={form.gender} />
+                      <div className="w-[70%] flex flex-col items-end">
+                        <Input onChange={(e) => setForm({ ...form, name: e.target.value })} name="Name" type="text" value={form.name} />
+                        <Input name="Email" value={form.email} type="text" readonly />
+                        <Input onChange={(e) => setForm({ ...form, phone: e.target.value })} name="Phone Number" value={form.phone} type="text" />
+                        <div className="flex -mr-4 sm:-mr-4 md:mr-[150px] lg-mr-[150px] xl:mr-[150px]">
+                          <label className="mr-5 text-[#9B9B9B]">Gender</label>
+                          <RadioButton onChange={(e) => setForm({ ...form, gender: e.target.value })} value={form.gender} />
+                        </div>
+                        <Datepicker onChange={(e) => setForm({ ...form, birth: e.target.value })} value={form.birth} />
                       </div>
-                      <Datepicker onChange={(e) => setForm({ ...form, birth: e.target.value })} value={form.birth} />
-                    </div>
-                    <div className="w-[30%] flex flex-col items-center border-l-2 border-gray my-4">
-                      {detailProfile.isLoading ? (<div>Laoding</div>)
-                        : (
-                          <img
-                            src={form.photo
-                              ? `https://drive.google.com/uc?export=view&id=${form.photo}`
-                              : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                            alt=""
-                            width="100px"
-                            height="100px"
-                            className="rounded-[100%] mb-9"
-                            onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data[0].profile.photo}`; }}
-                          />
-                        )}
-                      <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />
-                      <label className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray" htmlFor="images">Select image</label>
-                    </div>
+                      <div className="w-[30%] flex flex-col items-center border-l-2 border-gray my-4">
+                        {detailProfile.isLoading ? (<div>Laoding</div>)
+                          : (
+                            <img
+                              src={form.photo
+                                ? `https://drive.google.com/uc?export=view&id=${form.photo}`
+                                : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
+                              alt=""
+                              width="100px"
+                              height="100px"
+                              className="rounded-[100%] mb-9"
+                              onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data[0].profile.photo}`; }}
+                            />
+                          )}
+                        <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />
+                        <label className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray" htmlFor="images">Select image</label>
+                      </div>
 
+                    </div>
+                    <button type="submit" className="w-32 h-10 mt-5 mb-10 text-white border ml-28 sm:ml-28 md:ml-44 lg:ml-44 bg-primary active:bg-white active:text-primary rounded-2xl">Save</button>
                   </div>
-                  <button type="submit" className="w-32 h-10 mt-5 mb-10 text-white border ml-28 sm:ml-28 md:ml-44 lg:ml-44 bg-primary active:bg-white active:text-primary rounded-2xl">Save</button>
-                </div>
-              </form>
+                </form>
+              )
+
             ) : showSideBar === 1
               ? (<CardShippingAddress />) : showSideBar === 2
                 ? (<CardMyorder />) : null}

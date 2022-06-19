@@ -207,37 +207,41 @@ const Products = () => {
                     src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
-                            getDetail.data.image[0] ? getDetail.data.image[0].photo : 'default.png'
+                            getDetail.data.image[0].photo
                           }`
-                        : 'https://drive.google.com/uc?export=view&id=default.png'
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
                     }
+                    onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`; }}
                   />
                   <Img
                     src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
-                            getDetail.data.image[0] ? getDetail.data.image[0].photo : 'default.png'
+                            getDetail.data.image[0].photo
                           }`
-                        : 'https://drive.google.com/uc?export=view&id=default.png'
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
                     }
+                    onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`; }}
                   />
                   <Img
                     src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
-                            getDetail.data.image[0] ? getDetail.data.image[0].photo : 'default.png'
+                            getDetail.data.image[0].photo
                           }`
-                        : 'https://drive.google.com/uc?export=view&id=default.png'
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
                     }
+                    onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`; }}
                   />
                   <Img
                     src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
-                            getDetail.data.image[0] ? getDetail.data.image[0].photo : 'default.png'
+                            getDetail.data.image[0].photo
                           }`
-                        : 'https://drive.google.com/uc?export=view&id=default.png'
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
                     }
+                    onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`; }}
                   />
                 </div>
               </div>

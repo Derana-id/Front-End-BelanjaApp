@@ -125,9 +125,10 @@ const Seller = () => {
           icon: 'success'
         });
         dispatch(getDetailStore(decoded.id));
+        router.push('/profile/seller');
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
         if (err.response.data.code === 422) {
           const { error } = err.response.data;
           error.map(item => toastify(item, 'error'));
@@ -161,7 +162,7 @@ const Seller = () => {
                     width="100px"
                     height="100px"
                     className="rounded-[100%] mb-9"
-                    onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data[0].store.photo}`; }}
+                    onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`; }}
                   />
                 )}
               <div className="flex flex-col ml-2">
@@ -904,7 +905,7 @@ const Seller = () => {
                           width="100px"
                           height="100px"
                           className="rounded-[100%] mb-9"
-                          onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data[0].store.photo}`; }}
+                          onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`; }}
                         />
                       )}
                     <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />

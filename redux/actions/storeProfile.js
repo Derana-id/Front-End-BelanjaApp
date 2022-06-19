@@ -41,7 +41,7 @@ export const getDetailStore = id => async dispatch => {
 export const updateStore = data => {
   return new Promise((resolve, reject) => {
     axios
-      .put('user', data)
+      .put('user/srore', data)
       .then(res => {
         resolve(res.data);
       })
