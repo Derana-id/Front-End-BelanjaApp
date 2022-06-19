@@ -1,14 +1,38 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
+import { useDispatch, useSelector } from 'react-redux';
 import Search from '../../search/search';
+import { listOrderTransaction } from '../../../redux/actions/storeProfile';
 
 export default function cardMyorder() {
   const [showNav, setFormShowNav] = useState(0);
+  const dispatch = useDispatch();
 
   const setCurrentShow = index => {
     setFormShowNav(index);
+  };
+
+  const listOrderStore = useSelector(state => {
+    return state.listTransactionStore;
+  });
+
+  // console.log(listOrderStore);
+
+  useEffect(() => {
+    dispatch(listOrderTransaction());
+  }, [dispatch]);
+
+  const data = [];
+  if (listOrderStore.data.length > 0) {
+    listOrderStore.data[0].transaction.map((item) => (
+      data.push(item)
+    ));
+  }
+
+  const clickHandler = () => {
+    alert('hello');
   };
 
   const columns = [
@@ -26,19 +50,26 @@ export default function cardMyorder() {
     },
     {
       name: 'Status',
-      selector: row => row.status,
+      selector: row => row.status === 0 ? 'New' : row.status === 1 ? 'Packed' : row.status === 2 ? 'Sent' : row.status === 3 ? 'Completed' : 'Cancel order'
+    },
+    {
+      name: 'Action',
+      cell: () => <button onClick={clickHandler}>Change Status</button>,
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
     },
   ];
 
-  const data = [
-    {
-      id: 1,
-      invoice: 'ABC1243',
-      total: '10.000',
-      date: '11/05/1997',
-      status: 'success'
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     invoice: 'ABC1243',
+  //     total: '10.000',
+  //     date: '11/05/1997',
+  //     status: 'success'
+  //   },
+  // ];
 
   const customStyles = {
     rows: {

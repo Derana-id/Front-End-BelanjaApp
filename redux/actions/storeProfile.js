@@ -12,7 +12,10 @@ import {
   GET_BRAND_FAILED,
   GET_DETAIL_MY_PRODUCT_PENDING,
   GET_DETAIL_MY_PRODUCT_SUCCESS,
-  GET_DETAIL_MY_PRODUCT_FAILED
+  GET_DETAIL_MY_PRODUCT_FAILED,
+  GET_TRANSACTION_STORE_PENDING,
+  GET_TRANSACTION_STORE_SUCCESS,
+  GET_TRANSACTION_STORE_FAILED
 } from '../types';
 
 export const getDetailStore = id => async dispatch => {
@@ -31,6 +34,27 @@ export const getDetailStore = id => async dispatch => {
   } catch (error) {
     dispatch({
       type: GET_DETAIL_STORE_FAILED,
+      payload: error.message
+    });
+  }
+};
+
+export const listOrderTransaction = () => async dispatch => {
+  try {
+    dispatch({
+      type: GET_TRANSACTION_STORE_PENDING,
+      payload: null
+    });
+
+    const res = await axios.get('transaction/status');
+
+    dispatch({
+      type: GET_TRANSACTION_STORE_SUCCESS,
+      payload: res.data
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_TRANSACTION_STORE_FAILED,
       payload: error.message
     });
   }
