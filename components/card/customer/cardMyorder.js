@@ -19,7 +19,7 @@ export default function cardMyorder() {
       style: {
         minHeight: '72px', // override the row height
         border: '2px solid #F6F6F6'
-      },
+      }
     },
     headCells: {
       style: {
@@ -27,28 +27,28 @@ export default function cardMyorder() {
         paddingRight: '8px',
         backgroundColor: '#F6F6F6',
         border: '2px solid #F6F6F6'
-      },
+      }
     },
     cells: {
       style: {
         paddingLeft: '8px', // override the cell padding for data cells
-        paddingRight: '8px',
-      },
-    },
+        paddingRight: '8px'
+      }
+    }
   };
 
   const columns = [
     {
       name: 'Invoice',
-      selector: row => row.invoice,
+      selector: row => row.invoice
     },
     {
       name: 'Total price',
-      selector: row => row.total,
+      selector: row => row.total
     },
     {
       name: 'Date',
-      selector: row => row.date,
+      selector: row => row.date
     },
     {
       name: 'Status',
@@ -69,7 +69,7 @@ export default function cardMyorder() {
   //   },
   // ];
 
-  const myOrder = useSelector((state) => {
+  const myOrder = useSelector(state => {
     return state.listTransactionBuyer;
   });
 
@@ -77,9 +77,7 @@ export default function cardMyorder() {
 
   let data = [];
   if (myOrder.data.length > 0) {
-    myOrder.data.map((item) => (
-      data.push(item.transaction)
-    ));
+    myOrder.data.map(item => data.push(item.transaction));
   }
 
   // console.log(myOrder);
@@ -169,7 +167,6 @@ export default function cardMyorder() {
               />
             </div>
           )}
-
         </div>
       </div>
     </div>
