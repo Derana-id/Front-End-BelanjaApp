@@ -25,15 +25,29 @@ export default function ModalsSearch(params) {
   const [getBrand, setBrand] = useState('');
   const [isDropdown, setIsDropdown] = useState(false);
   const [isCategory, setIsCategory] = useState(false);
+  // const [data, setData] = useState({});
+
+  // const data = {
+  //   color: ['Red'],
+  //   category: [''],
+  //   size: [''],
+  //   brand: ['']
+  // };
 
   useEffect(() => {
     dispatch(getCategory());
     dispatch(getAllBrand());
+    // dispatch(getFilter(data));
   }, []);
 
   const getAllCategory = useSelector(state => {
     return state.getAllCategory;
   });
+
+  const filter = useSelector(state => {
+    return state.getFilter;
+  });
+  console.log(filter);
 
   const brand = useSelector(state => {
     return state.allBrand.data;
@@ -72,8 +86,17 @@ export default function ModalsSearch(params) {
       category: getValueCategory,
       brand: getBrand
     };
-
     dispatch(getFilter(data));
+    // setData(data);
+    // console.log(data);
+
+    // getFilter(data)
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
     // router.push(`/?color=${getColor}&size=${getSize}&category=${getCategory}&brand=${getBrand}`);
   };
   return (

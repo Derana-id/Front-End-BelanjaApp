@@ -68,15 +68,32 @@ export const getDetailProduct = id => async dispatch => {
   }
 };
 
-export const getFilter = data => {
-  return new Promise((resolve, reject) => {
-    axios
-      .post('product/filter', data)
-      .then(res => {
-        resolve(res.data);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
+export const getFilter = data => async dispatch => {
+  try {
+    dispatch({
+      type: GET_PRODUCTS_FILTER_PENDING
+    });
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}product/filter`, data, {});
+    dispatch({
+      type: GET_PRODUCTS_FILTER_SUCCESS,
+      payload: res.data
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_PRODUCTS_FILTER_FAILED
+    });
+  }
 };
+
+// export const getFilter = data => {
+//   return new Promise((resolve, reject) => {
+//     axios
+//       .post('product/filter', data)
+//       .then(res => {
+//         resolve(res.data);
+//       })
+//       .catch(err => {
+//         reject(err);
+//       });
+//   });
+// };
