@@ -148,7 +148,7 @@ const MyBag = () => {
     if (amount >= 1 && e === -1 && amount <= 1 && e === -1) {
       Swal.fire({
         title: 'Failed!',
-        text: 'null',
+        text: 'Number cannot be empty!',
         icon: 'error'
       });
     } else if (amount <= stock) {
