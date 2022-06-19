@@ -1,31 +1,27 @@
 <div id="top"></div>
-<p align="center">
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
   <a href="https://github.com/Derana-id/Front-End-BelanjaApp">
-    <img src="https://lh3.googleusercontent.com/d/13oL_tdqAFzcRVAPIk0lWpAuGZQ1Dmj4d" width="500px" alt="Logo">
+    <img src="https://lh3.googleusercontent.com/d/13oL_tdqAFzcRVAPIk0lWpAuGZQ1Dmj4d" alt="Logo" width="400px">
   </a>
-</p>
-<h3 align="center">Blanja App</h3>
-<p align="center">
-  Blanja is an online fashion store that offers fashion products.
-  <br/>
-  <a href="#table-of-contents">
-    <strong>Explore the docs »</strong>
-  </a>
-  <br /><br/>
-  <a href="https://bit.ly/blanja-app/">View Demo</a>
-  ·
-  <a href="https://github.com/Derana-id/Front-End-BelanjaApp/issues">Report Bug</a>
-  ·
-  <a href="https://github.com/Derana-id/Front-End-BelanjaApp/issues">Request Feature</a>
-</p>
-<p align="center">
-  <a href="https://reactjs.org/">
-    <img src="https://img.shields.io/badge/Next.js-v12.1.6-green?style=flat">
-  </a>
-  <a href="https://getbootstrap.com/docs/5.1/getting-started/introduction/">
-    <img src="https://img.shields.io/badge/Tailwind-v3.0.24-ff69b4?style=flat">
-  </a>                                     
-</p>
+
+  <h3 align="center">Blanja App</h3>
+
+  <p align="center">
+    Blanja is an online fashion store that offers fashion products.
+    <br />
+    <a href="#table-of-contents"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="bit.ly/blanja-app">View Web Service</a>
+    ·
+    <a href="https://github.com/Derana-id/Front-End-BelanjaApp/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Derana-id/Front-End-BelanjaApp/issues">Request Feature</a>
+  </p>
+</div>
 
 <!-- TABLE OF CONTENTS -->
  ## Table of Contents
