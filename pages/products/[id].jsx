@@ -8,8 +8,8 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import ContentLoader from 'react-content-loader';
-import jwtDecode from 'jwt-decode';
-import Cookies from 'js-cookie';
+// import jwtDecode from 'jwt-decode';
+// import Cookies from 'js-cookie';
 import Img from '../../components/img/Img';
 import Start from '../../components/star/start';
 import Color from '../../components/molecules/color';
@@ -119,7 +119,7 @@ const Products = () => {
   };
 
   const initialChat = e => {
-    const decoded = jwtDecode(Cookies.get('token'));
+    // const decoded = jwtDecode(Cookies.get('token'));
     e.preventDefault();
 
     chat({})
@@ -216,7 +216,7 @@ const Products = () => {
                     src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
-                            getDetail.data.image[0] ? getDetail.data.image[0].photo : 'default.png'
+                            getDetail.data.image[1] ? getDetail.data.image[1].photo : 'default.png'
                           }`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
@@ -225,7 +225,7 @@ const Products = () => {
                     src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
-                            getDetail.data.image[0] ? getDetail.data.image[0].photo : 'default.png'
+                            getDetail.data.image[2] ? getDetail.data.image[2].photo : 'default.png'
                           }`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
@@ -234,7 +234,7 @@ const Products = () => {
                     src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
-                            getDetail.data.image[0] ? getDetail.data.image[0].photo : 'default.png'
+                            getDetail.data.image[3] ? getDetail.data.image[3].photo : 'default.png'
                           }`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
@@ -259,7 +259,7 @@ const Products = () => {
                 <div className="mt-5">
                   <p className="text-md text-gray font-semibold text-sm">price</p>
                   <h3 className="text-dark text-xl font-extrabold">
-                    $ {getDetail.data.category ? getDetail.data.product.price : null}
+                    Rp {getDetail.data.category ? getDetail.data.product.price : null}
                   </h3>
                 </div>
                 <div className="mt-5">
@@ -326,7 +326,7 @@ const Products = () => {
                 <div key={index}>
                   <CardProducts
                     nameProduct={`${item.product.product_name}`}
-                    price={`$ ${item.product.price}`}
+                    price={`Rp ${item.product.price}`}
                     user={`${item.store[0].store_name}`}
                     onClick={() => onDetail(item.product.id)}
                     img={`${
