@@ -9,7 +9,8 @@ import Swal from 'sweetalert2';
 import jas from '../../assets/img/jas.jpg';
 // import { getMyCart } from '../../redux/actions/cart';
 import { getMyTransaction } from '../../redux/actions/transaction';
-import { getMyAddress, createAddress } from '../../redux/actions/address';
+import { getMyAddress } from '../../redux/actions/address';
+import { createAddressBuyer } from '../../redux/actions/userProfile';
 import { toastify } from '../../utils/toastify';
 import AddAddress from '../../components/modals/add-address';
 import CardCheckout from '../../components/card/card-checkout';
@@ -70,7 +71,7 @@ const Checkout = () => {
     ) {
       Swal.fire('Failed!', 'All field must be filled', 'warning');
     } else {
-      createAddress(formAddress)
+      createAddressBuyer(formAddress)
         .then(() => {})
         .catch(err => {
           if (err.response.data.code === 422) {

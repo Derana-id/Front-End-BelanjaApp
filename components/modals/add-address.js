@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Close from '../../assets/icons/close.svg';
-import CardShippingAddress from '../card/customer/cardShippingAddressProfile';
+//import CardShippingAddress from '../card/customer/cardShippingAddressProfile';
 import CardAddress from '../card/customer/cardAddress';
 
 export default function AddAddress({ myAddress }) {
@@ -34,7 +34,7 @@ export default function AddAddress({ myAddress }) {
                     <h3 className="text-3xl font-semibold">Choose another address</h3>
                   </div>
                 </div>
-                <CardShippingAddress myAddress={myAddress} />
+                <CardAddress />
               </div>
             </div>
           </div>

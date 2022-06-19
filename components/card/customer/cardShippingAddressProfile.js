@@ -9,50 +9,51 @@ import { toastify } from '../../../utils/toastify';
 
 export default function cardShippingAddress({ myAddress }) {
   const [showModal, setShowModal] = useState();
-  // const dispatch = useDispatch();
+  const [showEditModal, setShowEditModal] = useState();
+  const dispatch = useDispatch();
 
-  // const myAddress = useSelector(state => {
-  //   return state.myAddress;
-  // });
+  /*const myAddress = useSelector(state => {
+     return state.myAddress;
+  });
 
-  // useEffect(() => {
-  //   dispatch(getAddress());
-  // }, [dispatch]);
+  useEffect(() => {
+     dispatch(getAddress());
+  }, [dispatch]);*/
 
-  // const [form, setForm] = useState({
-  //   label: '',
-  //   recipientName: '',
-  //   recipientPhone: '',
-  //   address: '',
-  //   postalCode: '',
-  //   city: '',
-  //   isPrimary: ''
-  // });
+  const [form, setForm] = useState({
+     label: '',
+     recipientName: '',
+     recipientPhone: '',
+     address: '',
+     postalCode: '',
+     city: '',
+     isPrimary: ''
+  });
 
-  // const onAddAdress = e => {
-  //   e.preventDefault();
+  const onAddAddress = e => {
+    e.preventDefault();
 
-  //   createAddressBuyer(form)
-  //     .then(res => {
-  //       Swal.fire({
-  //         title: 'success',
-  //         text: res.message,
-  //         icon: 'success'
-  //       });
-  //     })
-  //     .catch(err => {
-  //       if (err.response.data.code === 422) {
-  //         const { error } = err.response.data;
-  //         error.map(item => toastify(item, 'error'));
-  //       } else {
-  //         Swal.fire({
-  //           title: 'Error!',
-  //           text: err.response.data.message,
-  //           icon: 'error'
-  //         });
-  //       }
-  //     });
-  // };
+    createAddressBuyer(form)
+        .then(res => {
+         Swal.fire({
+           title: 'success',
+           text: res.message,
+           icon: 'success'
+         });
+      })
+       .catch(err => {
+         if (err.response.data.code === 422) {
+           const { error } = err.response.data;
+           error.map(item => toastify(item, 'error'));
+         } else {
+           Swal.fire({
+             title: 'Error!',
+             text: err.response.data.message,
+             icon: 'error'
+           });
+         }
+       });
+  };
 
   return (
     <div>
@@ -78,17 +79,17 @@ export default function cardShippingAddress({ myAddress }) {
         ) : myAddress.data.length > 0 ? (
           myAddress.data.map((item, index) => (
             <div
-              className="ml-10 mr-10 my-5 border-2 rounded border-primary h-auto relative flex items-start flex-col"
+              className="relative flex flex-col items-start h-auto my-5 ml-10 mr-10 border-2 rounded border-primary"
               key={index}
             >
-              <label className="font-semibold m-2" htmlFor="">
+              <label className="m-2 font-semibold" htmlFor="">
                 {item.recipient_name}
               </label>
               <p className="text-[#222222] m-2">
                 {`[${item.label}] ${item.address},  ${item.city}, ${item.postal_code}, (HP: ${item.recipient_phone})`}
               </p>
 
-              <button type="button" onClick={() => setShowEditModal(true)} className="text-primary m-2 font-bold">
+              <button type="button" onClick={() => setShowEditModal(true)} className="m-2 font-bold text-primary">
                 Change address
               </button>
             </div>
@@ -99,77 +100,77 @@ export default function cardShippingAddress({ myAddress }) {
       </div>
       {showModal ? (
         <>
-          <form onSubmit={e => onAddAdress(e)}>
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-              <div className="relative w-auto my-6 mx-auto max-w-4xl">
+          <form onSubmit={e => onAddAddress(e)}>
+            <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+              <div className="relative w-auto max-w-4xl mx-auto my-6">
                 {/* content */}
-                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
                   {/* header */}
                   <div className="flex flex-col items-start justify-between p-5 rounded-t">
                     <button
-                      className="p-1 ml-auto bg-transparent border-0 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                      className="float-right p-1 ml-auto text-3xl font-semibold leading-none bg-transparent border-0 outline-none focus:outline-none"
                       onClick={() => setShowModal(false)}
                     >
-                      <span className="bg-transparent h-6 w-6 text-2xl block outline-none focus:outline-none">
+                      <span className="block w-6 h-6 text-2xl bg-transparent outline-none focus:outline-none">
                         <Image src={Close} />
                       </span>
                     </button>
-                    <div className="mt-6 mx-auto">
+                    <div className="mx-auto mt-6">
                       <h3 className="text-3xl font-semibold">Add new address</h3>
                     </div>
                   </div>
                   {/* body */}
                   <div className="w-[900px] flex flex-col relative p-6">
-                    <div className="w-full mb-2 flex flex-col">
+                    <div className="flex flex-col w-full mb-2">
                       <label className="text-[#9B9B9B]">Save address as (ex : home address, office address)</label>
                       <input
                         onChange={e => setForm({ ...form, label: e.target.value })}
                         type="text"
-                        className="border h-11 px-3 rounded mt-2"
+                        className="px-3 mt-2 border rounded h-11"
                       />
                     </div>
-                    <div className="flex mb-2 w-full">
-                      <div className="flex flex-col mr-4 w-1/2">
+                    <div className="flex w-full mb-2">
+                      <div className="flex flex-col w-1/2 mr-4">
                         <label className="text-[#9B9B9B]">Recipient’s name</label>
                         <input
                           onChange={e => setForm({ ...form, recipientName: e.target.value })}
                           type="text"
-                          className="border h-11 px-3 rounded mt-2"
+                          className="px-3 mt-2 border rounded h-11"
                         />
                       </div>
-                      <div className="flex flex-col ml-4 w-1/2">
+                      <div className="flex flex-col w-1/2 ml-4">
                         <label className="flex text-[#9B9B9B] flex-col">Recipient&apos;s telephone number</label>
                         <input
                           onChange={e => setForm({ ...form, recipientPhone: e.target.value })}
                           type="text"
-                          className="border h-11 px-3 rounded mt-2"
+                          className="px-3 mt-2 border rounded h-11"
                         />
                       </div>
                     </div>
-                    <div className="flex mb-2 w-full">
-                      <div className="flex flex-col mr-4 w-1/2">
+                    <div className="flex w-full mb-2">
+                      <div className="flex flex-col w-1/2 mr-4">
                         <label className="text-[#9B9B9B]">Address</label>
                         <input
                           onChange={e => setForm({ ...form, address: e.target.value })}
                           type="text"
-                          className="border h-11 px-3 rounded mt-2"
+                          className="px-3 mt-2 border rounded h-11"
                         />
                       </div>
-                      <div className="flex flex-col ml-4 w-1/2">
+                      <div className="flex flex-col w-1/2 ml-4">
                         <label className="flex flex-col text-[#9B9B9B]">Postal code</label>
                         <input
                           onChange={e => setForm({ ...form, postalCode: e.target.value })}
                           type="number"
-                          className="border h-11 px-3 rounded mt-2"
+                          className="px-3 mt-2 border rounded h-11"
                         />
                       </div>
                     </div>
-                    <div className="w-1/2 mb-2 flex flex-col">
+                    <div className="flex flex-col w-1/2 mb-2">
                       <label className="text-[#9B9B9B]">City or Subdistrict</label>
                       <input
                         onChange={e => setForm({ ...form, city: e.target.value })}
                         type="text"
-                        className="border mr-4 h-11 px-3 rounded mt-2"
+                        className="px-3 mt-2 mr-4 border rounded h-11"
                       />
                     </div>
                     <div className="mb-2">
@@ -177,7 +178,7 @@ export default function cardShippingAddress({ myAddress }) {
                         value="1"
                         onChange={e => setForm({ ...form, isPrimary: e.target.value })}
                         type="checkbox"
-                        className="mr-4 mt-8"
+                        className="mt-8 mr-4"
                       />
                       <label className="text-[#9B9B9B]">Make it the primary address</label>
                     </div>
@@ -192,7 +193,116 @@ export default function cardShippingAddress({ myAddress }) {
                       Cancel
                     </button>
                     <button
-                      className=" bg-primary text-white rounded-2xl h-10 w-44 ml-4"
+                      className="h-10 ml-4 text-white bg-primary rounded-2xl w-44"
+                      type="submit"
+                      // onClick={() => setShowModal(false)}
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="fixed inset-0 z-40 bg-black opacity-25" />
+          </form>
+        </>
+      ) : null}
+      {showEditModal ? (
+        <>
+          <form onSubmit={e => onAddAddress(e)}>
+            <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+              <div className="relative w-auto max-w-4xl mx-auto my-6">
+                {/* content */}
+                <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
+                  {/* header */}
+                  <div className="flex flex-col items-start justify-between p-5 rounded-t">
+                    <button
+                      className="float-right p-1 ml-auto text-3xl font-semibold leading-none bg-transparent border-0 outline-none focus:outline-none"
+                      onClick={() => setShowEditModal(false)}
+                    >
+                      <span className="block w-6 h-6 text-2xl bg-transparent outline-none focus:outline-none">
+                        <Image src={Close} />
+                      </span>
+                    </button>
+                    <div className="mx-auto mt-6">
+                      <h3 className="text-3xl font-semibold">Edit address</h3>
+                    </div>
+                  </div>
+                  {/* body */}
+                  <div className="w-[900px] flex flex-col relative p-6">
+                    <div className="flex flex-col w-full mb-2">
+                      <label className="text-[#9B9B9B]">Save address as (ex : home address, office address)</label>
+                      <input
+                        onChange={e => setForm({ ...form, label: e.target.value })}
+                        type="text"
+                        className="px-3 mt-2 border rounded h-11"
+                      />
+                    </div>
+                    <div className="flex w-full mb-2">
+                      <div className="flex flex-col w-1/2 mr-4">
+                        <label className="text-[#9B9B9B]">Recipient’s name</label>
+                        <input
+                          onChange={e => setForm({ ...form, recipientName: e.target.value })}
+                          type="text"
+                          className="px-3 mt-2 border rounded h-11"
+                        />
+                      </div>
+                      <div className="flex flex-col w-1/2 ml-4">
+                        <label className="flex text-[#9B9B9B] flex-col">Recipient&apos;s telephone number</label>
+                        <input
+                          onChange={e => setForm({ ...form, recipientPhone: e.target.value })}
+                          type="text"
+                          className="px-3 mt-2 border rounded h-11"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex w-full mb-2">
+                      <div className="flex flex-col w-1/2 mr-4">
+                        <label className="text-[#9B9B9B]">Address</label>
+                        <input
+                          onChange={e => setForm({ ...form, address: e.target.value })}
+                          type="text"
+                          className="px-3 mt-2 border rounded h-11"
+                        />
+                      </div>
+                      <div className="flex flex-col w-1/2 ml-4">
+                        <label className="flex flex-col text-[#9B9B9B]">Postal code</label>
+                        <input
+                          onChange={e => setForm({ ...form, postalCode: e.target.value })}
+                          type="number"
+                          className="px-3 mt-2 border rounded h-11"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-col w-1/2 mb-2">
+                      <label className="text-[#9B9B9B]">City or Subdistrict</label>
+                      <input
+                        onChange={e => setForm({ ...form, city: e.target.value })}
+                        type="text"
+                        className="px-3 mt-2 mr-4 border rounded h-11"
+                      />
+                    </div>
+                    <div className="mb-2">
+                      <input
+                        value="1"
+                        onChange={e => setForm({ ...form, isPrimary: e.target.value })}
+                        type="checkbox"
+                        className="mt-8 mr-4"
+                      />
+                      <label className="text-[#9B9B9B]">Make it the primary address</label>
+                    </div>
+                  </div>
+                  {/* footer */}
+                  <div className="flex items-center justify-end p-4 mr-5 rounded-b">
+                    <button
+                      className="border border-[#9B9B9B] text-[#9B9B9B] rounded-2xl h-10 w-44 mr-4"
+                      type="button"
+                      onClick={() => setShowEditModal(false)}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className="h-10 ml-4 text-white bg-primary rounded-2xl w-44"
                       type="submit"
                       // onClick={() => setShowModal(false)}
                     >
@@ -202,7 +312,7 @@ export default function cardShippingAddress({ myAddress }) {
                 </div>
               </div>
             </div>
-            <div className="opacity-25 fixed inset-0 z-40 bg-black" />
+            <div className="fixed inset-0 z-40 bg-black opacity-25" />
           </form>
         </>
       ) : null}

@@ -6,8 +6,8 @@ import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import JwtDecode from 'jwt-decode';
 import Close from '../../../assets/icons/close.svg';
-import { createAddressBuyer, updateAddressBuyer, deleteAddressBuyer, getAddress } from '../../../redux/actions/userProfile';
-import { getDetailAddress } from '../../../redux/actions/address';
+import { createAddressBuyer, updateAddressBuyer, deleteAddressBuyer, getAddressUser } from '../../../redux/actions/userProfile';
+import { getMyAddress } from '../../../redux/actions/address';
 import { toastify } from '../../../utils/toastify';
 
 export default function CardAddress() {
@@ -24,14 +24,14 @@ export default function CardAddress() {
   });
 
   useEffect(() => {
-    dispatch(getAddress);
+    dispatch(getMyAddress);
     //dispatch(getDetailAddress(id));
   }, [dispatch]);
 
   const clickDetail = (e, id) => {
     e.preventDefault();
   
-    dispatch(getDetailAddress(id));
+    dispatch(getAddressUser(id));
     //console.log(myDetailAddress);
     setShowEditModal(true);
   }
@@ -108,7 +108,7 @@ export default function CardAddress() {
           text: res.message,
           icon: 'success'
         });
-        dispatch(getDetailAddress(id));
+        dispatch(getAddressUser(id));
       })
       .catch((err) => {
         if (err.response.data.code === 422) {
@@ -125,7 +125,6 @@ export default function CardAddress() {
       
       Router.push('/checkout');
   };
-  console.log(getDetailAddress(id));
 
   const onDeleteAddress = (e, id) => {
     e.preventDefault();
