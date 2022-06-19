@@ -21,7 +21,7 @@ export default function Slider({ deviceType }) {
       paritialVisibilityGutter: 40
     }
   };
-  const images = ['/images/CardPromotion.jpg', '/images/CardPromotion2.jpg'];
+  const images = ['/images/CardPromotion.jpg', '/images/CardPromotion2.jpg', '/images/CardPromotion.jpg', '/images/CardPromotion2.jpg'];
 
   return (
     <div className="font-sans">

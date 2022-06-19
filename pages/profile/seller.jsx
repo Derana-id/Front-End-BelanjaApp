@@ -144,6 +144,7 @@ const Seller = () => {
         });
         dispatch(getDetailStore(decoded.id));
         router.push('/profile/seller');
+        window.location.reload();
       })
       .catch(err => {
         // console.log(err);
