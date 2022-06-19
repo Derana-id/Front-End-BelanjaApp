@@ -52,8 +52,8 @@ export default function cardMyorder() {
     },
     {
       name: 'Status',
-      selector: row => row.status
-    }
+      selector: row => row.status === 0 ? 'New' : row.status === 1 ? 'Packed' : row.status === 2 ? 'Sent' : row.status === 3 ? 'Completed' : 'Cancel order'
+    },
   ];
 
   // integrasi
@@ -72,6 +72,8 @@ export default function cardMyorder() {
   const myOrder = useSelector(state => {
     return state.listTransactionBuyer;
   });
+
+  // console.log(myOrder);
 
   let data = [];
   if (myOrder.data.length > 0) {
@@ -127,7 +129,7 @@ export default function cardMyorder() {
                 columns={columns}
                 fixedHeader
                 fixedHeaderScrollHeight="300px"
-                data={data}
+                // data={data2}
                 customStyles={customStyles}
               />
             </div>
