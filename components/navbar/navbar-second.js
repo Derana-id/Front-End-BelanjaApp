@@ -132,6 +132,7 @@ export default function SecondNavbar(req) {
                                   : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
                               }
                                   className="rounded-full cursor-pointer"
+                                  onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`; }}
                                   objectFit="cover"
                                   height={50}
                                   width={50}
@@ -146,6 +147,7 @@ export default function SecondNavbar(req) {
                                   : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
                               }
                                     className="rounded-full cursor-pointer"
+                                    onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`; }}
                                     objectFit="cover"
                                     height={50}
                                     width={50}

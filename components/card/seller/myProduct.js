@@ -65,9 +65,6 @@ export default function cardMyorder(params) {
       data.push(item.product)
     ));
   }
-
-  console.log(data);
-
   useEffect(() => {
     dispatch(getDetailMyProduct());
   }, [dispatch]);
