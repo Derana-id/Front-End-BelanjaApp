@@ -22,9 +22,7 @@ export const getDetailStore = id => async dispatch => {
       payload: null
     });
 
-    const res = await axios.get(
-      `user/${id}`,
-    );
+    const res = await axios.get(`user/${id}`);
 
     dispatch({
       type: GET_DETAIL_STORE_SUCCESS,
@@ -41,7 +39,7 @@ export const getDetailStore = id => async dispatch => {
 export const updateStore = data => {
   return new Promise((resolve, reject) => {
     axios
-      .put('user', data)
+      .put('user/store', data)
       .then(res => {
         resolve(res.data);
       })
