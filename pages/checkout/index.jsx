@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable radix */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
@@ -6,9 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Code, List, Instagram } from 'react-content-loader';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
-import jas from '../../assets/img/jas.jpg';
+import _ from 'lodash';
 // import { getMyCart } from '../../redux/actions/cart';
-import { getMyTransaction } from '../../redux/actions/transaction';
+import { getMyTransaction, updatePayment } from '../../redux/actions/transaction';
 import { getMyAddress, createAddress } from '../../redux/actions/address';
 import { toastify } from '../../utils/toastify';
 import AddAddress from '../../components/modals/add-address';
@@ -43,7 +44,7 @@ const Checkout = () => {
     city: '',
     is_primary: 0
   });
-  const [payment, setPayment] = useState(3);
+  const [payment, setPayment] = useState(0);
 
   const editAddress = item => {
     if (item) {
@@ -88,7 +89,45 @@ const Checkout = () => {
     }
   };
 
-  console.log(myTransaction);
+  const order = [];
+  if (myTransaction.data) {
+    myTransaction.data.map(item => {
+      order.push(item.transactionDetail.price);
+    });
+  }
+  const setOrder = _.sum(order);
+
+  const handlePayment = e => {
+    e.preventDefault();
+    if (!payment) {
+      Swal.fire('Failed!', 'Type payment must be filled', 'warning');
+    } else {
+      myTransaction.data.map(item => {
+        updatePayment(
+          {
+            paymentMethod: payment
+          },
+          item.transaction.id
+        )
+          .then(res => {
+            Swal.fire('Succcess!', res.message, 'success');
+            router.push('/profile/customer');
+          })
+          .catch(err => {
+            if (err.response.data.code === 422) {
+              const { error } = err.response.data;
+              error.map(item => toastify(item, 'error'));
+            } else {
+              Swal.fire({
+                title: 'Error!',
+                text: err.response.data.message,
+                icon: 'error'
+              });
+            }
+          });
+      });
+    }
+  };
 
   useEffect(() => {
     dispatch(getMyAddress());
@@ -145,12 +184,12 @@ const Checkout = () => {
                   <CardCheckout
                     image={`https://drive.google.com/uc?export=view&id=${item.image[0].photo}`}
                     productName={item.product.product_name}
-                    store="Zalora Cloth"
+                    store={item.store[0].store_name}
                     price={new Intl.NumberFormat('id-ID', {
                       style: 'currency',
                       currency: 'IDR',
                       minimumFractionDigits: 0
-                    }).format(parseInt(item.product.price))}
+                    }).format(parseInt(item.transactionDetail.price))}
                   />
                 </div>
               ))
@@ -162,25 +201,40 @@ const Checkout = () => {
             {myTransaction.isLoading ? (
               <Instagram />
             ) : (
-              <></>
-              // <CardTotalPrice
-              //   order={new Intl.NumberFormat('id-ID', {
-              //     style: 'currency',
-              //     currency: 'IDR',
-              //     minimumFractionDigits: 0
-              //   }).format(parseInt(myTransaction.data[0].product.price) * 1)}
-              //   delivery="$ 5.0"
-              //   totalPrice="$ 45.0"
-              //   onClick={() => setIsPayment(true)}
-              // />
+              <CardTotalPrice
+                order={new Intl.NumberFormat('id-ID', {
+                  style: 'currency',
+                  currency: 'IDR',
+                  minimumFractionDigits: 0
+                }).format(setOrder)}
+                delivery={new Intl.NumberFormat('id-ID', {
+                  style: 'currency',
+                  currency: 'IDR',
+                  minimumFractionDigits: 0
+                }).format(5000)}
+                totalPrice={new Intl.NumberFormat('id-ID', {
+                  style: 'currency',
+                  currency: 'IDR',
+                  minimumFractionDigits: 0
+                }).format(5000 + setOrder)}
+                onClick={() => setIsPayment(true)}
+              />
             )}
           </div>
         </div>
       </div>
-      {isPayment ? <ModalsPayment onClick={() => setIsPayment(false)} /> : null}
+      {isPayment ? (
+        <ModalsPayment
+          onClick={() => setIsPayment(false)}
+          setOrder={setOrder}
+          handlePayment={handlePayment}
+          setPayment={setPayment}
+        />
+      ) : null}
     </div>
   );
 };
 
 Checkout.layouts = 'MainLayout';
+
 export default Checkout;

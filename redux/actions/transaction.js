@@ -40,3 +40,16 @@ export const createTransaction = data => {
       });
   });
 };
+
+export const updatePayment = (data, id) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .put(`transaction/payment/${id}`, data)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
