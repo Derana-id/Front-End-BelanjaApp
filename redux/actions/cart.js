@@ -31,7 +31,7 @@ export const getMyCart = () => async dispatch => {
 export const deleteCart = id => {
   return new Promise((resolve, reject) => {
     axios
-      .delete(`cart/delete/${id}`)
+      .delete(`cart/${id}`)
       .then(res => {
         resolve(res.data);
       })
