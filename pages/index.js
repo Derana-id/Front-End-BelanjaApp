@@ -17,12 +17,8 @@ import { getPopularProducts, getProducts } from '../redux/actions/products';
 function Home({ deviceType }) {
   const dispatch = useDispatch();
   const router = useRouter();
-  // const [getSearch, setSearch] = useState('');
-
-  // console.log(router.query.search);
 
   const { search } = router.query;
-  console.log(search);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -48,8 +44,6 @@ function Home({ deviceType }) {
   const getPopular = useSelector(state => {
     return state.getPopular;
   });
-
-  console.log(getPopular);
 
   const onDetail = e => {
     router.push(`/products/${e}`);

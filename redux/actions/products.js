@@ -8,7 +8,10 @@ import {
   GET_DETAIL_PRODUCT_SUCCESS,
   GET_POPULAR_PRODUCTS_FAILED,
   GET_POPULAR_PRODUCTS_PENDING,
-  GET_POPULAR_PRODUCTS_SUCCESS
+  GET_POPULAR_PRODUCTS_SUCCESS,
+  GET_PRODUCTS_FILTER_FAILED,
+  GET_PRODUCTS_FILTER_PENDING,
+  GET_PRODUCTS_FILTER_SUCCESS
 } from '../types';
 
 export const getProducts = () => async dispatch => {
@@ -31,7 +34,6 @@ export const getProducts = () => async dispatch => {
 
 export const getPopularProducts = search => async dispatch => {
   const getValueSearch = search || '';
-  console.log(getValueSearch);
   try {
     dispatch({
       type: GET_POPULAR_PRODUCTS_PENDING
@@ -64,4 +66,17 @@ export const getDetailProduct = id => async dispatch => {
       type: GET_DETAIL_PRODUCT_FAILED
     });
   }
+};
+
+export const getFilter = data => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post('product/filter', data)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
 };
