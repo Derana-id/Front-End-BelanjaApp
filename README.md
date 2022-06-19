@@ -99,8 +99,8 @@ npm install
 Create .env file in your root project folder.
 ```
 # app
-NEXT_PUBLIC_API_URL=[API_URL]
-NEXT_PUBLIC_NODE_ENV=[NODE_ENV]
+NEXT_PUBLIC_API_URL = [API_URL]
+NEXT_PUBLIC_NODE_ENV = [NODE_ENV]
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
