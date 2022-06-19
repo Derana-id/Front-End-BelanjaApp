@@ -19,7 +19,7 @@ export default function cardMyorder() {
       style: {
         minHeight: '72px', // override the row height
         border: '2px solid #F6F6F6'
-      },
+      }
     },
     headCells: {
       style: {
@@ -27,33 +27,33 @@ export default function cardMyorder() {
         paddingRight: '8px',
         backgroundColor: '#F6F6F6',
         border: '2px solid #F6F6F6'
-      },
+      }
     },
     cells: {
       style: {
         paddingLeft: '8px', // override the cell padding for data cells
-        paddingRight: '8px',
-      },
-    },
+        paddingRight: '8px'
+      }
+    }
   };
 
   const columns = [
     {
       name: 'Invoice',
-      selector: row => row.invoice,
+      selector: row => row.invoice
     },
     {
       name: 'Total price',
-      selector: row => row.total,
+      selector: row => row.total
     },
     {
       name: 'Date',
-      selector: row => row.date,
+      selector: row => row.date
     },
     {
       name: 'Status',
-      selector: row => row.status,
-    },
+      selector: row => row.status
+    }
   ];
 
   // integrasi
@@ -69,17 +69,13 @@ export default function cardMyorder() {
   //   },
   // ];
 
-  const myOrder = useSelector((state) => {
+  const myOrder = useSelector(state => {
     return state.listTransactionBuyer;
   });
 
-  console.log(myOrder);
-
   let data = [];
   if (myOrder.data.length > 0) {
-    myOrder.data.map((item) => (
-      data.push(item.transaction)
-    ));
+    myOrder.data.map(item => data.push(item.transaction));
   }
 
   // console.log(myOrder);
@@ -131,7 +127,7 @@ export default function cardMyorder() {
                 columns={columns}
                 fixedHeader
                 fixedHeaderScrollHeight="300px"
-                data={data2}
+                data={data}
                 customStyles={customStyles}
               />
             </div>
@@ -169,7 +165,6 @@ export default function cardMyorder() {
               />
             </div>
           )}
-
         </div>
       </div>
     </div>
