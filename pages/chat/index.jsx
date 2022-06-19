@@ -14,7 +14,7 @@ import CardContact from '../../components/card/card-contact';
 import BubblessReciver from '../../components/bubbless/bubbless-reciver';
 import BubblessSender from '../../components/bubbless/bubbless-sender';
 import { getDetailProfile } from '../../redux/actions/users';
-import { getDetailUser } from '../../redux/actions/userProfile';
+// import { getDetailUser } from '../../redux/actions/userProfile';
 
 const Chat = () => {
   const dispatch = useDispatch();
