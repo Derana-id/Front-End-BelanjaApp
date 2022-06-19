@@ -15,7 +15,7 @@
     <a href="#table-of-contents"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="bit.ly/blanja-app">View Web Service</a>
+    <a href="bit.ly/blanja-app">View Demo</a>
     ·
     <a href="https://github.com/Derana-id/Front-End-BelanjaApp/issues">Report Bug</a>
     ·
@@ -25,18 +25,32 @@
 
 <!-- TABLE OF CONTENTS -->
  ## Table of Contents
-
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-  * [Setup .env](#setup-env)
-* [Screenshots](#screenshoots)
-* [Contributing](#contributing)
-* [Related Project](#related-project)
-* [Our Team](#our-team)
-* [License](#license)
+ 
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#setup-env-example">Setup .env example</a></li>
+      </ul>
+    </li>
+    <li><a href="#screenshoots">Screenshots</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#related-project">Related Project</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#our-team">Our Team</a></li>
+    <li><a href="#license">License</a></li>
+  </ol>
+</details>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
