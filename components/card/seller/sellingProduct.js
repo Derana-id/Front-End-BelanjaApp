@@ -19,6 +19,7 @@ import CardForm from '../card-form';
 import { createProductStore, getAllBrand, getAllCategory } from '../../../redux/actions/storeProfile';
 import FormAddBrand from '../../form/form-brand';
 import FormAddCategory from '../../form/form-category';
+import { toastify } from '../../../utils/toastify';
 
 export default function sellingProduct() {
   // integrasi
@@ -114,49 +115,52 @@ export default function sellingProduct() {
   };
   const createProduct = e => {
     e.preventDefault();
-    if (form.category_id === '' || form.product_name === '' || form.brand_id === '' || form.price === '' || form.stock === '' || form.description === '' || form.is_new === '' || form.photo === [] || form.product_size === []) {
-      Swal.fire({
-        title: 'Error',
-        text: 'All input must be filled',
-        icon: 'error'
-      });
-    } else {
-      const formData = new FormData();
-      formData.append('category_id', form.category_id);
-      formData.append('product_name', form.product_name);
-      formData.append('brand_id', form.brand_id);
-      formData.append('price', form.price);
-      formData.append('stock', form.stock);
-      formData.append('description', form.description);
-      formData.append('is_new', form.is_new);
-      formData.append('product_color', JSON.stringify(form.product_color));
-      formData.append('product_size', JSON.stringify(form.product_size));
-      if (image) {
-        for (let i = 0; i < image.length; i++) {
-          formData.append('photo', image[i]);
-        }
+    // if (form.category_id === '' || form.product_name === '' || form.brand_id === '' || form.price === '' || form.stock === '' || form.description === '' || form.is_new === '') {
+    //   Swal.fire({
+    //     title: 'Error',
+    //     text: 'All input must be filled',
+    //     icon: 'error'
+    //   });
+    // } else {
+    const formData = new FormData();
+    formData.append('category_id', form.category_id);
+    formData.append('product_name', form.product_name);
+    formData.append('brand_id', form.brand_id);
+    formData.append('price', form.price);
+    formData.append('stock', form.stock);
+    formData.append('description', form.description);
+    formData.append('is_new', form.is_new);
+    formData.append('product_color', JSON.stringify(form.product_color));
+    formData.append('product_size', JSON.stringify(form.product_size));
+    if (image) {
+      for (let i = 0; i < image.length; i++) {
+        formData.append('photo', image[i]);
       }
+    }
 
-      createProductStore(formData)
-        .then(res => {
-          if (res.code === 200) {
-            Swal.fire({
-              title: 'Success',
-              text: `${res.message}`,
-              icon: 'success'
-            });
-          }
-          router.push('/profile/seller');
-        })
-        .catch(err => {
-          // console.log(err.response.data.error);
+    createProductStore(formData)
+      .then(res => {
+        if (res.code === 200) {
           Swal.fire({
-            title: 'Error',
-            text: `${err.response.data.error}`,
+            title: 'Success',
+            text: `${res.message}`,
+            icon: 'success'
+          });
+        }
+        router.push('/profile/seller');
+      })
+      .catch(err => {
+        if (err.response.data.code === 422) {
+          const { error } = err.response.data;
+          error.map(item => toastify(item, 'error'));
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: err.response.data.message,
             icon: 'error'
           });
-        });
-    }
+        }
+      });
   };
 
   return (
