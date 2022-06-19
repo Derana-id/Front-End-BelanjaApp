@@ -5,7 +5,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Code, List, Instagram } from 'react-content-loader';
-import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 import _ from 'lodash';
 import { getMyTransaction, updatePayment } from '../../redux/actions/transaction';
@@ -30,15 +29,6 @@ const Checkout = () => {
     postalCode: '',
     city: '',
     isPrimary: 0
-  });
-  const [formTransaction, setFormTransaction] = useState({
-    label: '',
-    recipientName: '',
-    recipientPhone: '',
-    address: '',
-    postalCode: '',
-    city: '',
-    is_primary: 0
   });
   const [payment, setPayment] = useState(0);
 
