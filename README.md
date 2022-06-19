@@ -1,46 +1,56 @@
 <div id="top"></div>
-<p align="center">
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
   <a href="https://github.com/Derana-id/Front-End-BelanjaApp">
-    <img src="https://lh3.googleusercontent.com/d/13oL_tdqAFzcRVAPIk0lWpAuGZQ1Dmj4d" width="500px" alt="Logo">
+    <img src="https://lh3.googleusercontent.com/d/13oL_tdqAFzcRVAPIk0lWpAuGZQ1Dmj4d" alt="Logo" width="400px">
   </a>
-</p>
-<h3 align="center">Blanja App</h3>
-<p align="center">
-  Blanja is an online fashion store that offers fashion products.
-  <br/>
-  <a href="#table-of-contents">
-    <strong>Explore the docs »</strong>
-  </a>
-  <br /><br/>
-  <a href="https://bit.ly/blanja-app/">View Demo</a>
-  ·
-  <a href="https://github.com/Derana-id/Front-End-BelanjaApp/issues">Report Bug</a>
-  ·
-  <a href="https://github.com/Derana-id/Front-End-BelanjaApp/issues">Request Feature</a>
-</p>
-<p align="center">
-  <a href="https://reactjs.org/">
-    <img src="https://img.shields.io/badge/Next.js-v12.1.6-green?style=flat">
-  </a>
-  <a href="https://getbootstrap.com/docs/5.1/getting-started/introduction/">
-    <img src="https://img.shields.io/badge/Tailwind-v3.0.24-ff69b4?style=flat">
-  </a>                                     
-</p>
+
+  <h3 align="center">Blanja App</h3>
+
+  <p align="center">
+    Blanja is an online fashion store that offers fashion products.
+    <br />
+    <a href="#table-of-contents"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="bit.ly/blanja-app">View Demo</a>
+    ·
+    <a href="https://github.com/Derana-id/Front-End-BelanjaApp/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Derana-id/Front-End-BelanjaApp/issues">Request Feature</a>
+  </p>
+</div>
 
 <!-- TABLE OF CONTENTS -->
  ## Table of Contents
-
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-  * [Setup .env](#setup-env)
-* [Screenshots](#screenshoots)
-* [Contributing](#contributing)
-* [Related Project](#related-project)
-* [Our Team](#our-team)
-* [License](#license)
+ 
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#setup-env-example">Setup .env example</a></li>
+      </ul>
+    </li>
+    <li><a href="#screenshoots">Screenshots</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#related-project">Related Project</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#our-team">Our Team</a></li>
+    <li><a href="#license">License</a></li>
+  </ol>
+</details>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -89,8 +99,8 @@ npm install
 Create .env file in your root project folder.
 ```
 # app
-NEXT_PUBLIC_API_URL=[API_URL]
-NEXT_PUBLIC_NODE_ENV=[NODE_ENV]
+NEXT_PUBLIC_API_URL = [API_URL]
+NEXT_PUBLIC_NODE_ENV = [NODE_ENV]
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
