@@ -8,6 +8,7 @@ import { sweetAlert } from '../../../utils/sweetalert';
 import { reset } from '../../../redux/actions/auth';
 import Input from '../../../components/Input/index';
 import Button from '../../../components/Button';
+import logoAuth from '../../public/logoAuth.png';
 
 export default function index() {
   const router = useRouter();
@@ -67,8 +68,8 @@ export default function index() {
         <link rel="icon" href="/logo.svg" />
       </Head>
       <div className="sm:w-full md:w-2/6 border-slate-200 rounded-xl mx-auto p-5 flex flex-col items-center relative">
-        <Image src="/logoAuth.svg" width={150} height={100} layout="fixed" />
-        <label className="font-bold mb-2">Reset password</label>
+        <Image src={logoAuth} width={150} height={60} objectFit="center" layout="fixed" />
+        <label className="font-bold mb-2 mt-4">Reset password</label>
         <label className="font-medium text-[16px] leading-5 text-[#F01F0E] mb-8">
           You need change your password to active your account
         </label>
