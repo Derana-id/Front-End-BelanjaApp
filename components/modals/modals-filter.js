@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RiCloseLine } from 'react-icons/ri';
@@ -14,7 +14,7 @@ import { getAllBrand } from '../../redux/actions/storeProfile';
 import { getFilter } from '../../redux/actions/products';
 
 export default function ModalsSearch(params) {
-  const router = useRouter();
+  // const router = useRouter();
   const dispatch = useDispatch();
 
   const getSize = [];
@@ -44,10 +44,9 @@ export default function ModalsSearch(params) {
     return state.getAllCategory;
   });
 
-  const filter = useSelector(state => {
-    return state.getFilter;
-  });
-  console.log(filter);
+  // const filter = useSelector(state => {
+  //   return state.getFilter;
+  // });
 
   const brand = useSelector(state => {
     return state.allBrand.data;
