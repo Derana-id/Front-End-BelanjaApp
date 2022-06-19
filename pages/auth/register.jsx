@@ -8,6 +8,7 @@ import { sweetAlert } from '../../utils/sweetalert';
 import { registerBuyer, registerSeller } from '../../redux/actions/auth';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import logoAuth from '../../public/logoAuth.png';
 
 export default function index() {
   const router = useRouter();
@@ -125,8 +126,8 @@ export default function index() {
         <link rel="icon" href="/logo.svg" />
       </Head>
       <div className="sm:w-full md:w-2/6 border-slate-200 rounded-xl mx-auto p-5 flex flex-col items-center relative">
-        <Image src="/logoAuth.svg" width={150} height={100} layout="fixed" />
-        <label className="font-bold">Please login with your account</label>
+        <Image src={logoAuth} width={150} height={60} objectFit="center" layout="fixed" />
+        <label className="font-bold mt-4">Please login with your account</label>
         {formShow === 0 ? (
           <div className="flex w-[230px] flex-row my-8">
             <button
