@@ -159,10 +159,10 @@ export default function index() {
             <Link href="/auth/register" className="text-special-warning">
               Register
             </Link>
-            <label className="ml-2 sm:ml-2 md:ml-12 lg:ml-12 mr-2">Don&apos;t have a Tokopedia account?</label>
+            {/* <label className="ml-2 sm:ml-2 md:ml-12 lg:ml-12 mr-2">Don&apos;t have a Tokopedia account?</label>
             <Link href="/auth/register" className="text-special-warning">
               Register
-            </Link>
+            </Link> */}
           </form>
         )}
       </div>

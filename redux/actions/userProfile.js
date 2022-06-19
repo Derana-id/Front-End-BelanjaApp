@@ -9,16 +9,14 @@ import {
   GET_MY_ORDER_FAILED
 } from '../types';
 
-export const getDetailUser = (id, token) => async dispatch => {
+export const getDetailUser = (id) => async dispatch => {
   try {
     dispatch({
       type: GET_DETAIL_USER_PENDING,
       payload: null
     });
 
-    const res = await axios.get(`user/${id}`, {
-      headers: { token }
-    });
+    const res = await axios.get(`user/${id}`);
 
     dispatch({
       type: GET_DETAIL_USER_SUCCESS,
@@ -75,14 +73,14 @@ export const getAddressUser = (id, token) => async dispatch => {
   }
 };
 
-export const getMyOrder = () => async dispatch => {
+export const getMyOrder = (isPayment, status) => async dispatch => {
   try {
     dispatch({
       type: GET_MY_ORDER_PENDING,
       payload: null
     });
 
-    const res = await axios.get('mytransaction');
+    const res = await axios.get('transaction?isPayment=1&status=1');
 
     dispatch({
       type: GET_MY_ORDER_SUCCESS,

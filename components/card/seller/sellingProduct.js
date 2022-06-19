@@ -9,7 +9,8 @@ import React, { useState, useEffect } from 'react';
 // import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 // import box from '../../../assets/icons/box.png';
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
+import { useRouter } from 'next/router';
 import FormAddProduct from '../../form/form-addProduct';
 import RadioInput from '../../Input/radio';
 import ButtonSuccess from '../../Button/button-success';
@@ -18,10 +19,12 @@ import CardForm from '../card-form';
 import { createProductStore, getAllBrand, getAllCategory } from '../../../redux/actions/storeProfile';
 import FormAddBrand from '../../form/form-brand';
 import FormAddCategory from '../../form/form-category';
+import { toastify } from '../../../utils/toastify';
 
 export default function sellingProduct() {
   // integrasi
   const dispatch = useDispatch();
+  const router = useRouter();
   const [image, setImage] = useState(null);
 
   const allCategory = useSelector(state => {
@@ -112,7 +115,7 @@ export default function sellingProduct() {
   };
   const createProduct = e => {
     e.preventDefault();
-    // if (form.category_id === '' || form.product_name === '' || form.brand_id === '' || form.price === '' || form.stock === '' || form.description === '' || form.is_new === '' || form.photo === [] || form.product_size === []) {
+    // if (form.category_id === '' || form.product_name === '' || form.brand_id === '' || form.price === '' || form.stock === '' || form.description === '' || form.is_new === '') {
     //   Swal.fire({
     //     title: 'Error',
     //     text: 'All input must be filled',
@@ -137,10 +140,26 @@ export default function sellingProduct() {
 
     createProductStore(formData)
       .then(res => {
-        console.log(res);
+        if (res.code === 200) {
+          Swal.fire({
+            title: 'Success',
+            text: `${res.message}`,
+            icon: 'success'
+          });
+        }
+        router.push('/profile/seller');
       })
       .catch(err => {
-        console.log(err);
+        if (err.response.data.code === 422) {
+          const { error } = err.response.data;
+          error.map(item => toastify(item, 'error'));
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: err.response.data.message,
+            icon: 'error'
+          });
+        }
       });
   };
 
@@ -261,7 +280,7 @@ export default function sellingProduct() {
               ))}
 
               <div className="flex justify-center mt-5">
-                <ButtonSuccess onClick={addSize} action="Add Foto" className="-ml-10 p-[5px]" />
+                <ButtonSuccess onClick={addSize} action="Add Size" className="-ml-10 p-[5px]" />
               </div>
             </div>
           </CardForm>

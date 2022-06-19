@@ -109,7 +109,8 @@ export default function MainNavbar(req) {
                     <Image src={vector} />
                   </div>
                 </div>
-                <div className="w-1/5 hidden md:ml-10 md:flex h-12 items-center">
+                {/* kondisi navbar main */}
+                <div className="w-1/5 invisible sm:invisible md:visible lg:visible md:ml-10 md:flex h-12 items-center">
                   <div className="flex justify-end w-full h-full items-center">
                     <Link href="/mybag">
                       <div>
@@ -129,39 +130,44 @@ export default function MainNavbar(req) {
                         <HiOutlineMail className="text-2xl m-4 mr-6 text-gray cursor-pointer" />
                       </div>
                     </Link>
-                    <div className="flex items-center justify-center">
-                      <Link href="/profile/customer">
-                        <div className="relative h-8 w-8">
-                          {getProfile.isLoading ? (
-                            <div>Loading</div>
-                          ) : getProfile.data[0].user.level === 1 ? (
-                            <Image
-                              src={
+                    <div className="w-0 sm:0 md:block md:w-1/6 lg:block lg:w-1/6 ">
+                      <div className="flex sm:hidden md:block lg:block items-center justify-center">
+                        <Link href="/profile/customer">
+                          <div className="relative h-8 w-8">
+                            {getProfile.isLoading ? (<div>Loading</div>)
+                              : getProfile.data[0].user.level === 1
+                                ? (
+                                  <Image
+                                    src={
                                 getProfile.data.length >= 0
                                   ? `https://drive.google.com/uc?export=view&id=${getProfile.data[0].store.photo}`
                                   : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
                               }
-                              className="rounded-full cursor-pointer"
-                              objectFit="cover"
-                              height={50}
-                              width={50}
-                            />
-                          ) : getProfile.data[0].user.level === 2 ? (
-                            <Image
-                              src={
+                                    className="rounded-full cursor-pointer"
+                                    objectFit="cover"
+                                    height={50}
+                                    width={50}
+                                  />
+                                )
+                                : getProfile.data[0].user.level === 2
+                                  ? (
+                                    <Image
+                                      src={
                                 getProfile.data.length >= 0
                                   ? `https://drive.google.com/uc?export=view&id=${getProfile.data[0].profile.photo}`
                                   : `${process.env.NEXT_PUBLIC_API_URL}public/uploads/users/default.png`
                               }
-                              className="rounded-full cursor-pointer"
-                              objectFit="cover"
-                              height={50}
-                              width={50}
-                            />
-                          ) : null}
-                        </div>
-                      </Link>
+                                      className="rounded-full cursor-pointer"
+                                      objectFit="cover"
+                                      height={50}
+                                      width={50}
+                                    />
+                                  ) : null}
+                          </div>
+                        </Link>
+                      </div>
                     </div>
+
                   </div>
                 </div>
                 <div className="flex">

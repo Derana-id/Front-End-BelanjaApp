@@ -212,33 +212,33 @@ const Products = () => {
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
-                  <Img
-                    src={
+                 <Img
+                   src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
                             getDetail.data.image[1] ? getDetail.data.image[1].photo : 'default.png'
                           }`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
-                  />
-                  <Img
-                    src={
+                 />
+                 <Img
+                   src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
                             getDetail.data.image[2] ? getDetail.data.image[2].photo : 'default.png'
                           }`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
-                  />
-                  <Img
-                    src={
+                 />
+                 <Img
+                   src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
                             getDetail.data.image[3] ? getDetail.data.image[3].photo : 'default.png'
                           }`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
-                  />
+                 />
                 </div>
               </div>
               <div className="flex-auto md:w-3/5 bg-tertiary md:pl-9 md:pr-7 mt-5 md:mt-0">

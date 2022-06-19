@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
@@ -58,21 +59,30 @@ export default function cardMyorder() {
   // integrasi
   const dispatch = useDispatch();
 
-  const data = [
-    {
-      id: 1,
-      invoice: 'ABC1243',
-      total: '10.000',
-      date: '11/05/1997',
-      status: 'success'
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     invoice: 'ABC1243',
+  //     total: '10.000',
+  //     date: '11/05/1997',
+  //     status: 'success'
+  //   },
+  // ];
 
   const myOrder = useSelector((state) => {
-    return state.myOrder;
+    return state.listTransactionBuyer;
   });
 
   console.log(myOrder);
+
+  let data = [];
+  if (myOrder.data.length > 0) {
+    myOrder.data.map((item) => (
+      data.push(item.transaction)
+    ));
+  }
+
+  // console.log(myOrder);
 
   useEffect(() => {
     dispatch(getMyOrder());
@@ -121,7 +131,7 @@ export default function cardMyorder() {
                 columns={columns}
                 fixedHeader
                 fixedHeaderScrollHeight="300px"
-                data={data}
+                data={data2}
                 customStyles={customStyles}
               />
             </div>
