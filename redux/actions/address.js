@@ -54,7 +54,7 @@ export const editAddress = (data, id) => {
 export const deleteAddress = id => {
   return new Promise((resolve, reject) => {
     axios
-      .delete(`address/delete/${id}`)
+      .delete(`address/${id}`)
       .then(res => {
         resolve(res.data);
       })
