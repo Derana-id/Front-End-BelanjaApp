@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Close from '../../assets/icons/close.svg';
 import CardShippingAddress from '../card/customer/cardShippingAddressProfile';
 
-export default function AddAddress({ myAddress }) {
+export default function AddAddress(params) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -33,7 +33,14 @@ export default function AddAddress({ myAddress }) {
                     <h3 className="text-3xl font-semibold">Choose another address</h3>
                   </div>
                 </div>
-                <CardShippingAddress myAddress={myAddress} />
+                <CardShippingAddress
+                  myAddress={params.myAddress}
+                  formAddress={params.formAddress}
+                  setFormAddress={params.setFormAddress}
+                  AddNewAddress={params.AddNewAddress}
+                  EditAddress={params.EditAddress}
+                  DeleteAddress={params.DeleteAddress}
+                />
               </div>
             </div>
           </div>

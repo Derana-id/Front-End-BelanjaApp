@@ -1,61 +1,30 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/jsx-curly-newline */
+import React, { useState } from 'react';
 import Image from 'next/image';
-import Swal from 'sweetalert2';
 import { List } from 'react-content-loader';
-import { useDispatch, useSelector } from 'react-redux';
 import Close from '../../../assets/icons/close.svg';
-import { createAddressBuyer, getAddress } from '../../../redux/actions/userProfile';
-import { toastify } from '../../../utils/toastify';
 
-export default function cardShippingAddress({ myAddress }) {
+export default function cardShippingAddress(params) {
   const [showModal, setShowModal] = useState();
   const [showEditModal, setShowEditModal] = useState();
-  // const dispatch = useDispatch();
+  const [idAdress, setIdAddress] = useState('');
 
-  // const myAddress = useSelector(state => {
-  //   return state.myAddress;
-  // });
-
-  // useEffect(() => {
-  //   dispatch(getAddress());
-  // }, [dispatch]);
-
-  // const [form, setForm] = useState({
-  //   label: '',
-  //   recipientName: '',
-  //   recipientPhone: '',
-  //   address: '',
-  //   postalCode: '',
-  //   city: '',
-  //   isPrimary: ''
-  // });
-
-  // const onAddAdress = e => {
-  //   e.preventDefault();
-
-  //   createAddressBuyer(form)
-  //     .then(res => {
-  //       Swal.fire({
-  //         title: 'success',
-  //         text: res.message,
-  //         icon: 'success'
-  //       });
-  //     })
-  //     .catch(err => {
-  //       if (err.response.data.code === 422) {
-  //         const { error } = err.response.data;
-  //         error.map(item => toastify(item, 'error'));
-  //       } else {
-  //         Swal.fire({
-  //           title: 'Error!',
-  //           text: err.response.data.message,
-  //           icon: 'error'
-  //         });
-  //       }
-  //     });
-  // };
-
-  const handleDelete = () => {};
+  const handleEdit = (e, item) => {
+    e.preventDefault();
+    if (item) {
+      params.setFormAddress({
+        label: item.label,
+        recipientName: item.recipient_name,
+        recipientPhone: item.recipient_phone,
+        address: item.address,
+        postalCode: item.postal_code,
+        city: item.city,
+        isPrimary: item.is_primary
+      });
+      setIdAddress(item.id);
+    }
+    setShowEditModal(true);
+  };
 
   return (
     <div>
@@ -72,14 +41,14 @@ export default function cardShippingAddress({ myAddress }) {
             Add new address
           </button>
         </div>
-        {myAddress.isLoading ? (
+        {params.myAddress.isLoading ? (
           <List />
-        ) : myAddress.error === 'Addres Not Found' ? (
+        ) : params.myAddress.error === 'Addres Not Found' ? (
           <button>Add New Address</button>
-        ) : myAddress.isError ? (
+        ) : params.myAddress.isError ? (
           <div>Error</div>
-        ) : myAddress.data.length > 0 ? (
-          myAddress.data.map((item, index) => (
+        ) : params.myAddress.data.length > 0 ? (
+          params.myAddress.data.map((item, index) => (
             <div
               className="ml-10 mr-10 my-5 border-2 rounded border-primary h-auto relative flex items-start flex-col"
               key={index}
@@ -91,10 +60,14 @@ export default function cardShippingAddress({ myAddress }) {
                 {`[${item.label}] ${item.address},  ${item.city}, ${item.postal_code}, (HP: ${item.recipient_phone})`}
               </p>
 
-              <button type="button" onClick={() => setShowEditModal(true)} className="text-primary m-2 font-bold">
+              <button type="button" onClick={e => handleEdit(e, item)} className="text-primary m-2 font-bold">
                 Change address
               </button>
-              <button type="button" onClick={handleDelete} className="text-primary m-2 font-bold">
+              <button
+                type="button"
+                onClick={e => params.DeleteAddress(e, item.id)}
+                className="text-primary m-2 font-bold"
+              >
                 Delete address
               </button>
             </div>
@@ -105,7 +78,7 @@ export default function cardShippingAddress({ myAddress }) {
       </div>
       {showModal ? (
         <>
-          <form onSubmit={e => onAddAdress(e)}>
+          <form onSubmit={e => params.AddNewAddress(e)}>
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
               <div className="relative w-auto my-6 mx-auto max-w-4xl">
                 {/* content */}
@@ -129,7 +102,7 @@ export default function cardShippingAddress({ myAddress }) {
                     <div className="w-full mb-2 flex flex-col">
                       <label className="text-[#9B9B9B]">Save address as (ex : home address, office address)</label>
                       <input
-                        onChange={e => setForm({ ...form, label: e.target.value })}
+                        onChange={e => params.setFormAddress({ ...params.formAddress, label: e.target.value })}
                         type="text"
                         className="border h-11 px-3 rounded mt-2"
                       />
@@ -138,7 +111,9 @@ export default function cardShippingAddress({ myAddress }) {
                       <div className="flex flex-col mr-4 w-1/2">
                         <label className="text-[#9B9B9B]">Recipient’s name</label>
                         <input
-                          onChange={e => setForm({ ...form, recipientName: e.target.value })}
+                          onChange={e =>
+                            params.setFormAddress({ ...params.formAddress, recipientName: e.target.value })
+                          }
                           type="text"
                           className="border h-11 px-3 rounded mt-2"
                         />
@@ -146,7 +121,9 @@ export default function cardShippingAddress({ myAddress }) {
                       <div className="flex flex-col ml-4 w-1/2">
                         <label className="flex text-[#9B9B9B] flex-col">Recipient&apos;s telephone number</label>
                         <input
-                          onChange={e => setForm({ ...form, recipientPhone: e.target.value })}
+                          onChange={e =>
+                            params.setFormAddress({ ...params.formAddress, recipientPhone: e.target.value })
+                          }
                           type="text"
                           className="border h-11 px-3 rounded mt-2"
                         />
@@ -156,7 +133,7 @@ export default function cardShippingAddress({ myAddress }) {
                       <div className="flex flex-col mr-4 w-1/2">
                         <label className="text-[#9B9B9B]">Address</label>
                         <input
-                          onChange={e => setForm({ ...form, address: e.target.value })}
+                          onChange={e => params.setFormAddress({ ...params.formAddress, address: e.target.value })}
                           type="text"
                           className="border h-11 px-3 rounded mt-2"
                         />
@@ -164,7 +141,7 @@ export default function cardShippingAddress({ myAddress }) {
                       <div className="flex flex-col ml-4 w-1/2">
                         <label className="flex flex-col text-[#9B9B9B]">Postal code</label>
                         <input
-                          onChange={e => setForm({ ...form, postalCode: e.target.value })}
+                          onChange={e => params.setFormAddress({ ...params.formAddress, postalCode: e.target.value })}
                           type="number"
                           className="border h-11 px-3 rounded mt-2"
                         />
@@ -173,7 +150,7 @@ export default function cardShippingAddress({ myAddress }) {
                     <div className="w-1/2 mb-2 flex flex-col">
                       <label className="text-[#9B9B9B]">City or Subdistrict</label>
                       <input
-                        onChange={e => setForm({ ...form, city: e.target.value })}
+                        onChange={e => params.setFormAddress({ ...params.formAddress, city: e.target.value })}
                         type="text"
                         className="border mr-4 h-11 px-3 rounded mt-2"
                       />
@@ -181,7 +158,7 @@ export default function cardShippingAddress({ myAddress }) {
                     <div className="mb-2">
                       <input
                         value="1"
-                        onChange={e => setForm({ ...form, isPrimary: e.target.value })}
+                        onChange={e => params.setFormAddress({ ...params.formAddress, isPrimary: e.target.value })}
                         type="checkbox"
                         className="mr-4 mt-8"
                       />
@@ -237,34 +214,75 @@ export default function cardShippingAddress({ myAddress }) {
                 <div className="w-[900px] flex flex-col relative p-6">
                   <div className="w-full mb-2 flex flex-col">
                     <label className="text-[#9B9B9B]">Save address as (ex : home address, office address)</label>
-                    <input type="text" className="border h-11 px-3 rounded mt-2" />
+                    <input
+                      type="text"
+                      className="border h-11 px-3 rounded mt-2"
+                      value={params.formAddress.label}
+                      onChange={e => params.setFormAddress({ ...params.formAddress, label: e.target.value })}
+                    />
                   </div>
                   <div className="flex mb-2 w-full">
                     <div className="flex flex-col mr-4 w-1/2">
                       <label className="text-[#9B9B9B]">Recipient’s name</label>
-                      <input type="text" className="border h-11 px-3 rounded mt-2" />
+                      <input
+                        type="text"
+                        className="border h-11 px-3 rounded mt-2"
+                        value={params.formAddress.recipientName}
+                        onChange={e => params.setFormAddress({ ...params.formAddress, recipientName: e.target.value })}
+                      />
                     </div>
                     <div className="flex flex-col ml-4 w-1/2">
                       <label className="flex text-[#9B9B9B] flex-col">Recipient&apos;s telephone number</label>
-                      <input type="text" className="border h-11 px-3 rounded mt-2" />
+                      <input
+                        type="text"
+                        className="border h-11 px-3 rounded mt-2"
+                        value={params.formAddress.recipientPhone}
+                        onChange={e => params.setFormAddress({ ...params.formAddress, recipientPhone: e.target.value })}
+                      />
                     </div>
                   </div>
                   <div className="flex mb-2 w-full">
                     <div className="flex flex-col mr-4 w-1/2">
                       <label className="text-[#9B9B9B]">Address</label>
-                      <input type="text" className="border h-11 px-3 rounded mt-2" />
+                      <input
+                        type="text"
+                        className="border h-11 px-3 rounded mt-2"
+                        value={params.formAddress.address}
+                        onChange={e => params.setFormAddress({ ...params.formAddress, address: e.target.value })}
+                      />
                     </div>
                     <div className="flex flex-col ml-4 w-1/2">
                       <label className="flex flex-col text-[#9B9B9B]">Postal code</label>
-                      <input type="number" className="border h-11 px-3 rounded mt-2" />
+                      <input
+                        type="number"
+                        className="border h-11 px-3 rounded mt-2"
+                        value={params.formAddress.postalCode}
+                        onChange={e => params.setFormAddress({ ...params.formAddress, postalCode: e.target.value })}
+                      />
                     </div>
                   </div>
                   <div className="w-1/2 mb-2 flex flex-col">
                     <label className="text-[#9B9B9B]">City or Subdistrict</label>
-                    <input type="text" className="border mr-4 h-11 px-3 rounded mt-2" />
+                    <input
+                      type="text"
+                      className="border mr-4 h-11 px-3 rounded mt-2"
+                      value={params.formAddress.city}
+                      onChange={e => params.setFormAddress({ ...params.formAddress, city: e.target.value })}
+                    />
                   </div>
                   <div className="mb-2">
-                    <input type="checkbox" className="mr-4 mt-8" />
+                    <input
+                      type="checkbox"
+                      className="mr-4 mt-8"
+                      checked={params.formAddress.isPrimary === 1}
+                      onChange={e => {
+                        if (e.target.checked) {
+                          params.setFormAddress({ ...params.formAddress, isPrimary: 1 });
+                        } else {
+                          params.setFormAddress({ ...params.formAddress, isPrimary: 0 });
+                        }
+                      }}
+                    />
                     <label className="text-[#9B9B9B]">Make it the primary address</label>
                   </div>
                 </div>
@@ -280,7 +298,7 @@ export default function cardShippingAddress({ myAddress }) {
                   <button
                     className=" text-white bg-red-500 active:bg-red-600 px-20 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="submit"
-                    onClick={() => setShowEditModal(false)}
+                    onClick={e => params.EditAddress(e, idAdress)}
                   >
                     Save Changes
                   </button>

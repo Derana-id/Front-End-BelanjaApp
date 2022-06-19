@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-nested-ternary */
@@ -15,6 +16,7 @@ import Checklist from '../../components/Input/checklist';
 import { getMyCart, deleteCart, updateCart } from '../../redux/actions/cart';
 import { toastify } from '../../utils/toastify';
 import { sweetAlert } from '../../utils/sweetalert';
+import { createTransaction } from '../../redux/actions/transaction';
 
 const MyBag = () => {
   const router = useRouter();
@@ -27,8 +29,6 @@ const MyBag = () => {
   if (token) {
     decoded = JwtDecode(token);
   }
-
-  // console.log(myCart);
 
   useEffect(() => {
     dispatch(getMyCart(router));
@@ -50,35 +50,38 @@ const MyBag = () => {
     }
   }, [myCart]);
 
-  // const handleBuy = e => {
-  //   e.preventDefault();
-
-  //   createTransaction({
-  //     productId: getDetail.data.product.id,
-  //     qty: getAmount,
-  //     isBuy: 0
-  //   })
-  //     .then(res => {
-  //       Swal.fire({
-  //         title: 'Success!',
-  //         text: res.message,
-  //         icon: 'success'
-  //       });
-  //       router.push('/checkout');
-  //     })
-  //     .catch(err => {
-  //       if (err.response.data.code === 422) {
-  //         const { error } = err.response.data;
-  //         error.map(item => toastify(item, 'error'));
-  //       } else {
-  //         Swal.fire({
-  //           title: 'Error!',
-  //           text: err.response.data.message,
-  //           icon: 'error'
-  //         });
-  //       }
-  //     });
-  // };
+  const handleBuy = e => {
+    e.preventDefault();
+    if (myCart) {
+      myCart.data.map(item => {
+        createTransaction({
+          productId: item.cart.product_id,
+          qty: item.cart.qty,
+          isBuy: 0
+        })
+          .then(res => {
+            Swal.fire({
+              title: 'Success!',
+              text: res.message,
+              icon: 'success'
+            });
+            router.push('/checkout');
+          })
+          .catch(err => {
+            if (err.response.data.code === 422) {
+              const { error } = err.response.data;
+              error.map(item => toastify(item, 'error'));
+            } else {
+              Swal.fire({
+                title: 'Error!',
+                text: err.response.data.message,
+                icon: 'error'
+              });
+            }
+          });
+      });
+    }
+  };
 
   const handleDelete = (e, id) => {
     e.preventDefault();
@@ -218,7 +221,7 @@ const MyBag = () => {
                 <p className="font-bold text-black text-lg">$ {total}</p>
               </div>
               <div className="mt-8">
-                <ButtonWarning action="Buy" onClick={() => alert('Hallo')} />
+                <ButtonWarning action="Buy" onClick={handleBuy} />
               </div>
             </div>
           </div>
