@@ -122,6 +122,7 @@ const Customer = () => {
           icon: 'success'
         });
         dispatch(getDetailUser(decoded.id));
+        window.location.reload();
       })
       .catch((err) => {
         if (err.response.data.code === 422) {
