@@ -25,12 +25,14 @@ export default function CardCart(params) {
         <p className="text-gray text-sm">{params.store}</p>
       </div>
       <div className="flex">
-        <div className="flex w-28 items-center justify-between">
-          <SpinnerAction action="+" />
-          <FormValueNumber defaultValue={params.defaultValue} />
-          <SpinnerAction action="-" />
+        <div className="flex w-40 items-center justify-between">
+          <div className="flex items-center">
+            <SpinnerAction action="+" onClick={params.onPlus} />
+            <FormValueNumber defaultValue={params.defaultValue} value={params.value} />
+            <SpinnerAction action="-" onClick={params.onMin} />
+          </div>
         </div>
-        <div className="flex justify-end items-end w-28 font-bold text-black text-xl">
+        <div className="flex justify-end items-end w-28 font-bold text-black text-md">
           <h6>{params.price}</h6>
         </div>
       </div>

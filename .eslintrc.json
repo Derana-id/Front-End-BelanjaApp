@@ -41,6 +41,11 @@
     "arrow-body-style": ["off"],
     "no-alert": ["off"],
     "default-param-last": ["off"],
+    "operator-linebreak": ["off"],
+    "function-paren-newline": ["off"],
+    "no-confusing-arrow": ["off"],
+    "implicit-arrow-linebreak": ["off"],
+    "no-nested-ternary": ["off"],
     "import/extensions": [
       "off",
       "ignorePackages",

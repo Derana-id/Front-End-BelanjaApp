@@ -1,29 +1,49 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { List } from 'react-content-loader';
 import Close from '../../../assets/icons/close.svg';
 
-export default function CardShippingAddress() {
+export default function CardShippingAddress({ myAddress }) {
   const [showModal, setShowModal] = useState();
   const [showEditModal, setShowEditModal] = useState();
   return (
     <div>
       <div className="flex flex-col bg-white rounded w-3/4 h-auto mt-[120px] mx-24">
         <div className="flex w-full">
-          <button onClick={() => setShowModal(true)} className="w-full mx-10 h-20 border-2 border-dashed rounded text-[#9B9B9B]">
+          <button
+            onClick={() => setShowModal(true)}
+            className="w-full mx-10 h-20 border-2 border-dashed rounded text-[#9B9B9B]"
+          >
             Add new address
           </button>
         </div>
-        <div className="ml-10 mr-10 my-5 border-2 rounded border-primary h-auto relative flex items-start flex-col">
-          <label className="font-semibold m-2" htmlFor="">
-            Andreas Jane
-          </label>
-          <p className="text-[#222222] m-2">
-            Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah, 53181
-            [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181
-          </p>
+        {myAddress.isLoading ? (
+          <List />
+        ) : myAddress.error === 'Addres Not Found' ? (
+          <button>Add New Address</button>
+        ) : myAddress.isError ? (
+          <div>Error</div>
+        ) : myAddress.data.length > 0 ? (
+          myAddress.data.map((item, index) => (
+            <div
+              className="ml-10 mr-10 my-5 border-2 rounded border-primary h-auto relative flex items-start flex-col"
+              key={index}
+            >
+              <label className="font-semibold m-2" htmlFor="">
+                {item.recipient_name}
+              </label>
+              <p className="text-[#222222] m-2">
+                {`[${item.label}] ${item.address},  ${item.city}, ${item.postal_code}, (HP: ${item.recipient_phone})`}
+              </p>
 
-          <button type="button" onClick={() => setShowEditModal(true)} className="text-primary m-2 font-bold">Change address</button>
-        </div>
+              <button type="button" onClick={() => setShowEditModal(true)} className="text-primary m-2 font-bold">
+                Change address
+              </button>
+            </div>
+          ))
+        ) : (
+          <button>Add New Address</button>
+        )}
       </div>
       {showModal ? (
         <>

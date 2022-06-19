@@ -1,4 +1,4 @@
-import { GET_MY_ADDRESS_FAILED, GET_MY_ADDRESS_PENDING, GET_MY_ADDRESS_SUCCESS } from '../types';
+import { GET_USER_CHAT_FAILED, GET_USER_CHAT_PENDING, GET_USER_CHAT_SUCCESS } from '../types';
 
 const initialState = {
   isLoading: false,
@@ -7,18 +7,18 @@ const initialState = {
   error: null
 };
 
-const myAddressReducer = (state = initialState, action) => {
+const listUserChat = (state = initialState, action) => {
   switch (action.type) {
-    case GET_MY_ADDRESS_PENDING:
+    case GET_USER_CHAT_PENDING:
       return { ...state, isLoading: true };
-    case GET_MY_ADDRESS_SUCCESS:
+    case GET_USER_CHAT_SUCCESS:
       return {
         ...state,
         isLoading: false,
         isError: false,
         data: action.payload.data
       };
-    case GET_MY_ADDRESS_FAILED:
+    case GET_USER_CHAT_FAILED:
       return {
         ...state,
         isLoading: false,
@@ -30,4 +30,4 @@ const myAddressReducer = (state = initialState, action) => {
   }
 };
 
-export default myAddressReducer;
+export default listUserChat;

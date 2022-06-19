@@ -1,3 +1,6 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
@@ -5,12 +8,15 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import ContentLoader from 'react-content-loader';
 import Swal from 'sweetalert2';
+import Cookies from 'js-cookie';
+import JwtDecode from 'jwt-decode';
 import CardCart from '../../components/card/card-cart';
 import ButtonWarning from '../../components/Button/button-warning';
 import Checklist from '../../components/Input/checklist';
-import { getMyCart, deleteCart, deleteCartUser } from '../../redux/actions/cart';
+import { getMyCart, deleteCart, updateCart } from '../../redux/actions/cart';
 import { toastify } from '../../utils/toastify';
 import { sweetAlert } from '../../utils/sweetalert';
+import { createTransaction } from '../../redux/actions/transaction';
 
 const MyBag = () => {
   const router = useRouter();
@@ -18,20 +24,64 @@ const MyBag = () => {
   const myCart = useSelector(state => state.myCart);
   const [total, setTotal] = useState(0);
 
+  const token = Cookies.get('token');
+  let decoded = '';
+  if (token) {
+    decoded = JwtDecode(token);
+  }
+
   useEffect(() => {
     dispatch(getMyCart(router));
   }, []);
 
   useEffect(() => {
-    if (myCart.data) {
+    if (myCart) {
       const getTotal = myCart.data.map(item => {
-        const price = Number(item.product[0].price);
+        const price = Number(item.product[0].price * item.cart.qty);
         return price;
       });
-      const result = getTotal[0] * getTotal.length;
-      setTotal(Intl.NumberFormat('en-US').format(result));
+
+      let sum = 0;
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < getTotal.length; i++) {
+        sum += getTotal[i];
+      }
+      setTotal(Intl.NumberFormat('en-US').format(sum));
     }
   }, [myCart]);
+
+  const handleBuy = e => {
+    e.preventDefault();
+    if (myCart) {
+      myCart.data.map(item => {
+        createTransaction({
+          productId: item.cart.product_id,
+          qty: item.cart.qty,
+          isBuy: 0
+        })
+          .then(res => {
+            Swal.fire({
+              title: 'Success!',
+              text: res.message,
+              icon: 'success'
+            });
+            router.push('/checkout');
+          })
+          .catch(err => {
+            if (err.response.data.code === 422) {
+              const { error } = err.response.data;
+              error.map(item => toastify(item, 'error'));
+            } else {
+              Swal.fire({
+                title: 'Error!',
+                text: err.response.data.message,
+                icon: 'error'
+              });
+            }
+          });
+      });
+    }
+  };
 
   const handleDelete = (e, id) => {
     e.preventDefault();
@@ -74,7 +124,7 @@ const MyBag = () => {
     }).then(async confirm => {
       if (confirm.isConfirmed) {
         try {
-          const res = await deleteCartUser();
+          const res = await deleteCart(decoded.id);
           sweetAlert(res.message);
           window.location.reload();
         } catch (err) {
@@ -87,6 +137,29 @@ const MyBag = () => {
         }
       }
     });
+  };
+
+  const valueAction = (e, id, productId, amount, stock) => {
+    const data = {
+      id,
+      product_id: productId,
+      qty: amount + e
+    };
+    if (amount >= 1 && e === -1 && amount <= 1 && e === -1) {
+      Swal.fire({
+        title: 'Failed!',
+        text: 'null',
+        icon: 'error'
+      });
+    } else if (amount <= stock) {
+      updateCart(data)
+        // eslint-disable-next-line no-unused-vars
+        .then(res => {
+          dispatch(getMyCart(router));
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch(err => {});
+    }
   };
 
   return (
@@ -104,10 +177,8 @@ const MyBag = () => {
               <div className="flex items-cente justify-between">
                 <div className="flex">
                   <Checklist onChange={e => handleDeleteUser(e)} />
-                  <p className="text-black font-medium">Select all items</p>
-                  <p className="text-gray ml-2">(2 items selected)</p>
+                  <p className="font-medium text-primary">Delete all items</p>
                 </div>
-                <button className="flex text-primary font-semibold">Delete</button>
               </div>
             </div>
             {myCart.isLoading ? (
@@ -121,15 +192,22 @@ const MyBag = () => {
                 <div key={i}>
                   <CardCart
                     image={`${
-                      item.image[0].photo
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                      item.image.length >= 0
+                        ? `https://drive.google.com/uc?export=view&id=${item.image[0].photo}`
+                        : `https://drive.google.com/uc?export=view&id=
+                        default.png`
                     }`}
                     onChange={e => handleDelete(e, item.cart.id)}
                     productName={item.product[0].product_name}
                     store={item.store[0].store_name}
-                    price={`$ ${item.product[0].price}`}
-                    defaultValue="28"
+                    price={`Rp ${item.product[0].price * item.cart.qty}`}
+                    value={item.cart.qty}
+                    onPlus={() =>
+                      valueAction(1, item.cart.id, item.cart.product_id, item.cart.qty, item.product[0].stock)
+                    }
+                    onMin={() =>
+                      valueAction(-1, item.cart.id, item.cart.product_id, item.cart.qty, item.product[0].stock)
+                    }
                   />
                 </div>
               ))
@@ -140,10 +218,10 @@ const MyBag = () => {
               <p className="text-black font-bold">Shopping summary</p>
               <div className="flex justify-between mt-3">
                 <p className="text-gray text-md">Total Price</p>
-                <p className="font-bold text-black text-lg">$ {total}</p>
+                <p className="font-bold text-black text-lg">Rp {total}</p>
               </div>
               <div className="mt-8">
-                <ButtonWarning action="Buy" onClick={() => alert('Hallo')} />
+                <ButtonWarning action="Buy" onClick={handleBuy} />
               </div>
             </div>
           </div>

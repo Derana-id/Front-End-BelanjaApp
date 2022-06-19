@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable indent */
 /* eslint-disable react/jsx-indent */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -17,22 +17,19 @@ import { getPopularProducts, getProducts } from '../redux/actions/products';
 function Home({ deviceType }) {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [getSearch, setSearch] = useState('');
-
-  // console.log(router.query.search);
 
   const { search } = router.query;
 
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getCategory());
-    dispatch(getPopularProducts(getSearch));
-    setSearch(search);
+    dispatch(getPopularProducts(search));
+    // setSearch(search);
   }, []);
 
   useEffect(() => {
     if (search) {
-      dispatch(getPopularProducts(getSearch));
+      dispatch(getPopularProducts(search));
     }
   }, []);
 
@@ -69,6 +66,11 @@ function Home({ deviceType }) {
       paritialVisibilityGutter: 40
     }
   };
+
+  const onCategory = e => {
+    router.push(`/category?query=${e}`);
+  };
+
   return (
     <div>
       <Head>
@@ -102,11 +104,11 @@ function Home({ deviceType }) {
                       return (
                         <div key={index} className="w-full h-full p-2">
                           <Image
-                            src={`${process.env.NEXT_PUBLIC_API_URL}uploads/categories/${each.photo}`}
-                            className="rounded-lg shadow-xl"
+                            src={`https://drive.google.com/uc?export=view&id=${each.photo}`}
+                            className="rounded-lg shadow-xl cursor-pointer"
                             width={206}
                             height={220}
-                            onClick={() => alert(each.category_name)}
+                            onClick={() => onCategory(each.category_name)}
                           />
                         </div>
                       );
@@ -138,10 +140,17 @@ function Home({ deviceType }) {
                     <div key={index}>
                       <CardProducts
                         nameProduct={`${item.product.product_name}`}
-                        price={`$ ${item.product.price}`}
+                        price={`Rp ${item.product.price}`}
                         user={`${item.store[0].store_name}`}
                         onClick={() => onDetail(item.product.id)}
-                        img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                        img={`${
+                          item.image.length >= 0
+                            ? `https://drive.google.com/uc?export=view&id=${
+                                item.image[0] ? item.image[0].photo : 'default.png'
+                              }`
+                            : `${process.env.NEXT_PUBLIC_API_URL}/public/uploads/products/default.png`
+                        }`}
+                        // img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
                       />
                     </div>
                   ))
@@ -169,10 +178,18 @@ function Home({ deviceType }) {
                     <div key={index}>
                       <CardProducts
                         nameProduct={`${item.product.product_name}`}
-                        price={`$ ${item.product.price}`}
+                        price={`Rp ${item.product.price}`}
                         user={`${item.store[0].store_name}`}
                         onClick={() => onDetail(item.product.id)}
-                        img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                        img={`${
+                          item.image.length >= 0
+                            ? `https://drive.google.com/uc?export=view&id=${
+                                item.image[0] ? item.image[0].photo : 'default.png'
+                              }`
+                            : `https://drive.google.com/uc?export=view&id=
+                            default.png`
+                        }`}
+                        // img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`}
                       />
                     </div>
                   ))
@@ -241,5 +258,6 @@ function Home({ deviceType }) {
   );
 }
 
-Home.layouts = 'ThridLayout';
+Home.layouts = 'MainLayout';
+
 export default Home;

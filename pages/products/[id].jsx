@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable indent */
 import React, { useEffect, useState } from 'react';
@@ -7,6 +8,8 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import ContentLoader from 'react-content-loader';
+// import jwtDecode from 'jwt-decode';
+// import Cookies from 'js-cookie';
 import Img from '../../components/img/Img';
 import Start from '../../components/star/start';
 import Color from '../../components/molecules/color';
@@ -17,7 +20,10 @@ import ButtonWarning from '../../components/Button/button-warning';
 import FormInformation from '../../components/form/form-information';
 import CardProducts from '../../components/card/card-products';
 import { getDetailProduct, getPopularProducts } from '../../redux/actions/products';
-import { addCart } from '../../redux/actions/cart';
+import { addCart, getMyCart } from '../../redux/actions/cart';
+import { chat } from '../../redux/actions/chat';
+import { createTransaction } from '../../redux/actions/transaction';
+import { toastify } from '../../utils/toastify';
 
 const Products = () => {
   const router = useRouter();
@@ -30,7 +36,13 @@ const Products = () => {
   useEffect(() => {
     dispatch(getDetailProduct(id));
     dispatch(getPopularProducts());
+    dispatch(getMyCart());
   }, []);
+
+  // eslint-disable-next-line no-unused-vars
+  const myCart = useSelector(state => {
+    return state.myCart;
+  });
 
   const getPopular = useSelector(state => {
     return state.getPopular;
@@ -41,40 +53,116 @@ const Products = () => {
   });
 
   const onSize = e => {
-    setSize(getSize + e);
+    if (getSize <= 0 && e === -1) {
+      setSize(0);
+    } else if (getSize >= 10 && e === 1) {
+      setSize(10);
+    } else {
+      setSize(getSize + e);
+    }
   };
 
   const onBuy = async e => {
-    const data = {
-      product_id: e,
-      qty: getAmount,
-      color: getColor
-    };
+    try {
+      const data = {
+        product_id: e,
+        qty: getAmount,
+        color: getColor,
+        id: ''
+      };
+      if (data.qty === '' || data.qty === 0) {
+        Swal.fire({
+          title: 'Failed!',
+          text: 'Number of items must be filled!',
+          icon: 'error'
+        });
+      } else {
+        addCart(data)
+          .then(res => {
+            Swal.fire({
+              title: 'Success!',
+              text: res.message,
+              icon: 'success'
+            });
+            dispatch(getMyCart());
+          })
+          .catch(err => {
+            Swal.fire({
+              title: 'Failed!',
+              text: err.message,
+              icon: 'error'
+            });
+          });
+      }
+    } catch (error) {
+      Swal.fire({
+        title: 'Failed!',
+        text: error.message,
+        icon: 'error'
+      });
+    }
+  };
 
-    addCart(data)
+  const onAmount = e => {
+    if (getAmount <= 0 && e === -1) {
+      setAmount(0);
+    } else if (getAmount >= getDetail.data.product.stock && e === 1) {
+      setAmount(getDetail.data.product.stock);
+    } else {
+      setAmount(getAmount + e);
+    }
+  };
+
+  const onDetail = e => {
+    dispatch(getDetailProduct(e));
+    router.push(`/products/${e}`);
+  };
+
+  const initialChat = e => {
+    // const decoded = jwtDecode(Cookies.get('token'));
+    e.preventDefault();
+
+    chat({})
+      .then(() => {
+        router.push('/chat');
+      })
+      .catch(error => {
+        Swal.fire({
+          title: 'Error!',
+          text: error.response.data.message,
+          icon: 'error'
+        });
+      });
+  };
+
+  const handleBuyNow = e => {
+    e.preventDefault();
+
+    createTransaction({
+      productId: getDetail.data.product.id,
+      qty: getAmount,
+      isBuy: 1
+    })
       .then(res => {
         Swal.fire({
           title: 'Success!',
           text: res.message,
           icon: 'success'
         });
+        router.push('/checkout');
       })
       .catch(err => {
-        Swal.fire({
-          title: 'Failed!',
-          text: err.message,
-          icon: 'error'
-        });
+        if (err.response.data.code === 422) {
+          const { error } = err.response.data;
+          error.map(item => toastify(item, 'error'));
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: err.response.data.message,
+            icon: 'error'
+          });
+        }
       });
-  };
-
-  const onAmount = e => {
-    setAmount(getAmount + e);
-  };
-
-  const onDetail = e => {
-    dispatch(getDetailProduct(e));
-    router.push(`/products/${e}`);
   };
 
   return (
@@ -95,11 +183,11 @@ const Products = () => {
               <li className="cursor-pointer">category</li>
             </Link>
             <li>{'>'} </li>
-            {/* {getDetail.data.category.length > 0 ? ( */}
-            <li className="cursor-pointer">
-              {getDetail.data.category ? getDetail.data.category[0].category_name : 'null'}
-            </li>
-            {/* ) : null} */}
+            {getDetail.data.category ? (
+              <li className="cursor-pointer">
+                {getDetail.data.category ? getDetail.data.category[0].category_name : null}
+              </li>
+            ) : null}
           </ul>
         </div>
         {getDetail.data.length >= 0 ? (
@@ -117,30 +205,38 @@ const Products = () => {
                 >
                   <Img
                     src={
-                      getDetail.data.image[0]
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                      getDetail.data.image.length >= 0
+                        ? `https://drive.google.com/uc?export=view&id=${
+                            getDetail.data.image[0] ? getDetail.data.image[0].photo : 'default.png'
+                          }`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                   <Img
                     src={
-                      getDetail.data.image[1]
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                      getDetail.data.image.length >= 0
+                        ? `https://drive.google.com/uc?export=view&id=${
+                            getDetail.data.image[1] ? getDetail.data.image[1].photo : 'default.png'
+                          }`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                   <Img
                     src={
-                      getDetail.data.image[2]
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                      getDetail.data.image.length >= 0
+                        ? `https://drive.google.com/uc?export=view&id=${
+                            getDetail.data.image[2] ? getDetail.data.image[2].photo : 'default.png'
+                          }`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                   <Img
                     src={
-                      getDetail.data.image[2]
-                        ? `${process.env.NEXT_PUBLIC_API_URL}uploads/products/${getDetail.data.image[0].photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/products/default.png`
+                      getDetail.data.image.length >= 0
+                        ? `https://drive.google.com/uc?export=view&id=${
+                            getDetail.data.image[3] ? getDetail.data.image[3].photo : 'default.png'
+                          }`
+                        : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
                 </div>
@@ -150,8 +246,12 @@ const Products = () => {
                   <h3 className="text-2xl font-bold">
                     {getDetail.data.category ? getDetail.data.product.product_name : null}
                   </h3>
-                  {getDetail.data.category ? (
-                    <p className="text-gray text-sm font-semibold">{getDetail.data.brand[0].brand_name}</p>
+                  {getDetail.data.category.length > 0 ? (
+                    <div className="flex">
+                      <p className="text-gray text-sm font-semibold">{getDetail.data.brand[0].brand_name}</p>
+                      <p className="text-sm text-gray ml-2">|</p>
+                      <p className="text-sm text-gray ml-2"> {getDetail.data.product.stock} stock</p>
+                    </div>
                   ) : null}
 
                   <Start valueReview="(10)" />
@@ -159,7 +259,7 @@ const Products = () => {
                 <div className="mt-5">
                   <p className="text-md text-gray font-semibold text-sm">price</p>
                   <h3 className="text-dark text-xl font-extrabold">
-                    $ {getDetail.data.category ? getDetail.data.product.price : null}
+                    Rp {getDetail.data.category ? getDetail.data.product.price : null}
                   </h3>
                 </div>
                 <div className="mt-5">
@@ -173,7 +273,7 @@ const Products = () => {
                   </div>
                 </div>
                 <div className="flex justify-between w-full md:w-72 mt-5">
-                  <div className="ralative">
+                  <div className="relative">
                     <p className="font-bold text-base">Size</p>
                     <div className=" flex w-28 items-center justify-between">
                       <SpinnerAction action="+" onClick={() => onSize(+1)} />
@@ -181,9 +281,9 @@ const Products = () => {
                       <SpinnerAction action="-" onClick={() => onSize(-1)} />
                     </div>
                   </div>
-                  <div className="ralative">
+                  <div className="relative">
                     <p className="font-bold text-base">Jumlah</p>
-                    <div className="flex w-28 items-center justify-between">
+                    <div className="flex w-8 items-center justify-between">
                       <SpinnerAction action="+" onClick={() => onAmount(+1)} />
                       <FormValueNumber defaultValue={getDetail.data.product.stock} value={getAmount} />
                       <SpinnerAction action="-" onClick={() => onAmount(-1)} />
@@ -192,11 +292,11 @@ const Products = () => {
                 </div>
                 <div className="mt-8 md:mt-5 md:w-80">
                   <div className="flex justify-between mt-5">
-                    <ButtonSuccess onClick={() => alert('hai')} action="Chat" />
+                    <ButtonSuccess onClick={initialChat} action="Chat" />
                     <ButtonSuccess onClick={() => onBuy(getDetail.data.product.id)} action="Add bag" />
                   </div>
                   <div className="mt-5">
-                    <ButtonWarning action="Buy Now" />
+                    <ButtonWarning action="Buy Now" onClick={handleBuyNow} />
                   </div>
                 </div>
               </div>
@@ -226,10 +326,17 @@ const Products = () => {
                 <div key={index}>
                   <CardProducts
                     nameProduct={`${item.product.product_name}`}
-                    price={`$ ${item.product.price}`}
+                    price={`Rp ${item.product.price}`}
                     user={`${item.store[0].store_name}`}
                     onClick={() => onDetail(item.product.id)}
-                    img={`${process.env.NEXT_PUBLIC_API_URL}uploads/products/${item.image[0].photo}`}
+                    img={`${
+                      item.image.length >= 0
+                        ? `https://drive.google.com/uc?export=view&id=${
+                            item.image[0] ? item.image[0].photo : 'default.png'
+                          }`
+                        : `https://drive.google.com/uc?export=view&id=
+                        default.png`
+                    }`}
                   />
                 </div>
               ))
@@ -241,5 +348,6 @@ const Products = () => {
   );
 };
 
-Products.layouts = 'ThridLayout';
+Products.layouts = 'MainLayout';
+
 export default Products;

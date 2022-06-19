@@ -4,6 +4,7 @@ import detailStoreReducer from './detailStore';
 import getAllBrandReducer from './brand';
 import getAllCategoryReducer from './categoty';
 import detailMyProductReducer from './detailMyProduct';
+import getDetailMyAddressReducer from './getDetailMyAddress';
 import getMyOrderReducer from './myOrderBuyer';
 import myAddressReducer from './myAddress';
 import myCart from './myCart';
@@ -14,6 +15,8 @@ import getDetailProduct from './getDetailProduct';
 import getIdProfile from './getIdProfile';
 import getIdStore from './getIdStore';
 import getAllCategory from './getCategory';
+import getFilter from './getFilter';
+import listUserChat from './getListUserChat';
 
 export default combineReducers({
   detailCustomer: detailCustomerReducer,
@@ -23,6 +26,7 @@ export default combineReducers({
   myProduct: detailMyProductReducer,
   myOrder: getMyOrderReducer,
   myAddress: myAddressReducer,
+  myDetailAddress: getDetailMyAddressReducer,
   myCart,
   myTransaction,
   getAllProducts,
@@ -30,5 +34,7 @@ export default combineReducers({
   getDetailProduct,
   getIdProfile,
   getIdStore,
-  getAllCategory
+  getAllCategory,
+  getFilter,
+  listUserChat
 });
