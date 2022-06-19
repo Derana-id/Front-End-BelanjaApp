@@ -22,7 +22,6 @@ import { getAddress } from '../../redux/actions/userProfile';
 const Checkout = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const token = Cookies.get('token');
   const myAddress = useSelector(state => state.myAddress);
   const myTransaction = useSelector(state => state.myTransaction);
   const [isPayment, setIsPayment] = useState(false);

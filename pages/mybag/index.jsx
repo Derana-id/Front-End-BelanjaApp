@@ -50,6 +50,36 @@ const MyBag = () => {
     }
   }, [myCart]);
 
+  // const handleBuy = e => {
+  //   e.preventDefault();
+
+  //   createTransaction({
+  //     productId: getDetail.data.product.id,
+  //     qty: getAmount,
+  //     isBuy: 0
+  //   })
+  //     .then(res => {
+  //       Swal.fire({
+  //         title: 'Success!',
+  //         text: res.message,
+  //         icon: 'success'
+  //       });
+  //       router.push('/checkout');
+  //     })
+  //     .catch(err => {
+  //       if (err.response.data.code === 422) {
+  //         const { error } = err.response.data;
+  //         error.map(item => toastify(item, 'error'));
+  //       } else {
+  //         Swal.fire({
+  //           title: 'Error!',
+  //           text: err.response.data.message,
+  //           icon: 'error'
+  //         });
+  //       }
+  //     });
+  // };
+
   const handleDelete = (e, id) => {
     e.preventDefault();
     Swal.fire({
