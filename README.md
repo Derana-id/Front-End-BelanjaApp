@@ -15,7 +15,7 @@
     <a href="#table-of-contents"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="bit.ly/blanja-app">View Demo</a>
+    <a href="https://bit.ly/blanja-app">View Demo</a>
     ·
     <a href="https://github.com/Derana-id/Front-End-BelanjaApp/issues">Report Bug</a>
     ·
@@ -127,7 +127,9 @@ Contributions are what make the open source community such an amazing place to b
 
 :rocket: [`Frontend Blanja Admin`](https://github.com/Derana-id/Front-End-Admin)
 
-:rocket: [`Demo Blanja`](https://bit.ly/blanja-app/)
+:rocket: [`Web Service`](blanja-app.herokuapp.com/)
+
+:rocket: [`Demo Blanja`](https://bit.ly/blanja-app)
 
 :rocket: [`Demo Blanja Admin`](https://blanja-admin.vercel.app/)
 
