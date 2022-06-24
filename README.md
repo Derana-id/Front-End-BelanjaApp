@@ -106,7 +106,56 @@ NEXT_PUBLIC_NODE_ENV = [NODE_ENV]
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Screenshoots
+<p align="center" display=flex>
+<table>
+ 
+  <tr>
+    <td><image src="https://i.postimg.cc/wvw8FyGC/Screenshot-2022-06-24-130702.png" alt="Login Page" width=100%></td>
+    <td><image src="https://i.postimg.cc/2SQt2Lq0/Screenshot-2022-06-24-130959.png" alt="Landing Page" width=100%/></td>
+  </tr>
+   <tr>
+    <td>Login Page</td>
+    <td>Landing Page</td>
+  </tr>
+  
+  <tr>
+    <td><image src="https://i.postimg.cc/jjjG2d5v/Screenshot-2022-06-24-130829.png" alt="Profile Customer" width=100%></td>
+    <td><image src="https://i.postimg.cc/LXDYTDRm/Screenshot-2022-06-24-130916.png" alt="Chat" width=100%/></td>
+  </tr>
+  <tr>
+    <td>Profile Customer</td>
+    <td>Chat</td>
+  </tr>
 
+  <tr>
+    <td><image src="https://i.postimg.cc/N0wKvSjg/Screenshot-2022-06-24-131107.png" alt="Filter" width=100%></td>
+    <td><image src="https://i.postimg.cc/xCfqcmmh/Screenshot-2022-06-24-131324.png" alt="Address" width=100%></td>
+  </tr>
+  <tr>
+      <td>Filter</td>
+      <td>Chat</td>
+  </tr>
+  
+  <tr>
+    <td><image src="https://i.postimg.cc/bw1vggH4/Screenshot-2022-06-24-131351.png" alt="My Order" width=100%></td>
+    <td><image src="https://i.postimg.cc/mkF4DZmK/Screenshot-2022-06-22-182334.png" alt="Detail Product" width=100%></td>
+  </tr>
+  <tr>
+      <td>My Order</td>
+      <td>Detail Product</td>
+  </tr>
+  
+  <tr>
+    <td><image src="https://i.postimg.cc/8cWCYbgF/Screenshot-2022-06-22-182542.png" alt="My Bag" width=100%></td>
+    <td><image src="https://i.postimg.cc/SKvNNPy2/Screenshot-2022-06-22-182701.png" alt="Checkout" width=100%></td>
+  </tr>
+  <tr>
+      <td>My Bag</td>
+      <td>Checkout</td>
+  </tr>
+  
+  
+</table>
 
 ## Contributing
 
