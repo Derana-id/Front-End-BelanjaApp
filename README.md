@@ -153,6 +153,14 @@ NEXT_PUBLIC_NODE_ENV = [NODE_ENV]
       <td>My Bag</td>
       <td>Checkout</td>
   </tr>
+    <tr>
+    <td><image src="https://i.postimg.cc/8z3Mxtq4/Screenshot-2022-06-22-182954.png" alt="Payment" width=100%></td>
+    <td><image src="https://i.postimg.cc/7YNyBRTv/Screenshot-2022-06-22-183114.png" alt="My Order" width=100%/></td>
+  </tr>
+   <tr>
+    <td>Payment</td>
+    <td>My Order</td>
+  </tr>
    <tr>
     <td><image src="https://i.postimg.cc/GmS1ks66/Screenshot-2022-06-24-131940.png" alt="Profile Seller" width=100%></td>
     <td><image src="https://i.postimg.cc/xTT7t1GQ/Screenshot-2022-06-24-132032.png" alt="Selling Product" width=100%></td>
