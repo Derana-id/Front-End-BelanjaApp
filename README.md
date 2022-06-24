@@ -133,7 +133,7 @@ NEXT_PUBLIC_NODE_ENV = [NODE_ENV]
   </tr>
   <tr>
       <td>Filter</td>
-      <td>Chat</td>
+      <td>Address</td>
   </tr>
   
   <tr>
