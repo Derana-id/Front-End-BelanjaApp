@@ -8,7 +8,7 @@ import { sweetAlert } from '../../../utils/sweetalert';
 import { reset } from '../../../redux/actions/auth';
 import Input from '../../../components/Input/index';
 import Button from '../../../components/Button';
-import logoAuth from '../../public/logoAuth.png';
+import logoAuth from '../../../public/logoAuth.png';
 
 export default function index() {
   const router = useRouter();
