@@ -74,7 +74,7 @@ function Home({ deviceType }) {
   return (
     <div>
       <Head>
-        <title>Belanja | Home</title>
+        <title>Blanja | Home</title>
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
