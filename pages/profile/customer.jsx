@@ -32,7 +32,7 @@ const Customer = () => {
   const dispatch = useDispatch();
   const myAddress = useSelector(state => state.myAddress);
   const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState);
+    setIsOpen(prevState => !prevState);
   };
   const [showSideBar, setFormShowSideBar] = useState(0);
 
@@ -47,7 +47,7 @@ const Customer = () => {
     decoded = JwtDecode(token);
   }
 
-  const detailProfile = useSelector((state) => {
+  const detailProfile = useSelector(state => {
     return state.detailCustomer;
   });
 
@@ -90,20 +90,16 @@ const Customer = () => {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes'
-    }).then((result) => {
+    }).then(result => {
       if (result.isConfirmed) {
         Cookies.remove('token');
         router.push('/auth/login');
-        Swal.fire(
-          'Success to logout!',
-          'Success to logout.',
-          'success'
-        );
+        Swal.fire('Success to logout!', 'Success to logout.', 'success');
       }
     });
   };
 
-  const onEditUser = (e) => {
+  const onEditUser = e => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -115,7 +111,7 @@ const Customer = () => {
     formData.append('photo', form.photo);
 
     updateProfile(formData, token)
-      .then((res) => {
+      .then(res => {
         Swal.fire({
           title: 'success',
           text: res.message,
@@ -124,7 +120,7 @@ const Customer = () => {
         dispatch(getDetailUser(decoded.id));
         window.location.reload();
       })
-      .catch((err) => {
+      .catch(err => {
         if (err.response.data.code === 422) {
           const { error } = err.response.data;
           error.map(item => toastify(item, 'error'));
@@ -253,7 +249,7 @@ const Customer = () => {
   return (
     <div>
       <Head>
-        <title>Belanja | Profile customer</title>
+        <title>Blanja | Profile customer</title>
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
@@ -261,21 +257,28 @@ const Customer = () => {
         <div className="w-0 sm:w-0 md:w-1/4 lg:w-1/4 xl:w-1/4">
           <div className="w-full flex justify-center items-center mr-10 flex-col mt-[120px]">
             <div className="flex items-center">
-              {detailProfile.isLoading ? (<div>Laoding</div>)
-                : (
-                  <img
-                    src={form.photo
+              {detailProfile.isLoading ? (
+                <div>Laoding</div>
+              ) : (
+                <img
+                  src={
+                    form.photo
                       ? `https://drive.google.com/uc?export=view&id=${form.photo}`
-                      : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                    alt=""
-                    width="100px"
-                    height="100px"
-                    className="rounded-[100%] mb-9"
-                    onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data[0].profile.photo}`; }}
-                  />
-                )}
+                      : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`
+                  }
+                  alt=""
+                  width="100px"
+                  height="100px"
+                  className="rounded-[100%] mb-9"
+                  onError={e => {
+                    e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data[0].profile.photo}`;
+                  }}
+                />
+              )}
               <div className="flex flex-col ml-2">
-                <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[120px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">{ form.name}</label>
+                <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[120px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">
+                  {form.name}
+                </label>
                 <Image className="cursor-pointer hidden" src={edit} />
               </div>
             </div>
@@ -286,19 +289,25 @@ const Customer = () => {
                   <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
                   </div>
-                  <button onClick={() => setCurrentShow(0)} className="ml-3 font-semibold cursor-pointer">My account</button>
+                  <button onClick={() => setCurrentShow(0)} className="ml-3 font-semibold cursor-pointer">
+                    My account
+                  </button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={address} />
                   </div>
-                  <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer ">Shipping Adrress</button>
+                  <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer ">
+                    Shipping Adrress
+                  </button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                   </div>
-                  <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">My order</button>
+                  <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">
+                    My order
+                  </button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
@@ -315,19 +324,25 @@ const Customer = () => {
                   <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
                   </div>
-                  <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer ">My account</button>
+                  <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer ">
+                    My account
+                  </button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={address} />
                   </div>
-                  <button onClick={() => setCurrentShow(1)} className="ml-3 font-semibold cursor-pointer ">Shipping Adrress</button>
+                  <button onClick={() => setCurrentShow(1)} className="ml-3 font-semibold cursor-pointer ">
+                    Shipping Adrress
+                  </button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                   </div>
-                  <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">My order</button>
+                  <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">
+                    My order
+                  </button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
@@ -344,19 +359,25 @@ const Customer = () => {
                   <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
                   </div>
-                  <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer ">My account</button>
+                  <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer ">
+                    My account
+                  </button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={address} />
                   </div>
-                  <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer">Shipping Adrress</button>
+                  <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer">
+                    Shipping Adrress
+                  </button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                     <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                   </div>
-                  <button onClick={() => setCurrentShow(2)} className="ml-3 font-semibold cursor-pointer ">My order</button>
+                  <button onClick={() => setCurrentShow(2)} className="ml-3 font-semibold cursor-pointer ">
+                    My order
+                  </button>
                 </div>
                 <div className="flex items-center m-2">
                   <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
@@ -373,29 +394,30 @@ const Customer = () => {
         <div className="w-full sm:w-full md:w-3/4 lg:w-3/4 xl:w-3/4 bg-[#F5F5F5] min-h-screen relative">
           <div className="w-full sm:w-full md:hidden lg:hidden xl:hidden mt-[80px] ml-[15px] absolute">
             <AiOutlineMenu onClick={toggleDrawer} />
-            <Drawer
-              open={isOpen}
-              onClose={toggleDrawer}
-              direction="left"
-              style={{ width: '200px' }}
-              zIndex={3000}
-            >
+            <Drawer open={isOpen} onClose={toggleDrawer} direction="left" style={{ width: '200px' }} zIndex={3000}>
               <div className="mt-10 flex flex-row">
-                {detailProfile.isLoading ? (<div>Laoding</div>)
-                  : (
-                    <img
-                      src={form.photo
+                {detailProfile.isLoading ? (
+                  <div>Laoding</div>
+                ) : (
+                  <img
+                    src={
+                      form.photo
                         ? `https://drive.google.com/uc?export=view&id=${form.photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                      alt=""
-                      width="100px"
-                      height="100px"
-                      className="rounded-[100%] mb-9"
-                      onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data[0].profile.photo}`; }}
-                    />
-                  )}
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`
+                    }
+                    alt=""
+                    width="100px"
+                    height="100px"
+                    className="rounded-[100%] mb-9"
+                    onError={e => {
+                      e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data[0].profile.photo}`;
+                    }}
+                  />
+                )}
                 <div className="flex flex-col ml-2">
-                  <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[75px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">{ form.name}</label>
+                  <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[75px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">
+                    {form.name}
+                  </label>
                   <Image className="cursor-pointer hidden" width={25} height={25} src={edit} />
                 </div>
               </div>
@@ -406,21 +428,32 @@ const Customer = () => {
                   <div className="flex flex-col ml-[47%] w-full mt-10">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
-                        <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
+                        <Image
+                          className="absolute border-none rounded-full p-7"
+                          width={20}
+                          height={20}
+                          src={myaccount}
+                        />
                       </div>
-                      <button onClick={() => setCurrentShow(0)} className="ml-3 font-semibold cursor-pointer">My account</button>
+                      <button onClick={() => setCurrentShow(0)} className="ml-3 font-semibold cursor-pointer">
+                        My account
+                      </button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={address} />
                       </div>
-                      <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer ">Shipping Adrress</button>
+                      <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer ">
+                        Shipping Adrress
+                      </button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                       </div>
-                      <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">My order</button>
+                      <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">
+                        My order
+                      </button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
@@ -435,21 +468,32 @@ const Customer = () => {
                   <div className="flex flex-col ml-[47%] w-full mt-10">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
-                        <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
+                        <Image
+                          className="absolute border-none rounded-full p-7"
+                          width={20}
+                          height={20}
+                          src={myaccount}
+                        />
                       </div>
-                      <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer ">My account</button>
+                      <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer ">
+                        My account
+                      </button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={address} />
                       </div>
-                      <button onClick={() => setCurrentShow(1)} className="ml-3 font-semibold cursor-pointer ">Shipping Adrress</button>
+                      <button onClick={() => setCurrentShow(1)} className="ml-3 font-semibold cursor-pointer ">
+                        Shipping Adrress
+                      </button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                       </div>
-                      <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">My order</button>
+                      <button onClick={() => setCurrentShow(2)} className="ml-3 cursor-pointer ">
+                        My order
+                      </button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
@@ -464,21 +508,32 @@ const Customer = () => {
                   <div className="flex flex-col ml-[47%] w-full mt-10">
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#456BF3]  rounded-full relative flex justify-center items-center">
-                        <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myaccount} />
+                        <Image
+                          className="absolute border-none rounded-full p-7"
+                          width={20}
+                          height={20}
+                          src={myaccount}
+                        />
                       </div>
-                      <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer ">My account</button>
+                      <button onClick={() => setCurrentShow(0)} className="ml-3 cursor-pointer ">
+                        My account
+                      </button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F36F45]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={address} />
                       </div>
-                      <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer">Shipping Adrress</button>
+                      <button onClick={() => setCurrentShow(1)} className="ml-3 cursor-pointer">
+                        Shipping Adrress
+                      </button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-[#F3456F]  rounded-full relative flex justify-center items-center">
                         <Image className="absolute border-none rounded-full p-7" width={20} height={20} src={myorder} />
                       </div>
-                      <button onClick={() => setCurrentShow(2)} className="ml-3 font-semibold cursor-pointer ">My order</button>
+                      <button onClick={() => setCurrentShow(2)} className="ml-3 font-semibold cursor-pointer ">
+                        My order
+                      </button>
                     </div>
                     <div className="flex items-center m-2">
                       <div className="h-9 w-9 bg-primary  rounded-full relative flex justify-center items-center">
@@ -491,68 +546,93 @@ const Customer = () => {
                   </div>
                 )}
               </div>
-
             </Drawer>
           </div>
-          {showSideBar === 0
-            ? (
-              detailProfile.isLoading ? (
-                <BulletList />
-              ) : (
-                <form onSubmit={(e) => onEditUser(e)} className="flex w-full">
-                  <div className="flex flex-col bg-white rounded w-full h-auto mt-[120px] mx-2 sm:w-full md:w-3/4 lg:w-3/4 sm:mx-2 md:mx-12 lg:mx-12">
-                    <div className="flex flex-col m-5 border-b-2 border-[#9B9B9B] pb-5">
-                      <label className="mb-2 text-lg font-semibold">My Profile</label>
-                      <label className="text-[#9B9B9B]">Manage your profile information</label>
-                    </div>
-                    <div className="flex w-full">
-
-                      <div className="w-[70%] flex flex-col items-end">
-                        <Input onChange={(e) => setForm({ ...form, name: e.target.value })} name="Name" type="text" value={form.name} />
-                        <Input name="Email" value={form.email} type="text" readonly />
-                        <Input onChange={(e) => setForm({ ...form, phone: e.target.value })} name="Phone Number" value={form.phone} type="text" />
-                        <div className="flex -mr-4 sm:-mr-4 md:mr-[150px] lg-mr-[150px] xl:mr-[150px]">
-                          <label className="mr-5 text-[#9B9B9B]">Gender</label>
-                          <RadioButton onChange={(e) => setForm({ ...form, gender: e.target.value })} value={form.gender} />
-                        </div>
-                        <Datepicker onChange={(e) => setForm({ ...form, birth: e.target.value })} value={form.birth} />
-                      </div>
-                      <div className="w-[30%] flex flex-col items-center border-l-2 border-gray my-4">
-                        {detailProfile.isLoading ? (<div>Laoding</div>)
-                          : (
-                            <img
-                              src={form.photo
-                                ? `https://drive.google.com/uc?export=view&id=${form.photo}`
-                                : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                              alt=""
-                              width="100px"
-                              height="100px"
-                              className="rounded-[100%] mb-9"
-                              onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data[0].profile.photo}`; }}
-                            />
-                          )}
-                        <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />
-                        <label className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray" htmlFor="images">Select image</label>
-                      </div>
-
-                    </div>
-                    <button type="submit" className="w-32 h-10 mt-5 mb-10 text-white border ml-28 sm:ml-28 md:ml-44 lg:ml-44 bg-primary active:bg-white active:text-primary rounded-2xl">Save</button>
+          {showSideBar === 0 ? (
+            detailProfile.isLoading ? (
+              <BulletList />
+            ) : (
+              <form onSubmit={e => onEditUser(e)} className="flex w-full">
+                <div className="flex flex-col bg-white rounded w-full h-auto mt-[120px] mx-2 sm:w-full md:w-3/4 lg:w-3/4 sm:mx-2 md:mx-12 lg:mx-12">
+                  <div className="flex flex-col m-5 border-b-2 border-[#9B9B9B] pb-5">
+                    <label className="mb-2 text-lg font-semibold">My Profile</label>
+                    <label className="text-[#9B9B9B]">Manage your profile information</label>
                   </div>
-                </form>
-              )
-
-            ) : showSideBar === 1
-              ? (
-                <CardShippingAddress
-                  myAddress={myAddress}
-                  formAddress={formAddress}
-                  setFormAddress={setFormAddress}
-                  AddNewAddress={AddNewAddress}
-                  EditAddress={EditAddress}
-                  DeleteAddress={DeleteAddress}
-                />
-              ) : showSideBar === 2
-                ? (<CardMyorder />) : null}
+                  <div className="flex w-full">
+                    <div className="w-[70%] flex flex-col items-end">
+                      <Input
+                        onChange={e => setForm({ ...form, name: e.target.value })}
+                        name="Name"
+                        type="text"
+                        value={form.name}
+                      />
+                      <Input name="Email" value={form.email} type="text" readonly />
+                      <Input
+                        onChange={e => setForm({ ...form, phone: e.target.value })}
+                        name="Phone Number"
+                        value={form.phone}
+                        type="text"
+                      />
+                      <div className="flex -mr-4 sm:-mr-4 md:mr-[150px] lg-mr-[150px] xl:mr-[150px]">
+                        <label className="mr-5 text-[#9B9B9B]">Gender</label>
+                        <RadioButton onChange={e => setForm({ ...form, gender: e.target.value })} value={form.gender} />
+                      </div>
+                      <Datepicker onChange={e => setForm({ ...form, birth: e.target.value })} value={form.birth} />
+                    </div>
+                    <div className="w-[30%] flex flex-col items-center border-l-2 border-gray my-4">
+                      {detailProfile.isLoading ? (
+                        <div>Laoding</div>
+                      ) : (
+                        <img
+                          src={
+                            form.photo
+                              ? `https://drive.google.com/uc?export=view&id=${form.photo}`
+                              : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`
+                          }
+                          alt=""
+                          width="100px"
+                          height="100px"
+                          className="rounded-[100%] mb-9"
+                          onError={e => {
+                            e.target.src = `https://drive.google.com/uc?export=view&id=${detailProfile.data[0].profile.photo}`;
+                          }}
+                        />
+                      )}
+                      <input
+                        onChange={e => setForm({ ...form, photo: e.target.files[0] })}
+                        id="images"
+                        type="file"
+                        className="hidden"
+                      />
+                      <label
+                        className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray"
+                        htmlFor="images"
+                      >
+                        Select image
+                      </label>
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-32 h-10 mt-5 mb-10 text-white border ml-28 sm:ml-28 md:ml-44 lg:ml-44 bg-primary active:bg-white active:text-primary rounded-2xl"
+                  >
+                    Save
+                  </button>
+                </div>
+              </form>
+            )
+          ) : showSideBar === 1 ? (
+            <CardShippingAddress
+              myAddress={myAddress}
+              formAddress={formAddress}
+              setFormAddress={setFormAddress}
+              AddNewAddress={AddNewAddress}
+              EditAddress={EditAddress}
+              DeleteAddress={DeleteAddress}
+            />
+          ) : showSideBar === 2 ? (
+            <CardMyorder />
+          ) : null}
         </div>
       </div>
     </div>

@@ -46,7 +46,7 @@ export default function index() {
   return (
     <div className="flex min-h-screen">
       <Head>
-        <title>Belanja | Forgot Password</title>
+        <title>Blanja | Forgot Password</title>
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
