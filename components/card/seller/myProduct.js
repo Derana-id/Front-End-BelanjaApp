@@ -11,7 +11,7 @@ export default function cardMyorder(params) {
   const [showNav, setFormShowNav] = useState(0);
   const dispatch = useDispatch();
 
-  const myProduct = useSelector((state) => {
+  const myProduct = useSelector(state => {
     return state.myProduct;
   });
 
@@ -23,47 +23,50 @@ export default function cardMyorder(params) {
       style: {
         minHeight: '72px', // override the row height
         border: '3px solid #F6F6F6'
-      },
+      }
     },
     headCells: {
       style: {
         paddingLeft: '8px', // override the cell padding for head cells
         paddingRight: '8px',
         backgroundColor: '#F6F6F6',
-        border: '2px solid #F6F6F6',
-      },
+        border: '2px solid #F6F6F6'
+      }
     },
     cells: {
       style: {
         paddingLeft: '8px', // override the cell padding for data cells
-        paddingRight: '8px',
-      },
-    },
+        paddingRight: '8px'
+      }
+    }
   };
 
   const columns = [
     {
       name: 'Product name',
-      selector: row => row.product_name,
+      selector: row => row.product_name
     },
     {
       name: 'Price',
-      selector: row => row.price,
+      selector: row =>
+        new Intl.NumberFormat('id-ID', {
+          style: 'currency',
+          currency: 'IDR',
+          minimumFractionDigits: 0
+        }).format(row.price)
       // style: { marginLeft: '300px' }
     },
     {
       name: 'Stock',
-      selector: row => row.stock,
-    },
+      selector: row => row.stock
+    }
   ];
 
   // integrasi
 
   let data = [];
   if (myProduct.data) {
-    myProduct.data.map((item) => (
-      data.push(item.product)
-    ));
+    myProduct.data.map(item => data.push(item.product));
   }
   useEffect(() => {
     dispatch(getDetailMyProduct());
