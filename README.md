@@ -207,7 +207,7 @@ Contributions are what make the open source community such an amazing place to b
       <td align="center">
         <a href="https://github.com/hakamfaza">
           <img width="100" src="https://avatars.githubusercontent.com/u/75160713?v=4" alt="Muhammad Hakam Faza"><br/>
-          <sub><b>Muhammad Hakam Faza</b></sub> <br/>
+          <sub><b>Muhamad Hakam Faza</b></sub> <br/>
           <sub>Project Manager | Front End Web Developer</sub>
         </a>
       </td>
