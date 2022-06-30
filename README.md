@@ -137,8 +137,8 @@ NEXT_PUBLIC_NODE_ENV = [NODE_ENV]
   </tr>
   
   <tr>
-    <td><image src="https://i.postimg.cc/bw1vggH4/Screenshot-2022-06-24-131351.png" alt="My Order" width=100%></td>
-    <td><image src="https://i.postimg.cc/mkF4DZmK/Screenshot-2022-06-22-182334.png" alt="Detail Product" width=100%></td>
+    <td><image src="https://i.postimg.cc/59KPRfMC/Fire-Shot-Capture-056-Blanja-Profile-customer-blanja-shop-vercel-app.png" alt="My Order" width=100%></td>
+    <td><image src="https://i.postimg.cc/wjM9dqtY/Fire-Shot-Capture-055-Blanja-Products-blanja-shop-vercel-app.png" alt="Detail Product" width=100%></td>
   </tr>
   <tr>
       <td>My Order</td>
@@ -146,7 +146,7 @@ NEXT_PUBLIC_NODE_ENV = [NODE_ENV]
   </tr>
   
   <tr>
-    <td><image src="https://i.postimg.cc/8cWCYbgF/Screenshot-2022-06-22-182542.png" alt="My Bag" width=100%></td>
+    <td><image src="https://i.postimg.cc/YCTBK1KQ/Fire-Shot-Capture-046-Blanja-My-Bag-localhost.png" alt="My Bag" width=100%></td>
     <td><image src="https://i.postimg.cc/SKvNNPy2/Screenshot-2022-06-22-182701.png" alt="Checkout" width=100%></td>
   </tr>
   <tr>
@@ -155,11 +155,11 @@ NEXT_PUBLIC_NODE_ENV = [NODE_ENV]
   </tr>
     <tr>
     <td><image src="https://i.postimg.cc/8z3Mxtq4/Screenshot-2022-06-22-182954.png" alt="Payment" width=100%></td>
-    <td><image src="https://i.postimg.cc/7YNyBRTv/Screenshot-2022-06-22-183114.png" alt="My Order" width=100%/></td>
+    <td><image src="https://i.postimg.cc/wTS65KfX/Fire-Shot-Capture-041-Belanja-Profile-Seller-blanja-shop-vercel-app.png" alt="My Order" width=100%/></td>
   </tr>
    <tr>
     <td>Payment</td>
-    <td>My Order</td>
+    <td>My Product</td>
   </tr>
    <tr>
     <td><image src="https://i.postimg.cc/GmS1ks66/Screenshot-2022-06-24-131940.png" alt="Profile Seller" width=100%></td>
