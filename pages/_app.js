@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
       <ToastContainer />
       <Provider store={store}>
         <Layouts>
-          <NextNProgress color="bg-primary" />
+          <NextNProgress color="#F3456F" />
           <Component {...pageProps} />
         </Layouts>
       </Provider>

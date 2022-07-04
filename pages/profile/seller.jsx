@@ -71,15 +71,11 @@ const Seller = () => {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes'
-    }).then((result) => {
+    }).then(result => {
       if (result.isConfirmed) {
         Cookies.remove('token');
         router.push('/auth/login');
-        Swal.fire(
-          'Success to logout!',
-          'Success to logout.',
-          'success'
-        );
+        Swal.fire('Success to logout!', 'Success to logout.', 'success');
       }
     });
     // Cookies.remove('token');
@@ -163,7 +159,7 @@ const Seller = () => {
   return (
     <div>
       <Head>
-        <title>Belanja | Profile Seller</title>
+        <title>Blanja | Profile Seller</title>
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
@@ -171,21 +167,28 @@ const Seller = () => {
         <div className="w-0 sm:w-0 md:w-1/4 lg:w-1/4 xl:w-1/4">
           <div className="w-full flex mx-[25%] flex-col mt-[120px]">
             <div className="flex items-center">
-              {detailStore.isLoading ? (<div>Laoding</div>)
-                : (
-                  <img
-                    src={form.photo
+              {detailStore.isLoading ? (
+                <div>Laoding</div>
+              ) : (
+                <img
+                  src={
+                    form.photo
                       ? `https://drive.google.com/uc?export=view&id=${form.photo}`
-                      : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                    alt=""
-                    width="100px"
-                    height="100px"
-                    className="rounded-[100%] mb-9"
-                    onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`; }}
-                  />
-                )}
+                      : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`
+                  }
+                  alt=""
+                  width="100px"
+                  height="100px"
+                  className="rounded-[100%] mb-9"
+                  onError={e => {
+                    e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`;
+                  }}
+                />
+              )}
               <div className="flex flex-col ml-2">
-                <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[120px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">{ form.store_name}</label>
+                <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[120px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">
+                  {form.store_name}
+                </label>
                 <Image className="cursor-pointer hidden" width={25} height={25} src={edit} />
               </div>
             </div>
@@ -524,29 +527,30 @@ const Seller = () => {
         <div className="w-full sm:w-full md:w-3/4 lg:w-3/4 xl:w-3/4 bg-[#F5F5F5] min-h-screen">
           <div className="w-full sm:w-full md:hidden lg:hidden xl:hidden mt-[80px] ml-[15px] absolute">
             <AiOutlineMenu onClick={toggleDrawer} />
-            <Drawer
-              open={isOpen}
-              onClose={toggleDrawer}
-              direction="left"
-              style={{ width: '190px' }}
-              zIndex={3000}
-            >
+            <Drawer open={isOpen} onClose={toggleDrawer} direction="left" style={{ width: '190px' }} zIndex={3000}>
               <div className="mt-10 flex flex-row">
-                {detailStore.isLoading ? (<div>Laoding</div>)
-                  : (
-                    <img
-                      src={form.photo
+                {detailStore.isLoading ? (
+                  <div>Laoding</div>
+                ) : (
+                  <img
+                    src={
+                      form.photo
                         ? `https://drive.google.com/uc?export=view&id=${form.photo}`
-                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                      alt=""
-                      width="70px"
-                      height="70px"
-                      className="rounded-[100%] mb-9"
-                      onError={(e) => { e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data[0].store.photo}`; }}
-                    />
-                  )}
+                        : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`
+                    }
+                    alt=""
+                    width="70px"
+                    height="70px"
+                    className="rounded-[100%] mb-9"
+                    onError={e => {
+                      e.target.src = `https://drive.google.com/uc?export=view&id=${detailStore.data[0].store.photo}`;
+                    }}
+                  />
+                )}
                 <div className="flex flex-col ml-2">
-                  <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[100px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">{ form.store_name}</label>
+                  <label className="text-secondary text-sm float-right mt-1 ml-3 mb-2 font-semibold max-w-[100px] inline-block overflow-hidden text-ellipsis whitespace-nowrap">
+                    {form.store_name}
+                  </label>
                   <Image className="cursor-pointer hidden" width={25} height={25} src={edit} />
                 </div>
               </div>
@@ -565,7 +569,10 @@ const Seller = () => {
                     </div>
                     {showNav === 0 ? (
                       <div>
-                        <button onClick={() => setCurrentShow(0)} className="text-base ml-14 font-semibold cursor-pointer">
+                        <button
+                          onClick={() => setCurrentShow(0)}
+                          className="text-base ml-14 font-semibold cursor-pointer"
+                        >
                           Store profile
                         </button>
                       </div>
@@ -716,7 +723,10 @@ const Seller = () => {
                         <button onClick={() => setCurrentShow(1)} className="ml-14 text-base mb-3 cursor-pointer">
                           My products
                         </button>
-                        <button onClick={() => setCurrentShow(2)} className="ml-14 text-base cursor-pointer font-semibold">
+                        <button
+                          onClick={() => setCurrentShow(2)}
+                          className="ml-14 text-base cursor-pointer font-semibold"
+                        >
                           Selling products
                         </button>
                       </div>
@@ -867,7 +877,10 @@ const Seller = () => {
                         <button onClick={() => setCurrentShow(3)} className="ml-14 text-base mb-3 cursor-pointer">
                           My order
                         </button>
-                        <button onClick={() => setCurrentShow(3)} className="ml-14 text-base cursor-pointer  font-semibold">
+                        <button
+                          onClick={() => setCurrentShow(3)}
+                          className="ml-14 text-base cursor-pointer  font-semibold"
+                        >
                           Order cancel
                         </button>
                       </div>
@@ -914,21 +927,34 @@ const Seller = () => {
                     />
                   </div>
                   <div className="w-[30%] flex flex-col items-center border-l-2 border-gray my-4">
-                    {detailStore.isLoading ? (<div>Laoding</div>)
-                      : (
-                        <img
-                          src={form.photo
+                    {detailStore.isLoading ? (
+                      <div>Laoding</div>
+                    ) : (
+                      <img
+                        src={
+                          form.photo
                             ? `https://drive.google.com/uc?export=view&id=${form.photo}`
-                            : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`}
-                          alt=""
-                          width="100px"
-                          height="100px"
-                          className="rounded-[100%] mb-9"
-                          onError={(e) => { e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`; }}
-                        />
-                      )}
-                    <input onChange={(e) => setForm({ ...form, photo: e.target.files[0] })} id="images" type="file" className="hidden" />
-                    <label className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray" htmlFor="images">
+                            : `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`
+                        }
+                        alt=""
+                        width="100px"
+                        height="100px"
+                        className="rounded-[100%] mb-9"
+                        onError={e => {
+                          e.target.src = `${process.env.NEXT_PUBLIC_API_URL}uploads/users/default.png`;
+                        }}
+                      />
+                    )}
+                    <input
+                      onChange={e => setForm({ ...form, photo: e.target.files[0] })}
+                      id="images"
+                      type="file"
+                      className="hidden"
+                    />
+                    <label
+                      className="border w-[70%] sm:w-[70%] md:w-[80%] lg:w-[80%] pl-4 sm:pl-4 md:pl-[20%] lg:pl-[20%] rounded-2xl mt-8 p-2 text-gray"
+                      htmlFor="images"
+                    >
                       Select image
                     </label>
                   </div>

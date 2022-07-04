@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable prefer-const */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -44,7 +45,12 @@ export default function cardMyorder() {
     },
     {
       name: 'Total price',
-      selector: row => row.total
+      selector: row =>
+        new Intl.NumberFormat('id-ID', {
+          style: 'currency',
+          currency: 'IDR',
+          minimumFractionDigits: 0
+        }).format(row.total)
     },
     {
       name: 'Date',
@@ -52,8 +58,17 @@ export default function cardMyorder() {
     },
     {
       name: 'Status',
-      selector: row => row.status === 0 ? 'New' : row.status === 1 ? 'Packed' : row.status === 2 ? 'Sent' : row.status === 3 ? 'Completed' : 'Cancel order'
-    },
+      selector: row =>
+        row.status === 0
+          ? 'New'
+          : row.status === 1
+          ? 'Packed'
+          : row.status === 2
+          ? 'Sent'
+          : row.status === 3
+          ? 'Completed'
+          : 'Cancel order'
+    }
   ];
 
   // integrasi

@@ -15,7 +15,7 @@
     <a href="#table-of-contents"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="bit.ly/blanja-app">View Demo</a>
+    <a href="https://bit.ly/blanja-app">View Demo</a>
     ·
     <a href="https://github.com/Derana-id/Front-End-BelanjaApp/issues">Report Bug</a>
     ·
@@ -106,7 +106,71 @@ NEXT_PUBLIC_NODE_ENV = [NODE_ENV]
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Screenshoots
+<p align="center" display=flex>
+<table>
+ 
+  <tr>
+    <td><image src="https://i.postimg.cc/wvw8FyGC/Screenshot-2022-06-24-130702.png" alt="Login Page" width=100%></td>
+    <td><image src="https://i.postimg.cc/2SQt2Lq0/Screenshot-2022-06-24-130959.png" alt="Landing Page" width=100%/></td>
+  </tr>
+   <tr>
+    <td>Login Page</td>
+    <td>Landing Page</td>
+  </tr>
+  
+  <tr>
+    <td><image src="https://i.postimg.cc/jjjG2d5v/Screenshot-2022-06-24-130829.png" alt="Profile Customer" width=100%></td>
+    <td><image src="https://i.postimg.cc/LXDYTDRm/Screenshot-2022-06-24-130916.png" alt="Chat" width=100%/></td>
+  </tr>
+  <tr>
+    <td>Profile Customer</td>
+    <td>Chat</td>
+  </tr>
 
+  <tr>
+    <td><image src="https://i.postimg.cc/N0wKvSjg/Screenshot-2022-06-24-131107.png" alt="Filter" width=100%></td>
+    <td><image src="https://i.postimg.cc/xCfqcmmh/Screenshot-2022-06-24-131324.png" alt="Address" width=100%></td>
+  </tr>
+  <tr>
+      <td>Filter</td>
+      <td>Address</td>
+  </tr>
+  
+  <tr>
+    <td><image src="https://i.postimg.cc/59KPRfMC/Fire-Shot-Capture-056-Blanja-Profile-customer-blanja-shop-vercel-app.png" alt="My Order" width=100%></td>
+    <td><image src="https://i.postimg.cc/wjM9dqtY/Fire-Shot-Capture-055-Blanja-Products-blanja-shop-vercel-app.png" alt="Detail Product" width=100%></td>
+  </tr>
+  <tr>
+      <td>My Order</td>
+      <td>Detail Product</td>
+  </tr>
+  
+  <tr>
+    <td><image src="https://i.postimg.cc/YCTBK1KQ/Fire-Shot-Capture-046-Blanja-My-Bag-localhost.png" alt="My Bag" width=100%></td>
+    <td><image src="https://i.postimg.cc/SKvNNPy2/Screenshot-2022-06-22-182701.png" alt="Checkout" width=100%></td>
+  </tr>
+  <tr>
+      <td>My Bag</td>
+      <td>Checkout</td>
+  </tr>
+    <tr>
+    <td><image src="https://i.postimg.cc/8z3Mxtq4/Screenshot-2022-06-22-182954.png" alt="Payment" width=100%></td>
+    <td><image src="https://i.postimg.cc/wTS65KfX/Fire-Shot-Capture-041-Belanja-Profile-Seller-blanja-shop-vercel-app.png" alt="My Order" width=100%/></td>
+  </tr>
+   <tr>
+    <td>Payment</td>
+    <td>My Product</td>
+  </tr>
+   <tr>
+    <td><image src="https://i.postimg.cc/GmS1ks66/Screenshot-2022-06-24-131940.png" alt="Profile Seller" width=100%></td>
+    <td><image src="https://i.postimg.cc/xTT7t1GQ/Screenshot-2022-06-24-132032.png" alt="Selling Product" width=100%></td>
+  </tr>
+  <tr>
+      <td>Profile Seller</td>
+      <td>Selling Product</td>
+  </tr>
+  
+</table>
 
 ## Contributing
 
@@ -127,7 +191,9 @@ Contributions are what make the open source community such an amazing place to b
 
 :rocket: [`Frontend Blanja Admin`](https://github.com/Derana-id/Front-End-Admin)
 
-:rocket: [`Demo Blanja`](https://bit.ly/blanja-app/)
+:rocket: [`Web Service`](https://blanja-app.herokuapp.com/)
+
+:rocket: [`Demo Blanja`](https://bit.ly/blanja-app)
 
 :rocket: [`Demo Blanja Admin`](https://blanja-admin.vercel.app/)
 
@@ -141,7 +207,7 @@ Contributions are what make the open source community such an amazing place to b
       <td align="center">
         <a href="https://github.com/hakamfaza">
           <img width="100" src="https://avatars.githubusercontent.com/u/75160713?v=4" alt="Muhammad Hakam Faza"><br/>
-          <sub><b>Muhammad Hakam Faza</b></sub> <br/>
+          <sub><b>Muhamad Hakam Faza</b></sub> <br/>
           <sub>Project Manager | Front End Web Developer</sub>
         </a>
       </td>

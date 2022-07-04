@@ -212,33 +212,33 @@ const Products = () => {
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
                   />
-                 <Img
-                   src={
+                  <Img
+                    src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
                             getDetail.data.image[1] ? getDetail.data.image[1].photo : 'default.png'
                           }`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
-                 />
-                 <Img
-                   src={
+                  />
+                  <Img
+                    src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
                             getDetail.data.image[2] ? getDetail.data.image[2].photo : 'default.png'
                           }`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
-                 />
-                 <Img
-                   src={
+                  />
+                  <Img
+                    src={
                       getDetail.data.image.length >= 0
                         ? `https://drive.google.com/uc?export=view&id=${
                             getDetail.data.image[3] ? getDetail.data.image[3].photo : 'default.png'
                           }`
                         : 'https://drive.google.com/uc?export=view&id=default.png'
                     }
-                 />
+                  />
                 </div>
               </div>
               <div className="flex-auto md:w-3/5 bg-tertiary md:pl-9 md:pr-7 mt-5 md:mt-0">
@@ -257,9 +257,14 @@ const Products = () => {
                   <Start valueReview="(10)" />
                 </div>
                 <div className="mt-5">
-                  <p className="text-md text-gray font-semibold text-sm">price</p>
+                  <p className="text-md text-gray font-semibold text-sm">Price</p>
                   <h3 className="text-dark text-xl font-extrabold">
-                    Rp {getDetail.data.category ? getDetail.data.product.price : null}
+                    {new Intl.NumberFormat('id-ID', {
+                      style: 'currency',
+                      currency: 'IDR',
+                      minimumFractionDigits: 0
+                    }).format(getDetail.data.product.price)}
+                    {/* {getDetail.data.category ? getDetail.data.product.price : null} */}
                   </h3>
                 </div>
                 <div className="mt-5">
@@ -326,7 +331,11 @@ const Products = () => {
                 <div key={index}>
                   <CardProducts
                     nameProduct={`${item.product.product_name}`}
-                    price={`Rp ${item.product.price}`}
+                    price={new Intl.NumberFormat('id-ID', {
+                      style: 'currency',
+                      currency: 'IDR',
+                      minimumFractionDigits: 0
+                    }).format(item.product.price)}
                     user={`${item.store[0].store_name}`}
                     onClick={() => onDetail(item.product.id)}
                     img={`${

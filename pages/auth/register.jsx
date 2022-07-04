@@ -121,7 +121,7 @@ export default function index() {
   return (
     <div className="flex min-h-screen">
       <Head>
-        <title>Belanja | Register</title>
+        <title>Blanja | Register</title>
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
@@ -134,7 +134,7 @@ export default function index() {
               onClick={() => setCurrentShow(0)}
               className="border-solid-gray border-[1px] rounded w-full h-12 bg-primary text-white"
             >
-              customer
+              Customer
             </button>
             <button
               onClick={() => setCurrentShow(1)}
@@ -149,7 +149,7 @@ export default function index() {
               onClick={() => setCurrentShow(0)}
               className="border-solid-gray border-[1px] rounded text-gray w-full h-12"
             >
-              customer
+              Customer
             </button>
             <button
               onClick={() => setCurrentShow(1)}
