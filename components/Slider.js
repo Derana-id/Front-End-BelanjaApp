@@ -2,6 +2,10 @@ import Image from 'next/image';
 import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import promotion from '../assets/img/CardPromotion.jpg';
+import promotionSecond from '../assets/img/CardPromotion2.jpg';
+import promotionThrid from '../assets/img/CardPromotion3.jpg';
+import promotionFourth from '../assets/img/CardPromotion4.jpg';
 
 export default function Slider({ deviceType }) {
   const responsive = {
@@ -21,7 +25,7 @@ export default function Slider({ deviceType }) {
       paritialVisibilityGutter: 40
     }
   };
-  const images = ['/images/CardPromotion.jpg', '/images/CardPromotion2.jpg'];
+  const images = [promotion, promotionSecond, promotionThrid, promotionFourth];
 
   return (
     <div className="font-sans">

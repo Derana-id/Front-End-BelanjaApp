@@ -74,7 +74,7 @@ function Home({ deviceType }) {
   return (
     <div>
       <Head>
-        <title>Belanja | Home</title>
+        <title>Blanja | Home</title>
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
@@ -140,7 +140,11 @@ function Home({ deviceType }) {
                     <div key={index}>
                       <CardProducts
                         nameProduct={`${item.product.product_name}`}
-                        price={`Rp ${item.product.price}`}
+                        price={new Intl.NumberFormat('id-ID', {
+                          style: 'currency',
+                          currency: 'IDR',
+                          minimumFractionDigits: 0
+                        }).format(item.product.price)}
                         user={`${item.store[0].store_name}`}
                         onClick={() => onDetail(item.product.id)}
                         img={`${
@@ -178,7 +182,11 @@ function Home({ deviceType }) {
                     <div key={index}>
                       <CardProducts
                         nameProduct={`${item.product.product_name}`}
-                        price={`Rp ${item.product.price}`}
+                        price={new Intl.NumberFormat('id-ID', {
+                          style: 'currency',
+                          currency: 'IDR',
+                          minimumFractionDigits: 0
+                        }).format(item.product.price)}
                         user={`${item.store[0].store_name}`}
                         onClick={() => onDetail(item.product.id)}
                         img={`${

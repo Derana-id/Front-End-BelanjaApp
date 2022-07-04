@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable prefer-const */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -44,7 +45,12 @@ export default function cardMyorder() {
     },
     {
       name: 'Total price',
-      selector: row => row.total
+      selector: row =>
+        new Intl.NumberFormat('id-ID', {
+          style: 'currency',
+          currency: 'IDR',
+          minimumFractionDigits: 0
+        }).format(row.total)
     },
     {
       name: 'Date',
@@ -52,7 +58,16 @@ export default function cardMyorder() {
     },
     {
       name: 'Status',
-      selector: row => row.status
+      selector: row =>
+        row.status === 0
+          ? 'New'
+          : row.status === 1
+          ? 'Packed'
+          : row.status === 2
+          ? 'Sent'
+          : row.status === 3
+          ? 'Completed'
+          : 'Cancel order'
     }
   ];
 
@@ -72,6 +87,8 @@ export default function cardMyorder() {
   const myOrder = useSelector(state => {
     return state.listTransactionBuyer;
   });
+
+  // console.log(myOrder);
 
   let data = [];
   if (myOrder.data.length > 0) {
@@ -127,7 +144,7 @@ export default function cardMyorder() {
                 columns={columns}
                 fixedHeader
                 fixedHeaderScrollHeight="300px"
-                data={data}
+                // data={data2}
                 customStyles={customStyles}
               />
             </div>

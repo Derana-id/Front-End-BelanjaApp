@@ -19,6 +19,7 @@ import listMyTransactionBuyer from './orderBuyer';
 // import getFilter from './getFilter';
 import getFilter from './getFilter';
 import listUserChat from './getListUserChat';
+import listTransactionStoreReducer from './listTransactionStore';
 
 export default combineReducers({
   detailCustomer: detailCustomerReducer,
@@ -40,5 +41,6 @@ export default combineReducers({
   listTransactionBuyer: listMyTransactionBuyer,
   // getFilter
   getFilter,
-  listUserChat
+  listUserChat,
+  listTransactionStore: listTransactionStoreReducer
 });

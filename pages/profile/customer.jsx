@@ -24,10 +24,13 @@ import Input from '../../components/Input/input-profile';
 import RadioButton from '../../components/Input/radio-button';
 import Datepicker from '../../components/Input/datepicker';
 import { toastify } from '../../utils/toastify';
+import { getMyAddress, createAddress, editAddress, deleteAddress } from '../../redux/actions/address';
 
 const Customer = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const myAddress = useSelector(state => state.myAddress);
   const toggleDrawer = () => {
     setIsOpen(prevState => !prevState);
   };
@@ -38,7 +41,6 @@ const Customer = () => {
   };
 
   // integrasi
-  const dispatch = useDispatch();
   const token = Cookies.get('token');
   let decoded = '';
   if (token) {
@@ -65,8 +67,8 @@ const Customer = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!detailProfile.isLoading) {
-      if (detailProfile.data) {
+    if (detailProfile.data.length > 0) {
+      if (detailProfile.data[0]) {
         setForm({
           ...form,
           name: detailProfile.data[0].profile.name,
@@ -81,8 +83,20 @@ const Customer = () => {
   }, [detailProfile]);
 
   const onLogout = () => {
-    Cookies.remove('token');
-    router.push('/auth/login');
+    Swal.fire({
+      title: 'Are you sure to Logout?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then(result => {
+      if (result.isConfirmed) {
+        Cookies.remove('token');
+        router.push('/auth/login');
+        Swal.fire('Success to logout!', 'Success to logout.', 'success');
+      }
+    });
   };
 
   const onEditUser = e => {
@@ -104,6 +118,7 @@ const Customer = () => {
           icon: 'success'
         });
         dispatch(getDetailUser(decoded.id));
+        window.location.reload();
       })
       .catch(err => {
         if (err.response.data.code === 422) {
@@ -119,10 +134,122 @@ const Customer = () => {
       });
   };
 
+  // address
+  const [formAddress, setFormAddress] = useState({
+    label: '',
+    recipientName: '',
+    recipientPhone: '',
+    address: '',
+    postalCode: '',
+    city: '',
+    isPrimary: 0
+  });
+
+  useEffect(() => {
+    dispatch(getMyAddress());
+  }, []);
+
+  const AddNewAddress = e => {
+    e.preventDefault();
+    if (
+      !formAddress.label ||
+      !formAddress.recipientName ||
+      !formAddress.recipientPhone ||
+      !formAddress.address ||
+      !formAddress.postalCode ||
+      !formAddress.city
+    ) {
+      Swal.fire('Failed!', 'All field must be filled', 'warning');
+    } else {
+      createAddress(formAddress)
+        .then(res => {
+          Swal.fire('Success!', res.message, 'success');
+          window.location.reload();
+        })
+        .catch(err => {
+          if (err.response.data.code === 422) {
+            const { error } = err.response.data;
+            error.map(item => toastify(item, 'error'));
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: err.response.data.message,
+              icon: 'error'
+            });
+          }
+        });
+    }
+  };
+
+  const EditAddress = (e, id) => {
+    e.preventDefault();
+    if (
+      !formAddress.label ||
+      !formAddress.recipientName ||
+      !formAddress.recipientPhone ||
+      !formAddress.address ||
+      !formAddress.postalCode ||
+      !formAddress.city
+    ) {
+      Swal.fire('Failed!', 'All field must be filled', 'warning');
+    } else {
+      editAddress(formAddress, id)
+        .then(res => {
+          Swal.fire('Success!', res.message, 'success');
+          window.location.reload();
+        })
+        .catch(err => {
+          if (err.response.data.code === 422) {
+            const { error } = err.response.data;
+            error.map(item => toastify(item, 'error'));
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: err.response.data.message,
+              icon: 'error'
+            });
+          }
+        });
+    }
+  };
+
+  const DeleteAddress = (e, id) => {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Are you sure you want to restore the data ?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, I Sure!'
+    }).then(async confirm => {
+      if (confirm.isConfirmed) {
+        deleteAddress(id)
+          .then(res => {
+            Swal.fire('Success!', res.message, 'success');
+            window.location.reload();
+          })
+          .catch(err => {
+            if (err.response.data.code === 422) {
+              const { error } = err.response.data;
+              error.map(item => toastify(item, 'error'));
+            } else {
+              Swal.fire({
+                title: 'Error!',
+                text: err.response.data.message,
+                icon: 'error'
+              });
+            }
+          });
+      }
+    });
+  };
+
   return (
     <div>
       <Head>
-        <title>Belanja | Profile customer</title>
+        <title>Blanja | Profile customer</title>
         <meta name="" content="" />
         <link rel="icon" href="/logo.svg" />
       </Head>
@@ -495,7 +622,14 @@ const Customer = () => {
               </form>
             )
           ) : showSideBar === 1 ? (
-            <CardShippingAddress />
+            <CardShippingAddress
+              myAddress={myAddress}
+              formAddress={formAddress}
+              setFormAddress={setFormAddress}
+              AddNewAddress={AddNewAddress}
+              EditAddress={EditAddress}
+              DeleteAddress={DeleteAddress}
+            />
           ) : showSideBar === 2 ? (
             <CardMyorder />
           ) : null}
