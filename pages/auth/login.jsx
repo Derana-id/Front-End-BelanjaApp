@@ -109,7 +109,7 @@ export default function index() {
               onClick={() => setCurrentShow(0)}
               className="border-solid-gray border-[1px] rounded w-full h-12 bg-primary text-white"
             >
-              customer
+              Customer
             </button>
             <button
               onClick={() => setCurrentShow(1)}
@@ -124,7 +124,7 @@ export default function index() {
               onClick={() => setCurrentShow(0)}
               className="border-solid-gray border-[1px] rounded text-gray w-full h-12"
             >
-              customer
+              Customer
             </button>
             <button
               onClick={() => setCurrentShow(1)}
