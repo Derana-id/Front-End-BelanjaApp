@@ -108,14 +108,32 @@ NEXT_PUBLIC_NODE_ENV = [NODE_ENV]
 ## Screenshoots
 <p align="center" display=flex>
 <table>
+
+  <tr>
+    <td><image src="https://lh3.googleusercontent.com/d/1CI-wY7qE9L1zCzBLohYNuNrPicCp1rwy" alt="Landing Page" width=100%></td>
+    <td><image src="https://lh3.googleusercontent.com/d/1AtdoIlH-gikqsDwH5_6UcnqsTy0kRFzl" alt="Landing Page After Login" width=100%/></td>
+  </tr>
+   <tr>
+    <td>Landing Page</td>
+    <td>Landing Page After Login</td>
+  </tr>
  
   <tr>
-    <td><image src="https://i.postimg.cc/wvw8FyGC/Screenshot-2022-06-24-130702.png" alt="Login Page" width=100%></td>
-    <td><image src="https://i.postimg.cc/2SQt2Lq0/Screenshot-2022-06-24-130959.png" alt="Landing Page" width=100%/></td>
+    <td><image src="https://lh3.googleusercontent.com/d/1P4MAl8NboEdElUCnOVFBclAAwnRn5aFb" alt="Login Page" width=100%></td>
+    <td><image src="https://lh3.googleusercontent.com/d/15DfgzY7ZbpxcX6VEH3dODw0HnPIslZeC" alt="Register Page" width=100%/></td>
   </tr>
    <tr>
     <td>Login Page</td>
-    <td>Landing Page</td>
+    <td>Register Page</td>
+  </tr>
+  
+  <tr>
+    <td><image src="https://lh3.googleusercontent.com/d/1Imra1tf_S4NkaJSaDSreIYjCNvQdKWtn" alt="Forgot Password Page" width=100%></td>
+    <td><image src="https://lh3.googleusercontent.com/d/1Wof7LCRpXZyQka-3J__YST034NvV9vgX" alt="Reset Password Page" width=100%/></td>
+  </tr>
+   <tr>
+    <td>Forgot Password Page</td>
+    <td>Reset Password Page</td>
   </tr>
   
   <tr>
