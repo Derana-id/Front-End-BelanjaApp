@@ -137,7 +137,7 @@ NEXT_PUBLIC_NODE_ENV = [NODE_ENV]
   </tr>
   
   <tr>
-    <td><image src="" alt="Profile Customer" width=100%></td>
+    <td><image src="https://lh3.googleusercontent.com/d/d/199lMdBSCKjVkNxPbqVczHjIvQnLG8pL4" alt="Profile Customer" width=100%></td>
     <td><image src="https://i.postimg.cc/LXDYTDRm/Screenshot-2022-06-24-130916.png" alt="Chat" width=100%/></td>
   </tr>
   <tr>
