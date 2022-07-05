@@ -119,7 +119,7 @@ NEXT_PUBLIC_NODE_ENV = [NODE_ENV]
   </tr>
  
   <tr>
-    <td><image src="https://lh3.googleusercontent.com/d/1P4MAl8NboEdElUCnOVFBclAAwnRn5aFb" alt="Login Page" width=100%></td>
+    <td><image src="https://lh3.googleusercontent.com/d/1NIjZeRqP-FC1nTRKXMlIxsvLm68_W3wI" alt="Login Page" width=100%></td>
     <td><image src="https://lh3.googleusercontent.com/d/15DfgzY7ZbpxcX6VEH3dODw0HnPIslZeC" alt="Register Page" width=100%/></td>
   </tr>
    <tr>
